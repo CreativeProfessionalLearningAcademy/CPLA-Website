@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPLA Studio — Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:#1a1410; --paper:#faf7f2; --cream:#f0ead8; --rule:#d4c9b8;
+      --mid:#6b5e52; --mod:#FF7C00; --ml:#fff3e6; --green:#2d7a1a; --gnl:#f0fae8;
+    }
+    html, body { height: 100%; font-family: 'DM Sans', sans-serif; font-weight: 300; background: var(--cream); }
+
+    /* ── NAV ── */
+    .pnav {
+      background: var(--ink);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .pn-logo { font-size: 13px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: #faf7f2; }
+    .pn-logo span { color: var(--mod); font-style: italic; }
+    .pn-sep { color: rgba(250,247,242,.2); }
+    .pn-crumb { font-size: 11px; color: rgba(250,247,242,.4); letter-spacing: .04em; font-family: 'DM Mono', monospace; }
+    .pn-r { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+    .pn-role { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffb366; background: rgba(255,179,102,.12); border: 1px solid rgba(255,179,102,.3); padding: 3px 9px; border-radius: 100px; }
+    .pn-av { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #faf7f2; cursor: default; }
+    .sign-out-btn { background: none; border: none; color: rgba(250,247,242,.4); font-size: 11px; font-family: 'DM Sans', sans-serif; cursor: pointer; display: flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 6px; transition: color .15s; }
+    .sign-out-btn:hover { color: rgba(250,247,242,.8); }
+
+    /* ── MAIN ── */
+    .main { max-width: 720px; margin: 0 auto; padding: 32px 20px 60px; }
+
+    /* ── GREETING ── */
+    .greeting-date { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--mid); margin-bottom: 5px; font-family: 'DM Mono', monospace; }
+    .greeting-h { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 24px; line-height: 1.3; }
+    .greeting-h em { font-style: italic; color: var(--mod); }
+
+    /* ── TASK CARD ── */
+    .task-card {
+      background: white;
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .tc-head {
+      background: var(--ink);
+      padding: 13px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .tc-badge {
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-family: 'DM Mono', monospace;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: rgba(26,86,196,.25);
+      color: #a8c4f0;
+      border: 1px solid rgba(168,196,240,.3);
+    }
+    .tc-step-label {
+      font-size: 11px;
+      color: rgba(250,247,242,.3);
+      font-family: 'DM Mono', monospace;
+      margin-left: auto;
+    }
+    .tc-body { padding: 18px 20px; }
+    .tc-vol { font-size: 10px; color: var(--mid); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 5px; font-family: 'DM Mono', monospace; }
+    .tc-title { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; color: var(--ink); margin-bottom: 8px; line-height: 1.3; }
+    .tc-title em { font-style: italic; }
+    .tc-desc { font-size: 13px; color: var(--mid); line-height: 1.7; margin-bottom: 14px; }
+    .tc-meta { display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+    .tc-meta span { font-size: 12px; color: var(--mid); display: flex; align-items: center; gap: 4px; }
+    .tc-meta i { font-size: 13px; }
+    .continue-btn {
+      background: var(--ink);
+      color: #faf7f2;
+      border: none;
+      border-radius: 8px;
+      padding: 11px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'DM Sans', sans-serif;
+      transition: opacity .15s;
+      text-decoration: none;
+    }
+    .continue-btn:hover { opacity: 0.85; }
+    .continue-btn i { font-size: 15px; }
+
+    /* ── STEP STRIP ── */
+    .step-strip { display: flex; align-items: flex-start; gap: 0; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--rule); }
+    .si { display: flex; flex-direction: column; align-items: center; flex: 1; position: relative; }
+    .si:not(:last-child)::after { content: ''; position: absolute; top: 12px; left: 50%; width: 100%; height: 1px; background: var(--rule); z-index: 0; }
+    .si.done:not(:last-child)::after { background: var(--green); opacity: .4; }
+    .sd { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; position: relative; z-index: 1; flex-shrink: 0; }
+    .si.active .sd { background: var(--ink); color: #ffb366; border: 2px solid #ffb366; }
+    .si.done  .sd { background: var(--green); color: white; border: 2px solid var(--green); }
+    .si.locked .sd { background: var(--cream); border: 1px solid var(--rule); color: var(--mid); }
+    .sn { font-size: 10px; color: var(--mid); margin-top: 5px; text-align: center; max-width: 62px; line-height: 1.35; }
+    .si.active .sn { color: var(--ink); font-weight: 500; }
+    .si.done  .sn { color: var(--green); }
+
+    /* ── JOURNEY (collapsible sidebar card) ── */
+    .journey-card {
+      background: white;
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .journey-head {
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .journey-head-l { font-size: 12px; font-weight: 600; color: var(--ink); display: flex; align-items: center; gap: 7px; }
+    .journey-head-l i { font-size: 15px; color: var(--mod); }
+    .journey-toggle { font-size: 13px; color: var(--mid); transition: transform .25s; }
+    .journey-card.open .journey-toggle { transform: rotate(180deg); }
+    .journey-body { max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .25s ease; padding: 0 16px; }
+    .journey-card.open .journey-body { max-height: 400px; padding: 0 16px 14px; }
+    .vol-item { margin-bottom: 10px; }
+    .vol-label { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--mid); margin-bottom: 4px; font-family: 'DM Mono', monospace; display: flex; align-items: center; justify-content: space-between; }
+    .vol-bar-wrap { height: 4px; background: var(--cream); border-radius: 2px; }
+    .vol-bar { height: 100%; border-radius: 2px; background: var(--mod); }
+
+    /* ── LOADING SKELETON ── */
+    @keyframes shimmer { 0%{opacity:.4} 50%{opacity:.9} 100%{opacity:.4} }
+    .skeleton { background: var(--cream); border-radius: 4px; animation: shimmer 1.4s ease-in-out infinite; }
+    #loading-state { display: block; }
+    #loaded-state  { display: none; }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="pnav">
+    <div class="pn-logo">C<span>P</span>LA Studio</div>
+    <div class="pn-sep">·</div>
+    <div class="pn-crumb" id="nav-crumb">Loading…</div>
+    <div class="pn-r">
+      <div class="pn-role" id="nav-role">Student</div>
+      <div class="pn-av" id="nav-av">—</div>
+      <button class="sign-out-btn" id="sign-out-btn"><i class="ti ti-logout"></i> Sign out</button>
+    </div>
+  </nav>
+
+  <main class="main">
+    <!-- Loading skeleton -->
+    <div id="loading-state">
+      <div class="skeleton" style="height:14px;width:120px;margin-bottom:8px;"></div>
+      <div class="skeleton" style="height:26px;width:320px;margin-bottom:28px;"></div>
+      <div class="skeleton" style="height:240px;border-radius:14px;"></div>
+    </div>
+
+    <!-- Loaded content -->
+    <div id="loaded-state">
+      <div class="greeting-date" id="greeting-date"></div>
+      <div class="greeting-h" id="greeting-h">Welcome back.</div>
+
+      <div class="task-card">
+        <div class="tc-head">
+          <div class="tc-badge" id="tc-badge">Video · Lesson 2.9</div>
+          <div class="tc-step-label" id="tc-step-label">Step 1 of 4</div>
+        </div>
+        <div class="tc-body">
+          <div class="tc-vol">Volume 2 · Illustrator — Module 3</div>
+          <div class="tc-title">The Pen tool: thinking in <em>paths</em></div>
+          <div class="tc-desc">Before you touch a handle, you need to understand what a path actually is.</div>
+          <div class="tc-meta">
+            <span><i class="ti ti-clock"></i> 45–55 min</span>
+            <span><i class="ti ti-file-description"></i> Anatomy study + traces</span>
+          </div>
+          <a href="lesson.html" class="continue-btn" id="continue-btn">
+            <i class="ti ti-player-play"></i> <span id="continue-label">Watch now</span>
+          </a>
+
+          <!-- Step strip -->
+          <div class="step-strip" id="step-strip">
+            <div class="si" id="si-0"><div class="sd" id="sd-0">1</div><div class="sn">Watch video</div></div>
+            <div class="si" id="si-1"><div class="sd" id="sd-1">2</div><div class="sn">Practice exercise</div></div>
+            <div class="si" id="si-2"><div class="sd" id="sd-2">3</div><div class="sn">Assessment</div></div>
+            <div class="si" id="si-3"><div class="sd" id="sd-3">4</div><div class="sn">Submit work</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Journey card (collapsible) -->
+      <div class="journey-card" id="journey-card">
+        <div class="journey-head">
+          <div class="journey-head-l"><i class="ti ti-map-2"></i> Your Journey</div>
+          <i class="ti ti-chevron-down journey-toggle"></i>
+        </div>
+        <div class="journey-body">
+          <div class="vol-item">
+            <div class="vol-label"><span>Volume 1 — Photoshop</span><span style="color:var(--green)">Complete</span></div>
+            <div class="vol-bar-wrap"><div class="vol-bar" style="width:100%"></div></div>
+          </div>
+          <div class="vol-item">
+            <div class="vol-label"><span>Volume 2 — Illustrator</span><span id="v2-pct">—</span></div>
+            <div class="vol-bar-wrap"><div class="vol-bar" id="v2-bar" style="width:0%"></div></div>
+          </div>
+          <div class="vol-item">
+            <div class="vol-label"><span>Volume 3 — InDesign</span><span style="color:var(--mid)">Upcoming</span></div>
+            <div class="vol-bar-wrap"><div class="vol-bar" style="width:0%;background:var(--rule)"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+  <script src="firebase-config.js"></script>
+
+  <script>
+    // ── AUTH GUARD ──
+    auth.onAuthStateChanged(async function(user) {
+      if (!user) { window.location.href = 'index.html'; return; }
+      await loadDashboard(user);
+    });
+
+    async function loadDashboard(user) {
+      // Nav
+      const initials = user.displayName
+        ? user.displayName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2)
+        : user.email.slice(0,2).toUpperCase();
+      document.getElementById('nav-av').textContent = initials;
+
+      const isGuest = user.email === GUEST_EMAIL;
+      document.getElementById('nav-role').textContent = isGuest ? 'Reviewer' : 'Junior Designer';
+      document.getElementById('nav-crumb').textContent = 'Vol 2 · Module 3';
+
+      // Greeting
+      const now = new Date();
+      const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      document.getElementById('greeting-date').textContent =
+        days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate();
+
+      const firstName = user.displayName ? user.displayName.split(' ')[0] : (isGuest ? 'Reviewer' : 'Designer');
+      const hour = now.getHours();
+      const timeGreet = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+      document.getElementById('greeting-h').innerHTML =
+        timeGreet + ', <em>' + firstName + '</em>. Here\'s your assignment.';
+
+      // Load progress from Firestore
+      let steps = ['active', 'locked', 'locked', 'locked'];
+      let currentStep = 0;
+      try {
+        const docRef = db.collection('progress').doc(user.uid + '_' + CURRENT_LESSON);
+        const snap = await docRef.get();
+        if (snap.exists) {
+          const data = snap.data();
+          steps = data.steps || steps;
+          currentStep = data.currentStep || 0;
+        }
+      } catch (e) { console.warn('Could not load progress:', e); }
+
+      renderSteps(steps, currentStep);
+
+      // Journey bar — rough progress based on current lesson number
+      const lessonNum = 9; // 2.9 is the current lesson; Vol 2 has ~27 lessons
+      const pct = Math.min(100, Math.round((lessonNum / 27) * 100));
+      document.getElementById('v2-bar').style.width = pct + '%';
+      document.getElementById('v2-pct').textContent = pct + '%';
+
+      // Show content
+      document.getElementById('loading-state').style.display = 'none';
+      document.getElementById('loaded-state').style.display = 'block';
+    }
+
+    function renderSteps(steps, currentStep) {
+      const labels = ['Watch video', 'Practice exercise', 'Assessment', 'Submit work'];
+      const badgeLabels = ['Video · Lesson 2.9', 'Exercise · Lesson 2.9', 'Assessment · Lesson 2.9', 'Submit · Lesson 2.9'];
+      const contLabels = ['Watch now', 'Continue to exercise', 'Continue to assessment', 'Submit your work'];
+      const icons = ['ti-player-play', 'ti-pencil', 'ti-clipboard-check', 'ti-upload'];
+
+      for (var i = 0; i < 4; i++) {
+        var si = document.getElementById('si-' + i);
+        var sd = document.getElementById('sd-' + i);
+        si.className = 'si ' + (steps[i] === 'done' ? 'done' : steps[i] === 'active' ? 'active' : 'locked');
+        sd.innerHTML = steps[i] === 'done' ? '<i class="ti ti-check" style="font-size:11px"></i>' : (i + 1);
+      }
+
+      document.getElementById('tc-badge').textContent = badgeLabels[currentStep];
+      document.getElementById('tc-step-label').textContent = 'Step ' + (currentStep + 1) + ' of 4';
+
+      var contLabel = document.getElementById('continue-label');
+      var contBtn   = document.getElementById('continue-btn');
+      contLabel.textContent = contLabels[currentStep];
+      contBtn.innerHTML = '<i class="ti ' + icons[currentStep] + '"></i> ' + contLabels[currentStep];
+    }
+
+    // Sign out
+    document.getElementById('sign-out-btn').addEventListener('click', function() {
+      auth.signOut().then(function() { window.location.href = 'index.html'; });
+    });
+
+    // Journey toggle
+    document.getElementById('journey-card').addEventListener('click', function() {
+      this.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

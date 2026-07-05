@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPLA — Guest Account Setup</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --ink:#1a1410; --paper:#faf7f2; --cream:#f0ead8; --rule:#d4c9b8; --mid:#6b5e52; --mod:#FF7C00; --ml:#fff3e6; --green:#2d7a1a; --gnl:#f0fae8; --red:#c8401a; }
+    body { font-family: 'DM Sans', sans-serif; font-weight: 300; background: var(--cream); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .card { background: white; border: 1px solid var(--rule); border-radius: 16px; max-width: 520px; width: 100%; overflow: hidden; }
+    .card-head { background: var(--ink); padding: 20px 24px; }
+    .card-head h1 { font-size: 16px; font-weight: 600; color: #faf7f2; margin-bottom: 4px; }
+    .card-head p { font-size: 12px; color: rgba(250,247,242,.45); font-family: 'DM Mono', monospace; }
+    .card-body { padding: 24px; }
+    .warning { background: #fffbe6; border: 1px solid #f0d860; border-radius: 8px; padding: 12px 14px; margin-bottom: 20px; display: flex; gap: 10px; }
+    .warning i { font-size: 16px; color: #c09000; flex-shrink: 0; margin-top: 1px; }
+    .warning p { font-size: 12px; color: #806000; line-height: 1.6; }
+    .info-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+    .info-row:last-of-type { border-bottom: none; }
+    .info-label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--mid); font-family: 'DM Mono', monospace; }
+    .info-val { font-size: 13px; color: var(--ink); font-family: 'DM Mono', monospace; font-weight: 500; }
+    .prereq { background: var(--cream); border-radius: 8px; padding: 14px 16px; margin: 16px 0; }
+    .prereq h3 { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .prereq h3 i { font-size: 14px; color: var(--mod); }
+    .prereq ol { padding-left: 18px; }
+    .prereq li { font-size: 12px; color: var(--mid); line-height: 1.75; }
+    .prereq li strong { color: var(--ink); }
+    .run-btn { width: 100%; padding: 13px; background: var(--ink); color: #faf7f2; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; transition: opacity .15s; }
+    .run-btn:hover { opacity: .85; }
+    .run-btn:disabled { opacity: .4; cursor: not-allowed; }
+    .log { margin-top: 16px; background: #0d0d0d; border-radius: 8px; padding: 14px 16px; display: none; }
+    .log-item { font-size: 12px; font-family: 'DM Mono', monospace; line-height: 1.8; }
+    .log-item.ok { color: #6ec87a; }
+    .log-item.err { color: #f07070; }
+    .log-item.info { color: rgba(255,255,255,.45); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.3); border-top-color: #faf7f2; border-radius: 50%; animation: spin .7s linear infinite; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card-head">
+      <h1>Guest Reviewer Account Setup</h1>
+      <p>Run once · admin only · cpla-platform</p>
+    </div>
+    <div class="card-body">
+      <div class="warning">
+        <i class="ti ti-alert-triangle"></i>
+        <p>This page creates the guest account and seeds Firestore with pre-loaded progress data. Run it once after deploying. Keep this page out of your student navigation — it's admin-only.</p>
+      </div>
+
+      <div class="info-row"><span class="info-label">Guest email</span><span class="info-val">reviewer@cpla.studio</span></div>
+      <div class="info-row"><span class="info-label">Password</span><span class="info-val">CPLAReview2024!</span></div>
+      <div class="info-row"><span class="info-label">Pre-loaded state</span><span class="info-val">Steps 1+2 done · on assessment</span></div>
+      <div class="info-row"><span class="info-label">Lesson seeded</span><span class="info-val">v2-m3-l9</span></div>
+
+      <div class="prereq">
+        <h3><i class="ti ti-list-check"></i> Before you run this</h3>
+        <ol>
+          <li>Go to <strong>Firebase Console → Authentication → Users</strong></li>
+          <li>Click <strong>Add user</strong> and create:<br>Email: <strong>reviewer@cpla.studio</strong> · Password: <strong>CPLAReview2024!</strong></li>
+          <li>Copy the UID that Firebase assigns to the new user</li>
+          <li>Paste it in the field below, then click Run Setup</li>
+        </ol>
+      </div>
+
+      <div style="margin-bottom:4px">
+        <label style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);display:block;margin-bottom:5px;font-family:'DM Mono',monospace">Guest User UID (from Firebase Console)</label>
+        <input type="text" id="guest-uid" placeholder="e.g. xK9mN2pQr4VwYzA8bCdE" style="width:100%;padding:10px 13px;border:1px solid var(--rule);border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:var(--ink);background:white;outline:none;">
+      </div>
+
+      <button class="run-btn" id="run-btn" onclick="runSetup()">
+        <i class="ti ti-player-play"></i> Run Setup
+      </button>
+
+      <div class="log" id="log"></div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+  <script src="firebase-config.js"></script>
+
+  <script>
+    function log(msg, type) {
+      var logEl = document.getElementById('log');
+      logEl.style.display = 'block';
+      var item = document.createElement('div');
+      item.className = 'log-item ' + (type || 'info');
+      item.textContent = (type === 'ok' ? '✓ ' : type === 'err' ? '✗ ' : '  ') + msg;
+      logEl.appendChild(item);
+    }
+
+    async function runSetup() {
+      var uid = document.getElementById('guest-uid').value.trim();
+      if (!uid) { alert('Please paste the guest user UID from Firebase Console first.'); return; }
+
+      var btn = document.getElementById('run-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<div class="spinner"></div> Running…';
+      document.getElementById('log').innerHTML = '';
+
+      log('Starting guest account setup…', 'info');
+
+      // Pre-seeded progress: steps 0+1 done, step 2 active (on assessment)
+      var progressData = {
+        userId: uid,
+        lessonId: 'v2-m3-l9',
+        steps: ['done', 'done', 'active', 'locked'],
+        currentStep: 2,
+        quizScore: null,
+        submittedFile: null,
+        isGuest: true,
+        seededAt: firebase.firestore.FieldValue.serverTimestamp(),
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      };
+
+      try {
+        log('Writing Firestore progress document…', 'info');
+        var docId = uid + '_v2-m3-l9';
+        await db.collection('progress').doc(docId).set(progressData);
+        log('Progress document created: ' + docId, 'ok');
+
+        // Also write a user profile document
+        log('Writing user profile…', 'info');
+        await db.collection('users').doc(uid).set({
+          email: 'reviewer@cpla.studio',
+          displayName: 'Guest Reviewer',
+          role: 'reviewer',
+          isGuest: true,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        log('User profile created', 'ok');
+
+        log('——————————————————————', 'info');
+        log('Setup complete! Guest account is ready.', 'ok');
+        log('Share this with reviewers:', 'info');
+        log('URL: your-site.netlify.app', 'info');
+        log('Click "Review as Guest" on the login screen', 'info');
+        log('No email or password needed.', 'info');
+
+        btn.innerHTML = '<i class="ti ti-check"></i> Setup complete';
+        btn.style.background = '#2d7a1a';
+
+      } catch(err) {
+        log('Error: ' + err.message, 'err');
+        log('Make sure you are signed in as an admin, or check Firestore security rules.', 'info');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="ti ti-player-play"></i> Run Setup';
+      }
+    }
+  </script>
+</body>
+</html>
