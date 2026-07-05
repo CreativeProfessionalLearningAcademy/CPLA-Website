@@ -227,7 +227,7 @@
   <nav class="pnav">
     <button class="pn-back" id="back-btn"><i class="ti ti-arrow-left"></i> Dashboard</button>
     <div class="pn-sep">·</div>
-    <div class="pn-crumb">Vol 2 · Module 3 · Lesson 2.9</div>
+    <div class="pn-crumb"><a href="volume.html" style="color:inherit;text-decoration:none;opacity:.7">Vol 2</a> · <a href="module.html" style="color:inherit;text-decoration:none;opacity:.7">Module 3</a> · Lesson 2.9</div>
     <div class="pn-r">
       <div class="pn-role" id="nav-role">Junior Designer</div>
       <div class="pn-av" id="nav-av">—</div>
@@ -376,29 +376,38 @@
        PANEL 1 — WATCH VIDEO
   ════════════════════════════════════════════ -->
   <div id="panel-1" class="panel" style="display:none">
-    <div class="vplayer">
-      <div class="vscreen" id="vscreen" onclick="togglePlay()">
-        <div class="vscreen-inner">
-          <div class="vcanvas">
-            <div class="vbg"></div>
-            <div class="play-c" id="play-c">
-              <div class="play-ring" id="play-ring"><i class="ti ti-player-play" id="play-icon"></i></div>
-              <div class="play-lbl" id="play-lbl">Anchor Points &amp; Paths — The Logic Beneath Every Drawing · 5:45</div>
-            </div>
-            <div class="pause-h"><div class="pause-ring"><i class="ti ti-player-pause"></i></div></div>
-            <div class="wvf"><div class="wb2"></div><div class="wb2"></div><div class="wb2"></div><div class="wb2"></div><div class="wb2"></div></div>
+
+    <!-- Coming-soon placeholder -->
+    <div style="background:#0d0d0d;border-radius:12px;overflow:hidden;margin-bottom:16px;">
+      <div style="position:relative;padding-bottom:50%;background:#0d0d0d;">
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:32px 24px;">
+          <div style="width:64px;height:64px;border-radius:50%;background:rgba(255,124,0,.1);border:1.5px solid rgba(255,124,0,.25);display:flex;align-items:center;justify-content:center;">
+            <i class="ti ti-video" style="font-size:28px;color:var(--mod);"></i>
+          </div>
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,124,0,.55);margin-bottom:10px;">Video in Production</div>
+            <div style="font-size:15px;font-weight:500;color:rgba(255,255,255,.75);line-height:1.4;margin-bottom:8px;">Anchor Points &amp; Paths<br>The Logic Beneath Every Drawing</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.28);line-height:1.6;max-width:380px;">This lesson's screencast is being recorded and will appear here when ready. When it drops, this panel will become a full video player — no page changes needed.</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:4px;">
+            <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,124,0,.4);animation:b1 1.2s ease-in-out infinite;"></div>
+            <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,124,0,.4);animation:b2 1.2s ease-in-out infinite .3s;"></div>
+            <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,124,0,.4);animation:b3 1.2s ease-in-out infinite .6s;"></div>
           </div>
         </div>
       </div>
-      <div class="vctrl">
-        <button class="vbtn" onclick="togglePlay()"><i class="ti ti-player-play" id="vc-icon"></i></button>
-        <div class="vt" id="vc-time">0:00 / 5:45</div>
-        <div class="vbar" onclick="scrub(event)"><div class="vp" id="vc-bar"></div></div>
-        <button class="vbtn"><i class="ti ti-volume"></i></button>
-      </div>
     </div>
-    <div class="video-note">
-      <strong>Watch the full video</strong> — it demonstrates anchor points, smooth vs. corner handles, and live Pen tool technique directly in Illustrator. The Continue button activates when playback completes.
+
+    <!-- Reviewer note + manual advance -->
+    <div style="background:var(--cream);border:1px solid var(--rule);border-radius:10px;padding:16px 18px;display:flex;align-items:flex-start;gap:14px;">
+      <i class="ti ti-info-circle" style="font-size:20px;color:var(--mod);flex-shrink:0;margin-top:1px;"></i>
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;">For reviewers &amp; early students</div>
+        <div style="font-size:13px;color:var(--mid);line-height:1.7;margin-bottom:12px;">The video will cover everything in the reading panel — anchor points, smooth vs. corner handles, and live Pen tool technique in Illustrator. Once you've read the lesson and are ready to continue, click below.</div>
+        <button class="mark-read-btn" id="mark-video-btn" onclick="markVideoDone()" style="background:var(--mod);">
+          <i class="ti ti-check"></i> I've read the lesson — continue to workbook
+        </button>
+      </div>
     </div>
   </div>
 
@@ -650,16 +659,32 @@
       if (!user) { window.location.href = 'login.html'; return; }
       currentUser = user;
       const isGuest = user.email === GUEST_EMAIL;
-      document.getElementById('nav-role').textContent = isGuest ? 'Reviewer' : 'Junior Designer';
-      // Extract last name from displayName ("First Last" → "Last")
-      // Option A: uses displayName; replace with Firestore lastName field once
-      // student registration collects first/last name separately (Option B).
-      if (user.displayName && user.displayName.trim()) {
-        var nameParts = user.displayName.trim().split(/\s+/);
-        userLastName = nameParts[nameParts.length - 1];
-      } else {
-        // Fallback: use the part of the email before @ if no displayName set
-        userLastName = user.email.split('@')[0];
+
+      // ── Option B: load lastName + role from Firestore users doc ──
+      try {
+        var userSnap = await db.collection('users').doc(user.uid).get();
+        var udata = userSnap.exists ? userSnap.data() : {};
+        // Last name — Firestore field first, then displayName split, then email prefix
+        if (udata.lastName) {
+          userLastName = udata.lastName;
+        } else if (user.displayName && user.displayName.trim()) {
+          var parts = user.displayName.trim().split(/\s+/);
+          userLastName = parts[parts.length - 1];
+        } else {
+          userLastName = user.email.split('@')[0];
+        }
+        // Role badge
+        var roleLabel = isGuest ? 'Reviewer' : (udata.role || 'Junior Designer');
+        document.getElementById('nav-role').textContent = roleLabel;
+      } catch(e) {
+        // Fallback if Firestore is unreachable
+        if (user.displayName && user.displayName.trim()) {
+          var parts = user.displayName.trim().split(/\s+/);
+          userLastName = parts[parts.length - 1];
+        } else {
+          userLastName = user.email.split('@')[0];
+        }
+        document.getElementById('nav-role').textContent = isGuest ? 'Reviewer' : 'Junior Designer';
       }
       const initials = user.displayName
         ? user.displayName.split(' ').map(function(n){return n[0];}).join('').toUpperCase().slice(0,2)
@@ -675,7 +700,7 @@
         cur = 0; // Revisiting completed lesson — open at reading panel
       }
       renderTabs(); showPanel(cur); updateContBar();
-      if (cur === 1 && states[1] === 'active') setTimeout(startPlay, 500);
+      // Video auto-start removed — placeholder until real video is embedded
     });
 
     // ── FIRESTORE: LOAD ──
@@ -784,7 +809,6 @@
         cur++;
         if (states[cur] !== 'done') states[cur] = 'active';
         renderTabs(); showPanel(cur); updateContBar();
-        if (cur === 1) setTimeout(startPlay, 300);
       } else {
         renderTabs(); updateContBar();
       }
@@ -805,42 +829,17 @@
       saveProgress(); renderTabs(); updateContBar();
     }
 
-    // ── VIDEO ──
-    function fmt(s) { return Math.floor(s/60) + ':' + ('0'+Math.floor(s%60)).slice(-2); }
-    function startPlay() {
-      if (playing) return;
-      playing = true;
-      document.getElementById('vscreen').classList.add('is-playing');
-      document.getElementById('vc-icon').className = 'ti ti-player-pause';
-      timer = setInterval(tick, 200);
+    // ── VIDEO — manual advance (video in production) ──
+    function markVideoDone() {
+      var b = document.getElementById('mark-video-btn');
+      b.innerHTML = '<i class="ti ti-check"></i> Video step complete';
+      b.disabled = true;
+      states[1] = 'done';
+      if (states[2] !== 'done') states[2] = 'active';
+      saveProgress(); renderTabs(); updateContBar();
     }
-    function stopPlay() {
-      if (!playing) return;
-      playing = false; clearInterval(timer);
-      document.getElementById('vscreen').classList.remove('is-playing');
-      document.getElementById('vc-icon').className = 'ti ti-player-play';
-    }
-    function togglePlay() { playing ? stopPlay() : startPlay(); }
-    function tick() {
-      secs += 0.2;
-      if (secs >= dur) {
-        secs = dur; stopPlay();
-        document.getElementById('play-ring').classList.add('done-ring');
-        document.getElementById('play-icon').className = 'ti ti-check';
-        document.getElementById('play-lbl').textContent = 'Video complete';
-        states[1] = 'done';
-        if (states[2] !== 'done') states[2] = 'active';
-        saveProgress(); renderTabs(); updateContBar();
-      }
-      document.getElementById('vc-bar').style.width = (secs/dur*100) + '%';
-      document.getElementById('vc-time').textContent = fmt(secs) + ' / ' + fmt(dur);
-    }
-    function scrub(e) {
-      var r = e.currentTarget.getBoundingClientRect();
-      secs = Math.max(0, Math.min(dur, ((e.clientX - r.left) / r.width) * dur));
-      document.getElementById('vc-bar').style.width = (secs/dur*100) + '%';
-      document.getElementById('vc-time').textContent = fmt(secs) + ' / ' + fmt(dur);
-    }
+    // Stub — keeps gotoStep logic intact; will be replaced when real video is embedded
+    function stopPlay() { playing = false; }
 
     // ── WORKBOOK ──
     function markWorkbookDone() {

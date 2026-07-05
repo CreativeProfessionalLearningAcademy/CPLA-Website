@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPLA — Module 3: Paths, Shapes &amp; Vector Control</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:#1a1410; --paper:#faf7f2; --cream:#f0ead8; --rule:#d4c9b8;
+      --mid:#6b5e52; --mod:#FF7C00; --ml:#fff3e6;
+      --green:#2d7a1a; --gnl:#f0fae8;
+      --blue:#01123a; --gold:#da9e2b;
+    }
+    html, body { font-family: 'DM Sans', sans-serif; font-weight: 300; background: var(--cream); color: var(--ink); }
+
+    /* ── NAV ── */
+    .pnav { background: var(--ink); padding: 10px 20px; display: flex; align-items: center; gap: 10px; position: sticky; top: 0; z-index: 20; }
+    .pn-logo img { height: 26px; width: auto; display: block; }
+    .pn-sep { color: rgba(250,247,242,.2); }
+    .pn-crumb { font-size: 11px; color: rgba(250,247,242,.35); letter-spacing: .04em; font-family: 'DM Mono', monospace; display: flex; align-items: center; gap: 6px; }
+    .pn-crumb a { color: rgba(250,247,242,.35); text-decoration: none; transition: color .15s; }
+    .pn-crumb a:hover { color: rgba(250,247,242,.75); }
+    .pn-crumb .active { color: rgba(218,158,43,.8); }
+    .pn-r { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+    .pn-role { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffb366; background: rgba(255,179,102,.12); border: 1px solid rgba(255,179,102,.3); padding: 3px 9px; border-radius: 100px; }
+    .pn-av { width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: #faf7f2; }
+
+    /* ── HERO ── */
+    .mod-hero { background: var(--ink); padding: 36px 28px 32px; position: relative; overflow: hidden; }
+    .mod-hero::before {
+      content: "3";
+      position: absolute; right: 0; top: -24px;
+      font-family: 'Playfair Display', serif; font-size: 200px; font-weight: 900;
+      color: rgba(255,255,255,.025); line-height: 1; pointer-events: none;
+    }
+    .mh-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+    .mh-eyebrow {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(218,158,43,.7); margin-bottom: 6px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .mh-eyebrow a { color: rgba(218,158,43,.55); text-decoration: none; }
+    .mh-eyebrow a:hover { color: rgba(218,158,43,.85); }
+    .mh-eyebrow span { color: rgba(255,255,255,.2); }
+    .mod-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 4vw, 36px); font-weight: 900;
+      color: #ffffff; line-height: 1.1; letter-spacing: -.015em;
+      margin-bottom: 12px;
+    }
+    .mod-hero h1 em { color: var(--mod); font-style: italic; }
+    .mod-hero p { font-size: 14px; color: rgba(255,255,255,.42); line-height: 1.85; max-width: 560px; margin-bottom: 22px; }
+
+    .mod-stats {
+      display: flex; gap: 0;
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 18px; flex-wrap: wrap;
+    }
+    .ms { padding: 0 20px 0 0; }
+    .ms:first-child { padding-left: 0; }
+    .ms + .ms { border-left: 1px solid rgba(255,255,255,.08); padding-left: 20px; }
+    .ms-num { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: #ffffff; line-height: 1; margin-bottom: 2px; }
+    .ms-num em { color: var(--mod); font-style: normal; }
+    .ms-lbl { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.3); font-family: 'DM Mono', monospace; }
+
+    /* ── MAIN ── */
+    .main { max-width: 760px; margin: 0 auto; padding: 32px 20px 60px; }
+    .section-label {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+
+    /* ── LESSON CARDS ── */
+    .lesson-card {
+      background: white; border: 1px solid var(--rule);
+      border-radius: 14px; overflow: hidden; margin-bottom: 10px;
+      display: flex; align-items: stretch;
+    }
+    .lesson-card.current { border-color: var(--mod); border-left-width: 4px; }
+    .lesson-card.complete { border-left: 4px solid var(--green); }
+    .lesson-card.locked { opacity: .55; }
+
+    .lc-num-col {
+      width: 52px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--cream); border-right: 1px solid var(--rule);
+    }
+    .lesson-card.current  .lc-num-col { background: #fff8f0; border-right-color: rgba(255,124,0,.25); }
+    .lesson-card.complete .lc-num-col { background: #f0fae8; border-right-color: #b6d9a8; }
+
+    .lc-num {
+      font-family: 'DM Mono', monospace; font-size: 12px;
+      font-weight: 700; color: var(--mid);
+      writing-mode: vertical-rl; text-orientation: mixed;
+      transform: rotate(180deg); letter-spacing: .08em;
+    }
+    .lesson-card.current  .lc-num { color: var(--mod); }
+    .lesson-card.complete .lc-num { color: var(--green); }
+
+    .lc-body { padding: 16px 18px; flex: 1; }
+    .lc-tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 9px; letter-spacing: .12em; text-transform: uppercase;
+      font-weight: 600; padding: 2px 8px; border-radius: 100px;
+      margin-bottom: 7px;
+    }
+    .lc-tag.current  { background: var(--ml);  color: var(--mod);   border: 1px solid rgba(255,124,0,.3); }
+    .lc-tag.complete { background: var(--gnl); color: var(--green); border: 1px solid #b6d9a8; }
+    .lc-tag.upcoming { background: var(--cream); color: var(--mid); border: 1px solid var(--rule); }
+
+    .lc-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 5px; line-height: 1.3; }
+    .lesson-card.locked .lc-title { color: var(--mid); }
+    .lc-desc { font-size: 13px; color: var(--mid); line-height: 1.7; }
+
+    .lc-meta {
+      display: flex; align-items: center; gap: 14px;
+      margin-top: 10px; padding-top: 10px;
+      border-top: 1px solid var(--rule); flex-wrap: wrap;
+    }
+    .lc-meta-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--mid); }
+    .lc-meta-item i { font-size: 12px; }
+
+    /* ── KEY CONCEPTS (Module overview box) ── */
+    .concept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 24px; }
+    .concept-card {
+      background: white; border: 1px solid var(--rule);
+      border-radius: 10px; padding: 14px 16px;
+    }
+    .cc-icon { font-size: 20px; color: var(--mod); margin-bottom: 8px; }
+    .cc-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+    .cc-desc { font-size: 12px; color: var(--mid); line-height: 1.6; }
+
+    /* ── BREADCRUMB NAV ── */
+    .mod-nav-bar {
+      background: var(--paper); border-bottom: 1px solid var(--rule);
+      padding: 10px 20px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .mod-nav-bar a {
+      font-size: 12px; color: var(--mid); text-decoration: none;
+      display: flex; align-items: center; gap: 5px;
+      transition: color .15s;
+    }
+    .mod-nav-bar a:hover { color: var(--mod); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="pnav">
+    <div class="pn-logo"><img src="CPLA-logo-mark-rev.svg" alt="CPLA"></div>
+    <div class="pn-sep">·</div>
+    <div class="pn-crumb">
+      <a href="dashboard.html">Dashboard</a>
+      <span>/</span>
+      <a href="volume.html">Vol 2</a>
+      <span>/</span>
+      <span class="active">Module 3</span>
+    </div>
+    <div class="pn-r">
+      <div class="pn-role" id="nav-role">Student</div>
+      <div class="pn-av" id="nav-av">—</div>
+    </div>
+  </nav>
+
+  <!-- SUB-NAV -->
+  <div class="mod-nav-bar">
+    <a href="volume.html"><i class="ti ti-arrow-left"></i> Back to Volume 2</a>
+    <a href="dashboard.html"><i class="ti ti-layout-dashboard"></i> Go to my dashboard</a>
+  </div>
+
+  <!-- HERO -->
+  <div class="mod-hero">
+    <div class="mh-inner">
+      <div class="mh-eyebrow">
+        <a href="volume.html">Volume 2 — Illustrator</a>
+        <span>/</span>
+        Module 3 of 5
+      </div>
+      <h1>Paths, Shapes &amp; <em>Vector Control</em></h1>
+      <p>Every object in Illustrator is a path. Before a student can operate the Pen tool with confidence, they must be able to see what a path actually is — its anchor points, direction handles, and segments. This module takes you from that first structural understanding through the hands-on construction of real vector shapes, using a cloud form as the guided study.</p>
+      <div class="mod-stats">
+        <div class="ms"><div class="ms-num">5</div><div class="ms-lbl">Lessons</div></div>
+        <div class="ms"><div class="ms-num">~<em>8</em></div><div class="ms-lbl">Hours</div></div>
+        <div class="ms"><div class="ms-num">1</div><div class="ms-lbl">Deliverable</div></div>
+        <div class="ms"><div class="ms-num"><em>2</em></div><div class="ms-lbl">Tools used</div></div>
+      </div>
+    </div>
+  </div>
+
+  <main class="main">
+
+    <!-- KEY CONCEPTS -->
+    <div class="section-label">What this module covers</div>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="cc-icon"><i class="ti ti-point"></i></div>
+        <div class="cc-title">Anchor Points</div>
+        <div class="cc-desc">The fixed coordinates that define every shape. Corner vs. smooth points and when to use each.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-icon"><i class="ti ti-vector-bezier-2"></i></div>
+        <div class="cc-title">Direction Handles</div>
+        <div class="cc-desc">The levers that bend segments into curves — their length and angle determine curve quality.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-icon"><i class="ti ti-pencil"></i></div>
+        <div class="cc-title">The Pen Tool</div>
+        <div class="cc-desc">Click for corners, click-drag for smooth curves. Option/Alt to break handles independently.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-icon"><i class="ti ti-cursor"></i></div>
+        <div class="cc-title">Direct Selection</div>
+        <div class="cc-desc">Edit individual points and handles after drawing — the tool that refines every path.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-icon"><i class="ti ti-layers-intersect"></i></div>
+        <div class="cc-title">Compound Paths</div>
+        <div class="cc-desc">Combine shapes to punch holes, create letterforms, and build complex outlines.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-icon"><i class="ti ti-cloud"></i></div>
+        <div class="cc-title">The Cloud Study</div>
+        <div class="cc-desc">The module's guided project — a complete vector form built from scratch using Pen tool technique.</div>
+      </div>
+    </div>
+
+    <!-- LESSON LIST -->
+    <div class="section-label">Lessons in this module</div>
+
+    <!-- LESSON 2.9 — Current -->
+    <div class="lesson-card current">
+      <div class="lc-num-col"><div class="lc-num">2.9</div></div>
+      <div class="lc-body">
+        <div class="lc-tag current"><i class="ti ti-pencil" style="font-size:9px"></i> In Progress</div>
+        <div class="lc-title">Anchor Points &amp; Paths — The Logic Beneath Every Drawing</div>
+        <div class="lc-desc">The conceptual foundation before the Pen tool — understanding what a path actually is, how anchor points, segments, and direction handles relate, and why vector objects are resolution-independent. Includes a hands-on cloud sketch in the Field Manual to preview the forms you'll build in Illustrator.</div>
+        <div class="lc-meta">
+          <div class="lc-meta-item"><i class="ti ti-clock"></i> 55–70 min</div>
+          <div class="lc-meta-item"><i class="ti ti-file-description"></i> Field Manual + Illustrator file</div>
+          <div class="lc-meta-item"><i class="ti ti-apps"></i> Pen + Direct Selection tools</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON 2.10 — Upcoming -->
+    <div class="lesson-card locked">
+      <div class="lc-num-col"><div class="lc-num">2.10</div></div>
+      <div class="lc-body">
+        <div class="lc-tag upcoming">Upcoming</div>
+        <div class="lc-title">The Pen Tool: Placing Corner and Smooth Points</div>
+        <div class="lc-desc">Deliberate, controlled Pen tool technique — when to click and when to click-drag. Building simple open and closed paths from scratch, including the start of the cloud tracing begun in Lesson 2.9.</div>
+        <div class="lc-meta">
+          <div class="lc-meta-item"><i class="ti ti-clock"></i> 60–75 min</div>
+          <div class="lc-meta-item"><i class="ti ti-file-description"></i> Pen tool practice board</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON 2.11 — Upcoming -->
+    <div class="lesson-card locked">
+      <div class="lc-num-col"><div class="lc-num">2.11</div></div>
+      <div class="lc-body">
+        <div class="lc-tag upcoming">Upcoming</div>
+        <div class="lc-title">Editing Paths: The Direct Selection Tool</div>
+        <div class="lc-desc">Every path needs refinement after the first draft. The Direct Selection tool (white arrow) lets you move individual points, pull handles, and convert between corner and smooth without starting over. Practiced on the paths from Lesson 2.10.</div>
+        <div class="lc-meta">
+          <div class="lc-meta-item"><i class="ti ti-clock"></i> 45–60 min</div>
+          <div class="lc-meta-item"><i class="ti ti-file-description"></i> Editing exercise board</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON 2.12 — Upcoming -->
+    <div class="lesson-card locked">
+      <div class="lc-num-col"><div class="lc-num">2.12</div></div>
+      <div class="lc-body">
+        <div class="lc-tag upcoming">Upcoming</div>
+        <div class="lc-title">Compound Paths and the Pathfinder Panel</div>
+        <div class="lc-desc">When one path isn't enough — how to combine shapes using Pathfinder operations (Unite, Minus Front, Intersect) and how compound paths create transparent holes through a shape. Essential for logo construction and complex outlines.</div>
+        <div class="lc-meta">
+          <div class="lc-meta-item"><i class="ti ti-clock"></i> 50–65 min</div>
+          <div class="lc-meta-item"><i class="ti ti-file-description"></i> Pathfinder exercise board</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON 2.13 — Upcoming -->
+    <div class="lesson-card locked">
+      <div class="lc-num-col"><div class="lc-num">2.13</div></div>
+      <div class="lc-body">
+        <div class="lc-tag upcoming">Upcoming</div>
+        <div class="lc-title">The Cloud Study: Building the Final Piece</div>
+        <div class="lc-desc">The module capstone — taking the sketches and traced paths from Lessons 2.9–2.12 through to a finished, print-ready vector illustration. Color, stroke, refinement, and final file delivery. This is the deliverable that closes Module 3.</div>
+        <div class="lc-meta">
+          <div class="lc-meta-item"><i class="ti ti-clock"></i> 90–120 min</div>
+          <div class="lc-meta-item"><i class="ti ti-file-description"></i> Final .ai file + PDF export</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+
+  <script>
+    auth.onAuthStateChanged(async function(user) {
+      if (!user) { window.location.href = 'login.html'; return; }
+      var initials = user.displayName
+        ? user.displayName.split(' ').map(function(n){return n[0];}).join('').toUpperCase().slice(0,2)
+        : user.email.slice(0,2).toUpperCase();
+      document.getElementById('nav-av').textContent = initials;
+      try {
+        var snap = await db.collection('users').doc(user.uid).get();
+        var role = snap.exists && snap.data().role ? snap.data().role : 'Junior Designer';
+        var isGuest = user.email === GUEST_EMAIL;
+        document.getElementById('nav-role').textContent = isGuest ? 'Reviewer' : role;
+      } catch(e) {
+        document.getElementById('nav-role').textContent = user.email === GUEST_EMAIL ? 'Reviewer' : 'Junior Designer';
+      }
+    });
+  </script>
+</body>
+</html>

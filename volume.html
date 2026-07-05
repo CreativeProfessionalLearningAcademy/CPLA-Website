@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPLA — Volume 2: The Vector Discipline</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:#1a1410; --paper:#faf7f2; --cream:#f0ead8; --rule:#d4c9b8;
+      --mid:#6b5e52; --mod:#FF7C00; --ml:#fff3e6;
+      --green:#2d7a1a; --gnl:#f0fae8;
+      --blue:#01123a; --gold:#da9e2b; --gold-l:rgba(218,158,43,.1);
+    }
+    html, body { font-family: 'DM Sans', sans-serif; font-weight: 300; background: var(--cream); color: var(--ink); }
+
+    /* ── NAV ── */
+    .pnav { background: var(--ink); padding: 10px 20px; display: flex; align-items: center; gap: 10px; position: sticky; top: 0; z-index: 20; }
+    .pn-logo img { height: 26px; width: auto; display: block; }
+    .pn-sep { color: rgba(250,247,242,.2); font-size: 14px; }
+    .pn-back { font-size: 11px; color: rgba(250,247,242,.5); background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 5px; font-family: 'DM Sans', sans-serif; padding: 4px 10px 4px 6px; border-radius: 6px; transition: color .15s; text-decoration: none; }
+    .pn-back:hover { background: rgba(255,255,255,.08); color: #faf7f2; }
+    .pn-crumb { font-size: 11px; color: rgba(250,247,242,.4); letter-spacing: .04em; font-family: 'DM Mono', monospace; }
+    .pn-crumb span { color: rgba(218,158,43,.8); }
+    .pn-r { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+    .pn-role { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffb366; background: rgba(255,179,102,.12); border: 1px solid rgba(255,179,102,.3); padding: 3px 9px; border-radius: 100px; }
+    .pn-av { width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: #faf7f2; }
+
+    /* ── HERO ── */
+    .vol-hero { background: var(--ink); padding: 40px 28px 36px; position: relative; overflow: hidden; }
+    .vol-hero::before {
+      content: "2";
+      position: absolute; right: -10px; top: -20px;
+      font-family: 'Playfair Display', serif; font-size: 220px; font-weight: 900;
+      color: rgba(255,255,255,.025); line-height: 1; pointer-events: none; letter-spacing: -8px;
+    }
+    .vh-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+    .vol-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(218,158,43,.85); margin-bottom: 16px;
+    }
+    .vol-badge::before { content: ""; display: block; width: 24px; height: 1px; background: rgba(218,158,43,.45); }
+    .vol-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 5vw, 46px); font-weight: 900;
+      color: #ffffff; line-height: 1.08; letter-spacing: -.02em;
+      margin-bottom: 16px;
+    }
+    .vol-hero h1 em { color: var(--mod); font-style: italic; }
+    .vol-hero p { font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.85; max-width: 580px; margin-bottom: 24px; }
+
+    .vol-stats {
+      display: flex; gap: 0;
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 20px; flex-wrap: wrap;
+    }
+    .vs { padding: 0 24px 0 0; }
+    .vs:first-child { padding-left: 0; }
+    .vs + .vs { border-left: 1px solid rgba(255,255,255,.08); padding-left: 24px; }
+    .vs-num { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: #ffffff; line-height: 1; margin-bottom: 3px; }
+    .vs-num em { color: var(--mod); font-style: normal; }
+    .vs-lbl { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.3); font-family: 'DM Mono', monospace; }
+
+    .sw-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,124,0,.12); border: 1px solid rgba(255,124,0,.3);
+      padding: 5px 12px; border-radius: 100px; margin-bottom: 18px;
+    }
+    .sw-chip i { font-size: 13px; color: var(--mod); }
+    .sw-chip span { font-size: 11px; color: var(--mod); font-weight: 500; letter-spacing: .04em; }
+
+    /* ── MAIN ── */
+    .main { max-width: 760px; margin: 0 auto; padding: 32px 20px 60px; }
+    .section-label {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+
+    /* ── MODULE CARDS ── */
+    .mod-card {
+      background: white; border: 1px solid var(--rule);
+      border-radius: 14px; overflow: hidden; margin-bottom: 12px;
+    }
+    .mod-card.current { border-color: var(--mod); border-width: 1.5px; }
+
+    .mc-head {
+      padding: 16px 20px; display: flex;
+      align-items: center; gap: 14px; cursor: pointer;
+      transition: background .15s;
+    }
+    .mc-head:hover { background: var(--cream); }
+    .mod-card.current .mc-head:hover { background: #fff8f0; }
+
+    .mc-num {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--cream); border: 1px solid var(--rule);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 700;
+      color: var(--mid); flex-shrink: 0;
+    }
+    .mod-card.current .mc-num { background: var(--mod); color: white; border-color: var(--mod); }
+    .mod-card.complete .mc-num { background: var(--green); color: white; border-color: var(--green); }
+
+    .mc-info { flex: 1; }
+    .mc-title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+    .mc-sub { font-size: 12px; color: var(--mid); line-height: 1.5; }
+
+    .mc-meta { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .mc-count { font-size: 11px; color: var(--mid); font-family: 'DM Mono', monospace; white-space: nowrap; }
+    .mc-status {
+      font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+      font-weight: 500; padding: 3px 9px; border-radius: 100px;
+      white-space: nowrap;
+    }
+    .mc-status.complete { background: var(--gnl); color: var(--green); border: 1px solid #b6d9a8; }
+    .mc-status.current  { background: var(--ml);  color: var(--mod);   border: 1px solid rgba(255,124,0,.35); }
+    .mc-status.upcoming { background: var(--cream); color: var(--mid);  border: 1px solid var(--rule); }
+    .mc-toggle { font-size: 16px; color: var(--mid); transition: transform .25s; flex-shrink: 0; }
+    .mod-card.open .mc-toggle { transform: rotate(180deg); }
+
+    /* ── LESSON LIST (collapsible) ── */
+    .mc-lessons { max-height: 0; overflow: hidden; transition: max-height .35s ease; border-top: 0 solid var(--rule); }
+    .mod-card.open .mc-lessons { max-height: 600px; border-top-width: 1px; }
+
+    .lesson-row {
+      padding: 11px 20px 11px 70px;
+      display: flex; align-items: center; gap: 12px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .lesson-row:last-child { border-bottom: none; }
+    .lesson-row.locked { opacity: .45; }
+
+    .lr-dot {
+      width: 20px; height: 20px; border-radius: 50%;
+      border: 1.5px solid var(--rule); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px;
+    }
+    .lesson-row.done   .lr-dot { background: var(--green); border-color: var(--green); color: white; }
+    .lesson-row.active .lr-dot { background: var(--mod);   border-color: var(--mod);   color: white; font-size: 7px; }
+
+    .lr-num { font-size: 10px; color: var(--mid); font-family: 'DM Mono', monospace; flex-shrink: 0; width: 28px; }
+    .lr-title { font-size: 13px; color: var(--ink); flex: 1; line-height: 1.4; }
+    .lesson-row.locked .lr-title { color: var(--mid); }
+    .lr-badge {
+      font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 100px; white-space: nowrap; flex-shrink: 0;
+    }
+    .lr-badge.active  { background: var(--ml);  color: var(--mod);   border: 1px solid rgba(255,124,0,.3); }
+    .lr-badge.done    { background: var(--gnl); color: var(--green); border: 1px solid #b6d9a8; }
+    .lr-badge.soon    { background: var(--cream); color: var(--mid); border: 1px solid var(--rule); }
+
+    /* ── VIEW MODULE BUTTON ── */
+    .mc-footer {
+      padding: 12px 20px 14px 70px;
+      border-top: 1px solid var(--rule);
+      background: #fdfcf9;
+      display: none;
+    }
+    .mod-card.open .mc-footer { display: block; }
+    .view-mod-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500; color: var(--mod);
+      text-decoration: none; padding: 7px 14px;
+      border: 1px solid rgba(255,124,0,.4); border-radius: 7px;
+      transition: background .15s;
+    }
+    .view-mod-btn:hover { background: var(--ml); }
+    .view-mod-btn i { font-size: 13px; }
+
+    .coming-note {
+      font-size: 12px; color: var(--mid); padding: 12px 0 0;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="pnav">
+    <div class="pn-logo"><img src="CPLA-logo-mark-rev.svg" alt="CPLA"></div>
+    <div class="pn-sep">·</div>
+    <a href="dashboard.html" class="pn-back"><i class="ti ti-arrow-left"></i> Dashboard</a>
+    <div class="pn-sep">·</div>
+    <div class="pn-crumb"><span>Volume 2</span></div>
+    <div class="pn-r">
+      <div class="pn-role" id="nav-role">Student</div>
+      <div class="pn-av" id="nav-av">—</div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="vol-hero">
+    <div class="vh-inner">
+      <div class="vol-badge">Volume 2 of 4</div>
+      <h1>The <em>Vector</em> Discipline</h1>
+      <div class="sw-chip"><i class="ti ti-vector-triangle"></i><span>Adobe Illustrator</span></div>
+      <p>Illustrator is the industry standard for vector graphics — logos, icons, packaging, type systems, and technical illustration. This volume builds your command of the application from first launch through professional-grade path construction. Every shape, every letterform, every logo you will ever produce in Illustrator is made of paths. This volume teaches you to see them, build them, and control them with precision.</p>
+      <div class="vol-stats">
+        <div class="vs"><div class="vs-num">5</div><div class="vs-lbl">Modules</div></div>
+        <div class="vs"><div class="vs-num">25</div><div class="vs-lbl">Lessons</div></div>
+        <div class="vs"><div class="vs-num">~<em>40</em></div><div class="vs-lbl">Hours of work</div></div>
+        <div class="vs"><div class="vs-num">1</div><div class="vs-lbl">Final project</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE LIST -->
+  <main class="main">
+    <div class="section-label">Modules in this volume</div>
+
+    <!-- MODULE 1 — Complete -->
+    <div class="mod-card complete" id="mc-1">
+      <div class="mc-head" onclick="toggle(1)">
+        <div class="mc-num"><i class="ti ti-check" style="font-size:14px"></i></div>
+        <div class="mc-info">
+          <div class="mc-title">Module 1 — Environment &amp; Document Setup</div>
+          <div class="mc-sub">The workspace, document settings, color modes, and artboard organization.</div>
+        </div>
+        <div class="mc-meta">
+          <div class="mc-count">4 lessons</div>
+          <div class="mc-status complete">Complete</div>
+          <i class="ti ti-chevron-down mc-toggle"></i>
+        </div>
+      </div>
+      <div class="mc-lessons">
+        <div class="lesson-row done"><div class="lr-dot"><i class="ti ti-check" style="font-size:8px"></i></div><div class="lr-num">2.1</div><div class="lr-title">The Illustrator Interface</div><div class="lr-badge done">Done</div></div>
+        <div class="lesson-row done"><div class="lr-dot"><i class="ti ti-check" style="font-size:8px"></i></div><div class="lr-num">2.2</div><div class="lr-title">Document Setup for Print and Screen</div><div class="lr-badge done">Done</div></div>
+        <div class="lesson-row done"><div class="lr-dot"><i class="ti ti-check" style="font-size:8px"></i></div><div class="lr-num">2.3</div><div class="lr-title">Color Modes: RGB vs. CMYK</div><div class="lr-badge done">Done</div></div>
+        <div class="lesson-row done"><div class="lr-dot"><i class="ti ti-check" style="font-size:8px"></i></div><div class="lr-num">2.4</div><div class="lr-title">Artboards and Document Organization</div><div class="lr-badge done">Done</div></div>
+        <div class="mc-footer"><div class="coming-note">All lessons in this module are complete.</div></div>
+      </div>
+    </div>
+
+    <!-- MODULE 2 — Complete -->
+    <div class="mod-card complete" id="mc-2">
+      <div class="mc-head" onclick="toggle(2)">
+        <div class="mc-num"><i class="ti ti-check" style="font-size:14px"></i></div>
+        <div class="mc-info">
+          <div class="mc-title">Module 2 — Shapes, Objects &amp; Selection</div>
+          <div class="mc-sub">Shape tools, selection logic, grouping, alignment, and layer structure.</div>
+        </div>
+        <div class="mc-meta">
+          <div class="mc-count">4 lessons</div>
+          <div class="mc-status complete">Complete</div>
+          <i class="ti ti-chevron-down mc-toggle"></i>
+        </div>
+      </div>
+      <div class="mc-lessons">
+        <div class="lesson-row done"><div class="lr-dot"><i class="ti ti-check" style="font-size:8px"></i></div><div class="lr-num">2.5</div><div class="lr-title">The Selection Tools: Move vs. Edit</div><div class="lr-badge done">Done</div></div>
+        <div class="lesson-row done"><div class="lr-dot"><i class="ti ti-check" style="font-size:8px"></i></div><div class="lr-num">2.6</div><div class="lr-title">Basic Shapes and the Shape Tools</div><div class="lr-badge done">Done</div></div>
+        <div class="lesson-row done"><div class="lr-dot"><i class="ti ti-check" style="font-size:8px"></i></div><div class="lr-num">2.7</div><div class="lr-title">Grouping, Alignment, and Distribution</div><div class="lr-badge done">Done</div></div>
+        <div class="lesson-row done"><div class="lr-dot"><i class="ti ti-check" style="font-size:8px"></i></div><div class="lr-num">2.8</div><div class="lr-title">Object Stacking and Layer Structure</div><div class="lr-badge done">Done</div></div>
+        <div class="mc-footer"><div class="coming-note">All lessons in this module are complete.</div></div>
+      </div>
+    </div>
+
+    <!-- MODULE 3 — In Progress (CURRENT) -->
+    <div class="mod-card current open" id="mc-3">
+      <div class="mc-head" onclick="toggle(3)">
+        <div class="mc-num">3</div>
+        <div class="mc-info">
+          <div class="mc-title">Module 3 — Paths, Shapes &amp; Vector Control</div>
+          <div class="mc-sub">The structure of every vector object — anchor points, direction handles, and the Pen tool.</div>
+        </div>
+        <div class="mc-meta">
+          <div class="mc-count">5 lessons</div>
+          <div class="mc-status current">In Progress</div>
+          <i class="ti ti-chevron-down mc-toggle"></i>
+        </div>
+      </div>
+      <div class="mc-lessons">
+        <div class="lesson-row active"><div class="lr-dot"><i class="ti ti-pencil" style="font-size:7px"></i></div><div class="lr-num">2.9</div><div class="lr-title">Anchor Points &amp; Paths — The Logic Beneath Every Drawing</div><div class="lr-badge active">Current</div></div>
+        <div class="lesson-row locked"><div class="lr-dot"></div><div class="lr-num">2.10</div><div class="lr-title">The Pen Tool: Placing Corner and Smooth Points</div><div class="lr-badge soon">Upcoming</div></div>
+        <div class="lesson-row locked"><div class="lr-dot"></div><div class="lr-num">2.11</div><div class="lr-title">Editing Paths: The Direct Selection Tool</div><div class="lr-badge soon">Upcoming</div></div>
+        <div class="lesson-row locked"><div class="lr-dot"></div><div class="lr-num">2.12</div><div class="lr-title">Compound Paths and the Pathfinder Panel</div><div class="lr-badge soon">Upcoming</div></div>
+        <div class="lesson-row locked"><div class="lr-dot"></div><div class="lr-num">2.13</div><div class="lr-title">The Cloud Study: Building the Final Piece</div><div class="lr-badge soon">Upcoming</div></div>
+        <div class="mc-footer">
+          <a href="module.html" class="view-mod-btn"><i class="ti ti-layout-list"></i> View full module detail</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 4 — Upcoming -->
+    <div class="mod-card" id="mc-4">
+      <div class="mc-head" onclick="toggle(4)">
+        <div class="mc-num" style="opacity:.5">4</div>
+        <div class="mc-info">
+          <div class="mc-title" style="color:var(--mid)">Module 4 — Color, Fills &amp; Strokes</div>
+          <div class="mc-sub">Fill and stroke control, swatches, gradients, and the Appearance panel.</div>
+        </div>
+        <div class="mc-meta">
+          <div class="mc-count">4 lessons</div>
+          <div class="mc-status upcoming">Upcoming</div>
+          <i class="ti ti-chevron-down mc-toggle"></i>
+        </div>
+      </div>
+      <div class="mc-lessons">
+        <div class="lesson-row locked"><div class="lr-dot"></div><div class="lr-num">2.14</div><div class="lr-title">Fill and Stroke Fundamentals</div></div>
+        <div class="lesson-row locked"><div class="lr-dot"></div><div class="lr-num">2.15</div><div class="lr-title">The Color Panel and Swatches</div></div>
+        <div class="lesson-row locked"><div class="lr-dot"></div><div class="lr-num">2.16</div><div class="lr-title">Gradients and Gradient Meshes</div></div>
+        <div class="lesson-row locked"><div class="lr-dot"></div><div class="lr-num">2.17</div><div class="lr-title">The Appearance Panel and Graphic Styles</div></div>
+        <div class="mc-footer"><div class="coming-note">This module unlocks after you complete Module 3.</div></div>
+      </div>
+    </div>
+
+    <!-- MODULE 5 — Upcoming -->
+    <div class="mod-card" id="mc-5">
+      <div class="mc-head" onclick="toggle(5)">
+        <div class="mc-num" style="opacity:.5">5</div>
+        <div class="mc-info">
+          <div class="mc-title" style="color:var(--mid)">Module 5 — Type, Final Project &amp; Critique</div>
+          <div class="mc-sub">Typography in Illustrator, the volume capstone project, and peer critique.</div>
+        </div>
+        <div class="mc-meta">
+          <div class="mc-count">8 lessons</div>
+          <div class="mc-status upcoming">Upcoming</div>
+          <i class="ti ti-chevron-down mc-toggle"></i>
+        </div>
+      </div>
+      <div class="mc-lessons">
+        <div class="lesson-row locked"><div class="lr-dot"></div><div class="lr-num">2.18</div><div class="lr-title">Type Tools and Type Objects</div></div>
+        <div class="lesson-row locked"><div class="lr-dot"></div><div class="lr-num">2.19</div><div class="lr-title">Character and Paragraph Panels</div></div>
+        <div class="lesson-row locked"><div class="lr-dot"></div><div class="lr-num">2.20</div><div class="lr-title">Type on a Path</div></div>
+        <div class="lesson-row locked"><div class="lr-dot"></div><div class="lr-num">2.21</div><div class="lr-title">Outlining Type</div></div>
+        <div class="lesson-row locked"><div class="lr-dot"></div><div class="lr-num">2.22</div><div class="lr-title">The Volume 2 Project Brief</div></div>
+        <div class="lesson-row locked"><div class="lr-dot"></div><div class="lr-num">2.23</div><div class="lr-title">Sketching and Planning the Final Piece</div></div>
+        <div class="lesson-row locked"><div class="lr-dot"></div><div class="lr-num">2.24</div><div class="lr-title">Building the Artwork</div></div>
+        <div class="lesson-row locked"><div class="lr-dot"></div><div class="lr-num">2.25</div><div class="lr-title">Presentation and Critique</div></div>
+        <div class="mc-footer"><div class="coming-note">This module unlocks after you complete Module 4.</div></div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+
+  <script>
+    // Auth guard + nav population
+    auth.onAuthStateChanged(async function(user) {
+      if (!user) { window.location.href = 'login.html'; return; }
+      var initials = user.displayName
+        ? user.displayName.split(' ').map(function(n){return n[0];}).join('').toUpperCase().slice(0,2)
+        : user.email.slice(0,2).toUpperCase();
+      document.getElementById('nav-av').textContent = initials;
+      try {
+        var snap = await db.collection('users').doc(user.uid).get();
+        var role = snap.exists && snap.data().role ? snap.data().role : 'Junior Designer';
+        var isGuest = user.email === GUEST_EMAIL;
+        document.getElementById('nav-role').textContent = isGuest ? 'Reviewer' : role;
+      } catch(e) {
+        document.getElementById('nav-role').textContent = user.email === GUEST_EMAIL ? 'Reviewer' : 'Junior Designer';
+      }
+    });
+
+    // Module accordion toggle
+    function toggle(n) {
+      var card = document.getElementById('mc-' + n);
+      card.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>

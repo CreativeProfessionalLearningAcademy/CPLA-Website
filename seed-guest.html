@@ -132,7 +132,10 @@
         await db.collection('users').doc(uid).set({
           email: 'reviewer@cpla.studio',
           displayName: 'Guest Reviewer',
-          role: 'reviewer',
+          firstName: 'Guest',
+          lastName: 'Reviewer',
+          role: 'Reviewer',
+          accountType: 'reviewer',
           isGuest: true,
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
