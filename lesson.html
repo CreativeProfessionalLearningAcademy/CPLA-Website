@@ -35,7 +35,7 @@
 
     /* ── STEP TABS ── */
     .step-tabs { background: var(--cream); border-bottom: 2px solid var(--rule); display: flex; overflow-x: auto; }
-    .stab { padding: 10px 14px; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; font-family: 'DM Mono', monospace; border: none; background: none; cursor: pointer; color: var(--mid); border-bottom: 3px solid transparent; margin-bottom: -2px; white-space: nowrap; display: flex; align-items: center; gap: 5px; transition: color .15s; }
+    .stab { padding: 10px 13px; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; font-family: 'DM Mono', monospace; border: none; background: none; cursor: pointer; color: var(--mid); border-bottom: 3px solid transparent; margin-bottom: -2px; white-space: nowrap; display: flex; align-items: center; gap: 5px; transition: color .15s; }
     .stab.active { color: var(--mod); border-bottom-color: var(--mod); }
     .stab.done { color: var(--green); cursor: pointer; }
     .stab.locked { opacity: .3; cursor: not-allowed; pointer-events: none; }
@@ -57,7 +57,41 @@
     /* ── PANELS ── */
     .panel { padding: 22px 24px; background: var(--paper); }
 
-    /* VIDEO */
+    /* ── READING PANEL ── */
+    .lesson-section { margin-bottom: 28px; }
+    .ls-eyebrow { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 7px; font-family: 'DM Mono', monospace; }
+    .ls-h { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 10px; line-height: 1.25; }
+    .ls-p { font-size: 14px; line-height: 1.9; color: #2a2218; margin-bottom: 10px; }
+    .ls-p strong { font-weight: 600; color: var(--ink); }
+    .cbox { border-left: 4px solid var(--mod); background: var(--ml); padding: 14px 16px; margin: 14px 0; border-radius: 0 8px 8px 0; }
+    .cbox-l { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--mod); font-weight: 500; margin-bottom: 5px; font-family: 'DM Mono', monospace; }
+    .cbox p { font-size: 13px; line-height: 1.8; color: #2a2218; }
+
+    /* VOCAB GRID */
+    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 16px 0; }
+    .vocab-card { background: white; border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; }
+    .vocab-card .vc-term { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--mod); font-weight: 500; margin-bottom: 5px; }
+    .vocab-card .vc-def { font-size: 13px; line-height: 1.65; color: #2a2218; }
+
+    /* PROBLEM/SOLUTION */
+    .ps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+    @media (max-width: 560px) { .ps-grid { grid-template-columns: 1fr; } }
+    .ps-card { border-radius: 10px; padding: 16px; }
+    .ps-card.problem { background: var(--al); border: 1px solid #f0c4b8; }
+    .ps-card.solution { background: var(--gnl); border: 1px solid #b6d9a8; }
+    .ps-label { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; margin-bottom: 7px; font-family: 'DM Mono', monospace; }
+    .ps-card.problem .ps-label { color: var(--accent); }
+    .ps-card.solution .ps-label { color: var(--green); }
+    .ps-card p { font-size: 13px; line-height: 1.7; color: #2a2218; }
+
+    /* READ CONFIRM */
+    .read-confirm { background: var(--cream); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px; margin-top: 4px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .rc-label { font-size: 13px; color: var(--mid); }
+    .rc-label strong { color: var(--ink); }
+    .mark-read-btn { background: var(--ink); color: #faf7f2; border: none; border-radius: 8px; padding: 10px 18px; font-size: 13px; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; font-family: 'DM Sans', sans-serif; white-space: nowrap; }
+    .mark-read-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    /* ── VIDEO ── */
     .vplayer { background: #0a0a0a; border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
     .vscreen { position: relative; background: #0d0d0d; cursor: pointer; }
     .vscreen-inner { width: 100%; padding-bottom: 50%; }
@@ -94,17 +128,9 @@
     .vt { font-size: 11px; color: rgba(255,255,255,.3); font-family: 'DM Mono', monospace; white-space: nowrap; flex-shrink: 0; }
     .vbar { flex: 1; height: 4px; background: rgba(255,255,255,.1); border-radius: 2px; cursor: pointer; }
     .vp { height: 100%; background: var(--mod); border-radius: 2px; width: 0%; transition: width .2s linear; }
+    .video-note { font-size: 13px; color: var(--mid); line-height: 1.7; margin-top: 12px; padding: 12px 14px; background: var(--cream); border-radius: 8px; }
 
-    /* VIDEO TEXT */
-    .video-txt { }
-    .sl { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 7px; font-family: 'DM Mono', monospace; }
-    .lh2 { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; margin-bottom: 11px; line-height: 1.25; color: var(--ink); }
-    .lp { font-size: 14px; line-height: 1.9; margin-bottom: 11px; color: #2a2218; }
-    .cbox { border-left: 4px solid var(--mod); background: var(--ml); padding: 13px 15px; margin: 14px 0; border-radius: 0 8px 8px 0; }
-    .cbox-l { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--mod); font-weight: 500; margin-bottom: 4px; font-family: 'DM Mono', monospace; }
-    .cbox p { font-size: 13px; line-height: 1.75; color: #2a2218; }
-
-    /* EXERCISE */
+    /* ── EXERCISE ── */
     .brief-card { border: 2px solid var(--mod); border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
     .brief-hd { background: var(--mod); padding: 14px 18px; }
     .brief-hd .bl { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; color: rgba(255,255,255,.65); margin-bottom: 4px; }
@@ -118,10 +144,10 @@
     .brief-sec li { margin-bottom: 3px; }
     .brief-del { background: var(--ml); border-radius: 6px; padding: 11px 14px; margin-top: 10px; }
     .brief-del p { font-size: 13px; font-weight: 600; color: var(--mod); }
-    .complete-btn { background: var(--ink); color: #faf7f2; border: none; border-radius: 8px; padding: 10px 18px; font-size: 13px; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; font-family: 'DM Sans', sans-serif; margin-top: 4px; }
-    .complete-btn:disabled { opacity: .5; cursor: not-allowed; }
+    .action-btn { background: var(--ink); color: #faf7f2; border: none; border-radius: 8px; padding: 10px 18px; font-size: 13px; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; font-family: 'DM Sans', sans-serif; margin-top: 4px; }
+    .action-btn:disabled { opacity: .5; cursor: not-allowed; }
 
-    /* QUIZ */
+    /* ── QUIZ ── */
     .quiz-hd { background: var(--ink); border-radius: 10px 10px 0 0; padding: 15px 18px; }
     .quiz-hd .ql { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--mod); font-weight: 500; margin-bottom: 4px; }
     .quiz-hd h4 { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: #faf7f2; }
@@ -148,7 +174,7 @@
     .qsubmit-btn { background: var(--ink); color: #faf7f2; border: none; border-radius: 8px; padding: 10px 18px; font-size: 13px; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; font-family: 'DM Sans', sans-serif; }
     .retry-btn { background: none; color: var(--accent); border: 1px solid var(--accent); border-radius: 8px; padding: 9px 16px; font-size: 13px; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-left: 8px; }
 
-    /* SUBMIT */
+    /* ── SUBMIT ── */
     .submit-req { background: var(--cream); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; margin-bottom: 18px; display: flex; align-items: flex-start; gap: 12px; }
     .submit-req i { font-size: 20px; color: var(--mod); flex-shrink: 0; margin-top: 1px; }
     .submit-req-body h4 { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
@@ -188,7 +214,7 @@
     .submit-now-btn { background: var(--ink); color: #faf7f2; border: none; border-radius: 8px; padding: 11px 22px; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 8px; font-family: 'DM Sans', sans-serif; opacity: .3; pointer-events: none; transition: opacity .3s; }
     .submit-now-btn.ready { opacity: 1; pointer-events: auto; }
 
-    /* CONTINUE BAR */
+    /* ── CONTINUE BAR ── */
     .cont-bar { background: white; border-top: 1px solid var(--rule); padding: 13px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; position: sticky; bottom: 0; z-index: 10; }
     .ch { font-size: 12px; color: var(--mid); }
     .cbtn { background: var(--ink); color: #faf7f2; border: none; border-radius: 8px; padding: 10px 18px; font-size: 13px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 7px; font-family: 'DM Sans', sans-serif; opacity: .3; pointer-events: none; transition: opacity .3s; }
@@ -213,28 +239,142 @@
     <div><h3>Module 3 — Paths, Shapes &amp; Vector Control</h3><p>Lesson 2.9 · Volume 2 · Illustrator</p></div>
   </div>
 
-  <!-- STEP TABS -->
+  <!-- STEP TABS — 5 steps -->
   <div class="step-tabs" id="step-tabs">
-    <button class="stab" id="stab-0" onclick="gotoStep(0)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">1</span> Watch video</button>
-    <button class="stab" id="stab-1" onclick="gotoStep(1)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">2</span> Practice exercise</button>
-    <button class="stab" id="stab-2" onclick="gotoStep(2)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">3</span> Assessment</button>
-    <button class="stab" id="stab-3" onclick="gotoStep(3)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">4</span> Submit work</button>
+    <button class="stab" id="stab-0" onclick="gotoStep(0)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">1</span> Read lesson</button>
+    <button class="stab" id="stab-1" onclick="gotoStep(1)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">2</span> Watch video</button>
+    <button class="stab" id="stab-2" onclick="gotoStep(2)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">3</span> Practice</button>
+    <button class="stab" id="stab-3" onclick="gotoStep(3)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">4</span> Assessment</button>
+    <button class="stab" id="stab-4" onclick="gotoStep(4)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">5</span> Submit work</button>
   </div>
 
   <!-- HERO -->
   <div class="lesson-hero">
     <div class="lh-vt">Volume 2 · Module 3 · Lesson 2.9</div>
-    <div class="lh-title">The Pen tool: <em>thinking in paths</em></div>
+    <div class="lh-title">Anchor Points &amp; <em>Paths</em></div>
     <div class="lh-meta">
-      <div class="lh-mi"><label>Lesson type</label><span>Concept + vocabulary</span></div>
-      <div class="lh-mi"><label>Duration</label><span>45–55 min</span></div>
-      <div class="lh-mi"><label>App</label><span>Illustrator — intro</span></div>
-      <div class="lh-mi"><label>Deliverable</label><span>Anatomy study + traces</span></div>
+      <div class="lh-mi"><label>Lesson type</label><span>Conceptual + First Tool Contact</span></div>
+      <div class="lh-mi"><label>Duration</label><span>55–70 min</span></div>
+      <div class="lh-mi"><label>App</label><span>Illustrator — Direct Selection &amp; Pen</span></div>
+      <div class="lh-mi"><label>Deliverable</label><span>Path-anatomy study + first minimal traces</span></div>
     </div>
   </div>
 
-  <!-- PANEL 0: VIDEO -->
+  <!-- ═══════════════════════════════════════════
+       PANEL 0 — READ THE LESSON
+  ════════════════════════════════════════════ -->
   <div id="panel-0" class="panel">
+
+    <div class="lesson-section">
+      <div class="ls-eyebrow">The problem you're about to solve</div>
+      <div class="ls-h">Most designers pick up the Pen tool before they understand what it draws</div>
+      <div class="ps-grid">
+        <div class="ps-card problem">
+          <div class="ps-label">The problem</div>
+          <p>Students try to operate the Pen tool before they understand what it produces. The cursor drops points that don't connect, curves flip the wrong direction, handles appear from nowhere. It feels broken — and it keeps feeling broken until the underlying structure is visible.</p>
+        </div>
+        <div class="ps-card solution">
+          <div class="ps-label">The solution</div>
+          <p>Slow down before opening the Pen tool. Once you can see a path the way a professional sees it — as a small set of points with predictable behavior — every Pen tool action becomes logical rather than mysterious.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-section">
+      <div class="ls-eyebrow">Section 1 — Before the tool, the logic</div>
+      <div class="ls-h">Everything in Illustrator is a path</div>
+      <p class="ls-p">In Module 2 you set up the environment — the workspace, the document, the layers. You built the room. This module is about the material you will work with inside it: the <strong>path</strong>. Every vector object in Illustrator is a path or a collection of paths. A logo is paths. A letterform is a path. A map, an icon, a packaging dieline — all paths. There is no separate thing to learn for each; there is one underlying structure, repeated.</p>
+      <p class="ls-p">This is why we slow down before opening the Pen tool. You already met the reason in Lesson 2.3: the curves you are about to draw come directly from Pierre Bézier's 1960s mathematics. Now you will see that math as something you can hold.</p>
+    </div>
+
+    <div class="lesson-section">
+      <div class="ls-eyebrow">Section 2 — The three parts of every path</div>
+      <div class="ls-h">Anchor points, segments, and direction handles</div>
+      <p class="ls-p">An <strong>anchor point</strong> is a single fixed location that the path passes through — the skeleton of the shape. Place two anchor points and connect them and you have the simplest possible path: a single straight line. Anchor points are what you click into existence with the Pen tool, and what you grab and move with the Direct Selection tool (the white arrow).</p>
+      <p class="ls-p">A <strong>segment</strong> is the line that runs between two anchor points. A segment is either straight or curved — there is no third kind. A path is simply an ordered chain of anchor points joined by segments. When a designer says a shape has "too many points," they mean the chain is longer than it needs to be.</p>
+      <p class="ls-p">A <strong>direction handle</strong> is the lever that bends a segment into a curve. Handles extend out from an anchor point like antennae. Their length and angle determine how the curve leaves and enters that point. A straight segment has no active handles; a curved segment is shaped by the handles on both anchor ends. The Pen tool's click-and-drag is nothing more than placing an anchor and pulling out its handles in one gesture.</p>
+      <div class="cbox">
+        <div class="cbox-l">The whole vocabulary in one sentence</div>
+        <p>A path is an ordered set of <strong>anchor points</strong>, joined by straight or curved <strong>segments</strong>, whose curves are shaped by <strong>direction handles</strong>. That is the entire structure. Every drawing you make for the rest of this program is built from these three words.</p>
+      </div>
+    </div>
+
+    <div class="lesson-section">
+      <div class="ls-eyebrow">Section 3 — Open and closed paths</div>
+      <div class="ls-h">The type of path determines what it can do</div>
+      <p class="ls-p">Every path is one of two kinds. An <strong>open path</strong> has two distinct endpoints that are not joined — a single line, an arc, a signature stroke. A <strong>closed path</strong> loops back on itself with no endpoints — a circle, a star, the outline of a letter. The practical consequence is about fill: only a closed path encloses an area, so only a closed path can hold a fill color reliably.</p>
+      <p class="ls-p">Drawing a leaf? That is a closed path — it needs to hold a green fill. Drawing the stem as a thin line? That can be an open path with a stroke. Knowing which kind you are making before you start prevents the most common beginner confusion: trying to fill a shape that never actually closed.</p>
+    </div>
+
+    <div class="lesson-section">
+      <div class="ls-eyebrow">Section 4 — Corner and smooth points</div>
+      <div class="ls-h">The distinction that makes the Pen tool predictable</div>
+      <p class="ls-p">A <strong>corner point</strong> creates an abrupt change of direction — the path can turn sharply, like the tip of a star or the corner of a rectangle. A <strong>smooth point</strong> creates a continuous, flowing transition — the path glides through it without a kink, like the side of an ellipse. At a smooth point the two handles act as one straight lever, keeping the curve continuous. At a corner point the handles are independent, so the path can break direction.</p>
+      <p class="ls-p">You will spend the next two lessons learning to place each kind deliberately and to convert one into the other. For now, the goal is only to <em>see</em> the difference: open any vector shape, switch to the Direct Selection tool, and click a point. A smooth point shows two handles in a straight line through it; a corner point shows handles that angle independently.</p>
+    </div>
+
+    <div class="lesson-section">
+      <div class="ls-eyebrow">Section 5 — Why it matters</div>
+      <div class="ls-h">Vector paths are resolution-independent</div>
+      <p class="ls-p">When Illustrator saves a path, it does not save a picture of the path. It saves the <em>recipe</em>: the coordinates of each anchor point, the lengths and angles of the direction handles, and the order they connect. That recipe is mathematics, and mathematics has no size. When you scale the shape to 10 times its size or 1/100th, Illustrator recalculates the same recipe at the new dimensions. The edge stays perfectly crisp because there were never any pixels to blur — there were only points and the math between them.</p>
+      <p class="ls-p">This is the entire reason vector is the right tool for logos, icons, type, and anything that must survive scaling. A raster image stores pixels and degrades when enlarged; a vector path stores a recipe and is indifferent to scale.</p>
+      <div class="cbox" style="border-left-color:#b8860b; background:#faf6e8;">
+        <div class="cbox-l" style="color:#b8860b;">Path discipline starts here</div>
+        <p>In Module 1 you heard senior designers give the same note again and again: "simplify the paths." Now you can see what they mean. Fewer anchor points means a shorter recipe, a smoother curve, a smaller file, and a shape anyone can edit. <strong>Use the fewest anchor points that describe the shape cleanly.</strong> A curve that needs eight points from a beginner needs two or three from a professional.</p>
+      </div>
+    </div>
+
+    <div class="lesson-section">
+      <div class="ls-eyebrow">Key vocabulary — Lesson 2.9</div>
+      <div class="ls-h">Eight terms. Know them cold.</div>
+      <div class="vocab-grid">
+        <div class="vocab-card">
+          <div class="vc-term">Anchor Point</div>
+          <div class="vc-def">A single fixed coordinate that a path passes through — the skeleton of a vector shape. Created with the Pen tool, edited with the Direct Selection tool.<br><em style="font-size:12px;color:#888">"This curve has six anchor points doing the work of three — pull out the middle ones."</em></div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-term">Path</div>
+          <div class="vc-def">An ordered chain of anchor points joined by segments. The fundamental object of all vector drawing in Illustrator.<br><em style="font-size:12px;color:#888">"The whole logo is one closed path — there's nothing to group."</em></div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-term">Segment</div>
+          <div class="vc-def">The line connecting two adjacent anchor points. Always either straight or curved — never both.<br><em style="font-size:12px;color:#888">"That segment is curved where it should be straight — flatten the handles."</em></div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-term">Direction Handle</div>
+          <div class="vc-def">The lever extending from an anchor point that controls how a curved segment bends. Its length and angle shape the curve.<br><em style="font-size:12px;color:#888">"Shorten the handle and the curve tightens into the corner."</em></div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-term">Open Path</div>
+          <div class="vc-def">A path with two unjoined endpoints — a line or stroke. Cannot reliably hold a fill because it encloses no area.<br><em style="font-size:12px;color:#888">"The stem is an open path — just stroke it, don't try to fill it."</em></div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-term">Closed Path</div>
+          <div class="vc-def">A path that loops back to its start with no endpoints — a shape. Encloses an area and can hold a fill.<br><em style="font-size:12px;color:#888">"Close the path before you fill it, or the color won't behave."</em></div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-term">Corner Point</div>
+          <div class="vc-def">An anchor where the path changes direction abruptly. Its handles act independently, allowing a sharp turn.<br><em style="font-size:12px;color:#888">"The star tips are corner points — sharp, not rounded."</em></div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-term">Smooth Point</div>
+          <div class="vc-def">An anchor where the path flows through continuously without a kink. Its two handles align as one lever.<br><em style="font-size:12px;color:#888">"Make that a smooth point so the curve doesn't pinch."</em></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="read-confirm" id="read-confirm">
+      <div class="rc-label"><strong>Ready to continue?</strong> Watch the video to see these concepts in action inside Illustrator.</div>
+      <button class="mark-read-btn" id="mark-read-btn" onclick="markReadDone()">
+        <i class="ti ti-check"></i> I understand the concepts
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PANEL 1 — WATCH VIDEO
+  ════════════════════════════════════════════ -->
+  <div id="panel-1" class="panel" style="display:none">
     <div class="vplayer">
       <div class="vscreen" id="vscreen" onclick="togglePlay()">
         <div class="vscreen-inner">
@@ -256,43 +396,52 @@
         <button class="vbtn"><i class="ti ti-volume"></i></button>
       </div>
     </div>
-    <div class="video-txt">
-      <div class="sl">Section 1</div>
-      <div class="lh2">Before the tool, the logic</div>
-      <p class="lp">Every vector object in Illustrator is a path or a collection of paths. A logo is paths. A letterform is a path. There is one underlying structure, repeated everywhere.</p>
-      <div class="cbox">
-        <div class="cbox-l">The whole vocabulary in one sentence</div>
-        <p>A path is an ordered set of <strong>anchor points</strong>, joined by straight or curved <strong>segments</strong>, whose curves are shaped by <strong>direction handles</strong>. Every drawing you make for the rest of this program is built from these three words.</p>
-      </div>
+    <div class="video-note">
+      <strong>Watch the full video</strong> — it demonstrates anchor points, smooth vs. corner handles, and live Pen tool technique directly in Illustrator. The Continue button activates when playback completes.
     </div>
   </div>
 
-  <!-- PANEL 1: EXERCISE -->
-  <div id="panel-1" class="panel" style="display:none">
+  <!-- ═══════════════════════════════════════════
+       PANEL 2 — PRACTICE EXERCISE
+  ════════════════════════════════════════════ -->
+  <div id="panel-2" class="panel" style="display:none">
     <div class="brief-card">
       <div class="brief-hd"><div class="bl">Design Brief — Lesson 2.9</div><h4>Path Anatomy Study + First Minimal Traces</h4></div>
       <div class="brief-bd">
-        <div class="brief-sec"><div class="brief-sec-l">The problem</div><p>You cannot draw a path well until you can read one. First you'll dissect existing vector shapes to see their structure, then create your own paths under one constraint — the fewest anchor points possible.</p></div>
-        <div class="brief-sec"><div class="brief-sec-l">Constraints</div><ul>
-          <li><strong>Part A — Read.</strong> Open the anatomy template. Label each anchor as corner or smooth, and each path as open or closed.</li>
-          <li><strong>Part B — Build.</strong> Trace three silhouettes (leaf, speech bubble, lightning bolt) using only straight segments. No curves yet.</li>
-          <li>Record anchor-point count for each trace. Try removing one — keep the lowest that still reads.</li>
-        </ul></div>
-        <div class="brief-sec"><div class="brief-sec-l">Your deliverable</div><div class="brief-del"><p>One .ai file · two artboards: (1) labeled anatomy template, (2) three traced silhouettes with anchor counts.</p></div></div>
+        <div class="brief-sec">
+          <div class="brief-sec-l">The problem</div>
+          <p>You cannot draw a path well until you can read one. First you'll dissect existing vector shapes to see their structure, then create your own paths under one constraint — the fewest anchor points possible.</p>
+        </div>
+        <div class="brief-sec">
+          <div class="brief-sec-l">Constraints</div>
+          <ul>
+            <li><strong>Part A — Read.</strong> Open the anatomy template. Label each anchor as corner or smooth, and each path as open or closed.</li>
+            <li><strong>Part B — Build.</strong> Trace three silhouettes (leaf, speech bubble, lightning bolt) using only straight segments. No curves yet.</li>
+            <li>Record anchor-point count for each trace. Try removing one — keep the lowest count that still reads as the shape.</li>
+          </ul>
+        </div>
+        <div class="brief-sec">
+          <div class="brief-sec-l">Your deliverable</div>
+          <div class="brief-del"><p>One .ai file · two artboards: (1) labeled anatomy template, (2) three traced silhouettes with anchor counts.</p></div>
+        </div>
       </div>
     </div>
-    <button class="complete-btn" onclick="markExerciseDone()" id="ex-btn"><i class="ti ti-check"></i> I've completed this exercise</button>
+    <button class="action-btn" onclick="markExerciseDone()" id="ex-btn">
+      <i class="ti ti-check"></i> I've completed this exercise
+    </button>
   </div>
 
-  <!-- PANEL 2: ASSESSMENT -->
-  <div id="panel-2" class="panel" style="display:none">
+  <!-- ═══════════════════════════════════════════
+       PANEL 3 — ASSESSMENT
+  ════════════════════════════════════════════ -->
+  <div id="panel-3" class="panel" style="display:none">
     <div class="quiz-hd"><div class="ql">Knowledge check — Lesson 2.9</div><h4>Path anatomy and Pen tool logic</h4><p>5 questions · 80% to pass · one retake if needed</p></div>
     <div class="quiz-body">
-      <div class="qitem"><div class="qnum">Question 1 of 5</div><div class="qtext">What are the three building blocks of every vector path?</div><div class="qopts"><label class="qopt"><input type="radio" name="q0" value="0"><span>Lines, curves, and shapes</span></label><label class="qopt"><input type="radio" name="q0" value="1"><span>Anchor points, segments, and direction handles</span></label><label class="qopt"><input type="radio" name="q0" value="2"><span>Pixels, paths, and points</span></label><label class="qopt"><input type="radio" name="q0" value="3"><span>Handles, nodes, and layers</span></label></div></div>
-      <div class="qitem"><div class="qnum">Question 2 of 5</div><div class="qtext">An open path cannot reliably hold a fill because it:</div><div class="qopts"><label class="qopt"><input type="radio" name="q1" value="0"><span>Is always smaller than a closed path</span></label><label class="qopt"><input type="radio" name="q1" value="1"><span>Uses a different color space</span></label><label class="qopt"><input type="radio" name="q1" value="2"><span>Does not enclose an area — it has two unjoined endpoints</span></label><label class="qopt"><input type="radio" name="q1" value="3"><span>Is not a real Illustrator object</span></label></div></div>
-      <div class="qitem"><div class="qnum">Question 3 of 5</div><div class="qtext">At a smooth anchor point, the two direction handles:</div><div class="qopts"><label class="qopt"><input type="radio" name="q2" value="0"><span>Are always the same length</span></label><label class="qopt"><input type="radio" name="q2" value="1"><span>Act as one straight lever, keeping the curve continuous</span></label><label class="qopt"><input type="radio" name="q2" value="2"><span>Are hidden and cannot be edited</span></label><label class="qopt"><input type="radio" name="q2" value="3"><span>Create a sharp change of direction</span></label></div></div>
-      <div class="qitem"><div class="qnum">Question 4 of 5</div><div class="qtext">Why is a vector path resolution-independent?</div><div class="qopts"><label class="qopt"><input type="radio" name="q3" value="0"><span>It contains more pixel data than a raster image</span></label><label class="qopt"><input type="radio" name="q3" value="1"><span>Illustrator automatically upscales it on export</span></label><label class="qopt"><input type="radio" name="q3" value="2"><span>It stores coordinates and math — not pixels — so it recalculates at any size</span></label><label class="qopt"><input type="radio" name="q3" value="3"><span>Vector files use a different compression format</span></label></div></div>
-      <div class="qitem"><div class="qnum">Question 5 of 5</div><div class="qtext">What does professional "path discipline" mean?</div><div class="qopts"><label class="qopt"><input type="radio" name="q4" value="0"><span>Always using the Pen tool instead of shape tools</span></label><label class="qopt"><input type="radio" name="q4" value="1"><span>Using the fewest anchor points that describe the shape cleanly</span></label><label class="qopt"><input type="radio" name="q4" value="2"><span>Avoiding curves and using only straight segments</span></label><label class="qopt"><input type="radio" name="q4" value="3"><span>Working exclusively with closed paths</span></label></div></div>
+      <div class="qitem"><div class="qnum">Question 1 of 5</div><div class="qtext">A vector path is best described as:</div><div class="qopts"><label class="qopt"><input type="radio" name="q0" value="0"><span>A grid of colored pixels saved at a fixed resolution</span></label><label class="qopt"><input type="radio" name="q0" value="1"><span>An ordered chain of anchor points joined by straight or curved segments</span></label><label class="qopt"><input type="radio" name="q0" value="2"><span>A single mathematical curve with no editable parts</span></label><label class="qopt"><input type="radio" name="q0" value="3"><span>A photograph converted to line art</span></label></div></div>
+      <div class="qitem"><div class="qnum">Question 2 of 5</div><div class="qtext">You draw a shape and try to apply a fill, but the color behaves strangely or won't appear. The most likely cause is:</div><div class="qopts"><label class="qopt"><input type="radio" name="q1" value="0"><span>The path is closed when it should be open</span></label><label class="qopt"><input type="radio" name="q1" value="1"><span>The path is open — it has unjoined endpoints and encloses no area</span></label><label class="qopt"><input type="radio" name="q1" value="2"><span>There are too few anchor points</span></label><label class="qopt"><input type="radio" name="q1" value="3"><span>The direction handles are too long</span></label></div></div>
+      <div class="qitem"><div class="qnum">Question 3 of 5</div><div class="qtext">A vector shape stays perfectly crisp when scaled to 1000% because the file stores:</div><div class="qopts"><label class="qopt"><input type="radio" name="q2" value="0"><span>A very high-resolution version of the image</span></label><label class="qopt"><input type="radio" name="q2" value="1"><span>The coordinates of the points and the math of the handles — a recipe with no fixed size</span></label><label class="qopt"><input type="radio" name="q2" value="2"><span>A compressed copy of every pixel</span></label><label class="qopt"><input type="radio" name="q2" value="3"><span>A separate image for each zoom level</span></label></div></div>
+      <div class="qitem"><div class="qnum">Question 4 of 5</div><div class="qtext">The tip of a five-pointed star and the smooth side of an ellipse differ because the star tip uses a ___ and the ellipse side uses a ___:</div><div class="qopts"><label class="qopt"><input type="radio" name="q3" value="0"><span>smooth point / corner point</span></label><label class="qopt"><input type="radio" name="q3" value="1"><span>corner point / smooth point</span></label><label class="qopt"><input type="radio" name="q3" value="2"><span>open path / closed path</span></label><label class="qopt"><input type="radio" name="q3" value="3"><span>segment / handle</span></label></div></div>
+      <div class="qitem"><div class="qnum">Question 5 of 5</div><div class="qtext">What does professional "path discipline" mean, and why is it the standard?</div><div class="qopts"><label class="qopt"><input type="radio" name="q4" value="0"><span>Always using the Pen tool instead of shape tools, for maximum precision</span></label><label class="qopt"><input type="radio" name="q4" value="1"><span>Using the fewest anchor points that describe the shape cleanly — fewer points means smoother curves, smaller files, and easier editing</span></label><label class="qopt"><input type="radio" name="q4" value="2"><span>Avoiding curves and using only straight segments to keep files simple</span></label><label class="qopt"><input type="radio" name="q4" value="3"><span>Working exclusively with closed paths so every shape can hold a fill</span></label></div></div>
       <div style="display:flex;align-items:center;gap:8px;margin-top:16px;">
         <button class="qsubmit-btn" onclick="gradeQuiz()" id="q-submit"><i class="ti ti-check"></i> Submit answers</button>
         <button class="retry-btn" onclick="resetQuiz()" id="q-retry" style="display:none">Try again</button>
@@ -301,8 +450,10 @@
     </div>
   </div>
 
-  <!-- PANEL 3: SUBMIT -->
-  <div id="panel-3" class="panel" style="display:none">
+  <!-- ═══════════════════════════════════════════
+       PANEL 4 — SUBMIT WORK
+  ════════════════════════════════════════════ -->
+  <div id="panel-4" class="panel" style="display:none">
     <div class="submit-req">
       <i class="ti ti-file-description"></i>
       <div class="submit-req-body">
@@ -344,10 +495,14 @@
 
   <!-- CONTINUE BAR -->
   <div class="cont-bar" id="cont-bar">
-    <div class="ch" id="cont-hint">Watch the video to unlock the next step</div>
+    <div class="ch" id="cont-hint">Read through the lesson to continue</div>
     <div style="display:flex;align-items:center;gap:8px;">
-      <button class="return-btn" id="return-btn" onclick="returnToCurrent()" style="display:none"><i class="ti ti-arrow-right"></i> <span id="return-txt">Return to current step</span></button>
-      <button class="cbtn" id="cont-btn" onclick="advance()"><i class="ti ti-arrow-right" id="cont-icon"></i> <span id="cont-txt">Continue to exercise</span></button>
+      <button class="return-btn" id="return-btn" onclick="returnToCurrent()" style="display:none">
+        <i class="ti ti-arrow-right"></i> <span id="return-txt">Return to current step</span>
+      </button>
+      <button class="cbtn" id="cont-btn" onclick="advance()">
+        <i class="ti ti-arrow-right" id="cont-icon"></i> <span id="cont-txt">Continue to video</span>
+      </button>
     </div>
   </div>
 
@@ -359,11 +514,11 @@
   <script src="firebase-config.js"></script>
 
   <script>
-    // ── STATE ──
+    // ── STATE ── (5 steps)
     var currentUser = null;
-    var states = ['active','locked','locked','locked'];
+    var states = ['active','locked','locked','locked','locked'];
     var cur = 0;
-    var correct = [1, 2, 1, 2, 1];
+    var correct = [1, 1, 1, 1, 1];
     var selectedFile = null;
     var secs = 0, dur = 345, playing = false, timer = null;
 
@@ -378,8 +533,16 @@
         : user.email.slice(0,2).toUpperCase();
       document.getElementById('nav-av').textContent = initials;
       await loadProgress();
+      // Honor ?step= URL param or default behavior
+      var urlParams = new URLSearchParams(window.location.search);
+      var reqStep = parseInt(urlParams.get('step'));
+      if (!isNaN(reqStep) && reqStep >= 0 && reqStep <= 4 && states[reqStep] !== 'locked') {
+        cur = reqStep;
+      } else if (states.every(function(s) { return s === 'done'; })) {
+        cur = 0; // Revisiting completed lesson — open at reading panel
+      }
       renderTabs(); showPanel(cur); updateContBar();
-      if (cur === 0 && states[0] === 'active') setTimeout(startPlay, 500);
+      if (cur === 1 && states[1] === 'active') setTimeout(startPlay, 500);
     });
 
     // ── FIRESTORE: LOAD ──
@@ -389,9 +552,15 @@
         var snap = await db.collection('progress').doc(docId).get();
         if (snap.exists) {
           var data = snap.data();
-          states = data.steps || states;
+          // Handle legacy 4-step data by padding to 5 steps
+          var loaded = data.steps || states;
+          if (loaded.length === 4) {
+            loaded = ['done'].concat(loaded); // prepend reading as done for legacy users
+          }
+          states = loaded;
           cur = data.currentStep || 0;
-          // If on assessment and it was passed, re-enable the done state visually
+          // Shift cur forward by 1 for legacy 4-step data
+          if (data.steps && data.steps.length === 4) cur = Math.min(cur + 1, 4);
         }
       } catch(e) { console.warn('Load progress failed:', e); }
     }
@@ -413,7 +582,7 @@
 
     // ── STEP LOGIC ──
     function renderTabs() {
-      for (var i = 0; i < 4; i++) {
+      for (var i = 0; i < 5; i++) {
         var t = document.getElementById('stab-' + i);
         t.className = 'stab';
         if (states[i] === 'done') t.classList.add('done');
@@ -423,7 +592,7 @@
     }
 
     function showPanel(idx) {
-      for (var i = 0; i < 4; i++) {
+      for (var i = 0; i < 5; i++) {
         document.getElementById('panel-' + i).style.display = (i === idx) ? '' : 'none';
       }
     }
@@ -437,16 +606,17 @@
       rtbtn.style.display = 'none'; btn.style.display = 'flex';
 
       var configs = [
-        { locked: 'Watch the video to unlock the next step', done: 'Video complete', next: 'Continue to exercise' },
-        { locked: 'Complete the exercise, then mark it done', done: 'Exercise complete', next: 'Continue to assessment' },
-        { locked: 'Answer all questions and score 80% or higher', done: 'Assessment passed', next: 'Continue to submit' },
-        { locked: 'Upload your file to complete this lesson', done: 'Lesson 2.9 complete — well done.', next: 'Next lesson: 2.10' }
+        { locked: 'Read through the lesson to continue',            done: 'Lesson read',            next: 'Continue to video' },
+        { locked: 'Watch the video to unlock the next step',        done: 'Video complete',          next: 'Continue to practice' },
+        { locked: 'Complete the exercise, then mark it done',       done: 'Exercise complete',       next: 'Continue to assessment' },
+        { locked: 'Answer all questions and score 80% or higher',   done: 'Assessment passed',       next: 'Continue to submit' },
+        { locked: 'Upload your file to complete this lesson',       done: 'Lesson 2.9 complete.',    next: 'Next lesson: 2.10' }
       ];
       var c = configs[cur];
       if (states[cur] === 'done') {
         hint.textContent = c.done;
         ctxt.textContent = c.next;
-        cicon.className = cur === 3 ? 'ti ti-star' : 'ti ti-arrow-right';
+        cicon.className = cur === 4 ? 'ti ti-star' : 'ti ti-arrow-right';
         btn.classList.add('ready'); btn.removeAttribute('disabled');
       } else {
         hint.textContent = c.locked;
@@ -457,9 +627,9 @@
 
     function gotoStep(idx) {
       if (states[idx] === 'locked') return;
-      if (idx !== 0 && playing) stopPlay();
+      if (idx !== 1 && playing) stopPlay();
       cur = idx; renderTabs(); showPanel(idx); updateContBar();
-      // Show Return button only when user deliberately navigates back to a completed step
+      // Show Return button only when deliberately navigating back to a completed step
       var activeIdx = states.indexOf('active');
       if (activeIdx >= 0 && idx !== activeIdx && states[idx] === 'done') {
         var rtbtn = document.getElementById('return-btn');
@@ -472,11 +642,11 @@
     function advance() {
       states[cur] = 'done';
       saveProgress();
-      if (cur < 3) {
+      if (cur < 4) {
         cur++;
-        if (states[cur] === 'locked') states[cur] = 'active';
+        if (states[cur] !== 'done') states[cur] = 'active';
         renderTabs(); showPanel(cur); updateContBar();
-        if (cur === 0) setTimeout(startPlay, 300);
+        if (cur === 1) setTimeout(startPlay, 300);
       } else {
         renderTabs(); updateContBar();
       }
@@ -487,9 +657,18 @@
       if (a >= 0) { cur = a; renderTabs(); showPanel(a); updateContBar(); }
     }
 
+    // ── READING ──
+    function markReadDone() {
+      var b = document.getElementById('mark-read-btn');
+      b.innerHTML = '<i class="ti ti-check"></i> Concepts understood';
+      b.disabled = true;
+      states[0] = 'done';
+      if (states[1] !== 'done') states[1] = 'active';
+      saveProgress(); renderTabs(); updateContBar();
+    }
+
     // ── VIDEO ──
     function fmt(s) { return Math.floor(s/60) + ':' + ('0'+Math.floor(s%60)).slice(-2); }
-
     function startPlay() {
       if (playing) return;
       playing = true;
@@ -504,7 +683,6 @@
       document.getElementById('vc-icon').className = 'ti ti-player-play';
     }
     function togglePlay() { playing ? stopPlay() : startPlay(); }
-
     function tick() {
       secs += 0.2;
       if (secs >= dur) {
@@ -512,15 +690,13 @@
         document.getElementById('play-ring').classList.add('done-ring');
         document.getElementById('play-icon').className = 'ti ti-check';
         document.getElementById('play-lbl').textContent = 'Video complete';
-        states[0] = 'done';
-        if (states[1] !== 'done') states[1] = 'active';
-        saveProgress();
-        renderTabs(); updateContBar();
+        states[1] = 'done';
+        if (states[2] !== 'done') states[2] = 'active';
+        saveProgress(); renderTabs(); updateContBar();
       }
       document.getElementById('vc-bar').style.width = (secs/dur*100) + '%';
       document.getElementById('vc-time').textContent = fmt(secs) + ' / ' + fmt(dur);
     }
-
     function scrub(e) {
       var r = e.currentTarget.getBoundingClientRect();
       secs = Math.max(0, Math.min(dur, ((e.clientX - r.left) / r.width) * dur));
@@ -533,8 +709,8 @@
       var b = document.getElementById('ex-btn');
       b.innerHTML = '<i class="ti ti-check"></i> Exercise marked complete';
       b.disabled = true;
-      states[1] = 'done';
-      if (states[2] !== 'done') states[2] = 'active';
+      states[2] = 'done';
+      if (states[3] !== 'done') states[3] = 'active';
       saveProgress(); renderTabs(); updateContBar();
     }
 
@@ -543,9 +719,7 @@
       var score = 0;
       for (var i = 0; i < 5; i++) {
         var sel = document.querySelector('input[name="q'+i+'"]:checked');
-        document.querySelectorAll('input[name="q'+i+'"]').forEach(function(o) {
-          o.closest('.qopt').classList.remove('correct','incorrect');
-        });
+        document.querySelectorAll('input[name="q'+i+'"]').forEach(function(o) { o.closest('.qopt').classList.remove('correct','incorrect'); });
         if (sel) {
           var v = parseInt(sel.value);
           if (v === correct[i]) { score++; sel.closest('.qopt').classList.add('correct'); }
@@ -556,12 +730,12 @@
       var pct = Math.round((score/5)*100), pass = pct >= 80;
       var res = document.getElementById('quiz-result');
       res.style.display = 'block'; res.className = 'quiz-result ' + (pass ? 'pass' : 'fail');
-      res.innerHTML = '<div class="qr-score '+(pass?'pass':'fail')+'">'+pct+'% — '+(pass?'Passed':'Not yet')+'</div><div class="qr-msg">'+(pass?'Assessment complete. Continue to the next step.':'You need 80% to continue. Review the lesson and try again.')+'</div>';
+      res.innerHTML = '<div class="qr-score '+(pass?'pass':'fail')+'">'+pct+'% — '+(pass?'Passed':'Not yet')+'</div><div class="qr-msg">'+(pass?'Assessment complete. Continue to submit your work.':'You need 80% to continue. Review the lesson and try again.')+'</div>';
       document.getElementById('q-submit').style.display = 'none';
       document.getElementById('q-retry').style.display = pass ? 'none' : 'inline-flex';
       if (pass) {
-        states[2] = 'done';
-        if (states[3] !== 'done') states[3] = 'active';
+        states[3] = 'done';
+        if (states[4] !== 'done') states[4] = 'active';
         db.collection('progress').doc(currentUser.uid + '_' + CURRENT_LESSON).set({ quizScore: pct }, { merge: true });
         saveProgress(); renderTabs(); updateContBar();
       }
@@ -579,7 +753,6 @@
     function onDragOver(e) { e.preventDefault(); if (!selectedFile) document.getElementById('drop-zone').classList.add('drag-over'); }
     function onDragLeave() { document.getElementById('drop-zone').classList.remove('drag-over'); }
     function onDrop(e) { e.preventDefault(); document.getElementById('drop-zone').classList.remove('drag-over'); if (e.dataTransfer.files.length > 0) handleFileSelect(e.dataTransfer.files[0]); }
-
     function handleFileSelect(file) {
       if (!file) return;
       selectedFile = file;
@@ -590,7 +763,6 @@
       document.getElementById('submit-note').textContent = 'File ready — submit when you\'re sure';
       document.getElementById('submit-btn').classList.add('ready');
     }
-
     function removeFile(e) {
       e.stopPropagation(); selectedFile = null;
       document.getElementById('drop-zone').classList.remove('uploaded');
@@ -599,33 +771,27 @@
       document.getElementById('submit-note').textContent = 'No file selected yet';
       document.getElementById('submit-btn').classList.remove('ready');
     }
-
     function formatBytes(b) {
       if (b > 1048576) return (b/1048576).toFixed(1) + ' MB';
       if (b > 1024) return Math.round(b/1024) + ' KB';
       return b + ' B';
     }
 
-    // ── UPLOAD TO FIREBASE STORAGE ──
+    // ── FIREBASE STORAGE UPLOAD ──
     async function submitFile() {
       if (!selectedFile || !currentUser) return;
       var btn = document.getElementById('submit-btn');
       btn.classList.remove('ready'); btn.innerHTML = '<i class="ti ti-loader"></i> Uploading…';
-
       var prog = document.getElementById('upload-progress');
       var upBar = document.getElementById('up-bar');
       var upLabel = document.getElementById('up-label');
       prog.style.display = 'block';
-
       var path = 'submissions/' + currentUser.uid + '/' + CURRENT_LESSON + '/' + selectedFile.name;
-      var ref = storage.ref(path);
-      var task = ref.put(selectedFile);
-
+      var task = storage.ref(path).put(selectedFile);
       task.on('state_changed',
         function(snap) {
           var pct = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
-          upBar.style.width = pct + '%';
-          upLabel.textContent = 'Uploading… ' + pct + '%';
+          upBar.style.width = pct + '%'; upLabel.textContent = 'Uploading… ' + pct + '%';
         },
         function(err) {
           console.error('Upload failed:', err);
@@ -637,12 +803,11 @@
           upBar.style.width = '100%';
           document.getElementById('submit-note').textContent = 'Submitted — your instructor will review it.';
           btn.innerHTML = '<i class="ti ti-check"></i> Submitted'; btn.disabled = true; btn.style.opacity = '.6';
-          // Save submission path to Firestore
           await db.collection('progress').doc(currentUser.uid + '_' + CURRENT_LESSON).set({
             submittedFile: path,
             submittedAt: firebase.firestore.FieldValue.serverTimestamp()
           }, { merge: true });
-          states[3] = 'done';
+          states[4] = 'done';
           saveProgress(); renderTabs(); updateContBar();
         }
       );

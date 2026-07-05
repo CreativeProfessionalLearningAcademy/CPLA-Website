@@ -192,10 +192,11 @@
 
           <!-- Step strip -->
           <div class="step-strip" id="step-strip">
-            <div class="si" id="si-0"><div class="sd" id="sd-0">1</div><div class="sn">Watch video</div></div>
-            <div class="si" id="si-1"><div class="sd" id="sd-1">2</div><div class="sn">Practice exercise</div></div>
-            <div class="si" id="si-2"><div class="sd" id="sd-2">3</div><div class="sn">Assessment</div></div>
-            <div class="si" id="si-3"><div class="sd" id="sd-3">4</div><div class="sn">Submit work</div></div>
+            <div class="si" id="si-0"><div class="sd" id="sd-0">1</div><div class="sn">Read lesson</div></div>
+            <div class="si" id="si-1"><div class="sd" id="sd-1">2</div><div class="sn">Watch video</div></div>
+            <div class="si" id="si-2"><div class="sd" id="sd-2">3</div><div class="sn">Practice</div></div>
+            <div class="si" id="si-3"><div class="sd" id="sd-3">4</div><div class="sn">Assessment</div></div>
+            <div class="si" id="si-4"><div class="sd" id="sd-4">5</div><div class="sn">Submit work</div></div>
           </div>
         </div>
       </div>
@@ -289,25 +290,39 @@
     }
 
     function renderSteps(steps, currentStep) {
-      const labels = ['Watch video', 'Practice exercise', 'Assessment', 'Submit work'];
-      const badgeLabels = ['Video · Lesson 2.9', 'Exercise · Lesson 2.9', 'Assessment · Lesson 2.9', 'Submit · Lesson 2.9'];
-      const contLabels = ['Watch now', 'Continue to exercise', 'Continue to assessment', 'Submit your work'];
-      const icons = ['ti-player-play', 'ti-pencil', 'ti-clipboard-check', 'ti-upload'];
+      const badgeLabels = ['Read · Lesson 2.9', 'Video · Lesson 2.9', 'Exercise · Lesson 2.9', 'Assessment · Lesson 2.9', 'Submit · Lesson 2.9'];
+      const contLabels = ['Read lesson', 'Watch video', 'Continue to practice', 'Continue to assessment', 'Submit your work'];
+      const icons = ['ti-book', 'ti-player-play', 'ti-pencil', 'ti-clipboard-check', 'ti-upload'];
+      const stepTips = ['Read lesson', 'Watch video', 'Practice exercise', 'Assessment', 'Submit work'];
 
-      for (var i = 0; i < 4; i++) {
+      for (var i = 0; i < 5; i++) {
         var si = document.getElementById('si-' + i);
         var sd = document.getElementById('sd-' + i);
         si.className = 'si ' + (steps[i] === 'done' ? 'done' : steps[i] === 'active' ? 'active' : 'locked');
         sd.innerHTML = steps[i] === 'done' ? '<i class="ti ti-check" style="font-size:11px"></i>' : (i + 1);
+        if (steps[i] !== 'locked') {
+          (function(idx, el) {
+            el.style.cursor = 'pointer';
+            el.title = stepTips[idx];
+            el.addEventListener('click', function() {
+              window.location.href = 'lesson.html?step=' + idx;
+            });
+          })(i, si);
+        }
       }
 
-      document.getElementById('tc-badge').textContent = badgeLabels[currentStep];
-      document.getElementById('tc-step-label').textContent = 'Step ' + (currentStep + 1) + ' of 4';
+      var allDone = steps.every(function(s) { return s === 'done'; });
+      document.getElementById('tc-badge').textContent = allDone ? 'Lesson complete' : badgeLabels[currentStep];
+      document.getElementById('tc-step-label').textContent = allDone ? 'All steps complete' : 'Step ' + (currentStep + 1) + ' of 5';
 
-      var contLabel = document.getElementById('continue-label');
-      var contBtn   = document.getElementById('continue-btn');
-      contLabel.textContent = contLabels[currentStep];
-      contBtn.innerHTML = '<i class="ti ' + icons[currentStep] + '"></i> ' + contLabels[currentStep];
+      var contBtn = document.getElementById('continue-btn');
+      if (allDone) {
+        contBtn.innerHTML = '<i class="ti ti-refresh"></i> Review lesson';
+        contBtn.href = 'lesson.html?step=0';
+      } else {
+        contBtn.innerHTML = '<i class="ti ' + icons[currentStep] + '"></i> ' + contLabels[currentStep];
+        contBtn.href = 'lesson.html';
+      }
     }
 
     // Sign out
