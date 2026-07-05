@@ -436,13 +436,6 @@
       var cicon = document.getElementById('cont-icon');
       rtbtn.style.display = 'none'; btn.style.display = 'flex';
 
-      var activeIdx = states.indexOf('active');
-      if (cur !== activeIdx && states[cur] === 'done') {
-        hint.textContent = 'Viewing a completed step';
-        rtbtn.style.display = 'flex';
-        rtbtn.innerHTML = '<i class="ti ti-arrow-right"></i> Return to step ' + (activeIdx + 1);
-        btn.style.display = 'none'; return;
-      }
       var configs = [
         { locked: 'Watch the video to unlock the next step', done: 'Video complete', next: 'Continue to exercise' },
         { locked: 'Complete the exercise, then mark it done', done: 'Exercise complete', next: 'Continue to assessment' },
@@ -466,6 +459,14 @@
       if (states[idx] === 'locked') return;
       if (idx !== 0 && playing) stopPlay();
       cur = idx; renderTabs(); showPanel(idx); updateContBar();
+      // Show Return button only when user deliberately navigates back to a completed step
+      var activeIdx = states.indexOf('active');
+      if (activeIdx >= 0 && idx !== activeIdx && states[idx] === 'done') {
+        var rtbtn = document.getElementById('return-btn');
+        rtbtn.style.display = 'flex';
+        rtbtn.innerHTML = '<i class="ti ti-arrow-right"></i> Return to step ' + (activeIdx + 1);
+        document.getElementById('cont-btn').style.display = 'none';
+      }
     }
 
     function advance() {
@@ -483,7 +484,7 @@
 
     function returnToCurrent() {
       var a = states.indexOf('active');
-      if (a >= 0) gotoStep(a);
+      if (a >= 0) { cur = a; renderTabs(); showPanel(a); updateContBar(); }
     }
 
     // ── VIDEO ──
@@ -512,7 +513,7 @@
         document.getElementById('play-icon').className = 'ti ti-check';
         document.getElementById('play-lbl').textContent = 'Video complete';
         states[0] = 'done';
-        if (states[1] === 'locked') states[1] = 'unlocked';
+        if (states[1] !== 'done') states[1] = 'active';
         saveProgress();
         renderTabs(); updateContBar();
       }
@@ -533,7 +534,7 @@
       b.innerHTML = '<i class="ti ti-check"></i> Exercise marked complete';
       b.disabled = true;
       states[1] = 'done';
-      if (states[2] === 'locked') states[2] = 'unlocked';
+      if (states[2] !== 'done') states[2] = 'active';
       saveProgress(); renderTabs(); updateContBar();
     }
 
@@ -560,7 +561,7 @@
       document.getElementById('q-retry').style.display = pass ? 'none' : 'inline-flex';
       if (pass) {
         states[2] = 'done';
-        if (states[3] === 'locked') states[3] = 'unlocked';
+        if (states[3] !== 'done') states[3] = 'active';
         db.collection('progress').doc(currentUser.uid + '_' + CURRENT_LESSON).set({ quizScore: pct }, { merge: true });
         saveProgress(); renderTabs(); updateContBar();
       }
