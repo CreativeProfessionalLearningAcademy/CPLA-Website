@@ -183,8 +183,8 @@
           <div class="tc-title">The Pen tool: thinking in <em>paths</em></div>
           <div class="tc-desc">Before you touch a handle, you need to understand what a path actually is.</div>
           <div class="tc-meta">
-            <span><i class="ti ti-clock"></i> 45–55 min</span>
-            <span><i class="ti ti-file-description"></i> Anatomy study + traces</span>
+            <span><i class="ti ti-clock"></i> 55–70 min</span>
+            <span><i class="ti ti-file-description"></i> Cloud path study</span>
           </div>
           <a href="lesson.html" class="continue-btn" id="continue-btn">
             <i class="ti ti-player-play"></i> <span id="continue-label">Watch now</span>
@@ -194,9 +194,10 @@
           <div class="step-strip" id="step-strip">
             <div class="si" id="si-0"><div class="sd" id="sd-0">1</div><div class="sn">Read lesson</div></div>
             <div class="si" id="si-1"><div class="sd" id="sd-1">2</div><div class="sn">Watch video</div></div>
-            <div class="si" id="si-2"><div class="sd" id="sd-2">3</div><div class="sn">Practice</div></div>
-            <div class="si" id="si-3"><div class="sd" id="sd-3">4</div><div class="sn">Assessment</div></div>
-            <div class="si" id="si-4"><div class="sd" id="sd-4">5</div><div class="sn">Submit work</div></div>
+            <div class="si" id="si-2"><div class="sd" id="sd-2">3</div><div class="sn">Workbook</div></div>
+            <div class="si" id="si-3"><div class="sd" id="sd-3">4</div><div class="sn">Practice</div></div>
+            <div class="si" id="si-4"><div class="sd" id="sd-4">5</div><div class="sn">Assessment</div></div>
+            <div class="si" id="si-5"><div class="sd" id="sd-5">6</div><div class="sn">Submit work</div></div>
           </div>
         </div>
       </div>
@@ -290,12 +291,12 @@
     }
 
     function renderSteps(steps, currentStep) {
-      const badgeLabels = ['Read · Lesson 2.9', 'Video · Lesson 2.9', 'Exercise · Lesson 2.9', 'Assessment · Lesson 2.9', 'Submit · Lesson 2.9'];
-      const contLabels = ['Read lesson', 'Watch video', 'Continue to practice', 'Continue to assessment', 'Submit your work'];
-      const icons = ['ti-book', 'ti-player-play', 'ti-pencil', 'ti-clipboard-check', 'ti-upload'];
-      const stepTips = ['Read lesson', 'Watch video', 'Practice exercise', 'Assessment', 'Submit work'];
+      const badgeLabels = ['Read · Lesson 2.9', 'Video · Lesson 2.9', 'Workbook · Lesson 2.9', 'Practice · Lesson 2.9', 'Assessment · Lesson 2.9', 'Submit · Lesson 2.9'];
+      const contLabels = ['Read lesson', 'Watch video', 'Open workbook', 'Continue to practice', 'Continue to assessment', 'Submit your work'];
+      const icons = ['ti-book', 'ti-player-play', 'ti-notebook', 'ti-pencil', 'ti-clipboard-check', 'ti-upload'];
+      const stepTips = ['Read lesson', 'Watch video', 'Workbook exercise', 'Practice exercise', 'Assessment', 'Submit work'];
 
-      for (var i = 0; i < 5; i++) {
+      for (var i = 0; i < 6; i++) {
         var si = document.getElementById('si-' + i);
         var sd = document.getElementById('sd-' + i);
         si.className = 'si ' + (steps[i] === 'done' ? 'done' : steps[i] === 'active' ? 'active' : 'locked');
@@ -313,7 +314,7 @@
 
       var allDone = steps.every(function(s) { return s === 'done'; });
       document.getElementById('tc-badge').textContent = allDone ? 'Lesson complete' : badgeLabels[currentStep];
-      document.getElementById('tc-step-label').textContent = allDone ? 'All steps complete' : 'Step ' + (currentStep + 1) + ' of 5';
+      document.getElementById('tc-step-label').textContent = allDone ? 'All steps complete' : 'Step ' + (currentStep + 1) + ' of 6';
 
       var contBtn = document.getElementById('continue-btn');
       if (allDone) {

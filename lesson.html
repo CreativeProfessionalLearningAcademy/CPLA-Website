@@ -239,13 +239,14 @@
     <div><h3>Module 3 — Paths, Shapes &amp; Vector Control</h3><p>Lesson 2.9 · Volume 2 · Illustrator</p></div>
   </div>
 
-  <!-- STEP TABS — 5 steps -->
+  <!-- STEP TABS — 6 steps -->
   <div class="step-tabs" id="step-tabs">
     <button class="stab" id="stab-0" onclick="gotoStep(0)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">1</span> Read lesson</button>
     <button class="stab" id="stab-1" onclick="gotoStep(1)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">2</span> Watch video</button>
-    <button class="stab" id="stab-2" onclick="gotoStep(2)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">3</span> Practice</button>
-    <button class="stab" id="stab-3" onclick="gotoStep(3)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">4</span> Assessment</button>
-    <button class="stab" id="stab-4" onclick="gotoStep(4)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">5</span> Submit work</button>
+    <button class="stab" id="stab-2" onclick="gotoStep(2)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">3</span> Workbook</button>
+    <button class="stab" id="stab-3" onclick="gotoStep(3)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">4</span> Practice</button>
+    <button class="stab" id="stab-4" onclick="gotoStep(4)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">5</span> Assessment</button>
+    <button class="stab" id="stab-5" onclick="gotoStep(5)"><span class="stab-dot"></span><i class="ti ti-check stab-chk"></i><span class="stab-num">6</span> Submit work</button>
   </div>
 
   <!-- HERO -->
@@ -402,39 +403,148 @@
   </div>
 
   <!-- ═══════════════════════════════════════════
-       PANEL 2 — PRACTICE EXERCISE
+       PANEL 2 — WORKBOOK EXERCISE (PAPER)
   ════════════════════════════════════════════ -->
   <div id="panel-2" class="panel" style="display:none">
-    <div class="brief-card">
-      <div class="brief-hd"><div class="bl">Design Brief — Lesson 2.9</div><h4>Path Anatomy Study + First Minimal Traces</h4></div>
-      <div class="brief-bd">
-        <div class="brief-sec">
-          <div class="brief-sec-l">The problem</div>
-          <p>You cannot draw a path well until you can read one. First you'll dissect existing vector shapes to see their structure, then create your own paths under one constraint — the fewest anchor points possible.</p>
-        </div>
-        <div class="brief-sec">
-          <div class="brief-sec-l">Constraints</div>
-          <ul>
-            <li><strong>Part A — Read.</strong> Open the anatomy template. Label each anchor as corner or smooth, and each path as open or closed.</li>
-            <li><strong>Part B — Build.</strong> Trace three silhouettes (leaf, speech bubble, lightning bolt) using only straight segments. No curves yet.</li>
-            <li>Record anchor-point count for each trace. Try removing one — keep the lowest count that still reads as the shape.</li>
-          </ul>
-        </div>
-        <div class="brief-sec">
-          <div class="brief-sec-l">Your deliverable</div>
-          <div class="brief-del"><p>One .ai file · two artboards: (1) labeled anatomy template, (2) three traced silhouettes with anchor counts.</p></div>
-        </div>
+
+    <!-- Prompt card -->
+    <div style="background:var(--ink);color:#faf7f2;border-radius:12px;padding:20px;margin-bottom:16px;display:flex;align-items:flex-start;gap:14px;">
+      <i class="ti ti-notebook" style="font-size:30px;color:var(--mod);flex-shrink:0;margin-top:3px;"></i>
+      <div>
+        <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:6px;font-family:'DM Mono',monospace;">Step 3 — Field Manual</div>
+        <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;line-height:1.2;margin-bottom:8px;">Get out your Field Manual<br>and complete <em style="color:#ffb366;">Sections A &amp; B</em></div>
+        <p style="font-size:13px;color:rgba(250,247,242,.6);line-height:1.7;margin:0;">Work through the paper exercise before returning here. Your Field Manual sketch is what you'll rebuild in Illustrator in Step 4.</p>
       </div>
     </div>
-    <button class="action-btn" onclick="markExerciseDone()" id="ex-btn">
-      <i class="ti ti-check"></i> I've completed this exercise
+
+    <!-- Section A -->
+    <div style="background:white;border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin-bottom:10px;">
+      <div style="background:var(--ink);padding:10px 16px;display:flex;align-items:center;gap:10px;">
+        <div style="width:24px;height:24px;border-radius:50%;background:var(--mod);color:white;font-family:'DM Mono',monospace;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">A</div>
+        <div style="font-size:13px;font-weight:600;color:#faf7f2;">Sketch from the Prompt — the Cloud</div>
+      </div>
+      <div style="padding:14px 16px;">
+        <p style="font-size:13px;line-height:1.75;color:#2a2218;margin-bottom:8px;"><strong>Sketch a cloud by hand</strong> in the Field Manual drawing box. Draw it the way you see it — a few soft bumps, one flatter base. Don't trace, don't erase it perfect. This is your cloud, and you'll rebuild this exact shape in Illustrator.</p>
+        <p style="font-size:12px;color:var(--mid);line-height:1.65;margin-bottom:12px;font-style:italic;">Keep it simple enough that you can describe every place the outline truly turns. A cloud is mostly a handful of curves meeting at a few soft corners.</p>
+        <div style="height:1px;background:var(--rule);margin:12px 0;"></div>
+        <p style="font-size:13px;line-height:1.75;color:#2a2218;"><strong>One more form — your choice.</strong> Sketch one of: an apple, a wave (open curve), or a guitar pick (two curves meeting at one sharp point). Name it on the line in your Field Manual.</p>
+      </div>
+    </div>
+
+    <!-- Section B -->
+    <div style="background:white;border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin-bottom:16px;">
+      <div style="background:var(--ink);padding:10px 16px;display:flex;align-items:center;gap:10px;">
+        <div style="width:24px;height:24px;border-radius:50%;background:var(--mod);color:white;font-family:'DM Mono',monospace;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">B</div>
+        <div style="font-size:13px;font-weight:600;color:#faf7f2;">Mark the Extrema &amp; Predict the Points</div>
+      </div>
+      <div style="padding:14px 16px;">
+        <p style="font-size:13px;line-height:1.75;color:#2a2218;margin-bottom:10px;">On <strong>both sketches</strong>, mark every anchor point you'll need — and nowhere else.</p>
+        <div style="display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:#2a2218;"><span style="font-family:'DM Mono',monospace;font-size:12px;font-weight:700;color:var(--ink);">×</span> an <strong>extremum</strong> — furthest top, bottom, left, or right</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:#2a2218;"><span style="font-family:'DM Mono',monospace;font-size:12px;font-weight:700;color:var(--ink);">▲</span> a <strong>true corner</strong> — path changes direction sharply</div>
+        </div>
+        <p style="font-size:12px;color:var(--mid);line-height:1.65;font-style:italic;">Then fill in the prediction table: Click or Click-drag? / Points I Predict / Points I Actually Used. If your count climbs into double digits, you're marking places where the curve is only passing through.</p>
+      </div>
+    </div>
+
+    <!-- Coming up note -->
+    <div style="background:var(--cream);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;margin-bottom:16px;display:flex;gap:10px;align-items:flex-start;">
+      <i class="ti ti-info-circle" style="font-size:16px;color:var(--mid);flex-shrink:0;margin-top:1px;"></i>
+      <p style="font-size:12px;color:var(--mid);line-height:1.65;margin:0;">Keep your Field Manual open. <strong style="color:var(--ink);">Section C (Build It in Illustrator)</strong> is the next step on this platform. <strong style="color:var(--ink);">Section D (Reflect &amp; Record)</strong> is your written submission — complete it after practice, before uploading.</p>
+    </div>
+
+    <button class="action-btn" onclick="markWorkbookDone()" id="wb-btn">
+      <i class="ti ti-notebook"></i> Sections A &amp; B complete — ready to build
     </button>
   </div>
 
   <!-- ═══════════════════════════════════════════
-       PANEL 3 — ASSESSMENT
+       PANEL 3 — PRACTICE (ILLUSTRATOR)
   ════════════════════════════════════════════ -->
   <div id="panel-3" class="panel" style="display:none">
+    <div class="brief-card">
+      <div class="brief-hd">
+        <div class="bl">Field Manual · Section C — Build It in Illustrator</div>
+        <h4>Build Your Cloud with the Pen Tool</h4>
+      </div>
+      <div class="brief-bd">
+        <div class="brief-sec">
+          <div class="brief-sec-l">The task</div>
+          <p>Open your Field Manual to your Section A cloud sketch. Your goal is to build that exact cloud in Illustrator — placing only the anchor points you marked on paper in Section B. Open Illustrator now and follow the steps below.</p>
+        </div>
+
+        <div class="brief-sec">
+          <div class="brief-sec-l">Setup</div>
+          <ul>
+            <li><strong>New document.</strong> Letter-size artboard (landscape). Name your layer <code style="font-family:'DM Mono',monospace;font-size:12px;background:var(--cream);padding:1px 6px;border-radius:4px;">Cloud Study</code>.</li>
+            <li><strong>Select the Pen tool</strong> (P). You'll use both click and click-drag this lesson — clicking places a corner point, clicking and dragging pulls out direction handles for a smooth curve.</li>
+          </ul>
+        </div>
+
+        <div class="brief-sec">
+          <div class="brief-sec-l">Pen tool technique</div>
+          <ul>
+            <li><strong>Click</strong> to place a corner point where the path changes direction sharply.</li>
+            <li><strong>Click and drag</strong> to place a smooth point — drag in the direction of travel (follow the curve coming out of that point).</li>
+            <li><strong>Option / Alt + click</strong> on an existing point to break the handles and create a sharp corner inside a curve (for cloud bumps meeting at a dip).</li>
+            <li>Work around your cloud. Use only the extrema and corners you marked in Section B — no extra points.</li>
+          </ul>
+        </div>
+
+        <div class="brief-sec">
+          <div class="brief-sec-l">Close and fill</div>
+          <ul>
+            <li><strong>Close the path</strong> by hovering over your first anchor point until the small circle (°) appears on the cursor, then click.</li>
+            <li><strong>Apply a fill color.</strong> If the fill appears and holds, the path is properly closed. If the fill behaves strangely or won't show, the path has an open endpoint — undo and reconnect it.</li>
+          </ul>
+        </div>
+
+        <!-- Section C checklist — matches Field Manual exactly -->
+        <div class="brief-sec">
+          <div class="brief-sec-l">Section C checklist</div>
+          <div style="background:var(--cream);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;">
+            <p style="font-size:12px;color:var(--mid);font-style:italic;margin-bottom:12px;">Check each item in your Field Manual and in Illustrator before marking done.</p>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#2a2218;cursor:pointer;">
+                <input type="checkbox" id="chk-a" style="margin-top:3px;accent-color:var(--mod);">
+                <span>My cloud uses only the points I marked on paper — extrema and true corners, nothing extra</span>
+              </label>
+              <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#2a2218;cursor:pointer;">
+                <input type="checkbox" id="chk-b" style="margin-top:3px;accent-color:var(--mod);">
+                <span>The path is closed — the fill appears and stays</span>
+              </label>
+              <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#2a2218;cursor:pointer;">
+                <input type="checkbox" id="chk-c" style="margin-top:3px;accent-color:var(--mod);">
+                <span>I used Option/Alt to break a handle at least once — at a sharp dip between bumps</span>
+              </label>
+              <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#2a2218;cursor:pointer;">
+                <input type="checkbox" id="chk-d" style="margin-top:3px;accent-color:var(--mod);">
+                <span>No point sits in the middle of a smooth sweep where the curve isn't actually turning</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="brief-sec">
+          <div class="brief-sec-l">Redraw &amp; record</div>
+          <p>In your Field Manual, sketch what you actually built in Illustrator in the "Redraw Your Result" box (Section C). Note whether your actual point count matched your prediction from Section B. If it didn't — what did you add or remove, and why?</p>
+        </div>
+
+        <div class="brief-sec">
+          <div class="brief-sec-l">Your deliverable</div>
+          <div class="brief-del"><p>One .ai file — your cloud with final anchor-point count noted. Keep this file open: you'll complete <strong>Field Manual Section D (Reflect &amp; Record)</strong> on paper, then submit both in Step 6.</p></div>
+        </div>
+      </div>
+    </div>
+    <button class="action-btn" onclick="markExerciseDone()" id="ex-btn">
+      <i class="ti ti-check"></i> I've completed Section C and the redraw
+    </button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PANEL 4 — ASSESSMENT
+  ════════════════════════════════════════════ -->
+  <div id="panel-4" class="panel" style="display:none">
     <div class="quiz-hd"><div class="ql">Knowledge check — Lesson 2.9</div><h4>Path anatomy and Pen tool logic</h4><p>5 questions · 80% to pass · one retake if needed</p></div>
     <div class="quiz-body">
       <div class="qitem"><div class="qnum">Question 1 of 5</div><div class="qtext">A vector path is best described as:</div><div class="qopts"><label class="qopt"><input type="radio" name="q0" value="0"><span>A grid of colored pixels saved at a fixed resolution</span></label><label class="qopt"><input type="radio" name="q0" value="1"><span>An ordered chain of anchor points joined by straight or curved segments</span></label><label class="qopt"><input type="radio" name="q0" value="2"><span>A single mathematical curve with no editable parts</span></label><label class="qopt"><input type="radio" name="q0" value="3"><span>A photograph converted to line art</span></label></div></div>
@@ -451,16 +561,17 @@
   </div>
 
   <!-- ═══════════════════════════════════════════
-       PANEL 4 — SUBMIT WORK
+       PANEL 5 — SUBMIT WORK
   ════════════════════════════════════════════ -->
-  <div id="panel-4" class="panel" style="display:none">
+  <div id="panel-5" class="panel" style="display:none">
     <div class="submit-req">
       <i class="ti ti-file-description"></i>
       <div class="submit-req-body">
         <h4>What to submit</h4>
         <ul>
-          <li>One Illustrator file (.ai) with two artboards — anatomy study + traced silhouettes</li>
-          <li>File name: <strong>L2.9_Lastname_PathAnatomy.ai</strong></li>
+          <li>Your Illustrator cloud file (.ai) — closed path, filled, final anchor-point count</li>
+          <li>File name: <strong>L2.9_Lastname_CloudStudy.ai</strong></li>
+          <li>Before uploading: complete <strong>Field Manual Section D (Reflect &amp; Record)</strong> on paper — answer Q05, Q06, Q07 and fill in the vocabulary boxes</li>
         </ul>
       </div>
     </div>
@@ -481,6 +592,17 @@
       </div>
     </div>
     <div class="drop-hint" id="drop-hint"><i class="ti ti-info-circle"></i> You can also drag your file directly from Finder or your desktop</div>
+
+    <!-- Filename warning — shown when the dropped file name doesn't match the pattern -->
+    <div id="filename-warn" style="display:none;background:#fef3ec;border:1px solid #f5c4a0;border-radius:8px;padding:13px 15px;margin-top:10px;gap:11px;align-items:flex-start;">
+      <i class="ti ti-alert-triangle" style="font-size:18px;color:#c8401a;flex-shrink:0;margin-top:1px;"></i>
+      <div style="font-size:13px;line-height:1.7;color:#2a2218;">
+        <strong style="color:#c8401a;">Filename doesn't match.</strong> Rename your file before submitting:<br>
+        <code class="fn-warn-expected" style="font-family:'DM Mono',monospace;font-size:12px;background:white;border:1px solid #f5c4a0;padding:3px 9px;border-radius:4px;display:inline-block;margin:4px 0;"></code><br>
+        <span style="color:var(--mid);font-size:12px;">You submitted: <span class="fn-warn-got" style="font-family:'DM Mono',monospace;font-weight:500;color:#c8401a;"></span></span>
+      </div>
+    </div>
+
     <div class="upload-progress" id="upload-progress">
       <div class="up-label" id="up-label">Uploading…</div>
       <div class="up-bar-wrap"><div class="up-bar" id="up-bar"></div></div>
@@ -514,9 +636,10 @@
   <script src="firebase-config.js"></script>
 
   <script>
-    // ── STATE ── (5 steps)
+    // ── STATE ── (6 steps)
     var currentUser = null;
-    var states = ['active','locked','locked','locked','locked'];
+    var userLastName = '';
+    var states = ['active','locked','locked','locked','locked','locked'];
     var cur = 0;
     var correct = [1, 1, 1, 1, 1];
     var selectedFile = null;
@@ -528,6 +651,16 @@
       currentUser = user;
       const isGuest = user.email === GUEST_EMAIL;
       document.getElementById('nav-role').textContent = isGuest ? 'Reviewer' : 'Junior Designer';
+      // Extract last name from displayName ("First Last" → "Last")
+      // Option A: uses displayName; replace with Firestore lastName field once
+      // student registration collects first/last name separately (Option B).
+      if (user.displayName && user.displayName.trim()) {
+        var nameParts = user.displayName.trim().split(/\s+/);
+        userLastName = nameParts[nameParts.length - 1];
+      } else {
+        // Fallback: use the part of the email before @ if no displayName set
+        userLastName = user.email.split('@')[0];
+      }
       const initials = user.displayName
         ? user.displayName.split(' ').map(function(n){return n[0];}).join('').toUpperCase().slice(0,2)
         : user.email.slice(0,2).toUpperCase();
@@ -536,7 +669,7 @@
       // Honor ?step= URL param or default behavior
       var urlParams = new URLSearchParams(window.location.search);
       var reqStep = parseInt(urlParams.get('step'));
-      if (!isNaN(reqStep) && reqStep >= 0 && reqStep <= 4 && states[reqStep] !== 'locked') {
+      if (!isNaN(reqStep) && reqStep >= 0 && reqStep <= 5 && states[reqStep] !== 'locked') {
         cur = reqStep;
       } else if (states.every(function(s) { return s === 'done'; })) {
         cur = 0; // Revisiting completed lesson — open at reading panel
@@ -552,15 +685,19 @@
         var snap = await db.collection('progress').doc(docId).get();
         if (snap.exists) {
           var data = snap.data();
-          // Handle legacy 4-step data by padding to 5 steps
           var loaded = data.steps || states;
+          // Migrate legacy data to 6 steps
           if (loaded.length === 4) {
-            loaded = ['done'].concat(loaded); // prepend reading as done for legacy users
+            // Pre-reading-step data: insert read=done at 0, workbook=done at 2
+            loaded = ['done', loaded[0], 'done', loaded[1], loaded[2], loaded[3]];
+          } else if (loaded.length === 5) {
+            // Has reading, no workbook: insert workbook=done at index 2
+            loaded = [loaded[0], loaded[1], 'done', loaded[2], loaded[3], loaded[4]];
           }
           states = loaded;
-          cur = data.currentStep || 0;
-          // Shift cur forward by 1 for legacy 4-step data
-          if (data.steps && data.steps.length === 4) cur = Math.min(cur + 1, 4);
+          // Derive cur from first 'active' step
+          var a = states.indexOf('active');
+          cur = a >= 0 ? a : (states.every(function(s){return s==='done';}) ? 0 : 0);
         }
       } catch(e) { console.warn('Load progress failed:', e); }
     }
@@ -582,7 +719,7 @@
 
     // ── STEP LOGIC ──
     function renderTabs() {
-      for (var i = 0; i < 5; i++) {
+      for (var i = 0; i < 6; i++) {
         var t = document.getElementById('stab-' + i);
         t.className = 'stab';
         if (states[i] === 'done') t.classList.add('done');
@@ -592,7 +729,7 @@
     }
 
     function showPanel(idx) {
-      for (var i = 0; i < 5; i++) {
+      for (var i = 0; i < 6; i++) {
         document.getElementById('panel-' + i).style.display = (i === idx) ? '' : 'none';
       }
     }
@@ -607,7 +744,8 @@
 
       var configs = [
         { locked: 'Read through the lesson to continue',            done: 'Lesson read',            next: 'Continue to video' },
-        { locked: 'Watch the video to unlock the next step',        done: 'Video complete',          next: 'Continue to practice' },
+        { locked: 'Watch the video to unlock the next step',        done: 'Video complete',          next: 'Continue to workbook' },
+        { locked: 'Complete the workbook exercise to continue',     done: 'Workbook complete',       next: 'Continue to practice' },
         { locked: 'Complete the exercise, then mark it done',       done: 'Exercise complete',       next: 'Continue to assessment' },
         { locked: 'Answer all questions and score 80% or higher',   done: 'Assessment passed',       next: 'Continue to submit' },
         { locked: 'Upload your file to complete this lesson',       done: 'Lesson 2.9 complete.',    next: 'Next lesson: 2.10' }
@@ -616,7 +754,7 @@
       if (states[cur] === 'done') {
         hint.textContent = c.done;
         ctxt.textContent = c.next;
-        cicon.className = cur === 4 ? 'ti ti-star' : 'ti ti-arrow-right';
+        cicon.className = cur === 5 ? 'ti ti-star' : 'ti ti-arrow-right';
         btn.classList.add('ready'); btn.removeAttribute('disabled');
       } else {
         hint.textContent = c.locked;
@@ -642,7 +780,7 @@
     function advance() {
       states[cur] = 'done';
       saveProgress();
-      if (cur < 4) {
+      if (cur < 5) {
         cur++;
         if (states[cur] !== 'done') states[cur] = 'active';
         renderTabs(); showPanel(cur); updateContBar();
@@ -704,13 +842,23 @@
       document.getElementById('vc-time').textContent = fmt(secs) + ' / ' + fmt(dur);
     }
 
+    // ── WORKBOOK ──
+    function markWorkbookDone() {
+      var b = document.getElementById('wb-btn');
+      b.innerHTML = '<i class="ti ti-check"></i> Workbook exercise complete';
+      b.disabled = true;
+      states[2] = 'done';
+      if (states[3] !== 'done') states[3] = 'active';
+      saveProgress(); renderTabs(); updateContBar();
+    }
+
     // ── EXERCISE ──
     function markExerciseDone() {
       var b = document.getElementById('ex-btn');
       b.innerHTML = '<i class="ti ti-check"></i> Exercise marked complete';
       b.disabled = true;
-      states[2] = 'done';
-      if (states[3] !== 'done') states[3] = 'active';
+      states[3] = 'done';
+      if (states[4] !== 'done') states[4] = 'active';
       saveProgress(); renderTabs(); updateContBar();
     }
 
@@ -734,8 +882,8 @@
       document.getElementById('q-submit').style.display = 'none';
       document.getElementById('q-retry').style.display = pass ? 'none' : 'inline-flex';
       if (pass) {
-        states[3] = 'done';
-        if (states[4] !== 'done') states[4] = 'active';
+        states[4] = 'done';
+        if (states[5] !== 'done') states[5] = 'active';
         db.collection('progress').doc(currentUser.uid + '_' + CURRENT_LESSON).set({ quizScore: pct }, { merge: true });
         saveProgress(); renderTabs(); updateContBar();
       }
@@ -753,21 +901,47 @@
     function onDragOver(e) { e.preventDefault(); if (!selectedFile) document.getElementById('drop-zone').classList.add('drag-over'); }
     function onDragLeave() { document.getElementById('drop-zone').classList.remove('drag-over'); }
     function onDrop(e) { e.preventDefault(); document.getElementById('drop-zone').classList.remove('drag-over'); if (e.dataTransfer.files.length > 0) handleFileSelect(e.dataTransfer.files[0]); }
+    function getExpectedFilename() {
+      // Builds the exact expected filename for the logged-in student.
+      // Option A: derived from displayName. Upgrade to Firestore lastName (Option B)
+      // once the student registration flow collects first/last name separately.
+      var lastName = userLastName || 'YourLastName';
+      return 'L2.9_' + lastName + '_CloudStudy.ai';
+    }
+
     function handleFileSelect(file) {
       if (!file) return;
-      selectedFile = file;
       document.getElementById('drop-zone').classList.add('uploaded');
       document.getElementById('file-name').textContent = file.name;
-      document.getElementById('file-meta').textContent = formatBytes(file.size) + ' · ready to submit';
       document.getElementById('drop-hint').style.display = 'none';
-      document.getElementById('submit-note').textContent = 'File ready — submit when you\'re sure';
-      document.getElementById('submit-btn').classList.add('ready');
+
+      var warn = document.getElementById('filename-warn');
+      var expected = getExpectedFilename();
+
+      if (file.name !== expected) {
+        // Filename doesn't match — show warning, block submit
+        selectedFile = null;
+        document.getElementById('file-meta').textContent = formatBytes(file.size) + ' · rename required';
+        warn.style.display = 'flex';
+        warn.querySelector('.fn-warn-expected').textContent = expected;
+        warn.querySelector('.fn-warn-got').textContent = file.name;
+        document.getElementById('submit-note').textContent = 'Rename the file before submitting';
+        document.getElementById('submit-btn').classList.remove('ready');
+      } else {
+        // Filename matches — clear warning, enable submit
+        selectedFile = file;
+        warn.style.display = 'none';
+        document.getElementById('file-meta').textContent = formatBytes(file.size) + ' · ready to submit';
+        document.getElementById('submit-note').textContent = 'File ready — submit when you\'re sure';
+        document.getElementById('submit-btn').classList.add('ready');
+      }
     }
     function removeFile(e) {
       e.stopPropagation(); selectedFile = null;
       document.getElementById('drop-zone').classList.remove('uploaded');
       document.getElementById('file-input').value = '';
       document.getElementById('drop-hint').style.display = 'flex';
+      document.getElementById('filename-warn').style.display = 'none';
       document.getElementById('submit-note').textContent = 'No file selected yet';
       document.getElementById('submit-btn').classList.remove('ready');
     }
@@ -807,7 +981,7 @@
             submittedFile: path,
             submittedAt: firebase.firestore.FieldValue.serverTimestamp()
           }, { merge: true });
-          states[4] = 'done';
+          states[5] = 'done';
           saveProgress(); renderTabs(); updateContBar();
         }
       );

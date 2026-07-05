@@ -54,7 +54,7 @@
 
       <div class="info-row"><span class="info-label">Guest email</span><span class="info-val">reviewer@cpla.studio</span></div>
       <div class="info-row"><span class="info-label">Password</span><span class="info-val">CPLAReview2024!</span></div>
-      <div class="info-row"><span class="info-label">Pre-loaded state</span><span class="info-val">Read + Video done · on practice</span></div>
+      <div class="info-row"><span class="info-label">Pre-loaded state</span><span class="info-val">Read + Video + Workbook done · on practice</span></div>
       <div class="info-row"><span class="info-label">Lesson seeded</span><span class="info-val">v2-m3-l9</span></div>
 
       <div class="prereq">
@@ -108,12 +108,12 @@
 
       log('Starting guest account setup…', 'info');
 
-      // Pre-seeded progress: read + video done, step 2 active (on practice)
+      // Pre-seeded progress: read + video + workbook done, step 3 active (on practice)
       var progressData = {
         userId: uid,
         lessonId: 'v2-m3-l9',
-        steps: ['done', 'done', 'active', 'locked', 'locked'],
-        currentStep: 2,
+        steps: ['done', 'done', 'done', 'active', 'locked', 'locked'],
+        currentStep: 3,
         quizScore: null,
         submittedFile: null,
         isGuest: true,
