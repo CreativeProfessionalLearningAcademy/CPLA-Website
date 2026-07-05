@@ -3,21 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CPLA Studio — Sign In</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <title>CPLA — Sign In</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ink:    #1a1410;
+      --blue:   #01123a;
+      --gold:   #da9e2b;
+      --gold-l: rgba(218,158,43,.1);
       --paper:  #faf7f2;
-      --cream:  #f0ead8;
       --rule:   #d4c9b8;
       --mid:    #6b5e52;
-      --mod:    #FF7C00;
-      --ml:     #fff3e6;
-      --green:  #2d7a1a;
+      --ink:    #1a1410;
       --red:    #c8401a;
     }
 
@@ -25,12 +24,21 @@
       height: 100%;
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      background: var(--ink);
+      background: var(--blue);
       color: var(--ink);
+    }
+
+    /* Subtle gold glow — matches landing page */
+    body::before {
+      content: "";
+      position: fixed; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(218,158,43,.07) 0%, transparent 62%);
+      pointer-events: none;
     }
 
     /* ── PAGE LAYOUT ── */
     .page {
+      position: relative; z-index: 1;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -39,27 +47,16 @@
       padding: 24px 16px;
     }
 
-    /* ── BRAND MARK ── */
+    /* ── LOGO ── */
     .brand {
+      margin-bottom: 28px;
       text-align: center;
-      margin-bottom: 32px;
     }
-    .brand-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      font-weight: 900;
-      color: #faf7f2;
-      letter-spacing: -0.5px;
-      line-height: 1;
-    }
-    .brand-name span { color: var(--mod); font-style: italic; }
-    .brand-sub {
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(250,247,242,0.35);
-      margin-top: 6px;
-      font-family: 'DM Mono', monospace;
+    .brand img {
+      width: clamp(260px, 38vw, 380px);
+      height: auto;
+      display: block;
+      margin: 0 auto;
     }
 
     /* ── CARD ── */
@@ -69,6 +66,7 @@
       width: 100%;
       max-width: 380px;
       overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,.35);
     }
     .card-body { padding: 32px 28px; }
 
@@ -96,14 +94,14 @@
       transition: border-color 0.15s;
       outline: none;
     }
-    .field input:focus { border-color: var(--mod); }
+    .field input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(218,158,43,.12); }
     .field input::placeholder { color: #b0a090; }
 
     .sign-in-btn {
       width: 100%;
       padding: 12px;
-      background: var(--ink);
-      color: #faf7f2;
+      background: var(--blue);
+      color: #ffffff;
       border: none;
       border-radius: 8px;
       font-size: 14px;
@@ -126,7 +124,6 @@
       align-items: center;
       gap: 10px;
       margin: 20px 0;
-      color: var(--rule);
       font-size: 11px;
       color: var(--mid);
     }
@@ -142,8 +139,8 @@
       width: 100%;
       padding: 11px;
       background: transparent;
-      color: var(--mod);
-      border: 1.5px solid var(--mod);
+      color: var(--gold);
+      border: 1.5px solid var(--gold);
       border-radius: 8px;
       font-size: 14px;
       font-weight: 500;
@@ -155,7 +152,8 @@
       gap: 8px;
       transition: background 0.15s;
     }
-    .guest-btn:hover { background: var(--ml); }
+    .guest-btn:hover { background: var(--gold-l); }
+    .guest-btn:disabled { opacity: .4; cursor: not-allowed; }
     .guest-desc {
       text-align: center;
       font-size: 11px;
@@ -183,17 +181,32 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     .spinner {
       width: 16px; height: 16px;
-      border: 2px solid rgba(250,247,242,0.3);
-      border-top-color: #faf7f2;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #ffffff;
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
     }
+    .spinner-gold {
+      border-color: rgba(218,158,43,.25);
+      border-top-color: var(--gold);
+    }
+
+    /* ── BACK LINK ── */
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; color: rgba(255,255,255,.3);
+      text-decoration: none; letter-spacing: .06em;
+      font-family: 'DM Mono', monospace; text-transform: uppercase;
+      margin-bottom: 20px;
+      transition: color .15s;
+    }
+    .back-link:hover { color: rgba(255,255,255,.65); }
 
     /* ── FOOTER ── */
     .footer {
       text-align: center;
       font-size: 10px;
-      color: rgba(250,247,242,0.2);
+      color: rgba(255,255,255,.15);
       margin-top: 24px;
       font-family: 'DM Mono', monospace;
       letter-spacing: 0.08em;
@@ -202,9 +215,13 @@
 </head>
 <body>
   <div class="page">
+
+    <a href="landing.html" class="back-link">
+      <i class="ti ti-arrow-left"></i> Back
+    </a>
+
     <div class="brand">
-      <div class="brand-name">C<span>P</span>LA Studio</div>
-      <div class="brand-sub">Creative Professional Learning Academy</div>
+      <img src="CPLA-logo-full-rev.svg" alt="Creative Professional Learning Academy">
     </div>
 
     <div class="card">
@@ -308,7 +325,7 @@
     guestBtn.addEventListener('click', async function() {
       clearError();
       guestBtn.disabled = true;
-      guestBtn.innerHTML = '<div class="spinner" style="border-color:rgba(255,124,0,.3);border-top-color:var(--mod)"></div>';
+      guestBtn.innerHTML = '<div class="spinner spinner-gold"></div>';
       try {
         await auth.signInWithEmailAndPassword(GUEST_EMAIL, GUEST_PASSWORD);
         window.location.href = 'dashboard.html';
