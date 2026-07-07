@@ -144,6 +144,107 @@
     .skeleton { background: var(--cream); border-radius: 4px; animation: shimmer 1.4s ease-in-out infinite; }
     #loading-state { display: block; }
     #loaded-state  { display: none; }
+
+    /* ── INSTRUCTOR — CLASS MANAGEMENT ── */
+    .section-label {
+      font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--mid); font-family: 'DM Mono', monospace;
+      margin-bottom: 12px; margin-top: 28px;
+    }
+    .section-label:first-child { margin-top: 0; }
+    .class-card {
+      background: white; border: 1px solid var(--rule);
+      border-radius: 12px; padding: 16px 18px;
+      margin-bottom: 10px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .class-card-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(218,158,43,.1); border: 1px solid rgba(218,158,43,.25);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 17px; color: #b07e18;
+    }
+    .class-card-info { flex: 1; min-width: 0; }
+    .class-card-name { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+    .class-card-code {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .code-chip {
+      font-family: 'DM Mono', monospace; font-size: 13px;
+      letter-spacing: .14em; color: var(--blue);
+      background: #f0f4fa; padding: 3px 9px;
+      border-radius: 5px; border: 1px solid #d0daea;
+    }
+    .copy-btn {
+      background: none; border: 1px solid var(--rule);
+      border-radius: 6px; padding: 3px 9px;
+      font-size: 11px; color: var(--mid); cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      display: inline-flex; align-items: center; gap: 4px;
+      transition: background .12s, color .12s;
+    }
+    .copy-btn:hover { background: var(--cream); color: var(--ink); }
+    .copy-btn.copied { color: var(--green); border-color: #b6d9a8; background: var(--gnl); }
+    .no-classes {
+      font-size: 13px; color: var(--mid);
+      padding: 10px 0 6px; line-height: 1.6;
+    }
+
+    /* Create class form */
+    .create-class-card {
+      background: white; border: 1px solid var(--rule);
+      border-radius: 12px; overflow: hidden;
+    }
+    .create-class-head {
+      padding: 13px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer;
+      transition: background .12s;
+    }
+    .create-class-head:hover { background: #f8f5f0; }
+    .create-class-head-l {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 500; color: var(--ink);
+    }
+    .create-class-head-l i { font-size: 16px; color: var(--mod); }
+    .create-class-chevron { font-size: 14px; color: var(--mid); transition: transform .2s; }
+    .create-class-card.open .create-class-chevron { transform: rotate(180deg); }
+    .create-class-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height .25s ease, padding .2s ease;
+      padding: 0 18px; border-top: 0px solid var(--rule);
+    }
+    .create-class-card.open .create-class-body {
+      max-height: 200px; padding: 16px 18px;
+      border-top: 1px solid var(--rule);
+    }
+    .create-class-body .field { margin-bottom: 12px; }
+    .create-class-body .field label {
+      display: block; font-size: 11px; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--mid);
+      margin-bottom: 5px; font-weight: 500;
+    }
+    .create-class-body .field input {
+      width: 100%; padding: 9px 12px;
+      border: 1px solid var(--rule); border-radius: 8px;
+      font-size: 14px; font-family: 'DM Sans', sans-serif;
+      font-weight: 400; background: white; color: var(--ink);
+      outline: none; transition: border-color .15s, box-shadow .15s;
+    }
+    .create-class-body .field input:focus {
+      border-color: #da9e2b; box-shadow: 0 0 0 3px rgba(218,158,43,.12);
+    }
+    .create-class-body .field input::placeholder { color: #b0a090; }
+    .create-class-btn {
+      background: var(--ink); color: #faf7f2;
+      border: none; border-radius: 8px;
+      padding: 10px 20px; font-size: 13px; font-weight: 500;
+      font-family: 'DM Sans', sans-serif; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 7px;
+      transition: opacity .15s;
+    }
+    .create-class-btn:hover { opacity: .85; }
+    .create-class-btn:disabled { opacity: .4; cursor: not-allowed; }
   </style>
 </head>
 <body>
@@ -172,6 +273,34 @@
       <div class="greeting-date" id="greeting-date"></div>
       <div class="greeting-h" id="greeting-h">Welcome back.</div>
 
+      <!-- ── INSTRUCTOR VIEW ── -->
+      <div id="instructor-view" style="display:none">
+        <div class="section-label">My Classes</div>
+        <div id="classes-list">
+          <!-- populated by JS -->
+        </div>
+
+        <div class="create-class-card" id="create-class-card">
+          <div class="create-class-head" onclick="toggleCreateClass()">
+            <div class="create-class-head-l">
+              <i class="ti ti-plus"></i> Create a New Class
+            </div>
+            <i class="ti ti-chevron-down create-class-chevron"></i>
+          </div>
+          <div class="create-class-body">
+            <div class="field">
+              <label for="new-class-name">Class Name</label>
+              <input type="text" id="new-class-name" placeholder="e.g. Period 3 — Graphic Design">
+            </div>
+            <button class="create-class-btn" id="create-class-btn" onclick="createClass()">
+              <i class="ti ti-plus"></i> Create Class
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── STUDENT VIEW ── -->
+      <div id="student-view" style="display:none">
       <div class="task-card">
         <div class="tc-head">
           <div class="tc-badge" id="tc-badge">Video · Lesson 2.9</div>
@@ -202,7 +331,7 @@
       </div>
 
       <!-- Journey card (collapsible) -->
-      <div class="journey-card" id="journey-card">
+      <div class="journey-card" id="journey-card" style="display:none">
         <div class="journey-head">
           <div class="journey-head-l"><i class="ti ti-map-2"></i> Your Journey</div>
           <i class="ti ti-chevron-down journey-toggle"></i>
@@ -222,6 +351,8 @@
           </div>
         </div>
       </div>
+      </div><!-- /student-view -->
+
     </div>
   </main>
 
@@ -240,7 +371,7 @@
     });
 
     async function loadDashboard(user) {
-      // Nav
+      // Nav initials
       const initials = user.displayName
         ? user.displayName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2)
         : user.email.slice(0,2).toUpperCase();
@@ -248,17 +379,25 @@
 
       const isGuest = user.email === GUEST_EMAIL;
 
-      // Read role from Firestore user doc; fall back to 'Junior Designer'
+      // Read user doc from Firestore
+      let userData = {};
       let roleLabel = isGuest ? 'Reviewer' : 'Junior Designer';
+      let isInstructor = false;
       try {
         const userSnap = await db.collection('users').doc(user.uid).get();
-        if (userSnap.exists && userSnap.data().role) {
-          roleLabel = isGuest ? 'Reviewer' : userSnap.data().role;
+        if (userSnap.exists) {
+          userData = userSnap.data();
+          if (isGuest) {
+            roleLabel = 'Reviewer';
+          } else if (userData.accountType === 'instructor') {
+            roleLabel = 'Instructor';
+            isInstructor = true;
+          } else if (userData.role) {
+            roleLabel = userData.role;
+          }
         }
-      } catch (e) { console.warn('Could not load user role:', e); }
+      } catch (e) { console.warn('Could not load user:', e); }
       document.getElementById('nav-role').textContent = roleLabel;
-
-      document.getElementById('nav-crumb').innerHTML = '<a href="volume.html" style="color:inherit;text-decoration:none;transition:color .15s" onmouseover="this.style.color=\'rgba(250,247,242,.8)\'" onmouseout="this.style.color=\'\'">Vol 2</a> · <a href="module.html" style="color:inherit;text-decoration:none;transition:color .15s" onmouseover="this.style.color=\'rgba(250,247,242,.8)\'" onmouseout="this.style.color=\'\'">Module 3</a>';
 
       // Greeting
       const now = new Date();
@@ -270,34 +409,161 @@
       const firstName = user.displayName ? user.displayName.split(' ')[0] : (isGuest ? 'Reviewer' : 'Designer');
       const hour = now.getHours();
       const timeGreet = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
-      document.getElementById('greeting-h').innerHTML =
-        timeGreet + ', <em>' + firstName + '</em>. Here\'s your assignment.';
 
-      // Load progress from Firestore
-      let steps = ['active', 'locked', 'locked', 'locked'];
-      let currentStep = 0;
-      try {
-        const docRef = db.collection('progress').doc(user.uid + '_' + CURRENT_LESSON);
-        const snap = await docRef.get();
-        if (snap.exists) {
-          const data = snap.data();
-          steps = data.steps || steps;
-          currentStep = data.currentStep || 0;
-        }
-      } catch (e) { console.warn('Could not load progress:', e); }
+      if (isInstructor) {
+        // ── INSTRUCTOR DASHBOARD ──
+        document.getElementById('nav-crumb').textContent = 'Instructor Dashboard';
+        document.getElementById('greeting-h').innerHTML =
+          timeGreet + ', <em>' + firstName + '</em>. Here are your classes.';
+        document.getElementById('instructor-view').style.display = 'block';
+        document.getElementById('student-view').style.display = 'none';
+        await loadClasses(user.uid);
+      } else {
+        // ── STUDENT DASHBOARD ──
+        document.getElementById('nav-crumb').innerHTML =
+          '<a href="volume.html" style="color:inherit;text-decoration:none;transition:color .15s" onmouseover="this.style.color=\'rgba(250,247,242,.8)\'" onmouseout="this.style.color=\'\'">Vol 2</a> · <a href="module.html" style="color:inherit;text-decoration:none;transition:color .15s" onmouseover="this.style.color=\'rgba(250,247,242,.8)\'" onmouseout="this.style.color=\'\'">Module 3</a>';
+        document.getElementById('greeting-h').innerHTML =
+          timeGreet + ', <em>' + firstName + '</em>. Here\'s your assignment.';
+        document.getElementById('student-view').style.display = 'block';
+        document.getElementById('instructor-view').style.display = 'none';
+        document.getElementById('journey-card').style.display = 'block';
 
-      renderSteps(steps, currentStep);
+        // Load progress
+        let steps = ['active', 'locked', 'locked', 'locked', 'locked', 'locked'];
+        let currentStep = 0;
+        try {
+          const docRef = db.collection('progress').doc(user.uid + '_' + CURRENT_LESSON);
+          const snap = await docRef.get();
+          if (snap.exists) {
+            const data = snap.data();
+            steps = data.steps || steps;
+            currentStep = data.currentStep || 0;
+          }
+        } catch (e) { console.warn('Could not load progress:', e); }
+        renderSteps(steps, currentStep);
 
-      // Journey bar — rough progress based on current lesson number
-      const lessonNum = 9; // 2.9 is the current lesson; Vol 2 has ~27 lessons
-      const pct = Math.min(100, Math.round((lessonNum / 27) * 100));
-      document.getElementById('v2-bar').style.width = pct + '%';
-      document.getElementById('v2-pct').textContent = pct + '%';
+        // Journey bar
+        const lessonNum = 9;
+        const pct = Math.min(100, Math.round((lessonNum / 27) * 100));
+        document.getElementById('v2-bar').style.width = pct + '%';
+        document.getElementById('v2-pct').textContent = pct + '%';
+      }
 
       // Show content
       document.getElementById('loading-state').style.display = 'none';
       document.getElementById('loaded-state').style.display = 'block';
     }
+
+    // ── INSTRUCTOR: LOAD CLASSES ──
+    async function loadClasses(uid) {
+      var listEl = document.getElementById('classes-list');
+      try {
+        var snap = await db.collection('classes')
+          .where('instructorId', '==', uid)
+          .get();
+
+        if (snap.empty) {
+          listEl.innerHTML = '<p class="no-classes">No classes yet — create your first one below.</p>';
+          return;
+        }
+
+        // Sort by createdAt client-side (newest first)
+        var docs = snap.docs.slice().sort(function(a, b) {
+          var ta = a.data().createdAt ? a.data().createdAt.toMillis() : 0;
+          var tb = b.data().createdAt ? b.data().createdAt.toMillis() : 0;
+          return tb - ta;
+        });
+
+        listEl.innerHTML = docs.map(function(doc) {
+          var d = doc.data();
+          return '<div class="class-card">' +
+            '<div class="class-card-icon"><i class="ti ti-school"></i></div>' +
+            '<div class="class-card-info">' +
+              '<div class="class-card-name">' + d.name + '</div>' +
+              '<div class="class-card-code">' +
+                '<span class="code-chip">' + d.inviteCode + '</span>' +
+                '<button class="copy-btn" onclick="copyCode(\'' + d.inviteCode + '\', this)">' +
+                  '<i class="ti ti-copy"></i> Copy' +
+                '</button>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+
+      } catch (e) {
+        console.error('Could not load classes:', e);
+        listEl.innerHTML = '<p class="no-classes">Could not load classes. Please refresh.</p>';
+      }
+    }
+
+    // ── INSTRUCTOR: GENERATE INVITE CODE ──
+    function generateInviteCode() {
+      var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no confusable chars (0,1,I,O)
+      var code = '';
+      for (var i = 0; i < 6; i++) {
+        code += chars[Math.floor(Math.random() * chars.length)];
+      }
+      return code;
+    }
+
+    // ── INSTRUCTOR: CREATE CLASS ──
+    async function createClass() {
+      var name = document.getElementById('new-class-name').value.trim();
+      var btn  = document.getElementById('create-class-btn');
+      if (!name) {
+        document.getElementById('new-class-name').focus();
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<div class="spinner" style="border-top-color:#faf7f2;border-color:rgba(250,247,242,.3)"></div>';
+
+      try {
+        var code = generateInviteCode();
+        var user = auth.currentUser;
+        await db.collection('classes').add({
+          name:         name,
+          inviteCode:   code,
+          instructorId: user.uid,
+          active:       true,
+          createdAt:    firebase.firestore.FieldValue.serverTimestamp()
+        });
+        document.getElementById('new-class-name').value = '';
+        document.getElementById('create-class-card').classList.remove('open');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="ti ti-plus"></i> Create Class';
+        await loadClasses(user.uid);
+      } catch (e) {
+        console.error('Could not create class:', e);
+        btn.disabled = false;
+        btn.innerHTML = '<i class="ti ti-plus"></i> Create Class';
+      }
+    }
+
+    // ── INSTRUCTOR: TOGGLE CREATE FORM ──
+    function toggleCreateClass() {
+      document.getElementById('create-class-card').classList.toggle('open');
+    }
+
+    // ── COPY INVITE CODE ──
+    function copyCode(code, btn) {
+      navigator.clipboard.writeText(code).then(function() {
+        btn.classList.add('copied');
+        btn.innerHTML = '<i class="ti ti-check"></i> Copied';
+        setTimeout(function() {
+          btn.classList.remove('copied');
+          btn.innerHTML = '<i class="ti ti-copy"></i> Copy';
+        }, 2000);
+      });
+    }
+
+    // Allow Enter in class name input
+    document.addEventListener('DOMContentLoaded', function() {
+      var inp = document.getElementById('new-class-name');
+      if (inp) inp.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') createClass();
+      });
+    });
 
     function renderSteps(steps, currentStep) {
       const badgeLabels = ['Read · Lesson 2.9', 'Video · Lesson 2.9', 'Workbook · Lesson 2.9', 'Practice · Lesson 2.9', 'Assessment · Lesson 2.9', 'Submit · Lesson 2.9'];

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPLA — Create Account</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:   #01123a;
+      --gold:   #da9e2b;
+      --gold-l: rgba(218,158,43,.1);
+      --gold-b: rgba(218,158,43,.25);
+      --paper:  #faf7f2;
+      --cream:  #f0ead8;
+      --rule:   #d4c9b8;
+      --mid:    #6b5e52;
+      --ink:    #1a1410;
+      --green:  #2d7a1a;
+      --gnl:    #f0fae8;
+      --red:    #c8401a;
+    }
+
+    html, body { height: 100%; font-family: 'DM Sans', sans-serif; font-weight: 300; background: var(--blue); color: var(--ink); }
+
+    body::before {
+      content: "";
+      position: fixed; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(218,158,43,.07) 0%, transparent 62%);
+      pointer-events: none;
+    }
+
+    .page {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 32px 16px;
+    }
+
+    /* ── BACK LINK ── */
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; color: rgba(255,255,255,.3);
+      text-decoration: none; letter-spacing: .06em;
+      font-family: 'DM Mono', monospace; text-transform: uppercase;
+      margin-bottom: 20px;
+      transition: color .15s;
+    }
+    .back-link:hover { color: rgba(255,255,255,.65); }
+
+    /* ── LOGO ── */
+    .brand { margin-bottom: 24px; text-align: center; }
+    .brand img { width: clamp(200px, 30vw, 300px); height: auto; display: block; margin: 0 auto; }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--paper);
+      border-radius: 16px;
+      width: 100%; max-width: 420px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,.35);
+    }
+    .card-head {
+      background: var(--blue);
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--gold-b);
+    }
+    .card-head-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: .2em;
+      text-transform: uppercase; color: rgba(218,158,43,.7);
+      margin-bottom: 4px;
+    }
+    .card-head h2 {
+      font-size: 16px; font-weight: 600; color: #ffffff;
+    }
+    .card-body { padding: 24px; }
+
+    /* ── GATE SCREEN ── */
+    .gate-desc {
+      font-size: 13px; color: var(--mid); line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    /* ── CLASS BANNER ── */
+    .class-banner {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(218,158,43,.08);
+      border: 1px solid rgba(218,158,43,.3);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 18px;
+    }
+    .class-banner i { font-size: 16px; color: var(--gold); flex-shrink: 0; }
+    .class-banner-label {
+      font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--mid); font-family: 'DM Mono', monospace;
+      line-height: 1; margin-bottom: 3px;
+    }
+    .class-banner-name {
+      font-size: 13px; font-weight: 600; color: var(--ink);
+    }
+
+    /* ── FORM FIELDS ── */
+    .field { margin-bottom: 14px; }
+    .field label {
+      display: block; font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 5px; font-weight: 500;
+    }
+    .field label .opt {
+      font-weight: 300; text-transform: none; letter-spacing: 0;
+      color: #a09080; margin-left: 4px; font-size: 10px;
+    }
+    .field input, .field select {
+      width: 100%; padding: 10px 13px;
+      border: 1px solid var(--rule); border-radius: 8px;
+      font-size: 14px; font-family: 'DM Sans', sans-serif;
+      font-weight: 400; background: white; color: var(--ink);
+      transition: border-color .15s, box-shadow .15s; outline: none;
+      appearance: none;
+    }
+    .field input:focus, .field select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(218,158,43,.12);
+    }
+    .field input::placeholder { color: #b0a090; }
+
+    /* ── INVITE CODE FIELD ── */
+    .code-input-wrap { position: relative; }
+    .code-input-wrap input {
+      text-transform: uppercase;
+      font-family: 'DM Mono', monospace;
+      font-size: 20px; letter-spacing: .18em;
+      text-align: center; padding: 14px;
+    }
+
+    /* ── ACCOUNT TYPE TOGGLE ── */
+    .type-field { margin-bottom: 18px; }
+    .type-field > label {
+      display: block; font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 8px; font-weight: 500;
+    }
+    .type-toggle {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    }
+    .type-option { position: relative; }
+    .type-option input[type="radio"] {
+      position: absolute; opacity: 0; width: 0; height: 0;
+    }
+    .type-option label {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 6px; padding: 14px 12px;
+      border: 1.5px solid var(--rule); border-radius: 10px;
+      cursor: pointer; text-align: center;
+      transition: border-color .15s, background .15s;
+      letter-spacing: 0; text-transform: none; font-size: 13px;
+      font-weight: 500; color: var(--ink); background: white;
+    }
+    .type-option label i { font-size: 22px; color: var(--mid); transition: color .15s; }
+    .type-option label .type-name { font-size: 13px; font-weight: 600; line-height: 1; }
+    .type-option label .type-sub { font-size: 11px; color: var(--mid); font-weight: 300; line-height: 1.4; }
+    .type-option input:checked + label { border-color: var(--gold); background: rgba(218,158,43,.06); }
+    .type-option input:checked + label i { color: var(--gold); }
+
+    /* ── NAME ROW ── */
+    .name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      border: none; border-top: 1px solid var(--rule);
+      margin: 4px 0 16px;
+    }
+
+    /* ── SUBMIT BUTTON ── */
+    .submit-btn {
+      width: 100%; padding: 12px;
+      background: var(--blue); color: #ffffff;
+      border: none; border-radius: 8px;
+      font-size: 14px; font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer; display: flex;
+      align-items: center; justify-content: center; gap: 8px;
+      margin-top: 4px; transition: opacity .15s;
+    }
+    .submit-btn:hover { opacity: .85; }
+    .submit-btn:disabled { opacity: .4; cursor: not-allowed; }
+    .submit-btn.gold { background: var(--gold); color: var(--blue); }
+    .submit-btn.gold:hover { opacity: .9; }
+
+    /* ── SUCCESS STATE ── */
+    .success-card {
+      text-align: center; padding: 8px 0 4px;
+      display: none;
+    }
+    .success-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--gnl); border: 2px solid #b6d9a8;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
+      font-size: 24px; color: var(--green);
+    }
+    .success-card h3 {
+      font-size: 17px; font-weight: 600;
+      color: var(--ink); margin-bottom: 6px;
+    }
+    .success-card p {
+      font-size: 13px; color: var(--mid);
+      line-height: 1.7; margin-bottom: 14px;
+    }
+    .user-id-chip {
+      display: inline-block;
+      background: var(--blue); color: rgba(218,158,43,.9);
+      font-family: 'DM Mono', monospace; font-size: 15px;
+      letter-spacing: .1em; padding: 8px 18px;
+      border-radius: 8px; margin-bottom: 16px;
+    }
+
+    /* ── ERROR ── */
+    .error-msg {
+      background: #fdf0ed; border: 1px solid #f0c4b8;
+      border-radius: 6px; padding: 9px 12px;
+      font-size: 12px; color: var(--red);
+      margin-top: 12px; display: none;
+      align-items: center; gap: 7px;
+    }
+    .error-msg.visible { display: flex; }
+
+    /* ── SPINNER ── */
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,.3);
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center; font-size: 10px;
+      color: rgba(255,255,255,.15); margin-top: 20px;
+      font-family: 'DM Mono', monospace; letter-spacing: .08em;
+    }
+    .footer a { color: rgba(255,255,255,.3); text-decoration: none; }
+    .footer a:hover { color: rgba(255,255,255,.6); }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <a href="login.html" class="back-link">
+      <i class="ti ti-arrow-left"></i> Back to Sign In
+    </a>
+
+    <div class="brand">
+      <img src="CPLA-logo-full-rev.svg" alt="Creative Professional Learning Academy">
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-eyebrow">New Student</div>
+        <h2 id="card-title">Enter your invite code</h2>
+      </div>
+      <div class="card-body">
+
+        <!-- ── SCREEN 1: INVITE CODE GATE ── -->
+        <div id="gate-screen">
+          <p class="gate-desc">Your instructor will give you a 6-character invite code. Enter it below to get started.</p>
+          <div class="field">
+            <label for="invite-code">Invite Code</label>
+            <div class="code-input-wrap">
+              <input type="text" id="invite-code" placeholder="A7K2PQ"
+                     maxlength="6" autocomplete="off" spellcheck="false">
+            </div>
+          </div>
+          <button class="submit-btn" id="verify-btn" onclick="verifyCode()">
+            <i class="ti ti-arrow-right"></i> Verify Code
+          </button>
+          <div class="error-msg" id="gate-error">
+            <i class="ti ti-alert-circle"></i>
+            <span>That code isn't valid. Double-check with your instructor.</span>
+          </div>
+        </div>
+
+        <!-- ── SCREEN 2: REGISTRATION FORM ── -->
+        <div id="reg-screen" style="display:none">
+
+          <!-- Class confirmed banner -->
+          <div class="class-banner">
+            <i class="ti ti-school"></i>
+            <div>
+              <div class="class-banner-label">Enrolling in</div>
+              <div class="class-banner-name" id="class-name-display">—</div>
+            </div>
+          </div>
+
+          <!-- Name -->
+          <div class="name-row">
+            <div class="field">
+              <label for="first-name">First Name</label>
+              <input type="text" id="first-name" placeholder="First" autocomplete="given-name">
+            </div>
+            <div class="field">
+              <label for="last-name">Last Name</label>
+              <input type="text" id="last-name" placeholder="Last" autocomplete="family-name">
+            </div>
+          </div>
+
+          <!-- Preferred Name -->
+          <div class="field">
+            <label for="preferred-name">Preferred Name <span class="opt">optional</span></label>
+            <input type="text" id="preferred-name" placeholder="What you go by, if different" autocomplete="nickname">
+          </div>
+
+          <hr class="section-divider">
+
+          <!-- Email + Password -->
+          <div class="field">
+            <label for="reg-email">Email Address</label>
+            <input type="email" id="reg-email" placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="reg-password">Password</label>
+            <input type="password" id="reg-password" placeholder="At least 6 characters" autocomplete="new-password">
+          </div>
+
+          <!-- Phone -->
+          <div class="field">
+            <label for="reg-phone">Phone Number <span class="opt">optional</span></label>
+            <input type="tel" id="reg-phone" placeholder="(555) 000-0000" autocomplete="tel">
+          </div>
+
+          <hr class="section-divider">
+
+          <!-- Status toggle -->
+          <div class="type-field">
+            <label>I am enrolling as a</label>
+            <div class="type-toggle">
+              <div class="type-option">
+                <input type="radio" name="account-type" id="type-student" value="student" checked>
+                <label for="type-student">
+                  <i class="ti ti-school"></i>
+                  <span class="type-name">Student</span>
+                  <span class="type-sub">Full structured curriculum</span>
+                </label>
+              </div>
+              <div class="type-option">
+                <input type="radio" name="account-type" id="type-pro" value="professional">
+                <label for="type-pro">
+                  <i class="ti ti-briefcase"></i>
+                  <span class="type-name">Creative Professional</span>
+                  <span class="type-sub">Upskilling as a working creative</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <button class="submit-btn" id="reg-btn" onclick="createAccount()">
+            <i class="ti ti-user-plus"></i> Create my account
+          </button>
+          <div class="error-msg" id="reg-error">
+            <i class="ti ti-alert-circle"></i>
+            <span id="reg-error-text">Something went wrong.</span>
+          </div>
+        </div>
+
+        <!-- ── SCREEN 3: SUCCESS ── -->
+        <div class="success-card" id="success-screen">
+          <div class="success-icon"><i class="ti ti-check"></i></div>
+          <h3 id="success-name">Welcome!</h3>
+          <p>Your account is ready. Save your CPLA User ID — you'll use it on assignments and evaluations.</p>
+          <div class="user-id-chip" id="success-user-id">CPLA-—</div>
+          <p style="margin-bottom:20px;font-size:12px">Taking you to your dashboard…</p>
+          <a href="dashboard.html" class="submit-btn gold" style="text-decoration:none;">
+            <i class="ti ti-layout-dashboard"></i> Go to my dashboard
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer">
+      Already have an account? <a href="login.html">Sign in</a>
+    </div>
+
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+
+  <script>
+    var verifiedClass = null; // { id, name, inviteCode, ... }
+
+    // Auto-uppercase invite code as typed
+    document.getElementById('invite-code').addEventListener('input', function() {
+      var pos = this.selectionStart;
+      this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+      this.setSelectionRange(pos, pos);
+    });
+    document.getElementById('invite-code').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') verifyCode();
+    });
+
+    // ── SCREEN 1: VERIFY INVITE CODE ──
+    async function verifyCode() {
+      var code = document.getElementById('invite-code').value.trim().toUpperCase();
+      var errEl = document.getElementById('gate-error');
+      var btn   = document.getElementById('verify-btn');
+      errEl.classList.remove('visible');
+
+      if (!code || code.length < 4) {
+        errEl.querySelector('span').textContent = 'Please enter your invite code.';
+        errEl.classList.add('visible');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<div class="spinner"></div>';
+
+      try {
+        var snap = await db.collection('classes')
+          .where('inviteCode', '==', code)
+          .where('active', '==', true)
+          .get();
+
+        if (snap.empty) {
+          errEl.querySelector('span').textContent = 'That code isn\'t valid. Double-check with your instructor.';
+          errEl.classList.add('visible');
+          btn.disabled = false;
+          btn.innerHTML = '<i class="ti ti-arrow-right"></i> Verify Code';
+          return;
+        }
+
+        // Code verified — store class info and advance
+        var classDoc = snap.docs[0];
+        verifiedClass = Object.assign({ id: classDoc.id }, classDoc.data());
+        document.getElementById('class-name-display').textContent = verifiedClass.name;
+        document.getElementById('gate-screen').style.display = 'none';
+        document.getElementById('reg-screen').style.display = 'block';
+        document.getElementById('card-title').textContent = 'Create your account';
+        document.getElementById('first-name').focus();
+
+      } catch (err) {
+        console.error(err);
+        errEl.querySelector('span').textContent = 'Could not verify code. Check your connection and try again.';
+        errEl.classList.add('visible');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="ti ti-arrow-right"></i> Verify Code';
+      }
+    }
+
+    // ── GENERATE CPLA USER ID ──
+    function generateCPLAId() {
+      var year = new Date().getFullYear();
+      var num  = String(Math.floor(Math.random() * 9000) + 1000);
+      return 'CPLA-' + year + '-' + num;
+    }
+
+    // ── SCREEN 2: CREATE ACCOUNT ──
+    async function createAccount() {
+      var firstName     = document.getElementById('first-name').value.trim();
+      var lastName      = document.getElementById('last-name').value.trim();
+      var preferredName = document.getElementById('preferred-name').value.trim();
+      var email         = document.getElementById('reg-email').value.trim();
+      var password      = document.getElementById('reg-password').value;
+      var phone         = document.getElementById('reg-phone').value.trim();
+      var accountType   = document.querySelector('input[name="account-type"]:checked').value;
+
+      var errEl  = document.getElementById('reg-error');
+      var errTxt = document.getElementById('reg-error-text');
+      var btn    = document.getElementById('reg-btn');
+      errEl.classList.remove('visible');
+
+      // Validation
+      if (!firstName || !lastName) {
+        errTxt.textContent = 'Please enter your first and last name.';
+        errEl.classList.add('visible'); return;
+      }
+      if (!email) {
+        errTxt.textContent = 'Please enter your email address.';
+        errEl.classList.add('visible'); return;
+      }
+      if (password.length < 6) {
+        errTxt.textContent = 'Password must be at least 6 characters.';
+        errEl.classList.add('visible'); return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<div class="spinner"></div>';
+
+      try {
+        // 1. Create Firebase Auth account
+        var cred = await auth.createUserWithEmailAndPassword(email, password);
+        var uid  = cred.user.uid;
+
+        // 2. Set display name
+        await cred.user.updateProfile({ displayName: firstName + ' ' + lastName });
+
+        // 3. Generate CPLA User ID
+        var cpla_id = generateCPLAId();
+
+        // 4. Write user profile to Firestore
+        await db.collection('users').doc(uid).set({
+          firstName:     firstName,
+          lastName:      lastName,
+          preferredName: preferredName || null,
+          displayName:   firstName + ' ' + lastName,
+          email:         email,
+          phone:         phone || null,
+          accountType:   accountType,
+          role:          accountType === 'professional' ? 'Creative Professional' : 'Junior Designer',
+          classId:       verifiedClass.id,
+          className:     verifiedClass.name,
+          cpla_id:       cpla_id,
+          isGuest:       false,
+          createdAt:     firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        // 5. Seed initial lesson progress
+        await db.collection('progress').doc(uid + '_' + CURRENT_LESSON).set({
+          userId:        uid,
+          lessonId:      CURRENT_LESSON,
+          steps:         ['active', 'locked', 'locked', 'locked', 'locked', 'locked'],
+          currentStep:   0,
+          quizScore:     null,
+          submittedFile: null,
+          createdAt:     firebase.firestore.FieldValue.serverTimestamp(),
+          updatedAt:     firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        // 6. Show success screen
+        document.getElementById('reg-screen').style.display = 'none';
+        document.getElementById('success-screen').style.display = 'block';
+        document.getElementById('card-title').textContent = 'Account created';
+        document.getElementById('success-name').textContent = 'Welcome, ' + firstName + '.';
+        document.getElementById('success-user-id').textContent = cpla_id;
+
+        // Auto-redirect after 4 seconds (longer — give them time to note their ID)
+        setTimeout(function() { window.location.href = 'dashboard.html'; }, 4000);
+
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="ti ti-user-plus"></i> Create my account';
+        if (err.code === 'auth/email-already-in-use') {
+          errTxt.textContent = 'An account with that email already exists. Try signing in instead.';
+        } else if (err.code === 'auth/invalid-email') {
+          errTxt.textContent = 'Please enter a valid email address.';
+        } else if (err.code === 'auth/weak-password') {
+          errTxt.textContent = 'Password must be at least 6 characters.';
+        } else {
+          errTxt.textContent = 'Something went wrong. Please try again.';
+        }
+        errEl.classList.add('visible');
+      }
+    }
+  </script>
+</body>
+</html>
