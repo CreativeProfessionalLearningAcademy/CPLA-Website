@@ -222,6 +222,41 @@
     table.cmp tr td:last-child { font-weight: 500; color: var(--ink); }
     table.cmp tr td:last-child::before { content: "→ "; color: var(--gold); font-weight: 700; }
 
+    /* ── INSTRUCTOR ── */
+    #instructor-section { background: var(--paper); }
+    .instr-grid {
+      display: grid; grid-template-columns: 220px 1fr; gap: 40px;
+      margin-top: 28px; align-items: start;
+    }
+    .instr-photo {
+      width: 220px; height: 220px; border-radius: 12px;
+      background: var(--cream); border: 1px solid var(--rule);
+      object-fit: cover; display: block;
+    }
+    .instr-name {
+      font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px;
+      color: var(--ink); margin-bottom: 4px;
+    }
+    .instr-role {
+      font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 18px;
+    }
+    .instr-bio p { font-size: 15px; line-height: 1.8; color: var(--mid); max-width: 640px; margin-bottom: 14px; }
+    .instr-bio p:last-child { margin-bottom: 0; }
+    .instr-bio strong { color: var(--ink); font-weight: 600; }
+    .instr-credentials {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px;
+    }
+    .instr-credentials span {
+      font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: .04em;
+      background: var(--blue); color: var(--gold-light);
+      border-radius: 100px; padding: 6px 14px;
+    }
+    @media (max-width: 700px) {
+      .instr-grid { grid-template-columns: 1fr; }
+      .instr-photo { width: 140px; height: 140px; }
+    }
+
     /* ── NORTH STAR BAND ── */
     .north-star {
       background: var(--blue); text-align: center; padding: 72px 48px;
@@ -307,6 +342,7 @@
       <li><a href="#about-section" class="active">About</a></li>
       <li><a href="#philosophy-section">Philosophy</a></li>
       <li><a href="#curriculum-section">Curriculum</a></li>
+      <li><a href="#instructor-section">Instructor</a></li>
     </ul>
     <a href="login.html" class="nav-cta">Sign In</a>
   </nav>
@@ -409,6 +445,36 @@
     </div>
   </section>
 
+  <!-- ── INSTRUCTOR ── -->
+  <section id="instructor-section">
+    <div class="section-inner">
+      <div class="section-eyebrow">Who's Teaching This</div>
+      <h2 class="section-headline">Meet Your <em>Instructor.</em></h2>
+
+      <div class="instr-grid">
+        <img class="instr-photo" src="mark-sherfick.jpg" alt="Mark Sherfick, Digital Design Instructor">
+        <div>
+          <div class="instr-name">Mark Sherfick</div>
+          <div class="instr-role">Instructor, Digital Design</div>
+          <div class="instr-bio">
+            <p>Mark has spent more than two decades on both sides of the creative industry — as a working designer and as the person training the next generation of them. Before stepping into the classroom, he ran the advertising and print production department at Muncie Power Products, supervising a full slate of marketing collateral, technical manuals, and large-format print work. He's designed food packaging under strict brand and certification standards for Halal Processing Solutions, and spent years as a professional photo retoucher at Lifetouch, where precision — not just speed — was the job.</p>
+            <p>He currently works as a Graphic Designer at <strong>CSKern</strong>, a commercial printing company in Muncie, where he handles prepress — preparing client files to be press-ready — alongside creating new design work. It's a standard most design programs never touch: the difference between a file that looks right on screen and one that actually prints right, at scale, the first time. That standard shows up directly in how CPLA teaches file delivery and production readiness.</p>
+            <p>Today he also teaches Digital Design at the Muncie Area Career Center, where he built the program's curriculum around the Principles of Design, Digital Design Graphics, and Graphic Design &amp; Layout — and designs the custom rubrics and assessment tools his students are graded against. That same instinct for turning professional standards into teachable, measurable criteria is what shapes CPLA's approach to feedback and grading.</p>
+            <p>He holds a B.S. in Journalism (Photo Option) with a minor in Art from Ball State University, and an Indiana Workplace Specialist II teaching license. He was named Rising Star of the Year at the Muncie Area Career Center.</p>
+          </div>
+          <div class="instr-credentials">
+            <span>B.S. Journalism — Ball State University</span>
+            <span>Adobe Certified — Photoshop</span>
+            <span>Adobe Certified — Illustrator</span>
+            <span>Adobe Certified — InDesign</span>
+            <span>IN Workplace Specialist II License</span>
+            <span>Rising Star of the Year</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── NORTH STAR ── -->
   <div class="north-star">
     <div class="north-star-inner">
@@ -432,6 +498,7 @@
           <a href="#about-section">About</a>
           <a href="#philosophy-section">Philosophy</a>
           <a href="#curriculum-section">Curriculum</a>
+          <a href="#instructor-section">Instructor</a>
           <a href="login.html">Sign In</a>
         </div>
       </div>
