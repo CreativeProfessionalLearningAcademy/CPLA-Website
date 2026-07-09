@@ -11,12 +11,13 @@
     :root {
       --ink:#1a1410; --paper:#faf7f2; --cream:#f0ead8; --rule:#d4c9b8;
       --mid:#6b5e52; --mod:#FF7C00; --ml:#fff3e6; --green:#2d7a1a; --gnl:#f0fae8;
+      --blue:#01123a; --gold:#da9e2b;
     }
     html, body { height: 100%; font-family: 'DM Sans', sans-serif; font-weight: 300; background: var(--cream); }
 
     /* ── NAV ── */
     .pnav {
-      background: var(--ink);
+      background: var(--blue);
       padding: 12px 24px;
       display: flex;
       align-items: center;
@@ -25,11 +26,13 @@
       top: 0;
       z-index: 10;
     }
+    .pn-logo { display: block; line-height: 0; text-decoration: none; transition: opacity .15s; }
+    .pn-logo:hover { opacity: .8; }
     .pn-logo img { height: 28px; width: auto; display: block; }
     .pn-sep { color: rgba(250,247,242,.2); }
     .pn-crumb { font-size: 11px; color: rgba(250,247,242,.4); letter-spacing: .04em; font-family: 'DM Mono', monospace; }
     .pn-r { margin-left: auto; display: flex; align-items: center; gap: 10px; }
-    .pn-role { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffb366; background: rgba(255,179,102,.12); border: 1px solid rgba(255,179,102,.3); padding: 3px 9px; border-radius: 100px; }
+    .pn-role { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); background: rgba(218,158,43,.12); border: 1px solid rgba(218,158,43,.3); padding: 3px 9px; border-radius: 100px; }
     .pn-av { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #faf7f2; cursor: default; }
     .sign-out-btn { background: none; border: none; color: rgba(250,247,242,.4); font-size: 11px; font-family: 'DM Sans', sans-serif; cursor: pointer; display: flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 6px; transition: color .15s; }
     .sign-out-btn:hover { color: rgba(250,247,242,.8); }
@@ -250,7 +253,7 @@
 <body>
   <!-- NAV -->
   <nav class="pnav">
-    <div class="pn-logo"><img src="CPLA-logo-mark-rev.svg" alt="CPLA"></div>
+    <a class="pn-logo" href="about.html" title="About CPLA"><img src="CPLA-logo-mark-rev.svg" alt="CPLA"></a>
     <div class="pn-sep">·</div>
     <div class="pn-crumb" id="nav-crumb">Loading…</div>
     <div class="pn-r">
