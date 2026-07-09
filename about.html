@@ -268,6 +268,63 @@
       .instr-photo { width: 140px; height: 140px; }
     }
 
+    /* ── ASSESSMENT ── */
+    #assessment-section { background: var(--blue); }
+    #assessment-section .section-eyebrow { color: rgba(218,158,43,.85); }
+    #assessment-section .section-eyebrow::after { background: rgba(218,158,43,.4); }
+    #assessment-section .section-headline { color: #ffffff; }
+    #assessment-section .lede { color: rgba(255,255,255,.55); }
+    #assessment-section .lede strong { color: #ffffff; }
+    #assessment-section .stmt { color: var(--gold-light); border-left-color: var(--gold); }
+    .crit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 26px; }
+    .crit-card {
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px; padding: 18px 16px;
+    }
+    .crit-card .cpts {
+      font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 700;
+      color: var(--gold); margin-bottom: 8px;
+    }
+    .crit-card h4 { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: #ffffff; margin-bottom: 5px; }
+    .crit-card p { font-size: 11.5px; color: rgba(255,255,255,.45); line-height: 1.55; }
+    .crit-total {
+      font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .06em;
+      color: rgba(255,255,255,.4); margin-top: 14px;
+    }
+    .crit-total strong { color: var(--gold-light); }
+
+    /* ── OUTCOMES ── */
+    #outcomes-section { background: var(--cream); }
+    .year-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 26px; }
+    .year-card { background: #ffffff; border: 1px solid var(--rule); border-radius: 14px; padding: 26px 26px 24px; }
+    .year-card.y2 { border-color: var(--gold); background: var(--gold-pale); }
+    .year-tag {
+      font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--gold); background: var(--blue); display: inline-block; padding: 4px 10px; border-radius: 100px; margin-bottom: 12px;
+    }
+    .year-title { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .year-desc { font-size: 13.5px; color: var(--mid); line-height: 1.65; margin-bottom: 16px; }
+    .mini-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0; }
+    .mini-flow .mstep {
+      font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: .03em;
+      background: #ffffff; border: 1px solid var(--rule); color: var(--mid);
+      border-radius: 100px; padding: 6px 12px; white-space: nowrap;
+    }
+    .mini-flow .mstep.final { border-color: var(--gold); color: var(--ink); font-weight: 600; background: var(--gold-light); }
+    .mini-flow .marrow { color: var(--rule); padding: 0 6px; font-size: 12px; }
+
+    .gate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+    .gate-card {
+      background: #ffffff; border: 1px solid var(--rule); border-radius: 10px;
+      padding: 18px 20px;
+    }
+    .gate-card .gtag {
+      font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 6px;
+    }
+    .gate-card h4 { font-family: 'Playfair Display', serif; font-size: 15.5px; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+    .gate-card p { font-size: 13px; color: var(--mid); line-height: 1.6; }
+
     /* ── NORTH STAR BAND ── */
     .north-star {
       background: var(--blue); text-align: center; padding: 72px 48px;
@@ -354,7 +411,9 @@
       <li><a href="#about-section" class="active">About</a></li>
       <li><a href="#philosophy-section">Philosophy</a></li>
       <li><a href="#curriculum-section">Curriculum</a></li>
+      <li><a href="#assessment-section">Assessment</a></li>
       <li><a href="#instructor-section">Instructor</a></li>
+      <li><a href="#outcomes-section">Outcomes</a></li>
     </ul>
     <a href="login.html" class="nav-cta">Sign In</a>
   </nav>
@@ -461,6 +520,31 @@
     </div>
   </section>
 
+  <!-- ── ASSESSMENT ── -->
+  <section id="assessment-section">
+    <div class="section-inner">
+      <div class="section-eyebrow">How Work Gets Assessed</div>
+      <h2 class="section-headline">Real feedback, <em>every submission.</em></h2>
+
+      <p class="lede">Most software courses grade completion — did you finish the exercise. CPLA grades <strong>work</strong>, against the specific learning objectives of that exact lesson, every single time. Every assignment is scored against a rubric built from its own objectives, not a generic checklist recycled across the curriculum.</p>
+
+      <div class="stmt">A grade tells you where you landed. Feedback tells you how to get further.</div>
+
+      <p class="lede">When a student submits a project, it's reviewed against that lesson's rubric using CPLA's AI Design Review System, built on Anthropic's Claude. The review returns a criterion-by-criterion breakdown, specific strengths, specific areas to improve, and a note comparing the submission to the student's prior work — so growth is visible, not just a score.</p>
+
+      <p class="lede">Given the volume of work a program like this generates, the AI Design Review is the primary evaluator for most submissions — not a first draft waiting on a human to finalize it. That's a deliberate design choice, not a limitation: every review applies the exact same rubric, the exact same criteria, in the exact same way, submission after submission — a consistency no grader working through a stack of a hundred projects a week can fully guarantee. Instructors stay in the loop to spot-check, resolve disputes, and step in on edge cases, but the rubric-anchored review is built to be trusted as the standard assessment, not a placeholder for one.</p>
+
+      <div class="sub-label" style="color:rgba(255,255,255,.4);">The Universal Rubric — Same Structure, Every Lesson</div>
+      <div class="crit-grid">
+        <div class="crit-card"><div class="cpts">20 pts</div><h4>Knowledge Check</h4><p>Five auto-scored questions confirming the core concept landed before craft is judged.</p></div>
+        <div class="crit-card"><div class="cpts">5 × 4 pts</div><h4>Objective Criteria</h4><p>Drawn verbatim from that lesson's own learning objectives — never generic.</p></div>
+        <div class="crit-card"><div class="cpts">0–4 pts</div><h4>Craft &amp; Technical</h4><p>Correct file setup, clean construction, and the right export formats delivered.</p></div>
+        <div class="crit-card"><div class="cpts">0–4 pts</div><h4>Process &amp; Reflection</h4><p>Workbook completed, journal reflection submitted, brief steps actually followed.</p></div>
+      </div>
+      <div class="crit-total">Every lesson totals the same <strong>48 points</strong> — so grades are directly comparable across modules and volumes, not just within one.</div>
+    </div>
+  </section>
+
   <!-- ── INSTRUCTOR ── -->
   <section id="instructor-section">
     <div class="section-inner">
@@ -491,6 +575,49 @@
     </div>
   </section>
 
+  <!-- ── OUTCOMES ── -->
+  <section id="outcomes-section">
+    <div class="section-inner">
+      <div class="section-eyebrow">Where It Leads</div>
+      <h2 class="section-headline">A two-year path, <em>not three classes.</em></h2>
+
+      <p class="lede">CPLA's seven-volume curriculum is Year One of a two-year professional pathway — the complete foundation, not a stand-alone product built around a handful of courses. Year Two is where the platform's real purpose takes shape.</p>
+
+      <div class="year-grid">
+        <div class="year-card">
+          <div class="year-tag">Year One</div>
+          <div class="year-title">Foundations</div>
+          <div class="year-desc">The full seven-volume curriculum — design fundamentals through Illustrator, Photoshop, InDesign, and After Effects — taught through real professional problems and held to the same rubric-based standard from the first lesson to the last.</div>
+        </div>
+        <div class="year-card y2">
+          <div class="year-tag">Year Two</div>
+          <div class="year-title">Professional Practice</div>
+          <div class="year-desc">Students step out of structured lessons and work as junior designers on real projects, building toward a formal two-stage capstone.</div>
+          <div class="mini-flow">
+            <span class="mstep">Field Rehearsal</span>
+            <span class="marrow">&rarr;</span>
+            <span class="mstep">Master Client Capstone</span>
+            <span class="marrow">&rarr;</span>
+            <span class="mstep final">Certificate of Completion</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stmt">The capstone isn't a final exam. It's a client with a real deadline and a real opinion.</div>
+
+      <p class="lede">The <strong>Field Rehearsal</strong> comes first — a lower-stakes, single-deliverable engagement with an actual client, run through a full discovery-to-approval cycle. It's where students make their rookie mistakes on a small project, before those mistakes matter on the capstone.</p>
+
+      <div class="sub-label">The Master Client Capstone</div>
+      <p class="lede">The terminal project is a complete, real-client engagement that has to prove competency across all seven volumes at once — not just the most recent one.</p>
+      <div class="gate-grid">
+        <div class="gate-card"><div class="gtag">Phase 0</div><h4>Authorization</h4><p>Parent/guardian, instructor, principal, and client all sign off before work begins. No signatures, no project.</p></div>
+        <div class="gate-card"><div class="gtag">Requirement</div><h4>Coverage Matrix</h4><p>Deliverables must collectively demonstrate every one of the program's seven volumes — no single-skill shortcuts.</p></div>
+        <div class="gate-card"><div class="gtag">Scoring</div><h4>7-Criteria Rubric</h4><p>Graded out of 100 points through the same AI Design Review engine used across the whole curriculum.</p></div>
+        <div class="gate-card"><div class="gtag">The Gate</div><h4>Proficient+ to Pass</h4><p>Requires a Proficient-or-better score, verified coverage, and skill-map thresholds met — not just a passing grade.</p></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── NORTH STAR ── -->
   <div class="north-star">
     <div class="north-star-inner">
@@ -514,7 +641,9 @@
           <a href="#about-section">About</a>
           <a href="#philosophy-section">Philosophy</a>
           <a href="#curriculum-section">Curriculum</a>
+          <a href="#assessment-section">Assessment</a>
           <a href="#instructor-section">Instructor</a>
+          <a href="#outcomes-section">Outcomes</a>
           <a href="login.html">Sign In</a>
         </div>
       </div>
