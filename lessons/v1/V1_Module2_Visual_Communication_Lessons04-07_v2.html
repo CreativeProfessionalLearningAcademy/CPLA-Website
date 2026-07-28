@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volume 1 · Module 2 — Visual Communication · Lessons 1.4–1.7</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1410;--paper:#faf7f2;--cream:#f0ead8;
+  --accent:#c8401a;--al:#f5e6e0;
+  --gold:#b8860b;--gl:#faf6e8;
+  --mid:#6b5e52;--rule:#d4c9b8;
+  --green:#2d7a1a;--gnl:#f0fae8;
+  --blue:#1a56c4;--bl:#e8f0fe;
+  --mod:#2563eb;--ml:#eff6ff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.8;}
+nav{background:var(--ink);color:var(--paper);padding:14px 48px;display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;}
+nav .s{color:var(--mod);}nav .sep{color:var(--mid);}
+.mbanner{background:var(--mod);color:white;padding:16px 48px;display:flex;align-items:center;justify-content:space-between;}
+.mbanner h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;}
+.mbanner p{font-size:12px;opacity:.75;}
+.ltabs{background:var(--cream);border-bottom:2px solid var(--rule);display:flex;padding:0 48px;overflow-x:auto;position:sticky;top:0;z-index:200;}
+.ltab{padding:15px 20px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;font-family:'DM Sans',sans-serif;border:none;background:none;cursor:pointer;color:var(--mid);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s;}
+.ltab.active{color:var(--mod);border-bottom-color:var(--mod);}
+.ltab:hover:not(.active){color:var(--ink);}
+.ls{display:none;}.ls.active{display:block;}
+.hero{background:var(--ink);color:var(--paper);padding:60px 48px 48px;position:relative;overflow:hidden;}
+.hero::before{content:attr(data-n);position:absolute;right:48px;top:28px;font-family:'Playfair Display',serif;font-size:150px;font-weight:900;color:rgba(255,255,255,.04);line-height:1;pointer-events:none;}
+.vt{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:14px;font-weight:500;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(30px,5vw,58px);font-weight:900;line-height:1.08;max-width:660px;margin-bottom:18px;}
+.hero h1 em{font-style:italic;color:#93c5fd;}
+.hero .sub{font-size:15px;color:rgba(250,247,242,.6);max-width:510px;line-height:1.7;}
+.hero .mr{display:flex;gap:32px;margin-top:36px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap;}
+.hero .mi label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,247,242,.4);display:block;margin-bottom:3px;}
+.hero .mi span{font-size:13px;color:var(--paper);font-weight:500;}
+.itabs{background:var(--cream);border-bottom:2px solid var(--rule);display:flex;padding:0 48px;}
+.itab{padding:15px 22px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;font-family:'DM Sans',sans-serif;border:none;background:none;cursor:pointer;color:var(--mid);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;}
+.itab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.itab:hover:not(.active){color:var(--ink);}
+.tc{display:none;}.tc.active{display:block;}
+.wrap{max-width:820px;margin:0 auto;padding:52px 48px;}
+.sl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:10px;}
+h2{font-family:'Playfair Display',serif;font-size:29px;font-weight:700;margin-bottom:17px;line-height:1.25;}
+h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin:42px 0 13px;}
+p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
+.cb{border-left:4px solid var(--accent);background:var(--al);padding:20px 24px;margin:30px 0;border-radius:0 8px 8px 0;}
+.cb .cl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:6px;}
+.cb p{margin:0;font-size:15px;}
+.cb.gold{border-left-color:var(--gold);background:var(--gl);}.cb.gold .cl{color:var(--gold);}
+.cb.green{border-left-color:var(--green);background:var(--gnl);}.cb.green .cl{color:var(--green);}
+.cb.mod{border-left-color:var(--mod);background:var(--ml);}.cb.mod .cl{color:var(--mod);}
+.obj{border:2px solid var(--rule);border-radius:12px;padding:26px 30px;margin-bottom:40px;background:white;}
+.obj h4{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:16px;font-weight:500;}
+.ol{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.ol li{display:flex;align-items:flex-start;gap:11px;font-size:15px;line-height:1.6;}
+.ol li::before{content:'';width:20px;height:20px;border-radius:50%;background:var(--mod);flex-shrink:0;margin-top:2px;}
+.pb{background:var(--ink);color:var(--paper);border-radius:14px;padding:36px;margin:0 0 40px;}
+.pb-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:10px;}
+.pb h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:white;margin:0 0 14px;line-height:1.3;}
+.pb p{font-size:15px;color:rgba(250,247,242,.75);margin:0 0 16px;line-height:1.75;}
+.pb-meta{display:flex;gap:28px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap;}
+.pb-meta-item label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,247,242,.4);display:block;margin-bottom:3px;}
+.pb-meta-item span{font-size:13px;color:var(--paper);font-weight:500;}
+.kt{background:var(--ink);color:var(--paper);padding:32px;border-radius:12px;margin:40px 0;}
+.kt h4{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mod);margin-bottom:18px;font-weight:500;}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+.tn{font-family:'DM Mono',monospace;font-size:13px;color:#93c5fd;margin-bottom:3px;font-weight:500;}
+.td{font-size:13px;color:rgba(250,247,242,.7);line-height:1.6;}
+.vu{margin-top:10px;padding:10px 14px;background:rgba(255,255,255,.06);border-radius:6px;border-left:3px solid var(--mod);}
+.vu-label{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:4px;}
+.vu p{font-size:12px;color:rgba(250,247,242,.55);margin:0;font-style:italic;line-height:1.6;}
+.ex{background:var(--cream);border:1px solid var(--rule);border-radius:12px;padding:32px;margin:40px 0;}
+.exh{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.exb{background:var(--mod);color:white;font-size:10px;letter-spacing:.15em;text-transform:uppercase;padding:6px 14px;border-radius:100px;font-weight:500;flex-shrink:0;}
+.ex h4{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;}
+.ex ol{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.ex ol li{font-size:15px;line-height:1.7;padding-left:5px;}
+.tt{font-size:12px;color:var(--mid);font-family:'DM Mono',monospace;margin-top:16px;display:inline-block;}
+.brief{border:2px solid var(--mod);border-radius:12px;overflow:hidden;margin:40px 0;}
+.brief-head{background:var(--mod);color:white;padding:18px 26px;}
+.brief-head .bl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;opacity:.75;margin-bottom:6px;}
+.brief-head h4{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;margin:0;}
+.brief-body{padding:28px 26px;background:white;}
+.brief-section{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--rule);}
+.brief-section:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.brief-section-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:8px;}
+.brief-section p{font-size:15px;margin:0;line-height:1.7;color:#2a2218;}
+.brief-section ul{padding-left:18px;display:flex;flex-direction:column;gap:6px;}
+.brief-section ul li{font-size:15px;line-height:1.6;color:#2a2218;}
+.brief-deliverable{background:var(--ml);border-radius:8px;padding:16px 18px;margin-top:14px;}
+.brief-deliverable p{font-size:14px;font-weight:600;color:var(--mod);margin:0;}
+.div{height:1px;background:var(--rule);margin:40px 0;}
+.rf{border:2px dashed var(--rule);border-radius:12px;padding:30px;margin:40px 0;}
+.rf h4{font-family:'Playfair Display',serif;font-size:17px;margin-bottom:12px;}
+.wl{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+.wln{height:1px;background:var(--rule);}
+.sh{background:var(--ink);color:var(--paper);padding:26px 32px;border-radius:12px;margin-bottom:32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;}
+.sh label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,247,242,.4);display:block;margin-bottom:3px;}
+.sh span{font-size:14px;font-weight:500;}
+.sb{margin-bottom:22px;border-radius:12px;overflow:hidden;border:1px solid var(--rule);}
+.sbh{padding:12px 20px;display:flex;align-items:center;gap:9px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:500;}
+.nh{background:var(--al);color:var(--accent);}
+.oh{background:var(--gl);color:var(--gold);}
+.sbb{padding:20px;background:white;font-size:15px;line-height:1.8;}
+.nt{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;line-height:2;}
+.ot{font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);font-weight:500;}
+.tc2{font-family:'DM Mono',monospace;font-size:11px;color:var(--mid);background:var(--cream);padding:3px 9px;border-radius:4px;margin-left:auto;}
+.wb{background:white;border:1px solid var(--rule);border-radius:12px;padding:48px;margin-bottom:24px;position:relative;box-shadow:0 4px 18px rgba(0,0,0,.04);}
+.wb .pn{position:absolute;bottom:18px;right:24px;font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);}
+.wr{height:1px;background:var(--rule);margin:18px 0;}
+.ab{background:white;border:2px solid var(--ink);border-radius:12px;padding:32px;margin:40px 0;}
+.ab h4{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:18px;font-weight:500;}
+.qi{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--rule);}
+.qi:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.qn{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);margin-bottom:4px;}
+.qt{font-size:15px;margin-bottom:9px;font-weight:500;}
+.qo{display:flex;flex-direction:column;gap:6px;}
+.qop{font-size:14px;color:var(--mid);display:flex;gap:8px;align-items:flex-start;}
+.qop::before{content:'';width:16px;height:16px;border:2px solid var(--rule);border-radius:50%;flex-shrink:0;margin-top:2px;}
+.ak{background:var(--gl);border:1px solid var(--gold);border-radius:7px;padding:14px 18px;margin-top:24px;}
+.ak p{font-size:13px;color:var(--gold);margin:0;}
+.intro-block{background:var(--ink);border-radius:14px;overflow:hidden;margin:40px 0;}
+.intro-head{background:linear-gradient(135deg,#2563eb,#1e40af);padding:22px 28px;}
+.intro-head-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.65);font-weight:600;margin-bottom:6px;}
+.intro-head h4{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:white;margin:0;line-height:1.3;}
+.intro-head p{font-size:14px;color:rgba(255,255,255,.7);margin:8px 0 0;line-height:1.6;}
+.intro-body{padding:28px;}
+.intro-q{margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.08);}
+.intro-q:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.intro-q-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:6px;}
+.intro-q-text{font-size:15px;color:rgba(250,247,242,.85);margin-bottom:10px;line-height:1.7;font-weight:500;}
+.intro-q-note{font-size:13px;color:rgba(250,247,242,.4);font-style:italic;margin-bottom:12px;line-height:1.6;}
+.intro-lines{display:flex;flex-direction:column;gap:13px;}
+.intro-line{height:1px;background:rgba(255,255,255,.12);}
+.compare{width:100%;border-collapse:collapse;margin:28px 0;border-radius:10px;overflow:hidden;border:1px solid var(--rule);}
+.compare th{background:var(--ink);color:var(--paper);padding:14px 18px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;text-align:left;}
+.compare th:first-child{color:var(--mod);}
+.compare td{padding:13px 18px;font-size:14px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.6;}
+.compare tr:last-child td{border-bottom:none;}
+.compare tr:nth-child(even) td{background:rgba(37,99,235,.03);}
+.compare td:first-child{font-weight:600;color:var(--ink);font-family:'DM Mono',monospace;font-size:13px;}
+.can-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0;}
+.can-box{border-radius:10px;overflow:hidden;border:1px solid var(--rule);}
+.can-head{padding:12px 16px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;font-weight:600;}
+.can-head.yes{background:var(--gnl);color:var(--green);}
+.can-head.no{background:var(--al);color:var(--accent);}
+.can-body{padding:16px;background:white;}
+.can-body ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.can-body ul li{font-size:14px;color:var(--mid);line-height:1.5;display:flex;gap:8px;}
+.can-body.yes ul li::before{content:'✓';color:var(--green);font-weight:700;}
+.can-body.no ul li::before{content:'✗';color:var(--accent);font-weight:700;}
+/* HIERARCHY DEMO */
+.hier-demo{display:flex;flex-direction:column;gap:0;margin:28px 0;border:1px solid var(--rule);border-radius:12px;overflow:hidden;}
+.hier-row{display:grid;grid-template-columns:120px 1fr 80px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--rule);background:white;}
+.hier-row:last-child{border-bottom:none;}
+.hier-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);font-weight:600;}
+.hier-example{font-family:'Playfair Display',serif;}
+.hier-spec{font-family:'DM Mono',monospace;font-size:11px;color:var(--mid);text-align:right;}
+/* CHANNEL GRID */
+.channel-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0;}
+.channel-card{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:white;}
+.channel-head{padding:10px 16px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;}
+.channel-body{padding:14px 16px;font-size:14px;color:var(--mid);line-height:1.7;}
+/* PRINCIPLES GRID */
+.principles-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0;}
+.principle-card{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:white;}
+.principle-num{width:40px;height:40px;border-radius:50%;background:var(--mod);color:white;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:14px;font-weight:700;margin:16px 16px 0;}
+.principle-head{padding:8px 16px 0;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;}
+.principle-body{padding:8px 16px 16px;font-size:13px;color:var(--mid);line-height:1.6;}
+/* CASE STUDY */
+.cs{border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin:40px 0;}
+.cs-head{background:var(--cream);padding:14px 22px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);font-weight:600;}
+.cs-body{padding:24px 26px;background:white;}
+.cs-body h4{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin:0 0 12px;}
+.cs-body p{font-size:14px;line-height:1.8;color:#2a2218;margin-bottom:12px;}
+.cs-takeaway{border-left:3px solid var(--gold);background:var(--gl);padding:12px 16px;border-radius:0 6px 6px 0;margin-top:8px;}
+.cs-takeaway p{font-size:13px;font-weight:600;color:var(--ink);margin:0;}
+@media(max-width:700px){
+  nav,.hero,.mbanner{padding-left:24px;padding-right:24px;}
+  .ltabs,.itabs{padding:0 12px;}
+  .wrap{padding:36px 24px;}
+  .tg,.sh,.can-grid,.channel-grid,.principles-grid{grid-template-columns:1fr;}
+  .hero::before{display:none;}
+}
+</style>
+</head>
+<body>
+
+<nav><span class="s">Digital Design &amp; Media Technology</span><span class="sep">·</span><span>Volume 1 — Design Thinking</span><span class="sep">·</span><span>Module 2 — Visual Communication</span></nav>
+
+<div class="mbanner">
+  <div><h2>Module 2 — Visual Communication</h2><p>Lessons 1.4 · 1.5 · 1.6 · 1.7 &nbsp;·&nbsp; How Design Communicates · Audience &amp; Message · Visual Hierarchy · The Five Design Principles</p></div>
+  <div style="font-size:28px;opacity:.6;">👁</div>
+</div>
+
+<div class="ltabs">
+  <button class="ltab active" onclick="showL('l04',this)">L1.4 — How Design Communicates</button>
+  <button class="ltab" onclick="showL('l05',this)">L1.5 — Audience &amp; Message</button>
+  <button class="ltab" onclick="showL('l06',this)">L1.6 — Visual Hierarchy</button>
+  <button class="ltab" onclick="showL('l07',this)">L1.7 — The Five Design Principles</button>
+</div>
+
+
+<!-- ═══════════════════════ LESSON 1.4 ═══════════════════════ -->
+<div id="l04" class="ls active">
+<div class="hero" data-n="1.4">
+  <div class="vt">Volume 1 · Module 2 · Lesson 1.4</div>
+  <h1>How Design <em>Communicates</em></h1>
+  <p class="sub">Design communicates through multiple simultaneous channels — shape, color, type, space, and image — before a single word is read. Understanding how each channel works, and how they interact, is the foundation of making design decisions that achieve their intended effect rather than their accidental one.</p>
+  <div class="mr">
+    <div class="mi"><label>Lesson Type</label><span>Concept + Analysis</span></div>
+    <div class="mi"><label>Duration</label><span>45–55 minutes</span></div>
+    <div class="mi"><label>App</label><span>None — Observation and Analysis</span></div>
+    <div class="mi"><label>Deliverable</label><span>Channel Analysis — three designs</span></div>
+  </div>
+</div>
+<div class="itabs">
+  <button class="itab active" onclick="showI('l04-les',this,'l04')">📖 Lesson</button>
+  <button class="itab" onclick="showI('l04-scr',this,'l04')">🎬 Video Script</button>
+  <button class="itab" onclick="showI('l04-wb',this,'l04')">📄 Workbook</button>
+  <button class="itab" onclick="showI('l04-ass',this,'l04')">✅ Assessment</button>
+</div>
+
+<div id="l04-les" class="tc active"><div class="wrap">
+  <div class="obj"><h4>Learning Objectives — Lesson 1.4</h4><ul class="ol">
+    <li>Identify the five primary visual communication channels — shape, color, typography, space, and image — and describe what each communicates independently</li>
+    <li>Explain how the channels interact to either reinforce or contradict each other — and why alignment between channels is a primary mark of professional design</li>
+    <li>Analyze a real design by isolating and evaluating each channel independently</li>
+    <li>Identify when a communication failure is caused by channel contradiction — and prescribe a specific correction</li>
+    <li>Apply the "strip test" to evaluate whether a design communicates its message without its most prominent channel</li>
+  </ul></div>
+
+  <div class="pb">
+    <div class="pb-label">The Problem</div>
+    <h3>The copy says "premium luxury brand." The font is Comic Sans. The color is neon green. The layout is cramped and cluttered. Each channel is telling the audience something different — and none of them are saying "premium."</h3>
+    <p>Design that contradicts itself across communication channels is one of the most common and most damaging problems in visual communication. The words say one thing, the type says another, the color says something else entirely. The viewer's subconscious receives all of these signals simultaneously — and trusts the visual channels over the verbal ones almost every time. A luxury brand with the wrong typeface isn't a luxury brand. The visual language overrides the text. This lesson teaches you to identify the five channels, understand what each one communicates, and ensure they all point in the same direction.</p>
+    <div class="pb-meta">
+      <div class="pb-meta-item"><label>Context</label><span>Any multi-element design</span></div>
+      <div class="pb-meta-item"><label>Constraint</label><span>Visual channels override verbal ones</span></div>
+      <div class="pb-meta-item"><label>Skill This Lesson Builds</label><span>Channel analysis, contradiction identification</span></div>
+    </div>
+  </div>
+
+  <div class="sl">Introduction</div>
+  <h2>Five Channels, Firing Simultaneously</h2>
+  <p>When a viewer looks at a design, they receive information through five simultaneous channels — and they process all five before they have consciously read a single word. Shape communicates structure, personality, and expectation. Color communicates emotion, temperature, and category. Typography communicates tone, authority, and era. Space communicates quality, confidence, and breathing room. Image communicates story, context, and aspiration. The message a viewer takes away from a design is the aggregate of all five channels working together — or fighting each other.</p>
+  <p>The designer's job is not to control any single channel — it is to ensure all five channels are saying the same thing. When they align, the communication is effortless and trusted. When they contradict, the viewer feels cognitive dissonance — a subtle, often unconscious unease that undermines trust without them knowing why.</p>
+
+  <div class="cb mod"><div class="cl">Core Idea</div><p>Design communicates through five simultaneous channels: shape, color, typography, space, and image. The message a viewer receives is the sum of all five — and visual channels override verbal ones. A design that contradicts itself across channels is not just aesthetically inconsistent — it is actively confusing to its audience at a subconscious level.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 1</div>
+  <h2>The Five Communication Channels</h2>
+
+  <div class="channel-grid">
+    <div class="channel-card">
+      <div class="channel-head" style="background:var(--ml);color:var(--mod);">Shape &amp; Form</div>
+      <div class="channel-body">Sharp angles communicate precision, aggression, and modernity. Rounded forms communicate approachability, warmth, and safety. Organic, irregular shapes communicate naturalness and authenticity. Every container, every icon, every design element has a shape — and that shape is communicating something about the brand before the viewer identifies what the shape represents.</div>
+    </div>
+    <div class="channel-card">
+      <div class="channel-head" style="background:#fef3c7;color:var(--gold);">Color</div>
+      <div class="channel-body">Color is the fastest-acting channel — processed before shape, type, or image. It establishes emotional tone, signals category, and creates immediate psychological response. A healthcare brand in red and a healthcare brand in blue are communicating opposite things before the name is read. (Module 5 covers color in depth — this lesson establishes its role as a channel.)</div>
+    </div>
+    <div class="channel-card">
+      <div class="channel-head" style="background:var(--gnl);color:var(--green);">Typography</div>
+      <div class="channel-body">The typeface communicates tone, era, and authority before the words are processed. A serif typeface signals tradition, authority, and established credibility. A sans-serif signals modernity, clarity, and accessibility. A script signals personality, femininity, or formality. The words and the typeface must agree — a mismatch between message and type destroys the communication.</div>
+    </div>
+    <div class="channel-card">
+      <div class="channel-head" style="background:var(--al);color:var(--accent);">Space</div>
+      <div class="channel-body">Empty space — white space, negative space, breathing room — communicates confidence, quality, and sophistication. Premium brands use generous space. Crowded layouts communicate urgency, value-focus, or visual noise. Space is not absence — it is a design element that carries as much communicative weight as any element placed within it.</div>
+    </div>
+    <div class="channel-card" style="grid-column:1/-1;">
+      <div class="channel-head" style="background:var(--ink);color:white;">Image</div>
+      <div class="channel-body">Photography, illustration, and iconography communicate story, context, aspiration, and audience alignment. The people in an image tell the viewer who the brand is for. The setting tells them what world the brand inhabits. The emotion in the image tells them how the brand wants them to feel. Images tell stories whether the designer intends them to or not — choosing images is one of the most consequential communicative decisions in any design project. (Module 6 covers image selection in depth.)</div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+  <div class="sl">Section 2</div>
+  <h2>Channel Alignment — When Design Works</h2>
+  <p>A design achieves powerful communication when all five channels are saying the same thing. Consider a premium financial services brand: sharp, precise geometric shapes signal exactness. Deep navy blue signals trust and authority. A classic serif typeface signals longevity and establishment. Generous white space signals confidence and quality. Photography showing competent professionals in authentic environments signals reliability and expertise. Every channel is reinforcing the same message: <em>we are trustworthy, we are established, we are expert.</em></p>
+  <p>Now consider the same financial services brand with one channel out of alignment: replace the serif with a playful rounded sans-serif. Immediately, the brand feels less serious — less trustworthy — even though nothing else has changed. The viewer can't identify why. They just feel slightly less confident. That is channel contradiction at work.</p>
+
+  <div class="cb gold"><div class="cl">The Strip Test</div><p>Remove the most prominent channel from a design — usually the headline text. Does the remaining design still communicate the intended message? If yes, the visual channels are carrying their weight. If removing the text destroys the communication, the visual channels are not doing their job — the design is relying on words to say what the visuals should be showing.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 3</div>
+  <h2>Channel Contradiction — When Design Fails</h2>
+  <p>Channel contradiction is the silent killer of design effectiveness. It usually doesn't make a design look obviously wrong — it just makes it feel slightly off. The viewer senses inconsistency without being able to name it, and that inconsistency undermines the trust the design was trying to build.</p>
+
+  <table class="compare">
+    <thead><tr><th>The Message</th><th>Channel Contradiction</th><th>Effect on Viewer</th></tr></thead>
+    <tbody>
+      <tr><td>"Premium luxury"</td><td>Playful rounded typeface + bright primary colors</td><td>Cognitive dissonance — the claim is undermined by the visual language</td></tr>
+      <tr><td>"Friendly and approachable"</td><td>All black color scheme + aggressive angular shapes</td><td>Brand feels cold and intimidating despite verbal claims of warmth</td></tr>
+      <tr><td>"Environmental sustainability"</td><td>Photography of factories, no green or earth tones</td><td>Visual evidence contradicts verbal claim — viewer loses trust</td></tr>
+      <tr><td>"Innovation and technology"</td><td>Heavy serif type + cluttered crowded layout</td><td>Feels traditional and dated — visual language contradicts claimed positioning</td></tr>
+      <tr><td>"Trustworthy and safe"</td><td>Neon color palette + aggressive promotional tone</td><td>Feels pushy and untrustworthy — exactly opposite of intended communication</td></tr>
+    </tbody>
+  </table>
+
+  <div class="kt"><h4>Key Vocabulary — Lesson 1.4</h4><div class="tg">
+    <div><div class="tn">Communication Channel</div><div class="td">One of the five simultaneous visual channels through which design communicates: shape, color, typography, space, and image.</div><div class="vu"><div class="vu-label">In Use</div><p>"Walk through the channels one by one. What is the color communicating? What is the type communicating? Do they agree?"</p></div></div>
+    <div><div class="tn">Channel Alignment</div><div class="td">The condition in which all five visual channels are communicating the same message — producing effortless, trusted communication.</div><div class="vu"><div class="vu-label">In Use</div><p>"This design has channel alignment — every element is saying the same thing. That's why it feels so confident and clear."</p></div></div>
+    <div><div class="tn">Channel Contradiction</div><div class="td">The condition in which two or more channels are communicating incompatible messages — producing cognitive dissonance in the viewer.</div><div class="vu"><div class="vu-label">In Use</div><p>"The problem is channel contradiction — the words say luxury but the typeface says casual. Pick one and make every channel say it."</p></div></div>
+    <div><div class="tn">White Space</div><div class="td">Empty areas in a composition — not absence but active communicative choice. Generous white space signals quality, confidence, and sophistication.</div><div class="vu"><div class="vu-label">In Use</div><p>"Double the margins and remove half the elements. Watch how the design immediately reads as more premium — the space is doing the communicating."</p></div></div>
+    <div><div class="tn">The Strip Test</div><div class="td">A design evaluation method: remove the headline text and ask whether the visual channels still communicate the intended message.</div><div class="vu"><div class="vu-label">In Use</div><p>"Strip the text. Does the design still say 'premium healthcare'? If not, the visuals aren't carrying their weight."</p></div></div>
+    <div><div class="tn">Visual Language</div><div class="td">The consistent system of visual choices — shapes, colors, type, space, image — that defines how a brand communicates across all touchpoints.</div><div class="vu"><div class="vu-label">In Use</div><p>"Before making any design decisions, define the visual language. Every choice that follows must speak that language consistently."</p></div></div>
+  </div></div>
+
+  <div class="brief">
+    <div class="brief-head">
+      <div class="bl">Design Brief — Lesson 1.4</div>
+      <h4>Channel Analysis: Reading Three Designs</h4>
+    </div>
+    <div class="brief-body">
+      <div class="brief-section">
+        <div class="brief-section-label">The Problem</div>
+        <p>You cannot fix channel contradiction until you can see it — and you cannot see it until you know what each channel is saying independently. This exercise builds the ability to isolate and read each channel, making channel alignment and contradiction visible rather than felt.</p>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">The Constraints</div>
+        <ul>
+          <li>Gather three real designs — one that feels highly effective, one that feels unclear or contradictory, one that is plain but functional</li>
+          <li>For each design, analyze every channel independently: what is each one communicating? Use specific descriptive language — not "it looks nice" but "the rounded corners signal approachability"</li>
+          <li>Identify whether the channels are aligned or contradictory in each design</li>
+          <li>Apply the Strip Test to each: what happens when you mentally remove the headline text?</li>
+          <li>For the contradictory design: prescribe one specific change to one channel that would improve alignment</li>
+        </ul>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">Your Deliverable</div>
+        <div class="brief-deliverable"><p>Three channel analyses with independent evaluation of all five channels, alignment or contradiction verdict, Strip Test result, and one specific correction for the contradictory example.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rf"><h4>Journal Reflection — Lesson 1.4</h4>
+    <p style="font-size:15px;font-style:italic;">Look at your phone, your clothing, the room you're in. Pick one object with visual design — a product, a label, a surface. Analyze its five communication channels independently. Do they all say the same thing? Is there alignment or contradiction? What is the designer telling you — and what are they accidentally telling you?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+  </div>
+</div></div>
+
+<!-- VIDEO SCRIPT 1.4 -->
+<div id="l04-scr" class="tc"><div class="wrap">
+  <div class="sl">Concept Video Script — Lesson 1.4</div>
+  <h2>Five Channels, One Message</h2>
+  <p style="color:var(--mid);margin-bottom:28px;font-size:14px;">Channel alignment and contradiction — demonstration with real design examples</p>
+  <div class="sh">
+    <div><label>Video Type</label><span>Concept / Channel Analysis</span></div>
+    <div><label>Target Length</label><span>4:30 – 5:00 minutes</span></div>
+    <div><label>Key Visual</label><span>Channel isolation animation on real designs</span></div>
+    <div><label>Music Tone</label><span>Analytical, curious, building understanding</span></div>
+    <div><label>Production</label><span>After Effects channel overlay animation</span></div>
+    <div><label>Narration</label><span>ElevenLabs or AI Avatar</span></div>
+  </div>
+  <h3>OPENING</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:00–0:42</span></div><div class="sbb nt">Before you read the first word on this label, you already know whether this is a premium product or a budget one. You know whether it's for you or not for you. You know whether to trust it. How? Five simultaneous channels fired before your conscious mind caught up. Shape, color, typography, space, and image — each one communicating something distinct, all of them arriving at once. Today you are going to learn what each channel is saying — and how to make sure they all say the same thing.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Premium product label shown — viewer response question ]
+[ Five channel labels animate in simultaneously ]
+[ Title: "Lesson 1.4 — How Design Communicates" ]</div></div>
+  <h3>SEGMENT 1 — The Five Channels</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:43–2:15</span></div><div class="sbb nt">Shape: sharp angles mean precision and modernity. Rounded forms mean approachability and warmth. Organic shapes mean naturalness. Color: the fastest channel — emotional tone established before anything else is processed. Typography: your typeface communicates era, authority, and personality before the words are read. Space: generous white space communicates confidence and quality. Cramped layouts communicate urgency or budget constraints. And image: photographs tell the viewer who this brand is for, what world it inhabits, and how it wants them to feel. Five channels. Firing simultaneously. And the viewer's brain is averaging them all.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Each channel isolated and labeled on a design ]
+[ Animation: channels firing → viewer response ]
+[ Serif vs. sans-serif type comparison on same design ]</div></div>
+  <h3>SEGMENT 2 — Contradiction + Exercise</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">2:16–4:30</span></div><div class="sbb nt">Here is a financial services brand. Deep navy, classic serif, generous white space, precise geometric shapes, photography of confident professionals. Every channel says: trustworthy, established, expert. Now I change one thing — replace the serif with a rounded playful sans-serif. Immediately something feels wrong. The viewer can't name it. They just feel slightly less confident. That is channel contradiction. The typeface is saying "friendly and casual" while every other channel says "serious and authoritative." For your exercise, analyze three real designs across all five channels. Find the one with channel contradiction. Apply the Strip Test. Prescribe one specific fix. See you in Lesson 1.5.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Financial brand with serif — aligned ]
+[ Same brand with rounded sans — contradiction visible ]
+[ Strip Test animated: text removed → channels visible alone ]
+[ Exercise card: "Exercise 1.4 — Channel Analysis" ]
+[ "Next: Lesson 1.5 — Audience &amp; Message" ]</div></div>
+</div></div>
+
+<!-- WORKBOOK 1.4 -->
+<div id="l04-wb" class="tc"><div class="wrap">
+  <div class="wb">
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:6px;font-weight:500;">Volume 1 · Module 2 · Lesson 1.4</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:4px;">How Design Communicates</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:20px;">Channel Analysis — Five Channels, Three Designs</div>
+    <div class="wr"></div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;">
+        <div style="background:var(--mod);color:white;padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Design 1 — Effective</div>
+        <div style="padding:14px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+            <div><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Shape communicates:</p><div class="wln"></div></div>
+            <div><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Color communicates:</p><div class="wln"></div></div>
+            <div><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Typography communicates:</p><div class="wln"></div></div>
+            <div><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Space communicates:</p><div class="wln"></div></div>
+          </div>
+          <p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Image communicates:</p><div class="wln"></div>
+          <p style="font-size:11px;color:var(--mod);font-weight:600;margin:10px 0 4px;">Aligned or contradictory? Strip Test result:</p><div class="wl"><div class="wln"></div><div class="wln"></div></div>
+        </div>
+      </div>
+      <div style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;">
+        <div style="background:var(--accent);color:white;padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Design 2 — Contradictory</div>
+        <div style="padding:14px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+            <div><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Shape communicates:</p><div class="wln"></div></div>
+            <div><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Color communicates:</p><div class="wln"></div></div>
+            <div><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Typography communicates:</p><div class="wln"></div></div>
+            <div><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Space communicates:</p><div class="wln"></div></div>
+          </div>
+          <p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Contradiction identified:</p><div class="wln"></div>
+          <p style="font-size:11px;color:var(--accent);font-weight:600;margin:10px 0 4px;">One specific change to improve alignment:</p><div class="wl"><div class="wln"></div><div class="wln"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="pn">Digital Design &amp; Media Technology · Volume 1 · Page 4</div>
+  </div>
+</div></div>
+
+<!-- ASSESSMENT 1.4 -->
+<div id="l04-ass" class="tc"><div class="wrap">
+  <div class="sl">Lesson 1.4 Assessment</div>
+  <h2>How Design Communicates — Knowledge Check</h2>
+  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
+    <div class="qi"><div class="qn">Q01</div><div class="qt">When a design's visual channels and verbal message contradict each other, viewers typically:</div><div class="qo">
+      <div class="qop">Trust the verbal message over the visual channels</div>
+      <div class="qop">Experience cognitive dissonance — trusting the visual channels over the verbal ones and feeling subtle unease without knowing why</div>
+      <div class="qop">Ignore both channels and make a random decision</div>
+      <div class="qop">Consciously identify the contradiction and adjust their interpretation accordingly</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q02</div><div class="qt">White space in a design primarily communicates:</div><div class="qo">
+      <div class="qop">That the designer ran out of content to fill the available area</div>
+      <div class="qop">That the design is incomplete and needs additional elements</div>
+      <div class="qop">Confidence, quality, and sophistication — premium brands use generous space deliberately</div>
+      <div class="qop">That the target audience prefers minimalist aesthetics</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q03</div><div class="qt">The Strip Test evaluates whether:</div><div class="qo">
+      <div class="qop">The design passes WCAG accessibility standards for contrast</div>
+      <div class="qop">The visual channels alone communicate the intended message — without relying on headline text</div>
+      <div class="qop">All decorative elements have been removed from the layout</div>
+      <div class="qop">The design renders correctly when printed in black and white</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q04</div><div class="qt">A sustainable food brand uses photography of factory production lines and no green tones. This is a failure of:</div><div class="qo">
+      <div class="qop">Technical quality — the images are low resolution</div>
+      <div class="qop">Visual hierarchy — the most important element is not dominant</div>
+      <div class="qop">Channel alignment — the image and color channels contradict the verbal sustainability claim</div>
+      <div class="qop">Audience alignment — the images do not reflect the target demographic</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q05</div><div class="qt">Which channel communicates fastest — before shape, type, or image is consciously processed?</div><div class="qo">
+      <div class="qop">Typography — the typeface establishes tone before the words are read</div>
+      <div class="qop">Shape — humans are wired to recognize form before anything else</div>
+      <div class="qop">Color — processed at the neurological level before conscious recognition</div>
+      <div class="qop">Space — the arrangement of elements arrives before any individual element</div>
+    </div></div>
+    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-C &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-C &nbsp;·&nbsp; 5-C</p></div>
+  </div>
+  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
+    <div class="qi"><div class="qn">Q06</div><div class="qt">From your Channel Analysis exercise: describe the most significant channel contradiction you found. What was each contradicting channel communicating, and what was the effect on the overall design?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q07</div><div class="qt">Apply the Strip Test to a design you know well — remove the text and describe what the visual channels communicate on their own. Does the design pass or fail the test?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q08</div><div class="qt">A client wants a "friendly, approachable, community-focused" nonprofit but has requested a stark all-black color scheme and aggressive angular typography because they "look sophisticated." How do you respond — using channel theory?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+  </div>
+</div></div>
+</div><!-- end l04 -->
+
+
+<!-- ═══════════════════════ LESSON 1.5 ═══════════════════════ -->
+<div id="l05" class="ls">
+<div class="hero" data-n="1.5">
+  <div class="vt">Volume 1 · Module 2 · Lesson 1.5</div>
+  <h1>Audience <em>&amp; Message</em></h1>
+  <p class="sub">The most technically accomplished design in the world fails if it communicates to the wrong audience or communicates the wrong message. Before a designer touches any tool, two questions must be answered with precision: Who is this for? What must they understand, feel, or do? Everything follows from those answers — and this lesson teaches you to find them.</p>
+  <div class="mr">
+    <div class="mi"><label>Lesson Type</label><span>Strategy + Framework</span></div>
+    <div class="mi"><label>Duration</label><span>45–55 minutes</span></div>
+    <div class="mi"><label>App</label><span>None — Strategy and Writing</span></div>
+    <div class="mi"><label>Deliverable</label><span>Audience Profile + One-Sentence Message</span></div>
+  </div>
+</div>
+<div class="itabs">
+  <button class="itab active" onclick="showI('l05-les',this,'l05')">📖 Lesson</button>
+  <button class="itab" onclick="showI('l05-scr',this,'l05')">🎬 Video Script</button>
+  <button class="itab" onclick="showI('l05-wb',this,'l05')">📄 Workbook</button>
+  <button class="itab" onclick="showI('l05-ass',this,'l05')">✅ Assessment</button>
+</div>
+
+<div id="l05-les" class="tc active"><div class="wrap">
+  <div class="obj"><h4>Learning Objectives — Lesson 1.5</h4><ul class="ol">
+    <li>Build a detailed audience profile using the five dimensions: demographics, psychographics, visual vocabulary, context of encounter, and prior knowledge</li>
+    <li>Distill a complex design objective into a single, complete, testable one-sentence message statement</li>
+    <li>Explain why "everyone" is not a valid audience definition — and what it costs a design to try to speak to everyone</li>
+    <li>Apply audience understanding to make specific, justified visual decisions about color, type, space, and image</li>
+    <li>Evaluate whether a completed design serves its defined audience — and identify the most critical point of misalignment</li>
+  </ul></div>
+
+  <div class="pb">
+    <div class="pb-label">The Problem</div>
+    <h3>The client says the audience is "everyone ages 18–65 who might be interested." You have designed for no one. The design is generic, inoffensive, and invisible — because it was trying to include every possible viewer rather than speak clearly to one specific person.</h3>
+    <p>Designing for "everyone" is the surest path to a design that resonates with no one. Every visual decision that would make the design compelling to one specific audience — specific color, specific type tone, specific imagery, specific language level — risks alienating part of the undefined "everyone." The result is a design stripped of all the specific visual choices that create resonance, because every specific choice was vetoed by the imaginary viewer it might exclude. Audience definition is the first act of design. This lesson teaches you to do it with precision.</p>
+    <div class="pb-meta">
+      <div class="pb-meta-item"><label>Context</label><span>Every design project before any visual work begins</span></div>
+      <div class="pb-meta-item"><label>Constraint</label><span>Specificity creates resonance; generality creates invisibility</span></div>
+      <div class="pb-meta-item"><label>Skill This Lesson Builds</label><span>Audience profiling, message distillation</span></div>
+    </div>
+  </div>
+
+  <div class="sl">Introduction</div>
+  <h2>Design Is a Conversation — Know Who You're Talking To</h2>
+  <p>In Lesson 1.4 you learned that design communicates through five simultaneous channels. But communication is only successful when it is understood by a specific receiver — and different receivers decode visual language differently. A color that communicates authority to a 55-year-old corporate executive communicates exclusion to a 22-year-old first-generation immigrant. A typeface that feels cutting-edge and sophisticated to a design-literate audience feels cold and alienating to an audience who primarily reads news sites and grocery packaging.</p>
+  <p>The five visual channels don't exist in absolute terms — they exist in relation to a receiver. Defining that receiver precisely — knowing who they are, what they already know, what they fear, what they aspire to, and what visual language they instinctively trust — is the prerequisite for using those channels intentionally.</p>
+
+  <div class="cb mod"><div class="cl">Core Idea</div><p>You are not the audience. No matter how much you have in common with the people this design is for, your personal aesthetic preferences, your design literacy, and your emotional relationship to the subject are different from theirs. The professional discipline of audience definition is the practice of setting aside your own perspective and genuinely inhabiting theirs.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 1</div>
+  <h2>The Five Dimensions of Audience Definition</h2>
+
+  <table class="compare">
+    <thead><tr><th>Dimension</th><th>Questions to Answer</th><th>Why It Matters for Design</th></tr></thead>
+    <tbody>
+      <tr><td>Demographics</td><td>Age range, gender, income, education, location, occupation</td><td>Determines reading level, cultural references, media context</td></tr>
+      <tr><td>Psychographics</td><td>Values, beliefs, fears, aspirations, lifestyle, attitudes</td><td>Determines emotional tone, aspirational imagery, message framing</td></tr>
+      <tr><td>Visual Vocabulary</td><td>What design language do they encounter and trust? What feels familiar? What feels foreign?</td><td>Determines appropriate color, typeface, imagery style, and complexity level</td></tr>
+      <tr><td>Context of Encounter</td><td>Where will they see this design? How much time do they have? What are they doing before and after?</td><td>Determines required reading speed, size, contrast, and information hierarchy</td></tr>
+      <tr><td>Prior Knowledge</td><td>What do they already know about this brand, category, or subject? What assumptions will they bring?</td><td>Determines what needs to be explained, what can be assumed, what might create unexpected associations</td></tr>
+    </tbody>
+  </table>
+
+  <div class="div"></div>
+  <div class="sl">Section 2</div>
+  <h2>The One-Sentence Message Statement</h2>
+  <p>Once the audience is defined, the message must be distilled to a single, testable statement. Not a list of things the design should communicate. One thing. The one thing that, if the audience understands or feels it, the design has succeeded.</p>
+  <p>The format: <strong>"After seeing this design, [specific audience] should [feel/understand/do] [specific outcome]."</strong></p>
+  <p>This statement is not a tagline. It is not copywriting. It is the internal design standard against which every visual decision will be evaluated. If a design element serves this statement, it stays. If it doesn't, it goes. The discipline of holding to one message statement is the most powerful editing tool a designer has.</p>
+
+  <div class="cb gold"><div class="cl">One Message Statement Examples</div>
+    <p>"After seeing this poster, university students should feel that attending this design lecture is worth giving up an evening for — because it will make them significantly more professionally competitive."<br><br>
+    "After seeing this product packaging, health-conscious adults aged 35–50 should trust that this protein supplement is clinically credible and not associated with gym-bro culture."<br><br>
+    Notice how specific these are. The more specific the statement, the more useful it is as an evaluation standard.</p>
+  </div>
+
+  <div class="div"></div>
+  <div class="sl">Section 3</div>
+  <h2>Audience Definition Changes Every Visual Decision</h2>
+
+  <div class="cs">
+    <div class="cs-head">Case Study — Same Product, Two Audiences, Two Entirely Different Designs</div>
+    <div class="cs-body">
+      <h4>How Audience Determines Visual Language</h4>
+      <p>Consider a vitamin supplement brand launching two product lines simultaneously. Product A targets competitive athletes aged 18–30. Product B targets adults over 55 managing chronic fatigue. The active ingredient is identical. The clinical science is the same. But the audience definitions are completely different — and those definitions should produce completely different visual designs.</p>
+      <p>Product A: high saturation, performance imagery, bold sans-serif type, dynamic diagonal composition, language of optimization and achievement. The visual vocabulary speaks directly to a demographic that trusts aggressive performance branding. Product B: muted tones, warm clinical photography showing genuine human moments, authoritative serif or clean sans-serif, generous space, language of care and credibility. The visual vocabulary speaks to an audience that trusts gentle, considered, clinical presentation over aggressive performance claims.</p>
+      <p>The same formula. Completely different designs. Both are correct — for their specific audience.</p>
+      <div class="cs-takeaway"><p>Audience definition is the first creative act of design. Every visual decision that follows is justified or unjustified by reference to the defined audience and their specific visual language, values, and needs.</p></div>
+    </div>
+  </div>
+
+  <div class="kt"><h4>Key Vocabulary — Lesson 1.5</h4><div class="tg">
+    <div><div class="tn">Audience Profile</div><div class="td">A detailed description of the specific person for whom a design is created — covering demographics, psychographics, visual vocabulary, context, and prior knowledge.</div><div class="vu"><div class="vu-label">In Use</div><p>"Build the audience profile before you open any software. If I ask who this is for and you say 'everyone,' we start over."</p></div></div>
+    <div><div class="tn">Psychographics</div><div class="td">The values, beliefs, fears, aspirations, and attitudes of an audience — the emotional and motivational layer beneath demographic facts.</div><div class="vu"><div class="vu-label">In Use</div><p>"Demographics tell us they're 35–50. Psychographics tell us they're anxious about aging and deeply motivated by maintaining independence. That changes everything."</p></div></div>
+    <div><div class="tn">Message Statement</div><div class="td">A single testable sentence defining what the specific audience should feel, understand, or do after experiencing the design — the internal evaluation standard.</div><div class="vu"><div class="vu-label">In Use</div><p>"Write the message statement before any visual work. One sentence. If you have three things on the list, you don't have a message yet."</p></div></div>
+    <div><div class="tn">Visual Vocabulary</div><div class="td">The design language an audience encounters regularly and instinctively trusts — shapes, colors, and type treatments that feel native to their world.</div><div class="vu"><div class="vu-label">In Use</div><p>"What is the visual vocabulary of this audience? What does their grocery packaging look like? Their phone apps? Their magazines? Start there."</p></div></div>
+    <div><div class="tn">Context of Encounter</div><div class="td">Where, when, and how the audience will experience the design — determining required reading speed, contrast, size, and hierarchy.</div><div class="vu"><div class="vu-label">In Use</div><p>"The context of encounter is a moving subway car. The viewer has three seconds. Every design decision must serve legibility at speed — not elegance at leisure."</p></div></div>
+    <div><div class="tn">Specificity</div><div class="td">The quality of targeting a precise, well-defined audience — the property that creates resonance rather than generic inoffensiveness.</div><div class="vu"><div class="vu-label">In Use</div><p>"Be more specific. Not 'women interested in health' — but 'women 40–55 who have recently started taking their own health seriously after a health scare in the family.'"</p></div></div>
+  </div></div>
+
+  <div class="brief">
+    <div class="brief-head">
+      <div class="bl">Design Brief — Lesson 1.5</div>
+      <h4>Audience Profile + One-Sentence Message: Building the Foundation</h4>
+    </div>
+    <div class="brief-body">
+      <div class="brief-section">
+        <div class="brief-section-label">The Problem</div>
+        <p>You cannot make a justified visual design decision until you know who you are designing for and what single thing they must take away. This exercise forces both of those definitions into precise, written form — before any visual work begins.</p>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">The Constraints</div>
+        <ul>
+          <li>Choose a real or fictional design scenario: a nonprofit seeking donations, a product launching to a new market, a school event requiring a poster, a local business redesigning its brand</li>
+          <li>Build a complete audience profile using all five dimensions: demographics, psychographics, visual vocabulary, context of encounter, and prior knowledge</li>
+          <li>Write three candidate one-sentence message statements — then select the best one and explain why it is better than the others</li>
+          <li>Based on your audience profile and message statement, write five specific visual decisions: what color palette, what type tone, what image style, what space treatment, and what composition approach serves this audience and message</li>
+          <li>Exchange your profile with a partner and evaluate: is the audience specific enough? Is the message testable?</li>
+        </ul>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">Your Deliverable</div>
+        <div class="brief-deliverable"><p>Complete audience profile (all five dimensions) + three message statement candidates + selected statement with rationale + five specific visual decisions justified by the audience profile and message.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rf"><h4>Journal Reflection — Lesson 1.5</h4>
+    <p style="font-size:15px;font-style:italic;">Think of a design you encountered recently that felt like it was made for someone other than you — where you sensed "this is not for me." What specific visual choices produced that feeling? Now think of a design that felt made exactly for you. What was different? What does the contrast between those two experiences reveal about the power of specific audience definition?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+  </div>
+</div></div>
+
+<!-- VIDEO SCRIPT 1.5 -->
+<div id="l05-scr" class="tc"><div class="wrap">
+  <div class="sl">Concept Video Script — Lesson 1.5</div>
+  <h2>Audience &amp; Message — The Foundation of Every Decision</h2>
+  <p style="color:var(--mid);margin-bottom:28px;font-size:14px;">Audience profiling framework + message statement construction</p>
+  <div class="sh">
+    <div><label>Video Type</label><span>Concept / Strategy Framework</span></div>
+    <div><label>Target Length</label><span>4:30 – 5:00 minutes</span></div>
+    <div><label>Key Visual</label><span>Same product — two audience profiles — two completely different designs</span></div>
+    <div><label>Music Tone</label><span>Strategic, focused, decision-quality</span></div>
+    <div><label>Production</label><span>Synthesia + After Effects</span></div>
+    <div><label>Narration</label><span>ElevenLabs or AI Avatar</span></div>
+  </div>
+  <h3>OPENING</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:00–0:45</span></div><div class="sbb nt">The client says the audience is "everyone aged 18 to 65 who might be interested." You have just been asked to design for no one. Designing for "everyone" is the fastest path to a design that resonates with no one — because every visual decision that would make the design speak powerfully to a specific person risks alienating part of the undefined "everyone." The result is a design stripped of every specific choice that creates resonance. Audience definition is the first act of design. Before the brief is written. Before the software is opened. Before the color is chosen. Today you are going to learn how to do it with precision.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ "Target audience: everyone 18–65" → design that says nothing ]
+[ Title: "Lesson 1.5 — Audience &amp; Message" ]</div></div>
+  <h3>SEGMENT 1 — Five Dimensions</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:46–2:20</span></div><div class="sbb nt">Five dimensions. Demographics: the observable facts — age, gender, income, education, location. Psychographics: the motivational layer — values, fears, aspirations, beliefs. Visual vocabulary: what design language do they encounter and trust? What do their grocery packages look like? Their phone apps? Their magazines? Context of encounter: where will they see this? A moving subway car? A doctor's waiting room? A 3am Instagram scroll? Prior knowledge: what do they already know? What assumptions are they bringing? Each dimension produces specific design decisions. Demographics tells you reading level. Psychographics tells you emotional tone. Visual vocabulary tells you which typeface feels trustworthy vs. foreign. Context tells you how much time they have. Prior knowledge tells you what needs explaining and what can be assumed.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Five dimension framework builds on screen ]
+[ Example: "women 40–55 recovering from family health scare" — five dimensions filled in ]
+[ Visual decisions emerging from each dimension ]</div></div>
+  <h3>SEGMENT 2 — Message Statement + Exercise</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">2:21–4:30</span></div><div class="sbb nt">Once the audience is defined, distill the message to one sentence: "After seeing this design, [audience] should [feel/understand/do] [outcome]." Not three things. One. The more specific, the more useful. Here is an example: "After seeing this packaging, health-conscious adults aged 35–50 should trust that this supplement is clinically credible and not associated with gym-bro culture." Every visual decision you make is evaluated against that sentence. Element serves the statement — it stays. Element contradicts it or is neutral to it — it goes. For your exercise: build a complete audience profile. Write three message statement candidates. Choose one. Then write five specific visual decisions that the profile and statement produce. See you in Lesson 1.6.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Message statement formula shown ]
+[ Two example statements — specific vs. vague comparison ]
+[ Exercise card: "Exercise 1.5 — Audience Profile + Message Statement" ]
+[ "Next: Lesson 1.6 — Visual Hierarchy" ]</div></div>
+</div></div>
+
+<!-- WORKBOOK 1.5 -->
+<div id="l05-wb" class="tc"><div class="wrap">
+  <div class="wb">
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:6px;font-weight:500;">Volume 1 · Module 2 · Lesson 1.5</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:4px;">Audience &amp; Message</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:20px;">Complete Audience Profile + Message Statement</div>
+    <div class="wr"></div>
+    <p style="font-size:12px;color:var(--mid);margin-bottom:14px;">Design scenario: <span style="border-bottom:1px solid var(--rule);display:inline-block;min-width:360px;">&nbsp;</span></p>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:12px;"><p style="font-size:10px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Demographics — age, gender, income, location, education:</p><div class="wl"><div class="wln"></div><div class="wln"></div></div></div>
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:12px;"><p style="font-size:10px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Psychographics — values, fears, aspirations, beliefs:</p><div class="wl"><div class="wln"></div><div class="wln"></div></div></div>
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:12px;"><p style="font-size:10px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Visual Vocabulary — what design language do they encounter and trust?</p><div class="wl"><div class="wln"></div><div class="wln"></div></div></div>
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:12px;"><p style="font-size:10px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Context of Encounter — where/when/how will they see this?</p><div class="wln"></div></div>
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:12px;"><p style="font-size:10px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Prior Knowledge — what do they already know or assume?</p><div class="wln"></div></div>
+    </div>
+    <div class="wr"></div>
+    <p style="font-size:13px;font-weight:600;margin-bottom:10px;">Three Message Statement Candidates:</p>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;">
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:10px;"><p style="font-size:10px;color:var(--mid);margin-bottom:4px;">Candidate A:</p><div class="wln"></div></div>
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:10px;"><p style="font-size:10px;color:var(--mid);margin-bottom:4px;">Candidate B:</p><div class="wln"></div></div>
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:10px;"><p style="font-size:10px;color:var(--mid);margin-bottom:4px;">Candidate C:</p><div class="wln"></div></div>
+    </div>
+    <div style="border:2px solid var(--mod);border-radius:8px;padding:14px;">
+      <p style="font-size:11px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Selected Statement + Rationale:</p>
+      <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+    </div>
+    <div class="pn">Digital Design &amp; Media Technology · Volume 1 · Page 5</div>
+  </div>
+</div></div>
+
+<!-- ASSESSMENT 1.5 -->
+<div id="l05-ass" class="tc"><div class="wrap">
+  <div class="sl">Lesson 1.5 Assessment</div>
+  <h2>Audience &amp; Message — Knowledge Check</h2>
+  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
+    <div class="qi"><div class="qn">Q01</div><div class="qt">Why is "everyone aged 18–65 who might be interested" an inadequate audience definition?</div><div class="qo">
+      <div class="qop">It excludes children and seniors who might also be interested</div>
+      <div class="qop">It is too broad to produce any specific visual decisions — designing for "everyone" creates work that resonates with no one</div>
+      <div class="qop">Age ranges are inappropriate for design audience definitions</div>
+      <div class="qop">It requires the designer to create multiple versions of the design</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q02</div><div class="qt">Psychographics, as a dimension of audience definition, covers:</div><div class="qo">
+      <div class="qop">The demographic facts about an audience — age, income, location, and occupation</div>
+      <div class="qop">The visual media an audience encounters and trusts in their daily life</div>
+      <div class="qop">The values, beliefs, fears, aspirations, and attitudes that motivate an audience's behavior and choices</div>
+      <div class="qop">The technical format requirements for delivering design to the audience's devices</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q03</div><div class="qt">A valid one-sentence message statement must be:</div><div class="qo">
+      <div class="qop">Short enough to fit in a tweet and broad enough to cover all possible design applications</div>
+      <div class="qop">Specific enough to be testable — naming the audience, the intended response, and the specific outcome</div>
+      <div class="qop">Written by the client rather than the designer to ensure accuracy</div>
+      <div class="qop">Updated after each revision cycle to reflect the current design direction</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q04</div><div class="qt">The vitamin supplement case study demonstrates that the same product for two different audiences requires:</div><div class="qo">
+      <div class="qop">Identical visual design — the product is the same, so the design must be consistent</div>
+      <div class="qop">Minor adjustments to color and typography only — the core design language remains shared</div>
+      <div class="qop">Completely different visual designs — because the visual vocabulary, values, and context of encounter differ fundamentally between audiences</div>
+      <div class="qop">Separate brand identities — the same product cannot be marketed to two different audiences simultaneously</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q05</div><div class="qt">Context of encounter affects design because:</div><div class="qo">
+      <div class="qop">Legal requirements specify different design standards for different environments</div>
+      <div class="qop">Where, when, and how an audience sees a design determines required reading speed, hierarchy, size, and contrast — a subway poster is designed completely differently from a print catalog</div>
+      <div class="qop">The context tells the designer which color mode to use for output</div>
+      <div class="qop">Different contexts require different typefaces to ensure legibility across surface types</div>
+    </div></div>
+    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-C &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-C &nbsp;·&nbsp; 5-B</p></div>
+  </div>
+  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
+    <div class="qi"><div class="qn">Q06</div><div class="qt">From your Audience Profile exercise: which of the five dimensions produced the most specific, useful visual decisions? Explain what specific visual choice it generated and why.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q07</div><div class="qt">A children's museum is launching an exhibition about space. Write two one-sentence message statements — one for a 7-year-old child visitor, one for a parent accompanying them. How do the two statements differ, and what different visual decisions would they produce?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q08</div><div class="qt">Connect audience definition to the design process from Lesson 1.3. At which stage of the seven-stage process does audience definition happen — and what would go wrong at every subsequent stage if it were skipped?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+  </div>
+</div></div>
+</div><!-- end l05 -->
+
+
+<!-- ═══════════════════════ LESSON 1.6 ═══════════════════════ -->
+<div id="l06" class="ls">
+<div class="hero" data-n="1.6">
+  <div class="vt">Volume 1 · Module 2 · Lesson 1.6</div>
+  <h1>Visual <em>Hierarchy</em></h1>
+  <p class="sub">If everything is equally important, nothing is important. Visual hierarchy is the system that tells a viewer what to look at first, what to look at second, and what to look at last — creating a reading order that serves the design's communication goal. Without it, the viewer's eye wanders randomly and the message never lands.</p>
+  <div class="mr">
+    <div class="mi"><label>Lesson Type</label><span>Concept + Applied Studio</span></div>
+    <div class="mi"><label>Duration</label><span>50–65 minutes</span></div>
+    <div class="mi"><label>App</label><span>Illustrator — first hierarchy exercises</span></div>
+    <div class="mi"><label>Deliverable</label><span>Hierarchy study — three versions, one composition</span></div>
+  </div>
+</div>
+<div class="itabs">
+  <button class="itab active" onclick="showI('l06-les',this,'l06')">📖 Lesson</button>
+  <button class="itab" onclick="showI('l06-scr',this,'l06')">🎬 Video Script</button>
+  <button class="itab" onclick="showI('l06-wb',this,'l06')">📄 Workbook</button>
+  <button class="itab" onclick="showI('l06-ass',this,'l06')">✅ Assessment</button>
+</div>
+
+<div id="l06-les" class="tc active"><div class="wrap">
+  <div class="obj"><h4>Learning Objectives — Lesson 1.6</h4><ul class="ol">
+    <li>Explain visual hierarchy as a system for directing viewer attention — not an aesthetic preference</li>
+    <li>Apply the five tools of hierarchy — size, weight, color, position, and space — to create clear reading order</li>
+    <li>Use the squint test to evaluate whether hierarchy is working at a glance</li>
+    <li>Diagnose the three most common hierarchy failures: equal weight confusion, emphasis overload, and scale timidity</li>
+    <li>Redesign a flat, unhierarchical layout to have clear, functional reading order</li>
+  </ul></div>
+
+  <div class="pb">
+    <div class="pb-label">The Problem</div>
+    <h3>You have five elements in your layout — a headline, subheadline, body paragraph, call to action, and logo. They are all roughly the same size. The viewer's eye lands somewhere random and leaves without finding the message.</h3>
+    <p>Equal visual weight means equal importance — and equal importance means the viewer has no entry point, no reading path, and no guidance toward the action you need them to take. Visual hierarchy is the cure. It is the system of deliberate size, weight, color, position, and spacing decisions that creates a reading order: first this, then this, then this. The viewer shouldn't have to work to find the message — the hierarchy should guide them there effortlessly. This lesson teaches you to build that system from scratch and diagnose it when it fails.</p>
+    <div class="pb-meta">
+      <div class="pb-meta-item"><label>Context</label><span>Every multi-element layout</span></div>
+      <div class="pb-meta-item"><label>Constraint</label><span>Equal weight = no hierarchy = no message</span></div>
+      <div class="pb-meta-item"><label>Skill This Lesson Builds</label><span>Reading order, the five hierarchy tools, squint test</span></div>
+    </div>
+  </div>
+
+  <div class="sl">Introduction</div>
+  <h2>The Reading Order Problem</h2>
+  <p>When you look at a page, your eye doesn't wander randomly — it follows a path created by visual weight. Elements with more visual weight attract the eye first. Elements with less weight attract it later. The designer's job is to assign visual weight deliberately, so the order in which the eye encounters information is the order that best serves the communication goal.</p>
+  <p>A well-designed hierarchy makes a complex communication feel effortless — the viewer receives the most important information first, supporting information second, and additional detail if they choose to continue. They don't need to work to find anything. The design does the navigational work for them.</p>
+
+  <div class="cb mod"><div class="cl">The Squint Test</div><p>Squint at your layout until individual elements blur. Which element remains visible? That is your dominant element — the element with the most visual weight. Is it the element that should be dominant? If something other than your most important message element dominates the squint test, the hierarchy is wrong. The squint test takes five seconds and reveals hierarchy failures instantly.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 1</div>
+  <h2>Five Tools of Visual Hierarchy</h2>
+
+  <div class="hier-demo">
+    <div class="hier-row" style="background:var(--ml);">
+      <div class="hier-label">TOOL 01</div>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:22px;margin-bottom:2px;">Size</div>
+        <div style="font-size:13px;color:var(--mid);">Larger elements are seen first — always. The most reliable hierarchy tool. The dominant element should be dramatically larger than supporting elements.</div>
+      </div>
+      <div class="hier-spec">Most reliable</div>
+    </div>
+    <div class="hier-row">
+      <div class="hier-label">TOOL 02</div>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:16px;margin-bottom:2px;font-weight:700;">Weight</div>
+        <div style="font-size:13px;color:var(--mid);">Bold, heavy, or thick elements attract more attention than light or thin ones. Weight variation creates hierarchy between elements at similar sizes.</div>
+      </div>
+      <div class="hier-spec">Secondary</div>
+    </div>
+    <div class="hier-row" style="background:var(--ml);">
+      <div class="hier-label">TOOL 03</div>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:15px;margin-bottom:2px;color:var(--mod);">Color</div>
+        <div style="font-size:13px;color:var(--mid);">Warm, saturated, or contrasting colors attract attention faster than neutral or cool ones. Accent color used on the most important element directs the eye.</div>
+      </div>
+      <div class="hier-spec">Fast-acting</div>
+    </div>
+    <div class="hier-row">
+      <div class="hier-label">TOOL 04</div>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:15px;margin-bottom:2px;">Position</div>
+        <div style="font-size:13px;color:var(--mid);">Western viewers read top-left first, then move right and down. Primary elements placed top-left or center-top receive first attention. Bottom corners receive last.</div>
+      </div>
+      <div class="hier-spec">Contextual</div>
+    </div>
+    <div class="hier-row" style="background:var(--ml);">
+      <div class="hier-label">TOOL 05</div>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:15px;margin-bottom:2px;">Space</div>
+        <div style="font-size:13px;color:var(--mid);">Surrounding an element with white space creates emphasis through isolation — the eye is drawn to elements that stand alone rather than crowd together.</div>
+      </div>
+      <div class="hier-spec">Elegant</div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+  <div class="sl">Section 2</div>
+  <h2>Three Common Hierarchy Failures</h2>
+
+  <p><strong>Equal Weight Confusion:</strong> When all elements are approximately the same visual weight, the viewer has no entry point. The most important element is not identifiable. Solution: make the dominant element dramatically larger or heavier than everything else — not 20% larger, but 200% larger.</p>
+
+  <p><strong>Emphasis Overload:</strong> When everything is emphasized, nothing is emphasized. If five out of seven elements are bold, highlighted, or large, the bold and large elements become the new average. The eye registers emphasis only when it contrasts with the unemphasized. Solution: limit strong emphasis to one or two elements maximum per composition.</p>
+
+  <p><strong>Scale Timidity:</strong> The reluctance to make the dominant element dramatically large enough. Most beginning designers make their headlines slightly too small relative to body text — the result is hierarchy that is technically present but perceptually invisible. The difference between headline and body must be large enough to register without reading. If you have to read it to tell which is which, it's not large enough.</p>
+
+  <div class="cb gold"><div class="cl">The 3-Second Test</div><p>Show your layout to someone for exactly three seconds, then cover it. Ask: what was the most important thing on the page? If they cannot answer, or if they answer with something other than your intended primary message, the hierarchy has failed. Good hierarchy communicates reading order in under three seconds — before the viewer has consciously processed any content.</p></div>
+
+  <div class="kt"><h4>Key Vocabulary — Lesson 1.6</h4><div class="tg">
+    <div><div class="tn">Visual Hierarchy</div><div class="td">The system of visual weight decisions that creates a deliberate reading order — directing the viewer's eye through information in the sequence that best serves the communication goal.</div><div class="vu"><div class="vu-label">In Use</div><p>"The hierarchy isn't working — the call to action and the headline have the same visual weight. Make the headline three times larger. Make the call to action bold. Give the hierarchy a clear order."</p></div></div>
+    <div><div class="tn">Visual Weight</div><div class="td">The relative ability of an element to attract the viewer's eye — determined by its size, weight, color, position, and surrounding space.</div><div class="vu"><div class="vu-label">In Use</div><p>"That image has too much visual weight — it's pulling the eye away from the headline. Reduce its size or move it below the fold."</p></div></div>
+    <div><div class="tn">Squint Test</div><div class="td">A hierarchy evaluation technique: squint until elements blur, then ask whether the dominant element is the correct one.</div><div class="vu"><div class="vu-label">In Use</div><p>"Squint test. What survives? The decorative border — not the headline. That's a hierarchy problem. Remove the border or reduce the headline."</p></div></div>
+    <div><div class="tn">Emphasis Overload</div><div class="td">The condition in which too many elements are emphasized — destroying the contrast that makes emphasis meaningful.</div><div class="vu"><div class="vu-label">In Use</div><p>"Six bold elements on this page. When everything is bold, nothing is bold. Pick one primary element and one secondary. Everything else is normal weight."</p></div></div>
+    <div><div class="tn">Reading Order</div><div class="td">The sequence in which a viewer encounters information in a design — created by the hierarchy and ideally matching the sequence that best serves the communication goal.</div><div class="vu"><div class="vu-label">In Use</div><p>"What is the intended reading order? Define it before placing a single element. First the viewer sees X, then Y, then Z. Build the hierarchy to produce exactly that sequence."</p></div></div>
+    <div><div class="tn">Scale Timidity</div><div class="td">The beginner designer's reluctance to make the dominant element dramatically large enough — resulting in hierarchy that exists technically but is perceptually invisible.</div><div class="vu"><div class="vu-label">In Use</div><p>"Make it bigger. Much bigger. I can still tell the headline and subheadline apart by reading them — I need to tell them apart by looking at them."</p></div></div>
+  </div></div>
+
+  <div class="ex"><div class="exh"><span class="exb">Exercise 1.6</span><h4>Hierarchy Study — Three Versions, One Composition</h4></div>
+    <p>Using the same five elements (headline, subheadline, body text, call to action, logo), create three versions of the same composition with three different hierarchy structures — and evaluate which reading order best serves a specific brief.</p>
+    <ol>
+      <li>Open Illustrator. Set up an A5 artboard (148 × 210mm). Place all five text elements using placeholder text — do not design, just place.</li>
+      <li>Version A — No hierarchy: make all five elements approximately the same visual weight. This is the "before" state that demonstrates the problem.</li>
+      <li>Version B — Hierarchy that prioritizes the headline: use size, weight, and space to create a clear reading order that guides the viewer to the headline first.</li>
+      <li>Version C — Hierarchy that prioritizes the call to action: rearrange the hierarchy so the call to action is the dominant element — supporting everything else around it.</li>
+      <li>Apply the Squint Test and the 3-Second Test to Versions B and C. Which performs better for a specific brief: a brand awareness poster (B) vs. a direct response promotion (C)?</li>
+    </ol>
+    <div class="tt">⏱ Estimated time: 45–55 minutes</div>
+  </div>
+
+  <div class="rf"><h4>Journal Reflection — Lesson 1.6</h4>
+    <p style="font-size:15px;font-style:italic;">Find a design in your environment — a product package, a website, a signage system — and trace the reading order your eye actually follows. Does it match the order the designer intended? Where does your eye go first that the designer probably didn't intend? What specific visual weight decision caused that unintended first look?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+  </div>
+</div></div>
+
+<!-- VIDEO SCRIPT 1.6 -->
+<div id="l06-scr" class="tc"><div class="wrap">
+  <div class="sl">Concept Video Script — Lesson 1.6</div>
+  <h2>Visual Hierarchy — Directing the Eye</h2>
+  <p style="color:var(--mid);margin-bottom:28px;font-size:14px;">Live hierarchy construction — before/after with squint test demonstration</p>
+  <div class="sh">
+    <div><label>Video Type</label><span>Concept / Live Studio</span></div>
+    <div><label>Target Length</label><span>5:00 – 5:30 minutes</span></div>
+    <div><label>Key Visual</label><span>Flat layout → hierarchy applied → squint test</span></div>
+    <div><label>Music Tone</label><span>Structured, purposeful, satisfying</span></div>
+    <div><label>Production</label><span>Illustrator screen recording + After Effects</span></div>
+    <div><label>Narration</label><span>ElevenLabs or AI Avatar</span></div>
+  </div>
+  <h3>OPENING</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:00–0:45</span></div><div class="sbb nt">If everything is equally important, nothing is important. This is the hierarchy problem — and it kills more designs than any other single issue. Here are five elements: a headline, a subheadline, body text, a call to action, and a logo. All the same size. All the same weight. The viewer's eye lands somewhere random. It wanders. It leaves without finding the message. Today I am going to take that flat, unhierarchical layout and build a reading order that guides the viewer exactly where we need them to go — and show you the five tools that make that possible.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Five equal-weight elements shown — eye path animation showing random wandering ]
+[ Title: "Lesson 1.6 — Visual Hierarchy" ]</div></div>
+  <h3>SEGMENT 1 — Five Tools Live</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:46–2:30</span></div><div class="sbb nt">Five tools. Size is the most reliable — larger elements are seen first, always. Watch this headline at 12pt. Now at 60pt. The hierarchy is immediately clear — no reading required. Weight: bolding an element makes it heavier, more dominant. Color: I add the accent color to the call to action — now the eye is pulled there with specific urgency. Position: the primary element moves to the top — Western reading convention places the first look top-left. And space: I give the headline breathing room by clearing everything else away from it. Space creates emphasis through isolation — the element that stands alone gets looked at first. Five tools. I just applied all five in ninety seconds. Now watch the squint test.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Live Illustrator — each tool applied and labeled ]
+[ Before squint test: dominant element wrong ]
+[ After tools applied: squint test passes — headline dominant ]</div></div>
+  <h3>SEGMENT 2 — Three Failures + Exercise</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">2:31–5:00</span></div><div class="sbb nt">Three hierarchy failures to watch for. Equal weight confusion — everything the same size, no entry point. Fix: make the dominant element dramatically larger. Not 20% larger — 200% larger. Emphasis overload — everything is bold and highlighted. When everything is emphasized, nothing is emphasized. Fix: limit strong emphasis to one or two elements maximum. And scale timidity — the headline is slightly larger than the body text but not dramatically enough. You have to read it to tell them apart. Fix: if you can identify hierarchy levels by reading them rather than looking at them, the size gap is insufficient. For your exercise: build three versions of the same five-element composition. Version A has no hierarchy. B prioritizes the headline. C prioritizes the call to action. Apply the squint test to both. The results should tell you which hierarchy serves which brief. See you in Lesson 1.7.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Three failure types shown with labels ]
+[ Three-version exercise demonstrated ]
+[ Exercise card: "Exercise 1.6 — Hierarchy Study" ]
+[ "Next: Lesson 1.7 — The Five Design Principles" ]</div></div>
+</div></div>
+
+<!-- WORKBOOK 1.6 -->
+<div id="l06-wb" class="tc"><div class="wrap">
+  <div class="wb">
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:6px;font-weight:500;">Volume 1 · Module 2 · Lesson 1.6</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:4px;">Visual Hierarchy</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:20px;">Three-Version Hierarchy Study</div>
+    <div class="wr"></div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="border:1px solid var(--rule);border-radius:8px;padding:14px;background:var(--cream);">
+        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--mid);font-weight:600;margin-bottom:8px;">VERSION A — NO HIERARCHY</p>
+        <p style="font-size:12px;color:var(--mid);margin-bottom:6px;">Describe the equal-weight layout and what happens in the squint test:</p>
+        <div class="wl"><div class="wln"></div><div class="wln"></div></div>
+      </div>
+      <div style="border:2px solid var(--mod);border-radius:8px;padding:14px;">
+        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);font-weight:600;margin-bottom:8px;">VERSION B — HEADLINE DOMINANT</p>
+        <p style="font-size:12px;color:var(--mid);margin-bottom:6px;">Which tools did you use? What is the reading order produced?</p>
+        <div class="wl"><div class="wln"></div><div class="wln"></div></div>
+        <p style="font-size:12px;color:var(--mid);margin:10px 0 4px;">3-Second Test result:</p><div class="wln"></div>
+      </div>
+      <div style="border:2px solid var(--accent);border-radius:8px;padding:14px;">
+        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);font-weight:600;margin-bottom:8px;">VERSION C — CALL TO ACTION DOMINANT</p>
+        <p style="font-size:12px;color:var(--mid);margin-bottom:6px;">Which tools did you use? How does the reading order differ from Version B?</p>
+        <div class="wl"><div class="wln"></div><div class="wln"></div></div>
+        <p style="font-size:12px;color:var(--mid);margin:10px 0 4px;">3-Second Test result:</p><div class="wln"></div>
+      </div>
+    </div>
+    <p style="font-size:13px;font-weight:600;margin:14px 0 6px;">Which hierarchy serves a brand awareness brief? Which serves a direct response brief? Why?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+    <div class="pn">Digital Design &amp; Media Technology · Volume 1 · Page 6</div>
+  </div>
+</div></div>
+
+<!-- ASSESSMENT 1.6 -->
+<div id="l06-ass" class="tc"><div class="wrap">
+  <div class="sl">Lesson 1.6 Assessment</div>
+  <h2>Visual Hierarchy — Knowledge Check</h2>
+  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
+    <div class="qi"><div class="qn">Q01</div><div class="qt">The Squint Test evaluates hierarchy by:</div><div class="qo">
+      <div class="qop">Reducing the screen brightness until the layout is barely visible</div>
+      <div class="qop">Blurring vision until elements lose detail — then asking whether the dominant surviving element is the intended primary message</div>
+      <div class="qop">Reducing the design to 10% of its size to check legibility</div>
+      <div class="qop">Removing all color from the layout to isolate value contrast</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q02</div><div class="qt">"Emphasis overload" occurs when:</div><div class="qo">
+      <div class="qop">The most important element is made too large relative to the page size</div>
+      <div class="qop">Too many elements are emphasized simultaneously — destroying the contrast that makes emphasis meaningful</div>
+      <div class="qop">The emphasis on the primary element is so strong that secondary elements become invisible</div>
+      <div class="qop">Bold and color emphasis are used on the same element simultaneously</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q03</div><div class="qt">White space around an element creates visual hierarchy primarily through:</div><div class="qo">
+      <div class="qop">Making the element larger relative to the page</div>
+      <div class="qop">Reducing the visual competition from surrounding elements — emphasis through isolation</div>
+      <div class="qop">Increasing the color contrast between the element and its background</div>
+      <div class="qop">Signaling to the viewer that the element is less important than others</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q04</div><div class="qt">"Scale timidity" is diagnosed when:</div><div class="qo">
+      <div class="qop">The dominant element is so large it bleeds off the page boundaries</div>
+      <div class="qop">Hierarchy levels are technically present but perceptually invisible — requiring reading rather than looking to identify which level is which</div>
+      <div class="qop">The designer uses too many size variations — more than four hierarchy levels in one composition</div>
+      <div class="qop">The smallest elements in the hierarchy are below the minimum legible text size</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q05</div><div class="qt">In a direct response promotional design, the hierarchy should prioritize:</div><div class="qo">
+      <div class="qop">The brand name and logo — reinforcing awareness and recognition above all</div>
+      <div class="qop">The product image — making the product the dominant visual element</div>
+      <div class="qop">The call to action — making the desired viewer behavior the most visually prominent element</div>
+      <div class="qop">The body copy — ensuring all benefits are equally visible to the viewer</div>
+    </div></div>
+    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-C</p></div>
+  </div>
+  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
+    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.6: describe specifically how you created the hierarchy in Version B. Which tool had the most impact, and how dramatically did you apply it?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q07</div><div class="qt">A student has eight elements on a layout — all bolded to make them "stand out." Diagnose the failure type and prescribe a specific correction.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q08</div><div class="qt">Connect visual hierarchy to the concept of design serving the audience (Lesson 1.5). How does the message statement inform which element should be dominant in the hierarchy?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+  </div>
+</div></div>
+</div><!-- end l06 -->
+
+
+<!-- ═══════════════════════ LESSON 1.7 ═══════════════════════ -->
+<div id="l07" class="ls">
+<div class="hero" data-n="1.7">
+  <div class="vt">Volume 1 · Module 2 · Lesson 1.7</div>
+  <h1>The Five Design <em>Principles</em></h1>
+  <p class="sub">Balance, contrast, alignment, repetition, and proximity are not aesthetic preferences — they are perceptual facts about how the human visual system processes information. Applying them correctly produces design that feels coherent, trustworthy, and effortless to experience. Violating them produces work that feels wrong — even when no one can name why.</p>
+  <div class="mr">
+    <div class="mi"><label>Lesson Type</label><span>Principles + Applied Studio</span></div>
+    <div class="mi"><label>Duration</label><span>55–70 minutes</span></div>
+    <div class="mi"><label>App</label><span>Illustrator — principles audit</span></div>
+    <div class="mi"><label>Deliverable</label><span>Principles application study</span></div>
+  </div>
+</div>
+<div class="itabs">
+  <button class="itab active" onclick="showI('l07-les',this,'l07')">📖 Lesson</button>
+  <button class="itab" onclick="showI('l07-scr',this,'l07')">🎬 Video Script</button>
+  <button class="itab" onclick="showI('l07-wb',this,'l07')">📄 Workbook</button>
+  <button class="itab" onclick="showI('l07-ass',this,'l07')">✅ Assessment</button>
+</div>
+
+<div id="l07-les" class="tc active"><div class="wrap">
+  <div class="obj"><h4>Learning Objectives — Lesson 1.7</h4><ul class="ol">
+    <li>Define each of the five design principles and explain the perceptual mechanism underlying each one</li>
+    <li>Apply all five principles to evaluate a given design — identifying where each is working and where it is being violated</li>
+    <li>Explain why these are perceptual facts rather than stylistic preferences — grounding design critique in evidence rather than opinion</li>
+    <li>Demonstrate each principle applied correctly and violated in a simple composition</li>
+    <li>Use the five principles as a professional critique framework throughout all future modules</li>
+  </ul></div>
+
+  <div class="pb">
+    <div class="pb-label">The Problem</div>
+    <h3>Your client says "it just doesn't look right" but can't explain what's wrong. You feel it too — something is off — but you also can't name it. Without the principles, you have no vocabulary for diagnosing design problems and no framework for fixing them.</h3>
+    <p>Design criticism without principles is opinion. "I don't like this" is not actionable. "The alignment is broken — five elements are floating without a shared edge, which makes the composition feel chaotic" is actionable. The five design principles give you a diagnostic vocabulary that transforms vague aesthetic discomfort into specific, addressable problems. They are the language of professional design critique — and the framework you will use to evaluate every design you encounter from this point forward.</p>
+    <div class="pb-meta">
+      <div class="pb-meta-item"><label>Context</label><span>Every design, every critique, every iteration</span></div>
+      <div class="pb-meta-item"><label>Constraint</label><span>Opinion without principles is not useful feedback</span></div>
+      <div class="pb-meta-item"><label>Skill This Lesson Builds</label><span>Principle application, design critique vocabulary</span></div>
+    </div>
+  </div>
+
+  <div class="sl">Introduction</div>
+  <h2>Principles Are Perceptual Facts — Not Stylistic Rules</h2>
+  <p>These five principles are not design trends, not historical conventions, and not matters of personal aesthetic preference. They are observations about how the human visual system works — derived from perceptual psychology, cognitive science, and centuries of visual communication practice. Breaking any of them doesn't make a design "unconventional" — it creates specific, predictable problems in how the viewer processes the design.</p>
+  <p>Understanding why each principle works — the perceptual mechanism behind it — is what transforms it from a rule to follow into a tool to wield. When you know why alignment works, you can decide when breaking it is intentional and effective rather than accidental and harmful.</p>
+
+  <div class="div"></div>
+  <div class="sl">Section 1</div>
+  <h2>The Five Principles</h2>
+
+  <div class="principles-grid">
+    <div class="principle-card">
+      <div class="principle-num">01</div>
+      <div class="principle-head">Balance</div>
+      <div class="principle-body">Visual weight must be distributed across the composition so no area feels too heavy or too empty. Symmetrical balance creates formal stability. Asymmetrical balance — unequal elements balanced by size, weight, color, or position — creates dynamic stability. Unbalanced compositions make viewers feel uneasy, as if something might tip over.</div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-num">02</div>
+      <div class="principle-head">Contrast</div>
+      <div class="principle-body">Contrast — between large and small, dark and light, bold and thin, warm and cool — is what makes elements visible and creates visual interest. Without contrast, everything becomes a uniform gray. Contrast is also the mechanism of hierarchy — the element with the most contrast from its surroundings receives the most attention.</div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-num">03</div>
+      <div class="principle-head">Alignment</div>
+      <div class="principle-body">Every element should have a visual connection — a shared edge, center line, or grid relationship — with at least one other element in the composition. Random placement creates visual chaos. Deliberate alignment creates order, professionalism, and the invisible structure that makes layouts feel intentional rather than accidental.</div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-num">04</div>
+      <div class="principle-head">Repetition</div>
+      <div class="principle-body">Repeating visual elements — colors, typefaces, shapes, spacing — creates unity, consistency, and brand recognition. Repetition is the mechanism of visual identity: the consistent appearance of specific visual elements across touchpoints is what allows audiences to recognize a brand immediately. Inconsistency breaks trust; repetition builds it.</div>
+    </div>
+    <div class="principle-card" style="grid-column:1/-1;">
+      <div class="principle-num">05</div>
+      <div class="principle-head">Proximity</div>
+      <div class="principle-body">Elements placed near each other are perceived as related. Elements placed far apart are perceived as unrelated. Proximity is the perceptual grouping mechanism — the way the eye creates meaning from spatial relationships without reading any content. Placing a caption near its image creates meaning. Placing it near a different image creates confusion. Grouping related elements and separating unrelated ones is one of the most powerful layout tools available.</div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+  <div class="sl">Section 2</div>
+  <h2>Principles as a Critique Framework</h2>
+  <p>When a design is "not working," the five principles provide a systematic diagnostic framework. Rather than guessing at the problem, work through each principle methodically:</p>
+  <p><strong>Balance:</strong> Is the visual weight distributed appropriately? Is one area too heavy or too empty? Is the imbalance intentional or accidental?</p>
+  <p><strong>Contrast:</strong> Is there sufficient contrast between elements to create clear differentiation? Is there enough contrast between text and background for legibility? Is the highest-contrast element the one that should be dominant?</p>
+  <p><strong>Alignment:</strong> Does every element align with at least one other? Are there floating elements with no visual connection to the grid? Is random placement creating a feeling of accident?</p>
+  <p><strong>Repetition:</strong> Are visual elements being used consistently? Are colors, type styles, and spacing repeated across the composition? Does the design feel visually unified?</p>
+  <p><strong>Proximity:</strong> Are related elements grouped together? Are unrelated elements separated? Is any element placed near a grouping it doesn't belong to?</p>
+
+  <div class="cs">
+    <div class="cs-head">Case Study — The Principles Working Together</div>
+    <div class="cs-body">
+      <h4>A Business Card Audit</h4>
+      <p>A business card contains a name, title, company, phone, email, and website. It is a perfect test of all five principles applied in a small space. Balance: the heavier name and company name must be balanced against the lighter contact information, often through positioning and spacing. Contrast: the name should be dramatically larger or bolder than the contact details. Alignment: every element should share a left edge, right edge, or centerline — floating elements break the professional quality. Repetition: the type style, color, and spacing should be consistent across all contact information items. Proximity: name and title belong together (one group). Company belongs with the logo (another group). Contact details belong together (third group). Groups separated by clear spatial gaps.</p>
+      <div class="cs-takeaway"><p>The five principles don't compete with each other — they compound. A business card that applies all five correctly feels effortlessly professional. One that violates even one feels subtly wrong — even to viewers who have never heard of the five principles.</p></div>
+    </div>
+  </div>
+
+  <div class="kt"><h4>Key Vocabulary — Lesson 1.7</h4><div class="tg">
+    <div><div class="tn">Balance</div><div class="td">The distribution of visual weight across a composition — symmetrical for formal stability, asymmetrical for dynamic tension, neither for perceptual discomfort.</div><div class="vu"><div class="vu-label">In Use</div><p>"The composition is bottom-heavy — too much weight in the lower half. Move the headline up or add visual weight to the upper area."</p></div></div>
+    <div><div class="tn">Contrast</div><div class="td">The degree of difference between elements — in value, color, size, weight, or style. Contrast creates visibility, hierarchy, and visual interest.</div><div class="vu"><div class="vu-label">In Use</div><p>"There is no value contrast between the body text and the background — it's gray on gray. Darken the text or lighten the background."</p></div></div>
+    <div><div class="tn">Alignment</div><div class="td">The visual connection between elements through shared edges or centerlines — creating order, professionalism, and the sense of intentional structure.</div><div class="vu"><div class="vu-label">In Use</div><p>"Three elements are misaligned — they're all off by a few pixels, floating without a shared edge. Align them left to the same baseline."</p></div></div>
+    <div><div class="tn">Repetition</div><div class="td">The consistent use of visual elements — colors, type styles, shapes, spacing — creating unity and the foundation of brand recognition.</div><div class="vu"><div class="vu-label">In Use</div><p>"The spacing is inconsistent — some sections use 16px gaps, others use 24px. Standardize to one spacing interval and apply it everywhere."</p></div></div>
+    <div><div class="tn">Proximity</div><div class="td">The spatial grouping of related elements and separation of unrelated ones — communicating relationships through position rather than content.</div><div class="vu"><div class="vu-label">In Use</div><p>"The caption is closer to the wrong image than to its own image. Move it — proximity is creating a false relationship and confusing the reader."</p></div></div>
+    <div><div class="tn">Perceptual Psychology</div><div class="td">The scientific study of how humans perceive and interpret visual information — the foundation from which the five principles derive their authority.</div><div class="vu"><div class="vu-label">In Use</div><p>"The reason proximity works is perceptual psychology — humans automatically group nearby objects. This is not a design opinion; it is a documented fact about human perception."</p></div></div>
+  </div></div>
+
+  <div class="brief">
+    <div class="brief-head">
+      <div class="bl">Design Brief — Lesson 1.7</div>
+      <h4>Principles Application Study: Demonstrate Each Principle</h4>
+    </div>
+    <div class="brief-body">
+      <div class="brief-section">
+        <div class="brief-section-label">The Problem</div>
+        <p>You cannot apply principles you only understand abstractly. This exercise forces application: create a simple composition that demonstrates each principle, correctly applied, and then deliberately violate the same principle to make the failure visible and nameable.</p>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">The Constraints</div>
+        <ul>
+          <li>For each of the five principles, create two compositions using only simple shapes and text (no photography) — one that applies the principle correctly, one that violates it</li>
+          <li>Keep each composition small (A6 size) and simple — the principle, not the composition, is what you're demonstrating</li>
+          <li>Label each: "Principle: [name] — [Applied/Violated]"</li>
+          <li>For each violated composition, write one sentence naming the specific failure using principle vocabulary</li>
+          <li>Find a real design that violates at least two principles — write a critique using the five-principle diagnostic framework</li>
+        </ul>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">Your Deliverable</div>
+        <div class="brief-deliverable"><p>Ten small compositions (five principles × applied/violated) with labels + one real design critique using the five-principle diagnostic framework.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rf"><h4>Journal Reflection — Lesson 1.7</h4>
+    <p style="font-size:15px;font-style:italic;">Which of the five principles do you find most immediately obvious when it's violated — and which is hardest to notice? Why do you think that is? How does understanding the perceptual mechanism behind each principle change the way you will apply it compared to just knowing its name?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+  </div>
+
+  <div class="intro-block">
+    <div class="intro-head">
+      <div class="intro-head-label">Professional Introspection — Module 2 Complete</div>
+      <h4>From Seeing Design to Analyzing It</h4>
+      <p>Module 2 gave you the analytical vocabulary for visual communication — channels, audience, hierarchy, and principles. These questions bridge that vocabulary into how you'll practice design.</p>
+    </div>
+    <div class="intro-body">
+      <div class="intro-q">
+        <div class="intro-q-label">01 — The Diagnostic Shift</div>
+        <div class="intro-q-text">Before this module, when a design felt "off," you could feel it but not name it. After this module, which principle do you now most often find yourself naming when looking at design work around you?</div>
+        <div class="intro-q-note">Be specific — name the design and name the principle failure. Abstract answers are less useful than concrete observations.</div>
+        <div class="intro-lines"><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div></div>
+      </div>
+      <div class="intro-q">
+        <div class="intro-q-label">02 — Audience &amp; Hierarchy Connected</div>
+        <div class="intro-q-text">How does knowing your audience (Lesson 1.5) determine the correct visual hierarchy (Lesson 1.6)? Give a specific example — a specific audience definition that would produce a specific hierarchy decision.</div>
+        <div class="intro-q-note">The connection is real and practical: different audiences have different contexts of encounter, which changes which element must be dominant.</div>
+        <div class="intro-lines"><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div></div>
+      </div>
+      <div class="intro-q">
+        <div class="intro-q-label">03 — Into Module 3</div>
+        <div class="intro-q-text">Module 3 will go deeper into each of the five principles — treating balance, contrast, alignment, repetition, and proximity each as a complete lesson. Which principle are you most unsure about after Lesson 1.7, and what specific question do you want answered?</div>
+        <div class="intro-q-note">Naming what you don't yet understand is more valuable than summarizing what you do.</div>
+        <div class="intro-lines"><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div></div>
+      </div>
+    </div>
+  </div>
+
+</div></div>
+
+<!-- VIDEO SCRIPT 1.7 -->
+<div id="l07-scr" class="tc"><div class="wrap">
+  <div class="sl">Concept Video Script — Lesson 1.7</div>
+  <h2>The Five Design Principles</h2>
+  <p style="color:var(--mid);margin-bottom:28px;font-size:14px;">Principles demonstration — applied and violated side by side</p>
+  <div class="sh">
+    <div><label>Video Type</label><span>Concept / Demonstration</span></div>
+    <div><label>Target Length</label><span>5:00 – 5:30 minutes</span></div>
+    <div><label>Key Visual</label><span>Each principle: applied vs. violated — live side-by-side</span></div>
+    <div><label>Music Tone</label><span>Methodical, precise, building authority</span></div>
+    <div><label>Production</label><span>Illustrator screen recording + After Effects</span></div>
+    <div><label>Narration</label><span>ElevenLabs or AI Avatar</span></div>
+  </div>
+  <h3>OPENING</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:00–0:45</span></div><div class="sbb nt">Design criticism without principles is opinion. "I don't like this" is not useful feedback. "The alignment is broken — these five elements are floating without a shared edge" — that is useful feedback. That is the difference this lesson creates. Five design principles. Not stylistic rules, not aesthetic preferences. Perceptual facts about how the human visual system works. Violate any of them and you create a specific, predictable problem in how the viewer processes the design — whether or not anyone can name it. By the end of this lesson, you can name it.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Design with vague problem → "It just looks off" ]
+[ Same design labeled: "Alignment violation · Proximity failure · Contrast insufficient" ]
+[ Title: "Lesson 1.7 — The Five Design Principles" ]</div></div>
+  <h3>SEGMENT 1 — Balance and Contrast</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:46–2:00</span></div><div class="sbb nt">Balance. Visual weight must be distributed so no area feels too heavy or too empty. Here is a composition with all content pushed to the right — it feels like it's tipping. I redistribute the weight symmetrically — stable. Then I break symmetry intentionally and balance it asymmetrically — dynamic stability. Both work. Neither is neutral. Contrast. Without contrast, everything is a uniform gray. Watch this body text against this slightly-different-gray background. Near-invisible. I darken the text — now it reads. Contrast creates visibility. And contrast creates hierarchy — the element with the most contrast gets looked at first. Is that the right element? It should be.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Balance: unbalanced → symmetrical → asymmetrical balanced ]
+[ Contrast: low contrast text → high contrast — legibility comparison ]
+[ "Contrast is the mechanism of hierarchy" ]</div></div>
+  <h3>SEGMENT 2 — Alignment, Repetition, Proximity</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">2:01–3:45</span></div><div class="sbb nt">Alignment. Every element needs a visual connection to at least one other — a shared edge, a center line. Here are five elements floating freely — each positioned by feel. They look accidental. Now I align them all to a left edge. Immediately professional. The order was there; the alignment made it visible. Repetition. Inconsistent spacing, three different type weights, inconsistent color application — the composition feels chaotic. I standardize: one spacing interval, two type weights, one accent color applied consistently. Now it feels unified — like it was made by one person with a plan. Proximity. This caption is equally close to two images — it belongs to one but the spatial relationship doesn't tell me which. I move it closer to its image and further from the other. The relationship is now communicated purely by position — no reading required.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Alignment: floating elements → aligned — before/after ]
+[ Repetition: inconsistent → consistent system ]
+[ Proximity: ambiguous caption → clear relationship ]</div></div>
+  <h3>CLOSING — Framework + Exercise</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">3:46–5:00</span></div><div class="sbb nt">These five principles are now your diagnostic framework. When a design is "not working," you run through them methodically: balance, contrast, alignment, repetition, proximity. One of them — often more than one — is being violated. Name it. Fix it. For your exercise, create ten small compositions — a correct version and a violated version of each principle. Then find a real design that violates at least two principles and write a critique using this framework. This is how design critique becomes useful. See you in Module 3.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Five-principle diagnostic checklist ]
+[ Exercise card: "Exercise 1.7 — Principles Application Study" ]
+[ "Module 2 Complete → Module 3: The Principles in Depth" ]</div></div>
+</div></div>
+
+<!-- WORKBOOK 1.7 -->
+<div id="l07-wb" class="tc"><div class="wrap">
+  <div class="wb">
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:6px;font-weight:500;">Volume 1 · Module 2 · Lesson 1.7</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:4px;">The Five Design Principles</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:20px;">Principles Diagnostic — Real Design Critique</div>
+    <div class="wr"></div>
+    <p style="font-size:13px;font-weight:600;margin-bottom:10px;">Real design being critiqued: <span style="border-bottom:1px solid var(--rule);display:inline-block;min-width:260px;">&nbsp;</span></p>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
+      <div style="border:1px solid var(--rule);border-radius:7px;overflow:hidden;">
+        <div style="background:var(--mod);color:white;padding:8px 14px;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;">01 — Balance</div>
+        <div style="padding:12px 14px;"><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Working or violated? Evidence:</p><div class="wl"><div class="wln"></div><div class="wln"></div></div></div>
+      </div>
+      <div style="border:1px solid var(--rule);border-radius:7px;overflow:hidden;">
+        <div style="background:#1e40af;color:white;padding:8px 14px;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;">02 — Contrast</div>
+        <div style="padding:12px 14px;"><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Working or violated? Evidence:</p><div class="wl"><div class="wln"></div><div class="wln"></div></div></div>
+      </div>
+      <div style="border:1px solid var(--rule);border-radius:7px;overflow:hidden;">
+        <div style="background:var(--green);color:white;padding:8px 14px;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;">03 — Alignment</div>
+        <div style="padding:12px 14px;"><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Working or violated? Evidence:</p><div class="wl"><div class="wln"></div><div class="wln"></div></div></div>
+      </div>
+      <div style="border:1px solid var(--rule);border-radius:7px;overflow:hidden;">
+        <div style="background:var(--gold);color:white;padding:8px 14px;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;">04 — Repetition</div>
+        <div style="padding:12px 14px;"><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Working or violated? Evidence:</p><div class="wl"><div class="wln"></div><div class="wln"></div></div></div>
+      </div>
+      <div style="border:1px solid var(--rule);border-radius:7px;overflow:hidden;">
+        <div style="background:var(--accent);color:white;padding:8px 14px;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;">05 — Proximity</div>
+        <div style="padding:12px 14px;"><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Working or violated? Evidence:</p><div class="wl"><div class="wln"></div><div class="wln"></div></div></div>
+      </div>
+    </div>
+    <p style="font-size:13px;font-weight:600;margin-bottom:6px;">Most critical principle violation — specific correction:</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+    <div class="pn">Digital Design &amp; Media Technology · Volume 1 · Page 7</div>
+  </div>
+</div></div>
+
+<!-- ASSESSMENT 1.7 -->
+<div id="l07-ass" class="tc"><div class="wrap">
+  <div class="sl">Lesson 1.7 Assessment</div>
+  <h2>The Five Design Principles — Knowledge Check</h2>
+  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
+    <div class="qi"><div class="qn">Q01</div><div class="qt">The five design principles are described as "perceptual facts" rather than aesthetic preferences because:</div><div class="qo">
+      <div class="qop">They have been standardized by major design organizations as required practice</div>
+      <div class="qop">They derive from the documented mechanisms of human visual perception — violating them creates specific, predictable problems regardless of personal taste</div>
+      <div class="qop">They have been consistently applied throughout the history of graphic design</div>
+      <div class="qop">They are universally agreed upon by all professional designers without exception</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q02</div><div class="qt">Proximity communicates meaning by:</div><div class="qo">
+      <div class="qop">Using a consistent visual style across all related elements</div>
+      <div class="qop">Creating grouped relationships through spatial position — elements near each other are perceived as related without any content being read</div>
+      <div class="qop">Repeating the same spacing interval between all elements in a composition</div>
+      <div class="qop">Placing the most important element nearest to the viewer's entry point</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q03</div><div class="qt">Asymmetrical balance differs from symmetrical balance in that:</div><div class="qo">
+      <div class="qop">Asymmetrical balance is inherently unstable and should be avoided in professional design</div>
+      <div class="qop">Asymmetrical balance uses identical elements on both sides of a composition</div>
+      <div class="qop">Asymmetrical balance achieves stability through unequal elements balanced by size, weight, color, or position — creating dynamic rather than formal stability</div>
+      <div class="qop">Asymmetrical balance is appropriate only for entertainment and media brands</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q04</div><div class="qt">The primary function of the alignment principle is to:</div><div class="qo">
+      <div class="qop">Ensure all text elements are left-justified or centered consistently</div>
+      <div class="qop">Create visual connections between elements through shared edges or centerlines — making composition feel intentional rather than accidental</div>
+      <div class="qop">Align the design's visual language with the brand's verbal messaging</div>
+      <div class="qop">Position the most important element at the optical center of the composition</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q05</div><div class="qt">Repetition as a design principle creates brand recognition because:</div><div class="qo">
+      <div class="qop">Audiences remember designs that look different from each other</div>
+      <div class="qop">Consistent repetition of specific visual elements across touchpoints allows audiences to recognize a brand before consciously reading it</div>
+      <div class="qop">Repeating elements reduces file size and makes designs easier to produce</div>
+      <div class="qop">Repetition signals that a design was produced by a professional rather than an amateur</div>
+    </div></div>
+    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-C &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
+  </div>
+  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
+    <div class="qi"><div class="qn">Q06</div><div class="qt">Using the five-principle diagnostic framework, critique the following design description: "A business card has the company name in the center, the address in the top-left corner, the phone number in the bottom-right, and the logo also in the center at the same size as the company name."</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q07</div><div class="qt">Connect the repetition principle to the concept of brand identity. Why does visual inconsistency specifically damage trust — using the perceptual mechanism underlying the principle?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q08</div><div class="qt">From Exercise 1.7: which principle was most difficult to violate deliberately — to intentionally break in a way that made the violation visible and nameable? What does this difficulty reveal about that principle?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+  </div>
+</div></div>
+</div><!-- end l07 -->
+
+
+<script>
+function showL(id,btn){
+  document.querySelectorAll('.ls').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.ltab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:document.querySelector('.ltabs').offsetTop-10,behavior:'smooth'});
+}
+function showI(id,btn,lid){
+  const l=document.getElementById(lid);
+  l.querySelectorAll('.tc').forEach(t=>t.classList.remove('active'));
+  l.querySelectorAll('.itab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:l.querySelector('.itabs').offsetTop-10,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

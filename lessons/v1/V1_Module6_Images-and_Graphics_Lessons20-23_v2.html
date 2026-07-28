@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volume 1 · Module 6 — Images &amp; Graphics · Lessons 1.20–1.23</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1410;--paper:#faf7f2;--cream:#f0ead8;
+  --accent:#c8401a;--al:#f5e6e0;
+  --gold:#b8860b;--gl:#faf6e8;
+  --mid:#6b5e52;--rule:#d4c9b8;
+  --green:#2d7a1a;--gnl:#f0fae8;
+  --blue:#1a56c4;--bl:#e8f0fe;
+  --mod:#0369a1;--ml:#e0f2fe;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.8;}
+nav{background:var(--ink);color:var(--paper);padding:14px 48px;display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;}
+nav .s{color:var(--mod);}nav .sep{color:var(--mid);}
+.mbanner{background:var(--mod);color:white;padding:16px 48px;display:flex;align-items:center;justify-content:space-between;}
+.mbanner h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;}
+.mbanner p{font-size:12px;opacity:.75;}
+.ltabs{background:var(--cream);border-bottom:2px solid var(--rule);display:flex;padding:0 48px;overflow-x:auto;position:sticky;top:0;z-index:200;}
+.ltab{padding:15px 20px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;font-family:'DM Sans',sans-serif;border:none;background:none;cursor:pointer;color:var(--mid);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s;}
+.ltab.active{color:var(--mod);border-bottom-color:var(--mod);}
+.ltab:hover:not(.active){color:var(--ink);}
+.ls{display:none;}.ls.active{display:block;}
+.hero{background:var(--ink);color:var(--paper);padding:60px 48px 48px;position:relative;overflow:hidden;}
+.hero::before{content:attr(data-n);position:absolute;right:48px;top:28px;font-family:'Playfair Display',serif;font-size:150px;font-weight:900;color:rgba(255,255,255,.04);line-height:1;pointer-events:none;}
+.vt{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:14px;font-weight:500;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(30px,5vw,58px);font-weight:900;line-height:1.08;max-width:660px;margin-bottom:18px;}
+.hero h1 em{font-style:italic;color:#7dd3fc;}
+.hero .sub{font-size:15px;color:rgba(250,247,242,.6);max-width:510px;line-height:1.7;}
+.hero .mr{display:flex;gap:32px;margin-top:36px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap;}
+.hero .mi label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,247,242,.4);display:block;margin-bottom:3px;}
+.hero .mi span{font-size:13px;color:var(--paper);font-weight:500;}
+.itabs{background:var(--cream);border-bottom:2px solid var(--rule);display:flex;padding:0 48px;}
+.itab{padding:15px 22px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;font-family:'DM Sans',sans-serif;border:none;background:none;cursor:pointer;color:var(--mid);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;}
+.itab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.itab:hover:not(.active){color:var(--ink);}
+.tc{display:none;}.tc.active{display:block;}
+.wrap{max-width:820px;margin:0 auto;padding:52px 48px;}
+.sl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:10px;}
+h2{font-family:'Playfair Display',serif;font-size:29px;font-weight:700;margin-bottom:17px;line-height:1.25;}
+h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin:42px 0 13px;}
+p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
+.cb{border-left:4px solid var(--accent);background:var(--al);padding:20px 24px;margin:30px 0;border-radius:0 8px 8px 0;}
+.cb .cl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:6px;}
+.cb p{margin:0;font-size:15px;}
+.cb.gold{border-left-color:var(--gold);background:var(--gl);}.cb.gold .cl{color:var(--gold);}
+.cb.green{border-left-color:var(--green);background:var(--gnl);}.cb.green .cl{color:var(--green);}
+.cb.mod{border-left-color:var(--mod);background:var(--ml);}.cb.mod .cl{color:var(--mod);}
+.obj{border:2px solid var(--rule);border-radius:12px;padding:26px 30px;margin-bottom:40px;background:white;}
+.obj h4{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:16px;font-weight:500;}
+.ol{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.ol li{display:flex;align-items:flex-start;gap:11px;font-size:15px;line-height:1.6;}
+.ol li::before{content:'';width:20px;height:20px;border-radius:50%;background:var(--mod);flex-shrink:0;margin-top:2px;}
+.pb{background:var(--ink);color:var(--paper);border-radius:14px;padding:36px;margin:0 0 40px;}
+.pb-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:10px;}
+.pb h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:white;margin:0 0 14px;line-height:1.3;}
+.pb p{font-size:15px;color:rgba(250,247,242,.75);margin:0 0 16px;line-height:1.75;}
+.pb-meta{display:flex;gap:28px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap;}
+.pb-meta-item label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,247,242,.4);display:block;margin-bottom:3px;}
+.pb-meta-item span{font-size:13px;color:var(--paper);font-weight:500;}
+.kt{background:var(--ink);color:var(--paper);padding:32px;border-radius:12px;margin:40px 0;}
+.kt h4{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mod);margin-bottom:18px;font-weight:500;}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+.tn{font-family:'DM Mono',monospace;font-size:13px;color:#7dd3fc;margin-bottom:3px;font-weight:500;}
+.td{font-size:13px;color:rgba(250,247,242,.7);line-height:1.6;}
+.vu{margin-top:10px;padding:10px 14px;background:rgba(255,255,255,.06);border-radius:6px;border-left:3px solid var(--mod);}
+.vu-label{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:4px;}
+.vu p{font-size:12px;color:rgba(250,247,242,.55);margin:0;font-style:italic;line-height:1.6;}
+.ex{background:var(--cream);border:1px solid var(--rule);border-radius:12px;padding:32px;margin:40px 0;}
+.exh{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.exb{background:var(--mod);color:white;font-size:10px;letter-spacing:.15em;text-transform:uppercase;padding:6px 14px;border-radius:100px;font-weight:500;flex-shrink:0;}
+.ex h4{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;}
+.ex ol{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.ex ol li{font-size:15px;line-height:1.7;padding-left:5px;}
+.tt{font-size:12px;color:var(--mid);font-family:'DM Mono',monospace;margin-top:16px;display:inline-block;}
+.brief{border:2px solid var(--mod);border-radius:12px;overflow:hidden;margin:40px 0;}
+.brief-head{background:var(--mod);color:white;padding:18px 26px;}
+.brief-head .bl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;opacity:.75;margin-bottom:6px;}
+.brief-head h4{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;margin:0;}
+.brief-body{padding:28px 26px;background:white;}
+.brief-section{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--rule);}
+.brief-section:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.brief-section-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:8px;}
+.brief-section p{font-size:15px;margin:0;line-height:1.7;color:#2a2218;}
+.brief-section ul{padding-left:18px;display:flex;flex-direction:column;gap:6px;}
+.brief-section ul li{font-size:15px;line-height:1.6;color:#2a2218;}
+.brief-deliverable{background:var(--ml);border-radius:8px;padding:16px 18px;margin-top:14px;}
+.brief-deliverable p{font-size:14px;font-weight:600;color:var(--mod);margin:0;}
+.div{height:1px;background:var(--rule);margin:40px 0;}
+.rf{border:2px dashed var(--rule);border-radius:12px;padding:30px;margin:40px 0;}
+.rf h4{font-family:'Playfair Display',serif;font-size:17px;margin-bottom:12px;}
+.wl{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+.wln{height:1px;background:var(--rule);}
+.sh{background:var(--ink);color:var(--paper);padding:26px 32px;border-radius:12px;margin-bottom:32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;}
+.sh label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,247,242,.4);display:block;margin-bottom:3px;}
+.sh span{font-size:14px;font-weight:500;}
+.sb{margin-bottom:22px;border-radius:12px;overflow:hidden;border:1px solid var(--rule);}
+.sbh{padding:12px 20px;display:flex;align-items:center;gap:9px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:500;}
+.nh{background:var(--al);color:var(--accent);}
+.oh{background:var(--gl);color:var(--gold);}
+.sbb{padding:20px;background:white;font-size:15px;line-height:1.8;}
+.nt{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;line-height:2;}
+.ot{font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);font-weight:500;}
+.tc2{font-family:'DM Mono',monospace;font-size:11px;color:var(--mid);background:var(--cream);padding:3px 9px;border-radius:4px;margin-left:auto;}
+.wb{background:white;border:1px solid var(--rule);border-radius:12px;padding:48px;margin-bottom:24px;position:relative;box-shadow:0 4px 18px rgba(0,0,0,.04);}
+.wb .pn{position:absolute;bottom:18px;right:24px;font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);}
+.wr{height:1px;background:var(--rule);margin:18px 0;}
+.ab{background:white;border:2px solid var(--ink);border-radius:12px;padding:32px;margin:40px 0;}
+.ab h4{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:18px;font-weight:500;}
+.qi{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--rule);}
+.qi:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.qn{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);margin-bottom:4px;}
+.qt{font-size:15px;margin-bottom:9px;font-weight:500;}
+.qo{display:flex;flex-direction:column;gap:6px;}
+.qop{font-size:14px;color:var(--mid);display:flex;gap:8px;align-items:flex-start;}
+.qop::before{content:'';width:16px;height:16px;border:2px solid var(--rule);border-radius:50%;flex-shrink:0;margin-top:2px;}
+.ak{background:var(--gl);border:1px solid var(--gold);border-radius:7px;padding:14px 18px;margin-top:24px;}
+.ak p{font-size:13px;color:var(--gold);margin:0;}
+/* Image comparison */
+.img-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0;}
+.img-box{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:white;}
+.img-placeholder{height:100px;display:flex;align-items:center;justify-content:center;font-size:32px;}
+.img-label{padding:8px 14px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;}
+.img-desc{padding:12px 14px;font-size:13px;color:var(--mid);line-height:1.6;}
+/* Composition grid */
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0;}
+.comp-box{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:white;}
+.comp-head{padding:10px 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;}
+.comp-body{padding:14px;font-size:13px;color:var(--mid);line-height:1.7;}
+/* Story beat */
+.story-arc{display:flex;gap:0;margin:28px 0;}
+.story-beat{flex:1;border:1px solid var(--rule);padding:16px;text-align:center;position:relative;}
+.story-beat:not(:last-child){border-right:none;}
+.story-beat:first-child{border-radius:10px 0 0 10px;}
+.story-beat:last-child{border-radius:0 10px 10px 0;}
+.story-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);font-weight:600;margin-bottom:8px;}
+.story-title{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;margin-bottom:6px;}
+.story-desc{font-size:12px;color:var(--mid);line-height:1.5;}
+/* Icon types */
+.icon-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:28px 0;}
+.icon-box{border:1px solid var(--rule);border-radius:10px;padding:18px;background:white;text-align:center;}
+.icon-symbol{font-size:28px;margin-bottom:10px;}
+.icon-type{font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);font-weight:600;margin-bottom:6px;}
+.icon-desc{font-size:12px;color:var(--mid);line-height:1.5;}
+/* Case study */
+.cs{border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin:40px 0;}
+.cs-head{background:var(--cream);padding:14px 22px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);font-weight:600;}
+.cs-body{padding:24px 26px;background:white;}
+.cs-body h4{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin:0 0 12px;}
+.cs-body p{font-size:14px;line-height:1.8;color:#2a2218;margin-bottom:12px;}
+.cs-takeaway{border-left:3px solid var(--gold);background:var(--gl);padding:12px 16px;border-radius:0 6px 6px 0;margin-top:8px;}
+.cs-takeaway p{font-size:13px;font-weight:600;color:var(--ink);margin:0;}
+/* Introspection */
+.intro-block{background:var(--ink);border-radius:14px;overflow:hidden;margin:40px 0;}
+.intro-head{background:linear-gradient(135deg,var(--mod),#075985);padding:22px 28px;}
+.intro-head-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.65);font-weight:600;margin-bottom:6px;}
+.intro-head h4{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:white;margin:0;line-height:1.3;}
+.intro-head p{font-size:14px;color:rgba(255,255,255,.7);margin:8px 0 0;line-height:1.6;}
+.intro-body{padding:28px;}
+.intro-q{margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.08);}
+.intro-q:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.intro-q-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:6px;}
+.intro-q-text{font-size:15px;color:rgba(250,247,242,.85);margin-bottom:10px;line-height:1.7;font-weight:500;}
+.intro-q-note{font-size:13px;color:rgba(250,247,242,.4);font-style:italic;margin-bottom:12px;line-height:1.6;}
+.intro-lines{display:flex;flex-direction:column;gap:13px;}
+.intro-line{height:1px;background:rgba(255,255,255,.12);}
+/* Compare table */
+.compare{width:100%;border-collapse:collapse;margin:28px 0;border-radius:10px;overflow:hidden;border:1px solid var(--rule);}
+.compare th{background:var(--ink);color:var(--paper);padding:14px 18px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;text-align:left;}
+.compare td{padding:13px 18px;font-size:14px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.6;}
+.compare tr:last-child td{border-bottom:none;}
+.compare tr:nth-child(even) td{background:rgba(3,105,161,.03);}
+.compare td:first-child{font-weight:600;color:var(--ink);font-family:'DM Mono',monospace;font-size:13px;}
+@media(max-width:700px){
+  nav,.hero,.mbanner{padding-left:24px;padding-right:24px;}
+  .ltabs,.itabs{padding:0 12px;}
+  .wrap{padding:36px 24px;}
+  .tg,.sh,.img-compare,.comp-grid,.icon-grid{grid-template-columns:1fr;}
+  .hero::before{display:none;}
+  .story-arc{flex-direction:column;}
+  .story-beat:first-child{border-radius:10px 10px 0 0;}
+  .story-beat:last-child{border-radius:0 0 10px 10px;}
+  .story-beat:not(:last-child){border-right:1px solid var(--rule);border-bottom:none;}
+}
+</style>
+</head>
+<body>
+
+<nav><span class="s">Digital Design &amp; Media Technology</span><span class="sep">·</span><span>Volume 1 — Design Thinking</span><span class="sep">·</span><span>Module 6 — Images &amp; Graphics</span></nav>
+
+<div class="mbanner">
+  <div><h2>Module 6 — Images &amp; Graphics</h2><p>Lessons 1.20 · 1.21 · 1.22 · 1.23 &nbsp;·&nbsp; Choosing Images · Composition · Visual Storytelling · Icons &amp; Illustration</p></div>
+  <div style="font-size:28px;opacity:.6;">📸</div>
+</div>
+
+<div class="ltabs">
+  <button class="ltab active" onclick="showL('l20',this)">L1.20 — Choosing Images</button>
+  <button class="ltab" onclick="showL('l21',this)">L1.21 — Composition</button>
+  <button class="ltab" onclick="showL('l22',this)">L1.22 — Visual Storytelling</button>
+  <button class="ltab" onclick="showL('l23',this)">L1.23 — Icons &amp; Illustration</button>
+</div>
+
+
+<!-- ═══ LESSON 1.20 — CHOOSING EFFECTIVE IMAGES ═══ -->
+<div id="l20" class="ls active">
+<div class="hero" data-n="1.20">
+  <div class="vt">Volume 1 · Module 6 · Lesson 1.20</div>
+  <h1>Choosing <em>Effective Images</em></h1>
+  <p class="sub">Every image in a design is communicating something. The question is whether what it communicates serves your purpose — or works against it. Most designers treat image selection as an afterthought. Professional designers treat it as one of the most consequential communicative decisions in the entire project.</p>
+  <div class="mr">
+    <div class="mi"><label>Lesson Type</label><span>Concept + Critical Analysis</span></div>
+    <div class="mi"><label>Duration</label><span>50–65 minutes</span></div>
+    <div class="mi"><label>App</label><span>Adobe Stock / any image library</span></div>
+    <div class="mi"><label>Deliverable</label><span>Image Selection Rationale</span></div>
+  </div>
+</div>
+<div class="itabs">
+  <button class="itab active" onclick="showI('l20-les',this,'l20')">📖 Lesson</button>
+  <button class="itab" onclick="showI('l20-scr',this,'l20')">🎬 Video Script</button>
+  <button class="itab" onclick="showI('l20-wb',this,'l20')">📄 Workbook</button>
+  <button class="itab" onclick="showI('l20-ass',this,'l20')">✅ Assessment</button>
+</div>
+
+<div id="l20-les" class="tc active"><div class="wrap">
+
+  <div class="obj"><h4>Learning Objectives — Lesson 1.20</h4><ul class="ol">
+    <li>Apply the five criteria for effective image selection — audience alignment, emotional resonance, authenticity, visual compatibility, and technical quality</li>
+    <li>Write a structured image brief before selecting any image for a design</li>
+    <li>Identify stock clichés and explain why they undermine trust and communication effectiveness</li>
+    <li>Evaluate candidate images systematically and eliminate with specific, principle-grounded reasoning</li>
+    <li>Explain the Airbnb photography case study and its lesson about image quality as a business driver</li>
+  </ul></div>
+
+  <div class="pb">
+    <div class="pb-label">The Problem</div>
+    <h3>You opened the stock library, searched "teamwork," picked the first result that looked professional, and dropped it in. It's a smiling handshake in front of a glass building. You've seen it a thousand times. So has your audience — and they trust it exactly zero.</h3>
+    <p>Generic stock imagery doesn't just fail to communicate — it actively undermines the design's credibility. Audiences are remarkably skilled at detecting the staged handshake, the forced diversity group photo, the clichéd lightbulb-over-head. When they detect inauthenticity, trust drops. Image selection is not a time-saving shortcut task. It is a communicative decision that deserves the same intentional framework as every other design choice.</p>
+    <div class="pb-meta">
+      <div class="pb-meta-item"><label>Context</label><span>Any design project using photography</span></div>
+      <div class="pb-meta-item"><label>Constraint</label><span>Generic imagery undermines the message it's meant to support</span></div>
+      <div class="pb-meta-item"><label>Skill This Lesson Builds</label><span>Image brief writing, systematic selection, critique</span></div>
+    </div>
+  </div>
+
+  <div class="sl">Introduction</div>
+  <h2>An Image Is a Communicative Decision</h2>
+  <p>Every image in a design is communicating something. The question is not whether the image communicates — it always does. The question is whether what it communicates serves your design's purpose or works against it. An image with the wrong demographic excludes the actual audience. An image with the wrong emotional tone contradicts the message the copy is trying to send. An image with a busy background makes the headline illegible. All of these are design failures — created by treating image selection as decoration rather than communication.</p>
+
+  <div class="cb mod"><div class="cl">The Image Brief</div><p>Before selecting any image, write a one-sentence image brief: "This image should show [specific subject/moment] in a way that makes the viewer feel [specific emotion], and should visually communicate [specific brand value or message]." Any image that doesn't meet all three criteria is rejected — regardless of how visually attractive it is.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 1</div>
+  <h2>Five Criteria for Effective Image Selection</h2>
+
+  <h3>1. Audience Alignment</h3>
+  <p>The people, settings, and activities depicted must match the audience's world — or the aspirational world they want to belong to. A financial services product targeting first-generation immigrants should not be illustrated with photographs of wealthy white professionals in corner offices. The visual culture of the image — its production value and aesthetic quality — must also match audience expectations. A premium brand's photography must feel premium. A grassroots community organization's imagery must feel human and unpolished.</p>
+
+  <h3>2. Emotional Resonance</h3>
+  <p>The most effective images produce a specific, identifiable emotional response — not a generic positive feeling, but a precise emotion: warmth, aspiration, reassurance, urgency, wonder, belonging, pride. Before selecting an image, name the emotion the design requires. Then select the image that produces that emotion most directly and authentically.</p>
+
+  <h3>3. Authenticity</h3>
+  <p>Audiences are extraordinarily skilled at detecting inauthenticity — the staged handshake, the forced smile, the diversity-as-performance group photo. Inauthentic imagery undermines trust in the brand it represents. Where authentic photography is available — real customers, real employees, real environments — it almost always outperforms staged stock for credibility and engagement.</p>
+
+  <div class="img-compare">
+    <div class="img-box">
+      <div class="img-placeholder" style="background:#f3f4f6;">📸</div>
+      <div class="img-label" style="background:var(--al);color:var(--accent);">✗ INEFFECTIVE — Stock Cliché</div>
+      <div class="img-desc">Generic smiling professionals shaking hands. No specific audience, no specific emotion, instantly forgettable. Could represent any industry, any brand, any message.</div>
+    </div>
+    <div class="img-box">
+      <div class="img-placeholder" style="background:var(--ml);">🤝</div>
+      <div class="img-label" style="background:var(--gnl);color:var(--green);">✓ EFFECTIVE — Specific and Authentic</div>
+      <div class="img-desc">A candid moment of a specific professional interaction in a real environment — featuring people who look like the target audience, capturing a genuine emotion relevant to the communication goal.</div>
+    </div>
+  </div>
+
+  <h3>4. Visual Compatibility</h3>
+  <p>An image must work with surrounding design elements — not fight with them. A busy background makes overlaid text illegible. Warm orange tones clash with a cool blue brand palette. A subject looking toward the left edge of the frame conflicts with the reading direction of the layout. Image selection includes evaluating how the image will interact with the full composition — not just how it looks in isolation.</p>
+
+  <h3>5. Technical Quality</h3>
+  <p>Print requires a minimum of 300dpi at the intended print size. Web images must be sharp and clear at the sizes they will be displayed. Blurry or pixelated images communicate carelessness and reduce the perceived quality of the entire design. Technical quality is the baseline — it is not a reason to select an image, but its absence is always a reason to reject one.</p>
+
+  <div class="div"></div>
+  <div class="sl">Section 2</div>
+  <h2>The Stock Cliché Problem</h2>
+  <p>Stock photography has produced a canon of clichés so overused that they have become invisible to audiences — or worse, actively counterproductive. The smiling handshake. The lightbulb over the head. The jigsaw puzzle pieces clicking together. The team high-five in the conference room. These images signal "we couldn't find a better image" more loudly than they signal any brand message.</p>
+  <p>The antidote is specificity. The more specifically an image depicts a real moment from the actual world of the brand and audience, the more trust it creates. Specificity is authenticity. Genericity is distrust.</p>
+
+  <div class="cs">
+    <div class="cs-head">Case Study — Image Quality as a Business Driver</div>
+    <div class="cs-body">
+      <h4>How Airbnb's Photography Decision Changed Everything</h4>
+      <p>In its early years, Airbnb listings featured poor-quality photographs taken by property owners with smartphone cameras in unflattering lighting. The product was good — but the imagery made it look unreliable and uninviting. Bookings were low. Leadership realized the photographs were not a secondary concern — they were the primary communication of the brand's value proposition. Prospective guests were making booking decisions almost entirely based on images.</p>
+      <p>Airbnb introduced professional photography as a service for hosts — standardizing lighting, composition, and editing across the platform. The results were immediate and dramatic. Properties with professional photographs received significantly more bookings — studies suggested two to three times more. The images were not just more beautiful. They were more trustworthy, more specific, and more emotionally resonant. They showed what the actual experience would feel like.</p>
+      <div class="cs-takeaway"><p>Image selection and quality is not a cosmetic concern — it is a direct driver of business outcomes. In many contexts, the image is not decoration on the design. The image is the design.</p></div>
+    </div>
+  </div>
+
+  <div class="kt"><h4>Key Vocabulary — Lesson 1.20</h4><div class="tg">
+    <div><div class="tn">Audience Alignment</div><div class="td">The match between the people, settings, and activities depicted in an image and the world of the intended audience.</div><div class="vu"><div class="vu-label">In Use</div><p>"That image has an audience alignment problem — the lifestyle it depicts doesn't match our users' reality or their aspirations. Find something closer to their world."</p></div></div>
+    <div><div class="tn">Emotional Resonance</div><div class="td">The capacity of an image to produce a specific, intended emotional response — beyond generic positivity.</div><div class="vu"><div class="vu-label">In Use</div><p>"The brief calls for reassurance, not aspiration. These images feel ambitious and striving — that's the wrong emotion for someone who is anxious and needs to feel safe."</p></div></div>
+    <div><div class="tn">Authenticity</div><div class="td">The quality of feeling real, unstaged, and genuinely representative — the primary trust signal in photography.</div><div class="vu"><div class="vu-label">In Use</div><p>"This is a staged stock shot and the audience will clock it immediately. Can we get real photography? Even a phone photo of actual users beats this for credibility."</p></div></div>
+    <div><div class="tn">Visual Compatibility</div><div class="td">The degree to which an image works harmoniously with surrounding design elements — color, typography, composition, and reading direction.</div><div class="vu"><div class="vu-label">In Use</div><p>"The warm tones in this image are fighting the cool blue palette. Either recolor the image or replace it with one that has compatible color temperature."</p></div></div>
+    <div><div class="tn">Image Brief</div><div class="td">A one-sentence directive defining the specific subject, emotion, and brand value an image must communicate — written before searching.</div><div class="vu"><div class="vu-label">In Use</div><p>"Write the image brief before you open the stock library. Without the brief, you're browsing — not selecting."</p></div></div>
+    <div><div class="tn">Stock Cliché</div><div class="td">A widely overused stock image concept — the handshake, the lightbulb, the puzzle pieces — that signals genericity rather than specific meaning.</div><div class="vu"><div class="vu-label">In Use</div><p>"That's a stock cliché — any audience who has been on the internet for more than ten minutes has seen it a hundred times. It creates the opposite of trust."</p></div></div>
+  </div></div>
+
+  <div class="brief">
+    <div class="brief-head">
+      <div class="bl">Design Brief — Lesson 1.20</div>
+      <h4>Image Selection Rationale: Systematic Elimination</h4>
+    </div>
+    <div class="brief-body">
+      <div class="brief-section">
+        <div class="brief-section-label">The Scenario</div>
+        <p>You are selecting the hero image for a healthcare clinic's website — a clinic serving elderly residents in an urban neighborhood. The image will dominate the homepage and be the first visual impression the audience has of the clinic.</p>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">The Problem</div>
+        <p>You cannot choose by feel or by "what looks good." You must be able to explain every selection decision — and every elimination — using the five criteria. This exercise builds that systematic judgment muscle.</p>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">The Constraints</div>
+        <ul>
+          <li>Write the image brief first: "This image should show [subject/moment] in a way that makes the viewer feel [emotion], communicating [brand value]."</li>
+          <li>Find or describe three candidate images from any stock source</li>
+          <li>For each, evaluate all five criteria: audience alignment, emotional resonance, authenticity, visual compatibility with a clean white layout, technical quality</li>
+          <li>Eliminate one based on its weakest criterion — name the specific failure</li>
+          <li>Eliminate the second based on comparison to the finalist — explain why the finalist wins</li>
+          <li>Write a two-paragraph rationale for your chosen image explaining how it meets all five criteria</li>
+        </ul>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">Your Deliverable</div>
+        <div class="brief-deliverable"><p>Image Brief + three evaluated candidates + two elimination rationales + two-paragraph final selection rationale.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rf"><h4>Journal Reflection — Lesson 1.20</h4>
+    <p style="font-size:15px;font-style:italic;">Find an advertisement or website where the image selection feels wrong — where the photograph seems to contradict or undermine the message rather than support it. Describe the mismatch: what does the image actually communicate vs. what the design intends? Which of the five criteria does it fail? What image would you select instead, and why?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+  </div>
+
+</div></div>
+
+<!-- VIDEO SCRIPT 1.20 -->
+<div id="l20-scr" class="tc"><div class="wrap">
+  <div class="sl">Concept Video Script — Lesson 1.20</div>
+  <h2>Five Criteria for Images That Communicate</h2>
+  <p style="color:var(--mid);margin-bottom:28px;font-size:14px;">Stock cliché vs. authentic photography — systematic selection demonstration</p>
+  <div class="sh">
+    <div><label>Video Type</label><span>Concept / Image Comparison</span></div>
+    <div><label>Target Length</label><span>4:30 – 5:00 minutes</span></div>
+    <div><label>Key Visual</label><span>Cliché vs. authentic comparison; five criteria cards</span></div>
+    <div><label>Music Tone</label><span>Warm, considered, visual</span></div>
+    <div><label>Production</label><span>Synthesia + After Effects</span></div>
+    <div><label>Narration</label><span>ElevenLabs or AI Avatar</span></div>
+  </div>
+  <h3>OPENING</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:00–0:42</span></div><div class="sbb nt">Every image in a design is communicating something. The question is whether what it communicates serves your design's purpose — or works against it. Most designers treat image selection as an afterthought. They pick what looks good, or what was first in the search results. Professional designers treat image selection as a critical communicative decision — driven by the same criteria as every other design choice. In this lesson you are going to learn five criteria that turn image selection from a guess into a system.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Split: generic stock handshake vs. authentic brand photography ]
+[ Title: "Lesson 1.20 — Choosing Effective Images" ]
+[ Five criteria appear: Audience · Emotion · Authenticity · Compatibility · Quality ]</div></div>
+  <h3>SEGMENT 1 — Five Criteria</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:43–2:30</span></div><div class="sbb nt">Criterion one: audience alignment. The people, settings, and activities in the image must match the audience's world — or the world they aspire to. If your design targets women over 50 and every image shows 25-year-old athletes, you've told your actual audience: this is not for you. Criterion two: emotional resonance. Not a generic positive feeling — a specific emotion. Warmth. Reassurance. Urgency. Belonging. Name the emotion before searching. Criterion three: authenticity. Audiences are extraordinarily skilled at detecting staged inauthenticity. The forced smile. The diversity-as-performance group photo. Inauthentic imagery kills trust. Criterion four: visual compatibility. The image must work with the design around it. Busy backgrounds make text illegible. Warm orange tones fight a cool blue palette. Evaluate images in context — not just in isolation. And criterion five: technical quality. Print needs 300dpi at print size. Web needs sharpness at display size. Blurry images communicate carelessness and undermine everything around them.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Five criteria cards animate in sequence ]
+[ Failure examples shown for each criterion ]
+[ "Image Brief" template shown ]</div></div>
+  <h3>SEGMENT 2 — Airbnb Case + Exercise</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">2:31–4:30</span></div><div class="sbb nt">Airbnb proved what this lesson teaches at scale. Early listings were photographed badly. The product was good — but the images said otherwise. Bookings were low. Their solution was not to change the product. It was to change the images. Professional photography, consistent standards. The result: properties with professional photographs received two to three times more bookings. Not because they were more beautiful. Because they were more trustworthy, more specific, and more emotionally resonant. In many contexts, the image is the design. For your exercise: apply all five criteria to three candidate images for a specific brief. Eliminate two with specific reasoning. Write the rationale for the one you chose. See you in Lesson 1.21.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Airbnb smartphone photo vs. professional photo comparison ]
+[ Exercise card: "Exercise 1.20 — Image Selection Rationale" ]
+[ "Next: Lesson 1.21 — Understanding Composition" ]</div></div>
+</div></div>
+
+<!-- WORKBOOK 1.20 -->
+<div id="l20-wb" class="tc"><div class="wrap">
+  <div class="wb">
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:6px;font-weight:500;">Volume 1 · Module 6 · Lesson 1.20</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:4px;">Choosing Effective Images</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:20px;">Image Selection Rationale — Five Criteria Evaluation</div>
+    <div class="wr"></div>
+    <div style="background:var(--ml);border-left:4px solid var(--mod);padding:16px 18px;border-radius:0 8px 8px 0;margin-bottom:20px;">
+      <p style="font-size:13px;margin:0;font-style:italic;">"This image should show <span style="border-bottom:1px solid var(--mod);display:inline-block;min-width:160px;">&nbsp;</span> in a way that makes the viewer feel <span style="border-bottom:1px solid var(--mod);display:inline-block;min-width:120px;">&nbsp;</span>, and should visually communicate <span style="border-bottom:1px solid var(--mod);display:inline-block;min-width:140px;">&nbsp;</span>."</p>
+    </div>
+    <div style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:16px;">
+      <div style="background:var(--mod);color:white;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;">
+        <div style="padding:8px 12px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-right:1px solid rgba(255,255,255,.2);">Criterion</div>
+        <div style="padding:8px 12px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-right:1px solid rgba(255,255,255,.2);">Image A</div>
+        <div style="padding:8px 12px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-right:1px solid rgba(255,255,255,.2);">Image B</div>
+        <div style="padding:8px 12px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;">Image C</div>
+      </div>
+      <div style="display:flex;flex-direction:column;">
+        <div style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;border-bottom:1px solid var(--rule);"><div style="padding:10px 12px;border-right:1px solid var(--rule);font-size:13px;font-weight:600;">Audience Alignment</div><div style="padding:10px 12px;border-right:1px solid var(--rule);"></div><div style="padding:10px 12px;border-right:1px solid var(--rule);"></div><div style="padding:10px 12px;"></div></div>
+        <div style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;border-bottom:1px solid var(--rule);"><div style="padding:10px 12px;border-right:1px solid var(--rule);font-size:13px;font-weight:600;">Emotional Resonance</div><div style="padding:10px 12px;border-right:1px solid var(--rule);"></div><div style="padding:10px 12px;border-right:1px solid var(--rule);"></div><div style="padding:10px 12px;"></div></div>
+        <div style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;border-bottom:1px solid var(--rule);"><div style="padding:10px 12px;border-right:1px solid var(--rule);font-size:13px;font-weight:600;">Authenticity</div><div style="padding:10px 12px;border-right:1px solid var(--rule);"></div><div style="padding:10px 12px;border-right:1px solid var(--rule);"></div><div style="padding:10px 12px;"></div></div>
+        <div style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;border-bottom:1px solid var(--rule);"><div style="padding:10px 12px;border-right:1px solid var(--rule);font-size:13px;font-weight:600;">Visual Compatibility</div><div style="padding:10px 12px;border-right:1px solid var(--rule);"></div><div style="padding:10px 12px;border-right:1px solid var(--rule);"></div><div style="padding:10px 12px;"></div></div>
+        <div style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;"><div style="padding:10px 12px;border-right:1px solid var(--rule);font-size:13px;font-weight:600;">Technical Quality</div><div style="padding:10px 12px;border-right:1px solid var(--rule);"></div><div style="padding:10px 12px;border-right:1px solid var(--rule);"></div><div style="padding:10px 12px;"></div></div>
+      </div>
+    </div>
+    <p style="font-size:13px;font-weight:600;margin-bottom:8px;">First elimination — which image and why (name the specific criterion failure):</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div></div>
+    <p style="font-size:13px;font-weight:600;margin:14px 0 8px;">Second elimination — why the finalist wins:</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div></div>
+    <p style="font-size:13px;font-weight:600;margin:14px 0 8px;">Final selection rationale (two paragraphs — how it meets all five criteria):</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+    <div class="pn">Digital Design &amp; Media Technology · Volume 1 · Page 20</div>
+  </div>
+</div></div>
+
+<!-- ASSESSMENT 1.20 -->
+<div id="l20-ass" class="tc"><div class="wrap">
+  <div class="sl">Lesson 1.20 Assessment</div>
+  <h2>Choosing Effective Images — Knowledge Check</h2>
+  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
+    <div class="qi"><div class="qn">Q01</div><div class="qt">A financial services brand's imagery exclusively shows wealthy white professionals in corner offices — but their target audience is first-generation immigrants. This is a failure of:</div><div class="qo">
+      <div class="qop">Technical quality — the images are low resolution</div>
+      <div class="qop">Audience alignment — the imagery does not reflect the world or aspirations of the actual audience</div>
+      <div class="qop">Emotional resonance — the images trigger the wrong emotions</div>
+      <div class="qop">Visual compatibility — the images conflict with the brand's color palette</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q02</div><div class="qt">The image brief structure "This image should show [subject] in a way that makes the viewer feel [emotion], communicating [brand value]" is useful because:</div><div class="qo">
+      <div class="qop">It limits the search to a single category of stock photography</div>
+      <div class="qop">It forces a definition of communicative purpose before searching — turning selection from browsing into systematic evaluation</div>
+      <div class="qop">It satisfies client approval processes by documenting image rationale</div>
+      <div class="qop">It ensures images meet technical quality standards before selection</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q03</div><div class="qt">Audiences are described as "extraordinarily skilled at detecting inauthenticity." The practical implication for designers is:</div><div class="qo">
+      <div class="qop">All photography should be shot in black and white to obscure staging</div>
+      <div class="qop">Real photography of actual customers, employees, and environments almost always outperforms staged stock for credibility and trust</div>
+      <div class="qop">Authentication certificates should accompany all brand photography</div>
+      <div class="qop">Illustration should replace photography wherever possible to avoid authenticity concerns</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q04</div><div class="qt">The Airbnb photography case study demonstrates that:</div><div class="qo">
+      <div class="qop">Professional photography is always more expensive than the results justify</div>
+      <div class="qop">In many contexts, image quality is not a cosmetic concern but a direct driver of business outcomes — the image is the design</div>
+      <div class="qop">Users prefer amateur photography because it appears more authentic</div>
+      <div class="qop">Photography standards should only be upgraded after launching a product</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q05</div><div class="qt">Visual compatibility requires evaluating an image:</div><div class="qo">
+      <div class="qop">In isolation — as it appears on its own before being placed in the layout</div>
+      <div class="qop">In context — how it interacts with surrounding type, color, and layout elements in the actual design</div>
+      <div class="qop">Against a database of brand-approved imagery from previous campaigns</div>
+      <div class="qop">Only for color accuracy against the brand palette — other compatibility factors are secondary</div>
+    </div></div>
+    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
+  </div>
+  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
+    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.20: which of the five criteria was most decisive in your elimination decisions? Explain with specific reference to what failed in the image you eliminated first.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q07</div><div class="qt">A client has selected a hero image for their nonprofit's website. It's technically excellent photography — sharp, well-lit, professional. But it shows volunteers who look nothing like the community the nonprofit serves. Explain the problem using the five criteria and how you would address it professionally.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q08</div><div class="qt">Connect image selection to color theory from Module 5. How does an image's color temperature and saturation level affect its visual compatibility with a given brand palette?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+  </div>
+</div></div>
+</div><!-- end l20 -->
+
+
+<!-- ═══ LESSON 1.21 — UNDERSTANDING COMPOSITION ═══ -->
+<div id="l21" class="ls">
+<div class="hero" data-n="1.21">
+  <div class="vt">Volume 1 · Module 6 · Lesson 1.21</div>
+  <h1>Understanding <em>Composition</em></h1>
+  <p class="sub">Your eye doesn't wander randomly through an image. It follows a path — created by deliberate decisions about placement, emphasis, and space. Composition is the control of that path. This lesson teaches the three foundational compositional tools: the rule of thirds, focal points, and visual flow.</p>
+  <div class="mr">
+    <div class="mi"><label>Lesson Type</label><span>Concept + Studio</span></div>
+    <div class="mi"><label>Duration</label><span>50–65 minutes</span></div>
+    <div class="mi"><label>App</label><span>Illustrator / Photoshop — crop tool</span></div>
+    <div class="mi"><label>Deliverable</label><span>Three-crop composition study</span></div>
+  </div>
+</div>
+<div class="itabs">
+  <button class="itab active" onclick="showI('l21-les',this,'l21')">📖 Lesson</button>
+  <button class="itab" onclick="showI('l21-scr',this,'l21')">🎬 Video Script</button>
+  <button class="itab" onclick="showI('l21-wb',this,'l21')">📄 Workbook</button>
+  <button class="itab" onclick="showI('l21-ass',this,'l21')">✅ Assessment</button>
+</div>
+
+<div id="l21-les" class="tc active"><div class="wrap">
+
+  <div class="obj"><h4>Learning Objectives — Lesson 1.21</h4><ul class="ol">
+    <li>Apply the rule of thirds to place subjects at natural positions of visual prominence</li>
+    <li>Identify and strengthen the focal point of any composition using contrast, size, isolation, or sharpness</li>
+    <li>Trace and describe the visual flow of any image — and identify the compositional tools creating it</li>
+    <li>Use cropping as a deliberate compositional decision — not just a sizing operation</li>
+    <li>Analyze why a composition works or fails by reference to these three tools</li>
+  </ul></div>
+
+  <div class="pb">
+    <div class="pb-label">The Problem</div>
+    <h3>You placed the subject dead center in every image. The compositions feel static, stiff, and unengaging — but you don't know why. The subject is clearly visible. What's wrong?</h3>
+    <p>Centered placement is the compositional default of untrained designers — and it almost always produces less engaging results than deliberate off-center placement. The human eye is wired to find visual tension interesting and symmetrical stability less engaging. Composition is the control of that wiring — and the rule of thirds, focal points, and visual flow are the three tools that give you that control deliberately rather than accidentally.</p>
+    <div class="pb-meta">
+      <div class="pb-meta-item"><label>Context</label><span>Any design using photography or illustration</span></div>
+      <div class="pb-meta-item"><label>Constraint</label><span>The eye follows a path — composition directs it</span></div>
+      <div class="pb-meta-item"><label>Skill This Lesson Builds</label><span>Compositional analysis, cropping, visual flow</span></div>
+    </div>
+  </div>
+
+  <div class="sl">Introduction</div>
+  <h2>Every Frame Is a Decision About Attention</h2>
+  <p>Composition is the arrangement of visual elements within a frame — controlling where the eye enters, what it finds, and how it moves. When composition works, you don't notice it — you are simply absorbed. When it fails, you feel restless or bored without knowing why. That discomfort is the eye searching for a path and not finding one. Composition creates the path.</p>
+
+  <div class="div"></div>
+  <div class="sl">Section 1</div>
+  <h2>The Rule of Thirds</h2>
+  <p>The rule of thirds divides the frame into a 3×3 grid — two horizontal lines and two vertical lines creating nine equal sections. The four intersection points of these lines are called <strong>power points</strong> — the positions in any frame where the eye naturally rests and finds visual prominence most satisfying.</p>
+  <p>Placing the primary subject at one of the four power points — rather than at the dead center of the frame — creates natural visual interest through asymmetry. The remaining space becomes negative space, which gives the composition room to breathe and gives the eye somewhere to move. The rule is not absolute — centered compositions work brilliantly in contexts of deliberate symmetry and formality — but as a default, the rule of thirds produces more visually dynamic results than centered placement in most contexts.</p>
+
+  <div class="comp-grid">
+    <div class="comp-box">
+      <div class="comp-head" style="background:var(--al);color:var(--accent);">✗ Centered Placement</div>
+      <div class="comp-body">Subject at exact center. Static, formal, and slightly tense — the composition has nowhere for the eye to move. Works for intentional symmetry (portraits, formal documents) but becomes rigid when applied by default.</div>
+    </div>
+    <div class="comp-box">
+      <div class="comp-head" style="background:var(--gnl);color:var(--green);">✓ Rule of Thirds Placement</div>
+      <div class="comp-body">Subject at a power point. Dynamic — the asymmetry creates tension that the eye finds engaging. Surrounding negative space allows the composition to breathe and the subject to feel placed rather than trapped.</div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+  <div class="sl">Section 2</div>
+  <h2>Focal Points and Visual Flow</h2>
+
+  <h3>Focal Points — Where the Eye Lands First</h3>
+  <p>A focal point is the element in a composition that the eye finds first — the anchor from which everything else is experienced. Strong focal points are created by: <strong>contrast</strong> (an element that differs from its surroundings in value, color, or texture), <strong>size</strong> (an element larger than everything else), <strong>isolation</strong> (an element surrounded by negative space), or <strong>sharpness</strong> (an in-focus element against a blurred background).</p>
+  <p>Every strong composition has one clear primary focal point. A composition without a clear focal point forces the eye to wander randomly. A composition with too many competing focal points creates visual exhaustion. One dominant focal point, clearly established, is the goal.</p>
+
+  <h3>Visual Flow — The Eye's Journey</h3>
+  <p>Visual flow is the path the eye takes through a composition after finding the focal point. It is created and directed by leading lines — lines within the image that guide the eye toward or through the composition. A road receding toward the horizon, a row of columns, an arm pointing, a shoreline curving — all create leading lines that direct visual movement. S-curves and diagonals create dynamic energy. Horizontal and vertical lines create stability. Circular forms contain the eye within the composition.</p>
+
+  <div class="cb gold"><div class="cl">The Crop as Compositional Tool</div><p>Cropping is not a sizing operation — it is a compositional decision. Every crop changes focal point emphasis, negative space, leading lines, and visual flow. A considered crop can transform a mediocre photograph into a powerful design element. Always crop with the composition in mind — not just the size requirement.</p></div>
+
+  <div class="kt"><h4>Key Vocabulary — Lesson 1.21</h4><div class="tg">
+    <div><div class="tn">Rule of Thirds</div><div class="td">A compositional guideline dividing the frame into a 3×3 grid — placing key subjects at intersection power points for natural visual prominence.</div><div class="vu"><div class="vu-label">In Use</div><p>"The subject is dead center — it feels static. Move it to the upper-left power point and let the negative space on the right give the composition somewhere to breathe."</p></div></div>
+    <div><div class="tn">Focal Point</div><div class="td">The element the eye finds first in a composition — established through contrast, size, isolation, or sharpness.</div><div class="vu"><div class="vu-label">In Use</div><p>"Where is the focal point? I can't find one — three elements are competing at equal visual weight. Choose one and subordinate the other two."</p></div></div>
+    <div><div class="tn">Visual Flow</div><div class="td">The path the eye takes through a composition after finding the focal point — directed by leading lines, shapes, and tonal sequences.</div><div class="vu"><div class="vu-label">In Use</div><p>"The leading lines in this image are pointing toward the right edge and out of the frame — the eye is escaping. Flip the image horizontally."</p></div></div>
+    <div><div class="tn">Leading Lines</div><div class="td">Lines within an image that guide the viewer's eye toward the focal point or through the composition deliberately.</div><div class="vu"><div class="vu-label">In Use</div><p>"The road in this image creates a leading line that takes the eye straight to the product. That's the composition — don't crop it out."</p></div></div>
+    <div><div class="tn">Negative Space</div><div class="td">The empty areas surrounding subjects — creating breathing room, emphasis, and visual rest. Not empty — communicatively active.</div><div class="vu"><div class="vu-label">In Use</div><p>"Leave more negative space above the subject — it gives the headline room to breathe and makes the subject feel less trapped."</p></div></div>
+    <div><div class="tn">Power Points</div><div class="td">The four intersections of the rule of thirds grid — the positions of natural visual prominence in any frame.</div><div class="vu"><div class="vu-label">In Use</div><p>"Place the eye line at the upper power points — that's the natural position for a portrait subject and gives the face the weight it needs."</p></div></div>
+  </div></div>
+
+  <div class="ex"><div class="exh"><span class="exb">Exercise 1.21</span><h4>Composition Study — Three Crops</h4></div>
+    <p>Take one photograph — your own or from any source — and crop it three different ways, each time intentionally changing the compositional reading of the image.</p>
+    <ol>
+      <li>Identify the original composition's focal point, visual flow, and leading lines. Describe what the eye does when it enters.</li>
+      <li>Crop 1 — Rule of Thirds: crop so the primary subject sits at one of the four power points. How does this change the feel compared to the original?</li>
+      <li>Crop 2 — Negative space emphasis: crop to maximize negative space on one side. What does the additional negative space communicate? How does it change the emotional tone?</li>
+      <li>Crop 3 — Close detail: crop tightly to an expressive detail rather than the whole subject. What is gained? What is lost? What new story does the close crop tell?</li>
+      <li>Write an annotation for each crop: what compositional choice was made, what effect it creates, and which serves a specific design brief of your choice.</li>
+    </ol>
+    <div class="tt">⏱ Estimated time: 45–55 minutes</div>
+  </div>
+
+  <div class="rf"><h4>Journal Reflection — Lesson 1.21</h4>
+    <p style="font-size:15px;font-style:italic;">Look at a photograph you consider beautiful or compelling. Trace the path your eye takes through it. Where does it enter? Where does it go first? What leads it from one element to the next? Can you identify the compositional tools — rule of thirds, leading lines, focal point, negative space — that create that path? What does this analysis reveal about what makes the image work?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+  </div>
+
+</div></div>
+
+<!-- VIDEO SCRIPT 1.21 -->
+<div id="l21-scr" class="tc"><div class="wrap">
+  <div class="sl">Concept Video Script — Lesson 1.21</div>
+  <h2>Rule of Thirds, Focal Points, Visual Flow</h2>
+  <p style="color:var(--mid);margin-bottom:28px;font-size:14px;">Grid overlay + eye-tracking animation — the architecture of attention</p>
+  <div class="sh">
+    <div><label>Video Type</label><span>Concept / Composition Demo</span></div>
+    <div><label>Target Length</label><span>4:30 – 5:00 minutes</span></div>
+    <div><label>Key Visual</label><span>Grid overlays + eye path animation on real images</span></div>
+    <div><label>Music Tone</label><span>Visual, measured, absorbing</span></div>
+    <div><label>Production</label><span>After Effects with image overlays</span></div>
+    <div><label>Narration</label><span>ElevenLabs or AI Avatar</span></div>
+  </div>
+  <h3>OPENING</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:00–0:38</span></div><div class="sbb nt">Your eye doesn't wander randomly through an image. It follows a path — created by decisions the designer made about where to place things, what to emphasize, and where to leave space. Composition is the control of that path. When it works, you don't notice it — you are simply absorbed in the image. When it fails, you feel restless or bored without knowing why. Today you are going to learn three tools that give you control over that path: the rule of thirds, focal points, and visual flow.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Eye tracking path animated through a well-composed image ]
+[ Title: "Lesson 1.21 — Understanding Composition" ]</div></div>
+  <h3>SEGMENT 1 — Rule of Thirds</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:39–1:45</span></div><div class="sbb nt">The rule of thirds divides the frame into a three-by-three grid. The four intersection points — the power points — are where the eye naturally rests. Placing your primary subject at one of these four points creates natural visual interest through asymmetry. Look at this image — subject dead center. Static. Locked. Now I move the subject to the upper-left power point. Immediately the image breathes. The negative space on the right gives the eye somewhere to move, and the asymmetry creates dynamic tension. The rule is not absolute — centered compositions work brilliantly in deliberate symmetry contexts. But as a default, rule of thirds produces more engaging results than centered placement in most situations.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Rule of thirds grid overlaid on image ]
+[ Subject centered → moved to power point — before/after comparison ]
+[ "Power Points" labeled at four intersections ]</div></div>
+  <h3>SEGMENT 2 — Focal Points + Visual Flow</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">1:46–3:20</span></div><div class="sbb nt">Focal points: the eye needs to know where to land first. Strong focal points are created by contrast — an element different from everything around it. By size — the largest element dominates. By isolation — a subject surrounded by negative space commands attention. And by sharpness — a sharp subject against a blurred background is immediately primary. One focal point. If two or three elements compete equally, the eye doesn't know what to do — it cycles anxiously between them. Visual flow is the path the eye takes after the focal point. Leading lines create this path — a road, a shoreline, a row of columns, an arm pointing. Diagonal lines create energy. Horizontals create calm. Circular forms contain the eye. Your job as a designer is to identify these lines in images and make sure they are working for the composition — pointing into the design, not out of it.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Four focal point methods labeled on images ]
+[ Eye path traced over leading lines in multiple images ]
+[ "One dominant focal point" vs. "three competing" — comparison ]</div></div>
+  <h3>SEGMENT 3 — Exercise</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">3:21–4:40</span></div><div class="sbb nt">For your exercise, take one photograph and crop it three different ways. Rule of thirds placement. Negative space emphasis. Close detail. For each crop, write: what compositional choice was made, what effect it creates, and which serves a specific design brief. This is the exercise that teaches you that cropping is not a sizing operation — it is a compositional decision with real communicative consequences. See you in Lesson 1.22.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Three-crop demonstration on one photograph ]
+[ Exercise card: "Exercise 1.21 — Three-Crop Composition Study" ]
+[ "Next: Lesson 1.22 — Visual Storytelling" ]</div></div>
+</div></div>
+
+<!-- WORKBOOK 1.21 -->
+<div id="l21-wb" class="tc"><div class="wrap">
+  <div class="wb">
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:6px;font-weight:500;">Volume 1 · Module 6 · Lesson 1.21</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:4px;">Understanding Composition</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:20px;">Three-Crop Composition Study</div>
+    <div class="wr"></div>
+    <p style="font-size:13px;font-weight:600;margin-bottom:12px;">Original image analysis (before any cropping):</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;">
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:10px;"><p style="font-size:10px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Focal point:</p><div class="wln"></div></div>
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:10px;"><p style="font-size:10px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Leading lines:</p><div class="wln"></div></div>
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:10px;"><p style="font-size:10px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Visual flow direction:</p><div class="wln"></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="border:2px solid var(--mod);border-radius:8px;overflow:hidden;">
+        <div style="background:var(--mod);color:white;padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Crop 1 — Rule of Thirds Placement</div>
+        <div style="padding:14px;"><p style="font-size:11px;color:var(--mid);margin-bottom:6px;">Where did you place the subject? How does it change from the original?</p><div class="wl"><div class="wln"></div><div class="wln"></div></div></div>
+      </div>
+      <div style="border:2px solid var(--gold);border-radius:8px;overflow:hidden;">
+        <div style="background:var(--gold);color:white;padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Crop 2 — Negative Space Emphasis</div>
+        <div style="padding:14px;"><p style="font-size:11px;color:var(--mid);margin-bottom:6px;">What does the negative space communicate? How does it change the emotional tone?</p><div class="wl"><div class="wln"></div><div class="wln"></div></div></div>
+      </div>
+      <div style="border:2px solid var(--green);border-radius:8px;overflow:hidden;">
+        <div style="background:var(--green);color:white;padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Crop 3 — Close Detail</div>
+        <div style="padding:14px;"><p style="font-size:11px;color:var(--mid);margin-bottom:6px;">What is gained? What is lost? What new story does the close crop tell?</p><div class="wl"><div class="wln"></div><div class="wln"></div></div></div>
+      </div>
+    </div>
+    <p style="font-size:13px;font-weight:600;margin:16px 0 8px;">Which crop best serves your specific design brief and why:</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+    <div class="pn">Digital Design &amp; Media Technology · Volume 1 · Page 21</div>
+  </div>
+</div></div>
+
+<!-- ASSESSMENT 1.21 -->
+<div id="l21-ass" class="tc"><div class="wrap">
+  <div class="sl">Lesson 1.21 Assessment</div>
+  <h2>Understanding Composition — Knowledge Check</h2>
+  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
+    <div class="qi"><div class="qn">Q01</div><div class="qt">The "power points" in the rule of thirds are:</div><div class="qo">
+      <div class="qop">The four corners of the frame — where maximum visual tension is created</div>
+      <div class="qop">The four intersections of the 3×3 grid lines — the positions of natural visual prominence</div>
+      <div class="qop">The exact center and four midpoints of the frame edges</div>
+      <div class="qop">The areas of highest contrast in any composition</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q02</div><div class="qt">A composition has three elements competing at equal visual weight. The result is:</div><div class="qo">
+      <div class="qop">A balanced, professional composition communicating equal importance of all three elements</div>
+      <div class="qop">Visual exhaustion — the eye cycles anxiously between competing focal points without finding a clear path</div>
+      <div class="qop">A dynamic, energy-filled layout ideal for active brands</div>
+      <div class="qop">An appropriate treatment for informational design where all content is equally important</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q03</div><div class="qt">Leading lines in composition are used to:</div><div class="qo">
+      <div class="qop">Create visual boundaries between different sections of a design</div>
+      <div class="qop">Guide the viewer's eye toward the focal point or through the composition deliberately</div>
+      <div class="qop">Indicate the borders within which design elements must be placed</div>
+      <div class="qop">Connect captions to the images they describe</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q04</div><div class="qt">Negative space in composition is described as "communicatively active" because:</div><div class="qo">
+      <div class="qop">Negative space must be filled with secondary content to be professionally acceptable</div>
+      <div class="qop">Empty areas create breathing room, emphasis, and visual rest — actively serving the composition rather than being neutral absence</div>
+      <div class="qop">Negative space is defined by its relationship to positive elements and has no independent communicative function</div>
+      <div class="qop">It represents a missed opportunity that skilled designers avoid</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q05</div><div class="qt">Cropping is described as a compositional decision rather than a sizing operation because:</div><div class="qo">
+      <div class="qop">Cropping software is categorized under composition tools in design applications</div>
+      <div class="qop">Every crop changes focal point emphasis, negative space, leading lines, and visual flow — with real communicative consequences for how the image reads</div>
+      <div class="qop">Cropping always requires approval from the original photographer</div>
+      <div class="qop">Sizing operations are performed after composition decisions are finalized</div>
+    </div></div>
+    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
+  </div>
+  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
+    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.21: describe the crop that most changed the emotional reading of the image. What specific compositional change created that shift in feeling?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q07</div><div class="qt">A designer places a person looking toward the left edge of the frame in a layout where the headline appears on the right. What compositional problem does this create and how would you resolve it?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q08</div><div class="qt">Connect composition principles to color temperature from Lesson 1.17. How can you use both tools together to direct the viewer's eye toward the most important element in a composition?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+  </div>
+</div></div>
+</div><!-- end l21 -->
+
+
+<!-- ═══ LESSON 1.22 — VISUAL STORYTELLING ═══ -->
+<div id="l22" class="ls">
+<div class="hero" data-n="1.22">
+  <div class="vt">Volume 1 · Module 6 · Lesson 1.22</div>
+  <h1>Visual <em>Storytelling</em></h1>
+  <p class="sub">The human brain is a narrative machine. It does not see images — it reads them. Every photograph your audience encounters, they automatically construct context, character, cause, and consequence. Designers who understand this don't just select images that look good. They select images that trigger the right story in the viewer's mind.</p>
+  <div class="mr">
+    <div class="mi"><label>Lesson Type</label><span>Concept + Applied</span></div>
+    <div class="mi"><label>Duration</label><span>55–65 minutes</span></div>
+    <div class="mi"><label>App</label><span>Illustrator — layout and sequencing</span></div>
+    <div class="mi"><label>Deliverable</label><span>Three-image story arc with narrative rationale</span></div>
+  </div>
+</div>
+<div class="itabs">
+  <button class="itab active" onclick="showI('l22-les',this,'l22')">📖 Lesson</button>
+  <button class="itab" onclick="showI('l22-scr',this,'l22')">🎬 Video Script</button>
+  <button class="itab" onclick="showI('l22-wb',this,'l22')">📄 Workbook</button>
+  <button class="itab" onclick="showI('l22-ass',this,'l22')">✅ Assessment</button>
+</div>
+
+<div id="l22-les" class="tc active"><div class="wrap">
+
+  <div class="obj"><h4>Learning Objectives — Lesson 1.22</h4><ul class="ol">
+    <li>Identify the five narrative elements present in any strong photographic image: context, character, tension, emotion, and implication</li>
+    <li>Explain the concept of the decisive moment and apply it to image selection</li>
+    <li>Design a three-image before/transformation/after story arc for a brand</li>
+    <li>Explain how point of view (camera position) changes the viewer's narrative relationship to a story</li>
+    <li>Analyze why brand campaigns that show the story rather than the product are more persuasive</li>
+  </ul></div>
+
+  <div class="pb">
+    <div class="pb-label">The Problem</div>
+    <h3>Your product photography is perfect — beautifully lit, technically excellent, professionally composed. Your audience looks at it and feels nothing. Because a perfect picture of a product is not a story. And only stories create emotional investment.</h3>
+    <p>Product photography communicates what something looks like. Visual storytelling communicates what something feels like — and more importantly, what it feels like to use it, own it, or experience the transformation it enables. The shift from product photography to visual storytelling is one of the most powerful moves a designer can make — and this lesson gives you the framework to do it deliberately.</p>
+    <div class="pb-meta">
+      <div class="pb-meta-item"><label>Context</label><span>Brand campaigns, web design, marketing communication</span></div>
+      <div class="pb-meta-item"><label>Constraint</label><span>Images tell stories whether you intend them to or not</span></div>
+      <div class="pb-meta-item"><label>Skill This Lesson Builds</label><span>Narrative image analysis, story arc construction, POV</span></div>
+    </div>
+  </div>
+
+  <div class="sl">Introduction</div>
+  <h2>Every Image Tells a Story — Whether You Intend It to or Not</h2>
+  <p>When you look at a photograph of an empty park bench at dusk, your brain immediately begins asking: who sat there? Where did they go? What happened? This is involuntary — you cannot look at an image without your narrative brain constructing a story from it. The question for designers is not whether images tell stories. They always do. The question is whether the story your image tells is the one you intended.</p>
+
+  <div class="div"></div>
+  <div class="sl">Section 1</div>
+  <h2>The Five Narrative Elements in a Single Image</h2>
+
+  <div class="story-arc">
+    <div class="story-beat">
+      <div class="story-num">01</div>
+      <div class="story-title">Context</div>
+      <div class="story-desc">Where and when. The setting that establishes the world of the story.</div>
+    </div>
+    <div class="story-beat">
+      <div class="story-num">02</div>
+      <div class="story-title">Character</div>
+      <div class="story-desc">Who — expressed through posture, expression, and relationship to other elements.</div>
+    </div>
+    <div class="story-beat">
+      <div class="story-num">03</div>
+      <div class="story-title">Tension</div>
+      <div class="story-desc">The at-stake quality — the decision, action, or transformation moment captured.</div>
+    </div>
+    <div class="story-beat">
+      <div class="story-num">04</div>
+      <div class="story-title">Emotion</div>
+      <div class="story-desc">The feeling — communicated through expression, light, color, and composition.</div>
+    </div>
+    <div class="story-beat">
+      <div class="story-num">05</div>
+      <div class="story-title">Implication</div>
+      <div class="story-desc">What happened before? What happens next? The best images leave this productively open.</div>
+    </div>
+  </div>
+
+  <h3>The Decisive Moment</h3>
+  <p>Photographer Henri Cartier-Bresson introduced the concept of the decisive moment — the instant when visual form and emotional truth of a scene coincide perfectly. In design, this translates to selecting images that capture peak emotional expression, compositional clarity, or narrative intensity. Not the before, not the after, but the exact moment when the story is most fully and powerfully present. It is not always the most dramatic moment — it is the most true moment.</p>
+
+  <h3>Point of View as Narrative Tool</h3>
+  <p>The camera position determines the viewer's relationship to the story. Close, low-angle photography creates intimacy and places the viewer inside the experience — they feel present. Wide, high-angle photography creates distance and context — the viewer observes from outside. First-person perspective (looking through the subject's eyes) creates the strongest identification. Third-person perspective creates empathy and reflection. Choose point of view deliberately based on the emotional relationship you want the viewer to have with the story.</p>
+
+  <div class="div"></div>
+  <div class="sl">Section 2</div>
+  <h2>The Three-Image Story Arc</h2>
+  <p>The most powerful storytelling structure in brand communication is the three-image arc: before (the problem or desire state), transformation (the pivotal moment of encounter with the brand), and after (the aspired-to outcome). This structure mirrors the fundamental narrative arc of virtually all human storytelling — from ancient mythology to contemporary cinema — and taps into the same cognitive pattern-seeking that makes humans hungry for narrative.</p>
+
+  <div class="cs">
+    <div class="cs-head">Case Study — The Three-Image Arc in Brand Campaigns</div>
+    <div class="cs-body">
+      <h4>Showing the Story, Not the Product</h4>
+      <p>A healthcare brand might show: a person struggling alone with pain (before) → a moment of genuine connection and attentive care (transformation) → the same person engaged in joyful activity with family (after). A financial services brand: a couple looking anxiously at bills (before) → a productive, collaborative meeting with an advisor (transformation) → the same couple on a long-dreamed-of trip (after). In both cases, the product is never shown. The story is. And the story is doing all the communicative work.</p>
+      <p>The three-image arc works because it gives the viewer a complete narrative experience — they place themselves in the before state, experience the transformation, and aspire to the after state. The brand becomes associated with the journey from problem to resolution rather than with a product feature or price point.</p>
+      <div class="cs-takeaway"><p>Brand campaigns that show the story rather than the product create emotional investment that product photography cannot. The product satisfies a want. The story makes the viewer feel what it would be like to have that want satisfied — which is far more persuasive.</p></div>
+    </div>
+  </div>
+
+  <div class="kt"><h4>Key Vocabulary — Lesson 1.22</h4><div class="tg">
+    <div><div class="tn">Visual Storytelling</div><div class="td">The use of images to communicate narrative meaning — context, character, tension, emotion, and implication within a single frame or across a sequence.</div><div class="vu"><div class="vu-label">In Use</div><p>"This is product photography, not visual storytelling. Where is the before state? Where is the character? What story is this image triggering in the viewer's mind?"</p></div></div>
+    <div><div class="tn">Decisive Moment</div><div class="td">The instant when visual form and emotional truth coincide perfectly — the moment of greatest narrative intensity in a scene.</div><div class="vu"><div class="vu-label">In Use</div><p>"This image is slightly after the decisive moment — the expression has relaxed. The one three frames earlier, where the emotion peaks — that's the shot."</p></div></div>
+    <div><div class="tn">Narrative Arc</div><div class="td">The before/transformation/after structure of a story — one of the most powerful frameworks for sequential visual communication in brand design.</div><div class="vu"><div class="vu-label">In Use</div><p>"Build the campaign around the three-image arc. We don't need to show the product. We need to show the journey."</p></div></div>
+    <div><div class="tn">Point of View</div><div class="td">Camera position relative to the subject — determining the viewer's emotional relationship to the story (inside or outside, intimate or distant).</div><div class="vu"><div class="vu-label">In Use</div><p>"We want the viewer to feel inside the experience — use a close, low-angle POV. The wide observational shot creates distance we can't afford here."</p></div></div>
+    <div><div class="tn">Implication</div><div class="td">The implied story beyond the frame — what happened before and what happens next — triggered automatically by the viewer's narrative instinct.</div><div class="vu"><div class="vu-label">In Use</div><p>"The image needs more implication — it tells a complete story with no mystery. Leave something for the viewer's imagination to complete."</p></div></div>
+    <div><div class="tn">Before / After</div><div class="td">The two anchoring states of a brand story arc — before communicates the problem or desire; after communicates the aspired-to outcome the brand enables.</div><div class="vu"><div class="vu-label">In Use</div><p>"The after image needs to feel genuinely different from the before — the contrast between the two emotional states is what makes the transformation feel real."</p></div></div>
+  </div></div>
+
+  <div class="brief">
+    <div class="brief-head">
+      <div class="bl">Design Brief — Lesson 1.22</div>
+      <h4>Three-Image Story Sequence: Build the Arc</h4>
+    </div>
+    <div class="brief-body">
+      <div class="brief-section">
+        <div class="brief-section-label">The Scenario</div>
+        <p>You are designing a brand campaign for a fictional service brand — a fitness app, a language learning service, a mental health platform, a cooking school, or any service with a clear transformation story. The campaign will use three images — before, transformation, after — with no product shown in any of them.</p>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">The Constraints</div>
+        <ul>
+          <li>Choose a fictional service brand and define the transformation it enables in one sentence</li>
+          <li>Describe Image 1 in complete detail: context, character, tension, emotion, implication — the before state</li>
+          <li>Describe Image 2: the decisive transformation moment. What is the point of view? What emotional shift occurs?</li>
+          <li>Describe Image 3: the after state. How does it contrast with Image 1? What aspiration does it represent?</li>
+          <li>Write a one-paragraph narrative explaining how the three images together communicate the brand's value proposition</li>
+          <li>Lay out all three descriptions in a sequential presentation format</li>
+        </ul>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">Your Deliverable</div>
+        <div class="brief-deliverable"><p>Three detailed image descriptions with all five narrative elements identified for each + a narrative paragraph explaining how the arc communicates the brand story.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rf"><h4>Journal Reflection — Lesson 1.22</h4>
+    <p style="font-size:15px;font-style:italic;">Find a single photograph from any source that tells a complete story. Describe all five narrative elements: context, character, tension, emotion, and implication. Then describe what you imagine happened two minutes before and two minutes after it was taken. What does this exercise reveal about the relationship between visual design and the viewer's narrative imagination?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+  </div>
+
+</div></div>
+
+<!-- VIDEO SCRIPT 1.22 -->
+<div id="l22-scr" class="tc"><div class="wrap">
+  <div class="sl">Concept Video Script — Lesson 1.22</div>
+  <h2>The Decisive Moment — How Images Communicate Stories</h2>
+  <p style="color:var(--mid);margin-bottom:28px;font-size:14px;">Story arc animation + single image narrative breakdown</p>
+  <div class="sh">
+    <div><label>Video Type</label><span>Concept / Story Analysis</span></div>
+    <div><label>Target Length</label><span>4:30 – 5:00 minutes</span></div>
+    <div><label>Key Visual</label><span>Five narrative elements animated; three-arc diagram</span></div>
+    <div><label>Music Tone</label><span>Warm, human, narrative</span></div>
+    <div><label>Production</label><span>After Effects image analysis overlay</span></div>
+    <div><label>Narration</label><span>ElevenLabs or AI Avatar</span></div>
+  </div>
+  <h3>OPENING</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:00–0:42</span></div><div class="sbb nt">The human brain is a narrative machine. It does not see images — it reads them. Show someone a photograph of an empty park bench at dusk and they immediately ask: who sat there? Where did they go? This is involuntary — you cannot look at an image without your brain constructing a story. Designers who understand this don't just select images that look good. They select images that trigger the right story in the viewer's mind. Today you are going to learn the five narrative elements that make that possible — and the most powerful storytelling structure in brand communication.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Empty park bench — labels appear: "Who?" "Where?" "What happened?" "What next?" ]
+[ Title: "Lesson 1.22 — Visual Storytelling" ]</div></div>
+  <h3>SEGMENT 1 — Five Narrative Elements</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:43–2:15</span></div><div class="sbb nt">Every strong photographic image contains five narrative elements. Context: the setting that establishes the world of the story. Character: who, expressed through posture, expression, relationship. Tension: the at-stake quality — the decision, the action, the transformation moment being captured. Emotion: the feeling communicated through expression, light, color, and composition. And implication: what happened before? What happens next? The best images leave this productively open — giving the viewer's imagination something to complete. Henri Cartier-Bresson called the ideal photographic moment "the decisive moment" — the instant when visual form and emotional truth coincide perfectly. It is not the most dramatic moment. It is the most true. For designers selecting images rather than shooting them, moment selection means choosing the frame where emotional and narrative truth peaks — not just the cleanest technically.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Five narrative element cards animate in sequence ]
+[ Single image analyzed with all five labels ]
+[ "The Decisive Moment" — Cartier-Bresson reference ]</div></div>
+  <h3>SEGMENT 2 — Three-Image Arc + Exercise</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">2:16–4:25</span></div><div class="sbb nt">The most powerful storytelling structure in brand communication: before, transformation, after. Image one shows the problem or desire — the character in a state that needs to change. Image two shows the pivotal moment — encounter with the brand's solution. Image three shows the outcome — the aspired-to state. And here is the most important thing: in many of the most effective campaigns, the product is never shown in any of the three images. They show the story. And the brand becomes associated with the journey from before to after. For your exercise, build a three-image arc for a fictional service brand. Describe all three images in complete detail. Apply all five narrative elements to each one. Then write a paragraph explaining how the sequence together communicates the brand's value proposition — without showing the product. See you in Lesson 1.23.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Three-image arc diagram: BEFORE → TRANSFORMATION → AFTER ]
+[ Healthcare example shown — three images described with labels ]
+[ Exercise card: "Exercise 1.22 — Three-Image Story Sequence" ]
+[ "Next: Lesson 1.23 — Icons, Graphics &amp; Illustration" ]</div></div>
+</div></div>
+
+<!-- WORKBOOK 1.22 -->
+<div id="l22-wb" class="tc"><div class="wrap">
+  <div class="wb">
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:6px;font-weight:500;">Volume 1 · Module 6 · Lesson 1.22</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:4px;">Visual Storytelling</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:20px;">Three-Image Story Arc Planner</div>
+    <div class="wr"></div>
+    <p style="font-size:12px;color:var(--mid);margin-bottom:14px;">Brand: <span style="border-bottom:1px solid var(--rule);display:inline-block;min-width:200px;">&nbsp;</span> &nbsp;&nbsp; Transformation enabled: <span style="border-bottom:1px solid var(--rule);display:inline-block;min-width:200px;">&nbsp;</span></p>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;">
+        <div style="background:var(--accent);color:white;padding:10px 14px;display:flex;align-items:center;gap:12px;"><span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;">01</span><span style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">BEFORE — The Problem or Desire State</span></div>
+        <div style="padding:14px;">
+          <p style="font-size:11px;color:var(--mid);margin-bottom:6px;">What does Image 1 show in detail? Apply all five narrative elements:</p>
+          <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+            <div><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Emotion viewer feels:</p><div class="wln"></div></div>
+            <div><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Point of view (close/wide/POV):</p><div class="wln"></div></div>
+          </div>
+        </div>
+      </div>
+      <div style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;">
+        <div style="background:var(--mod);color:white;padding:10px 14px;display:flex;align-items:center;gap:12px;"><span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;">02</span><span style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">TRANSFORMATION — The Decisive Moment</span></div>
+        <div style="padding:14px;">
+          <p style="font-size:11px;color:var(--mid);margin-bottom:6px;">What decisive moment does Image 2 capture? What emotional shift occurs?</p>
+          <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+            <div><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Brand's role in this moment:</p><div class="wln"></div></div>
+            <div><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Narrative element most prominent:</p><div class="wln"></div></div>
+          </div>
+        </div>
+      </div>
+      <div style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;">
+        <div style="background:var(--green);color:white;padding:10px 14px;display:flex;align-items:center;gap:12px;"><span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;">03</span><span style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">AFTER — The Aspired-To Outcome</span></div>
+        <div style="padding:14px;">
+          <p style="font-size:11px;color:var(--mid);margin-bottom:6px;">What does Image 3 show? How does it contrast with Image 1?</p>
+          <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+            <div><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Aspiration it represents:</p><div class="wln"></div></div>
+            <div><p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Emotion vs. Image 1:</p><div class="wln"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:13px;font-weight:600;margin:16px 0 8px;">Narrative paragraph — how the three images together communicate the brand's value proposition:</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+    <div class="pn">Digital Design &amp; Media Technology · Volume 1 · Page 22</div>
+  </div>
+</div></div>
+
+<!-- ASSESSMENT 1.22 -->
+<div id="l22-ass" class="tc"><div class="wrap">
+  <div class="sl">Lesson 1.22 Assessment</div>
+  <h2>Visual Storytelling — Knowledge Check</h2>
+  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
+    <div class="qi"><div class="qn">Q01</div><div class="qt">Visual storytelling in design is primarily about:</div><div class="qo">
+      <div class="qop">Using multiple images to show a chronological sequence of events</div>
+      <div class="qop">Selecting images that contain narrative meaning — context, character, tension, emotion, and implication — within themselves or across a sequence</div>
+      <div class="qop">Adding text captions to photographs to explain what they show</div>
+      <div class="qop">Illustrating the text content of a design with representative photographs</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q02</div><div class="qt">Henri Cartier-Bresson's "decisive moment" refers to:</div><div class="qo">
+      <div class="qop">The moment when the designer decides which image to select</div>
+      <div class="qop">The most dramatic or action-filled moment in any scene</div>
+      <div class="qop">The instant when visual form and emotional truth coincide perfectly — the moment of greatest narrative intensity</div>
+      <div class="qop">The final exposure made in a photographic session</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q03</div><div class="qt">The "before/transformation/after" three-image arc is effective because:</div><div class="qo">
+      <div class="qop">It requires fewer design decisions than single-image campaigns</div>
+      <div class="qop">It mirrors the fundamental human narrative arc — placing the viewer in the before state and making them aspire to the after state through the transformation</div>
+      <div class="qop">Three images are always more persuasive than one</div>
+      <div class="qop">Sequential images allow the brand logo to appear multiple times</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q04</div><div class="qt">"Implication" as a narrative element refers to:</div><div class="qo">
+      <div class="qop">Text that implies the meaning of the image without stating it directly</div>
+      <div class="qop">The suggested story beyond the frame — what happened before and what happens next — triggered by the viewer's narrative instinct</div>
+      <div class="qop">The implied price or value suggested by the production quality of the photograph</div>
+      <div class="qop">The implied relationship between different images in a campaign sequence</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q05</div><div class="qt">A close, low-angle photograph creates:</div><div class="qo">
+      <div class="qop">Distance and objectivity — the viewer observes from outside the experience</div>
+      <div class="qop">Intimacy and identification — placing the viewer inside the experience as a participant</div>
+      <div class="qop">Maximum context — showing the full environment surrounding the subject</div>
+      <div class="qop">A formal, institutional tone appropriate for corporate photography</div>
+    </div></div>
+    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-C &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
+  </div>
+  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
+    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.22: describe the transformation moment image in detail. What specific narrative decision made this the pivotal image of your arc?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q07</div><div class="qt">Why do many of the most effective brand campaigns show the story rather than the product? What does this approach accomplish that product-focused photography cannot?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q08</div><div class="qt">Describe how point of view changes the viewer's emotional relationship to a story. Give a specific example of how the same subject photographed from two different perspectives would tell two different stories.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+  </div>
+</div></div>
+</div><!-- end l22 -->
+
+
+<!-- ═══ LESSON 1.23 — ICONS, GRAPHICS & ILLUSTRATION ═══ -->
+<div id="l23" class="ls">
+<div class="hero" data-n="1.23">
+  <div class="vt">Volume 1 · Module 6 · Lesson 1.23</div>
+  <h1>Icons, Graphics, <em>and Illustration</em></h1>
+  <p class="sub">Not every design needs photography. Icons, graphics, and illustration communicate what photography cannot — abstraction, scalability, consistency, and stylistic flexibility. This lesson teaches when to use each, and how to use them well — including the four rules that determine whether an icon system actually functions as a system.</p>
+  <div class="mr">
+    <div class="mi"><label>Lesson Type</label><span>Concept + Applied</span></div>
+    <div class="mi"><label>Duration</label><span>50–60 minutes</span></div>
+    <div class="mi"><label>App</label><span>Illustrator + Adobe Firefly</span></div>
+    <div class="mi"><label>Deliverable</label><span>Five-icon system study</span></div>
+  </div>
+</div>
+<div class="itabs">
+  <button class="itab active" onclick="showI('l23-les',this,'l23')">📖 Lesson</button>
+  <button class="itab" onclick="showI('l23-scr',this,'l23')">🎬 Video Script</button>
+  <button class="itab" onclick="showI('l23-wb',this,'l23')">📄 Workbook</button>
+  <button class="itab" onclick="showI('l23-ass',this,'l23')">✅ Assessment</button>
+</div>
+
+<div id="l23-les" class="tc active"><div class="wrap">
+
+  <div class="obj"><h4>Learning Objectives — Lesson 1.23</h4><ul class="ol">
+    <li>Distinguish between functional icons, conceptual icons, decorative graphics, and brand illustration — and when each is appropriate</li>
+    <li>Explain the four rules of icon system design: line weight, corner treatment, visual weight, and detail level</li>
+    <li>Apply the squint test to evaluate whether an icon set functions as a unified visual family</li>
+    <li>Connect illustration style choice to brand personality — choosing illustration as deliberately as typeface</li>
+    <li>Design a five-icon system demonstrating visual consistency across all five icons</li>
+  </ul></div>
+
+  <div class="pb">
+    <div class="pb-label">The Problem</div>
+    <h3>You have five icons for your app's navigation bar. Four of them are outlined, minimal, and thin-line. The fifth is filled, detailed, and bold. Every user who sees the navigation bar knows immediately that something is wrong — even if they can't name what. The fifth icon breaks the visual family.</h3>
+    <p>Icon systems live and die by visual consistency. The eye is exquisitely sensitive to elements that don't belong to the same visual family — and one inconsistent icon in a set of five immediately signals a lack of design intention. The four rules of icon system design — line weight, corner treatment, visual weight, and detail level — prevent this failure by creating a shared visual DNA that all icons in the system must conform to.</p>
+    <div class="pb-meta">
+      <div class="pb-meta-item"><label>Context</label><span>App UI, brand identity, wayfinding systems</span></div>
+      <div class="pb-meta-item"><label>Constraint</label><span>Visual consistency = functional trust</span></div>
+      <div class="pb-meta-item"><label>Skill This Lesson Builds</label><span>Icon system rules, visual family evaluation, illustration judgment</span></div>
+    </div>
+  </div>
+
+  <div class="sl">Introduction</div>
+  <h2>When Words and Photos Are Not Enough — and Sometimes Too Much</h2>
+  <p>Photography is powerful — but it is also specific. Specific to a moment, a setting, a set of people who may or may not match your audience. It carries detail that can be a disadvantage when the communication goal requires abstraction or universality. It doesn't scale elegantly — a photograph designed for a billboard loses detail when reduced to icon size.</p>
+  <p>Icons, graphics, and illustration exist to communicate what photography cannot — or to do it more efficiently, more consistently, or more universally. They distill complex ideas, actions, or objects to essential visual form, removing the specificity that photography requires and creating communicative clarity that transcends cultural and contextual particularity.</p>
+
+  <div class="div"></div>
+  <div class="sl">Section 1</div>
+  <h2>Three Types of Graphic Element</h2>
+
+  <div class="icon-grid">
+    <div class="icon-box">
+      <div class="icon-symbol">⚙️</div>
+      <div class="icon-type">Functional Icons</div>
+      <div class="icon-desc">Communicate an action or function. The gear = settings. The magnifier = search. The share arrow = share. Clarity is everything — if a functional icon requires explanation, it has failed.</div>
+    </div>
+    <div class="icon-box">
+      <div class="icon-symbol">🏠</div>
+      <div class="icon-type">Conceptual Icons</div>
+      <div class="icon-desc">Represent abstract ideas through established conventions. The house = home. The heart = favorites or love. Meaning comes from repetition and convention, not literal resemblance.</div>
+    </div>
+    <div class="icon-box">
+      <div class="icon-symbol">✏️</div>
+      <div class="icon-type">Brand Illustration</div>
+      <div class="icon-desc">Custom drawn with a consistent visual language — creates a genuinely distinctive identity impossible to achieve with stock photography or generic icon sets.</div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+  <div class="sl">Section 2</div>
+  <h2>Four Rules of Icon System Design</h2>
+  <p>An icon system is only a system if every icon obeys the same visual rules. Four properties must be consistent across every icon in the set:</p>
+
+  <table class="compare">
+    <thead><tr><th>Rule</th><th>What It Means</th><th>Why Inconsistency Fails</th></tr></thead>
+    <tbody>
+      <tr><td>Line Weight</td><td>All icons use exactly the same stroke thickness — 1px, 1.5px, 2px — never mixed</td><td>Mixed line weights make icons look like they came from different sources — the eye immediately identifies the impostor</td></tr>
+      <tr><td>Corner Treatment</td><td>Either all sharp corners or all rounded corners — never mixed within a system</td><td>Sharp corners feel precise and technical; rounded corners feel friendly and approachable. Mixing creates visual incoherence — no consistent personality</td></tr>
+      <tr><td>Visual Weight</td><td>Light, medium, or bold — the same optical heaviness applied consistently to every icon</td><td>A heavy filled icon next to two light outline icons creates a hierarchy where none was intended — one icon appears more important than the others</td></tr>
+      <tr><td>Level of Detail</td><td>The same amount of simplification across every icon — more complex icons are simplified to match simpler ones</td><td>An icon with more detail than its neighbors breaks the visual family — it reads as either more important or from a different designer</td></tr>
+    </tbody>
+  </table>
+
+  <div class="cb mod"><div class="cl">The Squint Test for Icon Systems</div><p>Squint at your icon set until the individual shapes blur. Do all five (or however many) still feel like they belong together? If one reads as heavier, more detailed, or stylistically different from the others when blurred, it is breaking the system. Revise it until the squint test passes — until the set looks unmistakably like a single visual family.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 3</div>
+  <h2>Illustration Style as Brand Language</h2>
+  <p>Illustration style communicates brand personality as directly as typeface classification. Flat geometric illustration communicates modernity and technological confidence. Editorial hand-drawn illustration communicates craft, authenticity, and human warmth. Playful character-based illustration communicates friendliness and accessibility. Precise technical illustration communicates expertise and reliability. Choose illustration style the same way you choose a typeface — based on the personality that serves the brand's audience and purpose, not personal preference.</p>
+  <p>A well-developed custom illustration style becomes a brand asset as recognizable as a logo — creating a visual language that is genuinely impossible to replicate with stock imagery. This is why many of the world's most recognized digital brands (Mailchimp, Duolingo, Dropbox) have invested heavily in distinctive illustration styles rather than relying on photography.</p>
+
+  <div class="kt"><h4>Key Vocabulary — Lesson 1.23</h4><div class="tg">
+    <div><div class="tn">Icon System</div><div class="td">A set of icons sharing a consistent visual DNA — line weight, corner treatment, visual weight, and detail level — functioning as a unified visual family.</div><div class="vu"><div class="vu-label">In Use</div><p>"This isn't an icon system — it's an icon collection. Write the system rules first, then design every icon to comply with them."</p></div></div>
+    <div><div class="tn">Functional Icon</div><div class="td">An icon that communicates an action or function — clarity at minimum size is the only success criterion.</div><div class="vu"><div class="vu-label">In Use</div><p>"If this functional icon needs a tooltip, it has failed. Simplify until the action is readable at 16px without explanation."</p></div></div>
+    <div><div class="tn">Squint Test</div><div class="td">Blurring the view of an icon set to evaluate whether all icons read as a unified visual family — any outlier is immediately identifiable.</div><div class="vu"><div class="vu-label">In Use</div><p>"Squint test — which icon breaks the family? The third one reads heavier than the rest. Reduce its visual weight to match."</p></div></div>
+    <div><div class="tn">Illustration Style</div><div class="td">The consistent visual language of a brand's illustration — communicating personality as directly as typeface classification.</div><div class="vu"><div class="vu-label">In Use</div><p>"The illustration style brief: approachable, human, slightly imperfect. Think editorial hand-drawn, not clean geometric. That matches the brand's warmth."</p></div></div>
+    <div><div class="tn">Abstraction</div><div class="td">The distillation of complex subjects to their essential visual form — what icons and illustration achieve that photography cannot.</div><div class="vu"><div class="vu-label">In Use</div><p>"Photography is too specific for this global audience — use illustration. Abstraction allows the concept to land without cultural or demographic barriers."</p></div></div>
+    <div><div class="tn">Corner Treatment</div><div class="td">The decision to use sharp or rounded corners in an icon system — a brand personality choice that must be applied consistently across all icons.</div><div class="vu"><div class="vu-label">In Use</div><p>"The brand is friendly and approachable — all corners rounded, no exceptions. Sharp corners are technically precise brands. That's not who this is."</p></div></div>
+  </div></div>
+
+  <div class="brief">
+    <div class="brief-head">
+      <div class="bl">Design Brief — Lesson 1.23</div>
+      <h4>Five-Icon System Study</h4>
+    </div>
+    <div class="brief-body">
+      <div class="brief-section">
+        <div class="brief-section-label">The Problem</div>
+        <p>Icons designed without a consistent system look like they were collected from five different sources — which breaks user trust and visual credibility. This exercise builds the habit of defining system rules before designing a single icon.</p>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">The Constraints</div>
+        <ul>
+          <li>Choose a fictional brand and define four system rules before drawing anything: outlined or filled, line weight, corner treatment, level of detail</li>
+          <li>Design five icons for this brand's navigation or feature set — all conforming to the four rules</li>
+          <li>Apply the squint test to the completed set — which icon (if any) breaks the family?</li>
+          <li>Revise any icon that fails the squint test until the set reads as a unified visual family</li>
+          <li>Write one paragraph explaining how the icon style choices reflect the brand's personality</li>
+        </ul>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">Your Deliverable</div>
+        <div class="brief-deliverable"><p>Written system rules + five icons conforming to those rules + squint test result documentation + one paragraph connecting icon style to brand personality.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rf"><h4>Journal Reflection — Lesson 1.23</h4>
+    <p style="font-size:15px;font-style:italic;">Identify an icon system from an app you use regularly. Describe the system rules you can infer — line weight, corner treatment, fill style, level of detail. Is the system fully consistent, or are there icons that break it? What do the system rules communicate about the brand's personality?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+  </div>
+
+  <div class="intro-block">
+    <div class="intro-head">
+      <div class="intro-head-label">Professional Introspection — Module 6 Complete</div>
+      <h4>Reflecting on Images Before Moving to Layout</h4>
+      <p>Module 6 expanded your visual toolkit from type and color to the full range of image, graphic, and illustration decisions. These questions consolidate what you've learned.</p>
+    </div>
+    <div class="intro-body">
+      <div class="intro-q">
+        <div class="intro-q-label">01 — The Most Consequential Insight</div>
+        <div class="intro-q-text">Of the four lessons in Module 6 — image selection, composition, visual storytelling, and icons — which single insight will most change how you work? Name the specific situation where you will apply it differently.</div>
+        <div class="intro-q-note">The most useful answer identifies a future moment of application — not just a principle learned.</div>
+        <div class="intro-lines"><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div></div>
+      </div>
+      <div class="intro-q">
+        <div class="intro-q-label">02 — Connection to Earlier Modules</div>
+        <div class="intro-q-text">Connect one concept from Module 6 to a concept from Modules 1–5. The connection should be a functional one — where understanding one makes you better at the other. Be specific about both concepts and how they interact.</div>
+        <div class="intro-q-note">Example: "The image brief from L1.20 and the design brief from L1.3 use the same structure for the same reason — they force problem definition before solution generation."</div>
+        <div class="intro-lines"><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div></div>
+      </div>
+      <div class="intro-q">
+        <div class="intro-q-label">03 — Into Module 7</div>
+        <div class="intro-q-text">Module 7 covers layout and digital design — how visual elements are organized in space. How does your understanding of composition (L1.21) prepare you for layout thinking? What overlap do you already see?</div>
+        <div class="intro-q-note">Composition principles scale directly from single images to full page layouts. Name the specific principles that transfer.</div>
+        <div class="intro-lines"><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div></div>
+      </div>
+    </div>
+  </div>
+
+</div></div>
+
+<!-- VIDEO SCRIPT 1.23 -->
+<div id="l23-scr" class="tc"><div class="wrap">
+  <div class="sl">Concept Video Script — Lesson 1.23</div>
+  <h2>Icons, Illustration, and the Power of Abstraction</h2>
+  <p style="color:var(--mid);margin-bottom:28px;font-size:14px;">Icon system consistency demonstration + illustration style comparison</p>
+  <div class="sh">
+    <div><label>Video Type</label><span>Concept / System Demo</span></div>
+    <div><label>Target Length</label><span>4:30 – 5:00 minutes</span></div>
+    <div><label>Key Visual</label><span>Icon system rules + squint test animation</span></div>
+    <div><label>Music Tone</label><span>Clean, systematic, creative</span></div>
+    <div><label>Production</label><span>After Effects icon animation</span></div>
+    <div><label>Narration</label><span>ElevenLabs or AI Avatar</span></div>
+  </div>
+  <h3>OPENING</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:00–0:40</span></div><div class="sbb nt">Photography is powerful. But it is also specific — to a moment, a setting, a set of people who may or may not match your audience. Sometimes you need something more abstract, more universal, more scalable. Icons, graphics, and illustration communicate what photography cannot — they are the tools of abstraction. They distill complex ideas to essential visual form, crossing cultural and linguistic barriers that photographs struggle with. And in the hands of a skilled designer, they can build brand recognition as powerful as any photograph. The key word is system.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Photography specificity limitation → abstraction through icons ]
+[ Title: "Lesson 1.23 — Icons, Graphics &amp; Illustration" ]</div></div>
+  <h3>SEGMENT 1 — Four System Rules</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:41–2:20</span></div><div class="sbb nt">Three types of graphic element. Functional icons communicate an action — the gear for settings, the magnifier for search. Clarity at minimum size is the only criterion. If it needs a tooltip, it has failed. Conceptual icons represent abstract ideas through convention — the house for home, the heart for favorites. Their meaning comes from repetition, not visual resemblance. And brand illustration — custom drawn with a consistent visual language — does what no stock photography can: create a genuinely distinctive identity. For icon systems, four rules govern everything. Line weight: all icons use exactly the same stroke thickness. Corner treatment: either all sharp or all rounded — never mixed. Visual weight: the same optical heaviness across every icon. And level of detail: the same simplification applied to all. When one icon breaks any of these rules, it breaks the family. The eye immediately identifies the outsider and trust in the system drops.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Three type cards: Functional · Conceptual · Illustration ]
+[ Four rules shown with icon examples: Line Weight · Corners · Weight · Detail ]
+[ Broken system → one inconsistent icon highlighted → fixed system ]</div></div>
+  <h3>SEGMENT 2 — Squint Test + Illustration + Exercise</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">2:21–4:20</span></div><div class="sbb nt">The squint test: blur your eyes until the individual shapes lose definition. Do all five icons still feel like a family? If one reads as heavier, more detailed, or stylistically different — it is breaking the system. Fix it before moving on. Illustration style communicates brand personality as directly as typeface choice. Flat geometric communicates modernity and technology. Editorial hand-drawn communicates craft and authenticity. Playful character-based communicates friendliness. Precise technical communicates expertise. Choose illustration style the same way you choose a typeface — based on the personality that serves the brand's audience, not personal preference. For your exercise: write your four system rules first. Then design five icons. Then apply the squint test. Revise until the set passes. Write one paragraph connecting your style choices to the brand's personality. See you in Module 7.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Squint test animated: five icons blur → one outlier identified ]
+[ Illustration style comparison: four styles side by side ]
+[ Exercise card: "Exercise 1.23 — Five-Icon System Study" ]
+[ "Module 6 Complete → Module 7: Layout &amp; Digital Design" ]</div></div>
+</div></div>
+
+<!-- WORKBOOK 1.23 -->
+<div id="l23-wb" class="tc"><div class="wrap">
+  <div class="wb">
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:6px;font-weight:500;">Volume 1 · Module 6 · Lesson 1.23</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:4px;">Icons, Graphics &amp; Illustration</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:20px;">Five-Icon System Study — Rules First, Then Design</div>
+    <div class="wr"></div>
+    <p style="font-size:13px;font-weight:600;margin-bottom:12px;">Define your system rules before drawing a single icon:</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:12px;"><p style="font-size:10px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Style: Outlined or Filled?</p><div class="wln"></div></div>
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:12px;"><p style="font-size:10px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Line Weight (px):</p><div class="wln"></div></div>
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:12px;"><p style="font-size:10px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Corner Treatment:</p><div class="wln"></div></div>
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:12px;"><p style="font-size:10px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Level of Detail:</p><div class="wln"></div></div>
+    </div>
+    <p style="font-size:13px;font-weight:600;margin-bottom:10px;">Five Icon Sketches — comply with your system rules consistently:</p>
+    <div style="display:flex;gap:10px;margin-bottom:16px;">
+      <div style="flex:1;border:2px dashed var(--mod);border-radius:8px;min-height:80px;background:var(--ml);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:8px;"><p style="font-size:10px;color:var(--mid);text-align:center;">Icon 1</p></div>
+      <div style="flex:1;border:2px dashed var(--mod);border-radius:8px;min-height:80px;background:var(--ml);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:8px;"><p style="font-size:10px;color:var(--mid);text-align:center;">Icon 2</p></div>
+      <div style="flex:1;border:2px dashed var(--mod);border-radius:8px;min-height:80px;background:var(--ml);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:8px;"><p style="font-size:10px;color:var(--mid);text-align:center;">Icon 3</p></div>
+      <div style="flex:1;border:2px dashed var(--mod);border-radius:8px;min-height:80px;background:var(--ml);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:8px;"><p style="font-size:10px;color:var(--mid);text-align:center;">Icon 4</p></div>
+      <div style="flex:1;border:2px dashed var(--mid);border-radius:8px;min-height:80px;background:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:8px;"><p style="font-size:10px;color:var(--mid);text-align:center;">Icon 5</p></div>
+    </div>
+    <p style="font-size:12px;font-weight:600;margin-bottom:6px;">Squint test result — do all five feel like a visual family? Which (if any) breaks the system?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div></div>
+    <p style="font-size:12px;font-weight:600;margin:12px 0 6px;">How do these icon style choices reflect the brand's personality?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div></div>
+    <div class="pn">Digital Design &amp; Media Technology · Volume 1 · Page 23</div>
+  </div>
+</div></div>
+
+<!-- ASSESSMENT 1.23 -->
+<div id="l23-ass" class="tc"><div class="wrap">
+  <div class="sl">Lesson 1.23 Assessment</div>
+  <h2>Icons, Graphics &amp; Illustration — Knowledge Check</h2>
+  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
+    <div class="qi"><div class="qn">Q01</div><div class="qt">Icons are described as "tools of abstraction" because:</div><div class="qo">
+      <div class="qop">They are more aesthetically abstract than photography</div>
+      <div class="qop">They distill complex subjects to essential visual form — removing photographic specificity to achieve greater universality and scalability</div>
+      <div class="qop">Abstract art principles are applied in their design process</div>
+      <div class="qop">They cannot be photographed and must be drawn abstractly</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q02</div><div class="qt">The most important quality standard for a functional icon is:</div><div class="qo">
+      <div class="qop">Aesthetic beauty and visual refinement</div>
+      <div class="qop">Clarity — communicating its meaning without ambiguity at the smallest size at which it will be used</div>
+      <div class="qop">Consistency with historical icon design conventions</div>
+      <div class="qop">Maximum visual detail to aid identification</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q03</div><div class="qt">An icon system requires visual consistency because:</div><div class="qo">
+      <div class="qop">Consistent icons are faster to design in bulk</div>
+      <div class="qop">Platform design guidelines require icon consistency</div>
+      <div class="qop">Inconsistent icons create visual chaos — the eye identifies any element that breaks the family as an outsider, fragmenting the visual language and undermining trust</div>
+      <div class="qop">All icons in a system represent the same concept and must therefore look similar</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q04</div><div class="qt">Custom illustration offers an advantage over stock photography for brand building primarily because:</div><div class="qo">
+      <div class="qop">Illustration is always less expensive than professional photography</div>
+      <div class="qop">Illustration can be produced more quickly than photography</div>
+      <div class="qop">A distinctive illustration style creates a unique visual language impossible to achieve with generic stock — becoming a brand asset as recognizable as a logo</div>
+      <div class="qop">Illustration avoids the licensing restrictions of photography</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q05</div><div class="qt">When should illustration be chosen over photography?</div><div class="qo">
+      <div class="qop">Always — illustration is universally superior to photography in design</div>
+      <div class="qop">When the concept is abstract, the audience is global, consistency across many images is critical, or the brand needs genuine distinctiveness rather than generic imagery</div>
+      <div class="qop">Only for children's brands and educational materials</div>
+      <div class="qop">When the budget does not allow for professional photography</div>
+    </div></div>
+    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-C &nbsp;·&nbsp; 4-C &nbsp;·&nbsp; 5-B</p></div>
+  </div>
+  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
+    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.23: which of your five icons was hardest to bring into compliance with the system rules? What specific constraint created the challenge?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q07</div><div class="qt">Identify an icon system from an app you use regularly. Describe the system rules you can infer — line weight, corner treatment, fill style, level of detail. Is the system fully consistent? Where does it break?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q08</div><div class="qt">Design a three-word brief for the illustration style of a global children's literacy nonprofit. What visual properties should the system have, and why do those properties serve this specific brand and audience?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+  </div>
+</div></div>
+</div><!-- end l23 -->
+
+
+<script>
+function showL(id,btn){
+  document.querySelectorAll('.ls').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.ltab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:document.querySelector('.ltabs').offsetTop-10,behavior:'smooth'});
+}
+function showI(id,btn,lid){
+  const l=document.getElementById(lid);
+  l.querySelectorAll('.tc').forEach(t=>t.classList.remove('active'));
+  l.querySelectorAll('.itab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:l.querySelector('.itabs').offsetTop-10,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

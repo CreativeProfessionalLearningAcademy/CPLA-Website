@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volume 1 · Module 3 — The Principles in Depth · Lessons 1.8–1.11</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1410;--paper:#faf7f2;--cream:#f0ead8;
+  --accent:#c8401a;--al:#f5e6e0;
+  --gold:#b8860b;--gl:#faf6e8;
+  --mid:#6b5e52;--rule:#d4c9b8;
+  --green:#2d7a1a;--gnl:#f0fae8;
+  --blue:#1a56c4;--bl:#e8f0fe;
+  --mod:#7c3aed;--ml:#ede9fe;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.8;}
+nav{background:var(--ink);color:var(--paper);padding:14px 48px;display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;}
+nav .s{color:var(--mod);}nav .sep{color:var(--mid);}
+.mbanner{background:var(--mod);color:white;padding:16px 48px;display:flex;align-items:center;justify-content:space-between;}
+.mbanner h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;}
+.mbanner p{font-size:12px;opacity:.75;}
+.ltabs{background:var(--cream);border-bottom:2px solid var(--rule);display:flex;padding:0 48px;overflow-x:auto;position:sticky;top:0;z-index:200;}
+.ltab{padding:15px 20px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;font-family:'DM Sans',sans-serif;border:none;background:none;cursor:pointer;color:var(--mid);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s;}
+.ltab.active{color:var(--mod);border-bottom-color:var(--mod);}
+.ltab:hover:not(.active){color:var(--ink);}
+.ls{display:none;}.ls.active{display:block;}
+.hero{background:var(--ink);color:var(--paper);padding:60px 48px 48px;position:relative;overflow:hidden;}
+.hero::before{content:attr(data-n);position:absolute;right:48px;top:28px;font-family:'Playfair Display',serif;font-size:150px;font-weight:900;color:rgba(255,255,255,.04);line-height:1;pointer-events:none;}
+.vt{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:14px;font-weight:500;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(30px,5vw,58px);font-weight:900;line-height:1.08;max-width:660px;margin-bottom:18px;}
+.hero h1 em{font-style:italic;color:#c4b5fd;}
+.hero .sub{font-size:15px;color:rgba(250,247,242,.6);max-width:510px;line-height:1.7;}
+.hero .mr{display:flex;gap:32px;margin-top:36px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap;}
+.hero .mi label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,247,242,.4);display:block;margin-bottom:3px;}
+.hero .mi span{font-size:13px;color:var(--paper);font-weight:500;}
+.itabs{background:var(--cream);border-bottom:2px solid var(--rule);display:flex;padding:0 48px;}
+.itab{padding:15px 22px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;font-family:'DM Sans',sans-serif;border:none;background:none;cursor:pointer;color:var(--mid);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;}
+.itab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.itab:hover:not(.active){color:var(--ink);}
+.tc{display:none;}.tc.active{display:block;}
+.wrap{max-width:820px;margin:0 auto;padding:52px 48px;}
+.sl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:10px;}
+h2{font-family:'Playfair Display',serif;font-size:29px;font-weight:700;margin-bottom:17px;line-height:1.25;}
+h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin:42px 0 13px;}
+p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
+.cb{border-left:4px solid var(--accent);background:var(--al);padding:20px 24px;margin:30px 0;border-radius:0 8px 8px 0;}
+.cb .cl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:6px;}
+.cb p{margin:0;font-size:15px;}
+.cb.gold{border-left-color:var(--gold);background:var(--gl);}.cb.gold .cl{color:var(--gold);}
+.cb.green{border-left-color:var(--green);background:var(--gnl);}.cb.green .cl{color:var(--green);}
+.cb.mod{border-left-color:var(--mod);background:var(--ml);}.cb.mod .cl{color:var(--mod);}
+.obj{border:2px solid var(--rule);border-radius:12px;padding:26px 30px;margin-bottom:40px;background:white;}
+.obj h4{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:16px;font-weight:500;}
+.ol{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.ol li{display:flex;align-items:flex-start;gap:11px;font-size:15px;line-height:1.6;}
+.ol li::before{content:'';width:20px;height:20px;border-radius:50%;background:var(--mod);flex-shrink:0;margin-top:2px;}
+.pb{background:var(--ink);color:var(--paper);border-radius:14px;padding:36px;margin:0 0 40px;}
+.pb-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:10px;}
+.pb h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:white;margin:0 0 14px;line-height:1.3;}
+.pb p{font-size:15px;color:rgba(250,247,242,.75);margin:0 0 16px;line-height:1.75;}
+.pb-meta{display:flex;gap:28px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap;}
+.pb-meta-item label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,247,242,.4);display:block;margin-bottom:3px;}
+.pb-meta-item span{font-size:13px;color:var(--paper);font-weight:500;}
+.kt{background:var(--ink);color:var(--paper);padding:32px;border-radius:12px;margin:40px 0;}
+.kt h4{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mod);margin-bottom:18px;font-weight:500;}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+.tn{font-family:'DM Mono',monospace;font-size:13px;color:#c4b5fd;margin-bottom:3px;font-weight:500;}
+.td{font-size:13px;color:rgba(250,247,242,.7);line-height:1.6;}
+.vu{margin-top:10px;padding:10px 14px;background:rgba(255,255,255,.06);border-radius:6px;border-left:3px solid var(--mod);}
+.vu-label{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:4px;}
+.vu p{font-size:12px;color:rgba(250,247,242,.55);margin:0;font-style:italic;line-height:1.6;}
+.ex{background:var(--cream);border:1px solid var(--rule);border-radius:12px;padding:32px;margin:40px 0;}
+.exh{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.exb{background:var(--mod);color:white;font-size:10px;letter-spacing:.15em;text-transform:uppercase;padding:6px 14px;border-radius:100px;font-weight:500;flex-shrink:0;}
+.ex h4{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;}
+.ex ol{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.ex ol li{font-size:15px;line-height:1.7;padding-left:5px;}
+.tt{font-size:12px;color:var(--mid);font-family:'DM Mono',monospace;margin-top:16px;display:inline-block;}
+.brief{border:2px solid var(--mod);border-radius:12px;overflow:hidden;margin:40px 0;}
+.brief-head{background:var(--mod);color:white;padding:18px 26px;}
+.brief-head .bl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;opacity:.75;margin-bottom:6px;}
+.brief-head h4{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;margin:0;}
+.brief-body{padding:28px 26px;background:white;}
+.brief-section{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--rule);}
+.brief-section:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.brief-section-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:8px;}
+.brief-section p{font-size:15px;margin:0;line-height:1.7;color:#2a2218;}
+.brief-section ul{padding-left:18px;display:flex;flex-direction:column;gap:6px;}
+.brief-section ul li{font-size:15px;line-height:1.6;color:#2a2218;}
+.brief-deliverable{background:var(--ml);border-radius:8px;padding:16px 18px;margin-top:14px;}
+.brief-deliverable p{font-size:14px;font-weight:600;color:var(--mod);margin:0;}
+.div{height:1px;background:var(--rule);margin:40px 0;}
+.rf{border:2px dashed var(--rule);border-radius:12px;padding:30px;margin:40px 0;}
+.rf h4{font-family:'Playfair Display',serif;font-size:17px;margin-bottom:12px;}
+.wl{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+.wln{height:1px;background:var(--rule);}
+.sh{background:var(--ink);color:var(--paper);padding:26px 32px;border-radius:12px;margin-bottom:32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;}
+.sh label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,247,242,.4);display:block;margin-bottom:3px;}
+.sh span{font-size:14px;font-weight:500;}
+.sb{margin-bottom:22px;border-radius:12px;overflow:hidden;border:1px solid var(--rule);}
+.sbh{padding:12px 20px;display:flex;align-items:center;gap:9px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:500;}
+.nh{background:var(--al);color:var(--accent);}
+.oh{background:var(--gl);color:var(--gold);}
+.sbb{padding:20px;background:white;font-size:15px;line-height:1.8;}
+.nt{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;line-height:2;}
+.ot{font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);font-weight:500;}
+.tc2{font-family:'DM Mono',monospace;font-size:11px;color:var(--mid);background:var(--cream);padding:3px 9px;border-radius:4px;margin-left:auto;}
+.wb{background:white;border:1px solid var(--rule);border-radius:12px;padding:48px;margin-bottom:24px;position:relative;box-shadow:0 4px 18px rgba(0,0,0,.04);}
+.wb .pn{position:absolute;bottom:18px;right:24px;font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);}
+.wr{height:1px;background:var(--rule);margin:18px 0;}
+.ab{background:white;border:2px solid var(--ink);border-radius:12px;padding:32px;margin:40px 0;}
+.ab h4{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:18px;font-weight:500;}
+.qi{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--rule);}
+.qi:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.qn{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);margin-bottom:4px;}
+.qt{font-size:15px;margin-bottom:9px;font-weight:500;}
+.qo{display:flex;flex-direction:column;gap:6px;}
+.qop{font-size:14px;color:var(--mid);display:flex;gap:8px;align-items:flex-start;}
+.qop::before{content:'';width:16px;height:16px;border:2px solid var(--rule);border-radius:50%;flex-shrink:0;margin-top:2px;}
+.ak{background:var(--gl);border:1px solid var(--gold);border-radius:7px;padding:14px 18px;margin-top:24px;}
+.ak p{font-size:13px;color:var(--gold);margin:0;}
+.intro-block{background:var(--ink);border-radius:14px;overflow:hidden;margin:40px 0;}
+.intro-head{background:linear-gradient(135deg,#7c3aed,#5b21b6);padding:22px 28px;}
+.intro-head-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.65);font-weight:600;margin-bottom:6px;}
+.intro-head h4{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:white;margin:0;line-height:1.3;}
+.intro-head p{font-size:14px;color:rgba(255,255,255,.7);margin:8px 0 0;line-height:1.6;}
+.intro-body{padding:28px;}
+.intro-q{margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.08);}
+.intro-q:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.intro-q-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:6px;}
+.intro-q-text{font-size:15px;color:rgba(250,247,242,.85);margin-bottom:10px;line-height:1.7;font-weight:500;}
+.intro-q-note{font-size:13px;color:rgba(250,247,242,.4);font-style:italic;margin-bottom:12px;line-height:1.6;}
+.intro-lines{display:flex;flex-direction:column;gap:13px;}
+.intro-line{height:1px;background:rgba(255,255,255,.12);}
+.compare{width:100%;border-collapse:collapse;margin:28px 0;border-radius:10px;overflow:hidden;border:1px solid var(--rule);}
+.compare th{background:var(--ink);color:var(--paper);padding:14px 18px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;text-align:left;}
+.compare th:first-child{color:var(--mod);}
+.compare td{padding:13px 18px;font-size:14px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.6;}
+.compare tr:last-child td{border-bottom:none;}
+.compare tr:nth-child(even) td{background:rgba(124,58,237,.03);}
+.compare td:first-child{font-weight:600;color:var(--ink);font-family:'DM Mono',monospace;font-size:13px;}
+.balance-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:28px 0;}
+.balance-box{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:white;}
+.balance-box-head{padding:8px 14px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;}
+.balance-box-body{height:120px;position:relative;display:flex;align-items:center;justify-content:center;}
+.contrast-demo{display:flex;flex-direction:column;gap:14px;margin:28px 0;}
+.contrast-pair{border:1px solid var(--rule);border-radius:10px;overflow:hidden;}
+.contrast-pair-head{padding:8px 16px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;background:var(--cream);}
+.contrast-samples{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.contrast-sample{padding:18px 20px;font-size:15px;font-weight:500;}
+.align-types{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0;}
+.align-box{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:white;}
+.align-box-head{padding:10px 14px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;background:var(--ml);color:var(--mod);}
+.align-box-body{padding:14px;}
+.align-elem{height:8px;background:var(--mod);border-radius:2px;margin-bottom:8px;opacity:.7;}
+.prox-demo{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0;}
+.prox-box{border:1px solid var(--rule);border-radius:10px;padding:16px;background:white;}
+.prox-box-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:12px;}
+.cs{border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin:40px 0;}
+.cs-head{background:var(--cream);padding:14px 22px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);font-weight:600;}
+.cs-body{padding:24px 26px;background:white;}
+.cs-body h4{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin:0 0 12px;}
+.cs-body p{font-size:14px;line-height:1.8;color:#2a2218;margin-bottom:12px;}
+.cs-takeaway{border-left:3px solid var(--gold);background:var(--gl);padding:12px 16px;border-radius:0 6px 6px 0;margin-top:8px;}
+.cs-takeaway p{font-size:13px;font-weight:600;color:var(--ink);margin:0;}
+@media(max-width:700px){
+  nav,.hero,.mbanner{padding-left:24px;padding-right:24px;}
+  .ltabs,.itabs{padding:0 12px;}
+  .wrap{padding:36px 24px;}
+  .tg,.sh,.balance-row,.align-types,.prox-demo{grid-template-columns:1fr;}
+  .hero::before{display:none;}
+}
+</style>
+</head>
+<body>
+
+<nav><span class="s">Digital Design &amp; Media Technology</span><span class="sep">·</span><span>Volume 1 — Design Thinking</span><span class="sep">·</span><span>Module 3 — The Principles in Depth</span></nav>
+
+<div class="mbanner">
+  <div><h2>Module 3 — The Principles in Depth</h2><p>Lessons 1.8 · 1.9 · 1.10 · 1.11 &nbsp;·&nbsp; Balance · Contrast · Alignment · Repetition &amp; Proximity</p></div>
+  <div style="font-size:28px;opacity:.6;">⚖️</div>
+</div>
+
+<div class="ltabs">
+  <button class="ltab active" onclick="showL('l08',this)">L1.8 — Balance</button>
+  <button class="ltab" onclick="showL('l09',this)">L1.9 — Contrast</button>
+  <button class="ltab" onclick="showL('l10',this)">L1.10 — Alignment</button>
+  <button class="ltab" onclick="showL('l11',this)">L1.11 — Repetition &amp; Proximity</button>
+</div>
+
+<!-- ═══════════════════════ LESSON 1.8 ═══════════════════════ -->
+<div id="l08" class="ls active">
+<div class="hero" data-n="1.8">
+  <div class="vt">Volume 1 · Module 3 · Lesson 1.8</div>
+  <h1>The Principle of <em>Balance</em></h1>
+  <p class="sub">Balance is what makes a composition feel stable — or deliberately unstable. It is the distribution of visual weight across the page, and the designer's control over that distribution is what separates a layout that feels settled and trustworthy from one that makes viewers feel vaguely uneasy without knowing why.</p>
+  <div class="mr">
+    <div class="mi"><label>Lesson Type</label><span>Principle + Applied Studio</span></div>
+    <div class="mi"><label>Duration</label><span>50–60 minutes</span></div>
+    <div class="mi"><label>App</label><span>Illustrator — balance exercises</span></div>
+    <div class="mi"><label>Deliverable</label><span>Three balance compositions</span></div>
+  </div>
+</div>
+<div class="itabs">
+  <button class="itab active" onclick="showI('l08-les',this,'l08')">📖 Lesson</button>
+  <button class="itab" onclick="showI('l08-scr',this,'l08')">🎬 Video Script</button>
+  <button class="itab" onclick="showI('l08-wb',this,'l08')">📄 Workbook</button>
+  <button class="itab" onclick="showI('l08-ass',this,'l08')">✅ Assessment</button>
+</div>
+
+<div id="l08-les" class="tc active"><div class="wrap">
+  <div class="obj"><h4>Learning Objectives — Lesson 1.8</h4><ul class="ol">
+    <li>Distinguish between symmetrical balance, asymmetrical balance, and intentional imbalance — and identify when each is appropriate</li>
+    <li>Identify the five contributors to visual weight: size, value, color saturation, texture, and isolation</li>
+    <li>Create a balanced asymmetrical composition — demonstrating that balance is not symmetry</li>
+    <li>Recognize and diagnose balance failure in real design examples</li>
+    <li>Use intentional imbalance to create tension, energy, or urgency in a composition</li>
+  </ul></div>
+
+  <div class="pb">
+    <div class="pb-label">The Problem</div>
+    <h3>Your layout has a large hero image on the left and two small text blocks on the right. It feels heavy on the left — like it's listing to one side. You try centering everything, but now it feels stiff and corporate. There has to be a middle ground.</h3>
+    <p>That middle ground is asymmetrical balance. Most beginning designers understand that a large element on one side needs something on the other to balance it — but they reach for symmetry when asymmetry would be more dynamic, more interesting, and more appropriate. Asymmetrical balance achieves stability through unequal means: a large element balanced by several smaller ones, a heavy dark element balanced by a larger light area, a dominant image balanced by a substantial block of space. This lesson teaches you to see and create that balance.</p>
+    <div class="pb-meta">
+      <div class="pb-meta-item"><label>Context</label><span>Every multi-element layout composition</span></div>
+      <div class="pb-meta-item"><label>Constraint</label><span>Symmetry is not the only balance — and often not the best one</span></div>
+      <div class="pb-meta-item"><label>Skill This Lesson Builds</label><span>Visual weight analysis, asymmetrical balance, intentional imbalance</span></div>
+    </div>
+  </div>
+
+  <div class="sl">Introduction</div>
+  <h2>Why Balance Matters — The Perceptual Mechanism</h2>
+  <p>The human visual system evolved to detect unstable objects — things that might fall, tip, or move unexpectedly. When a composition is unbalanced, the brain registers it as a visual instability, producing a subtle sense of unease or incompleteness. This response is involuntary and largely unconscious. The viewer doesn't think "this composition is unbalanced" — they think "something feels off."</p>
+  <p>Balance in composition exploits this mechanism in reverse: a well-balanced layout triggers the settled, stable response that the brain associates with objects at rest. For brands that want to communicate trustworthiness, authority, and calm confidence — financial services, healthcare, legal — balance is not a stylistic preference but a communicative tool. For brands that want energy, disruption, and urgency — sports, entertainment, promotional design — intentional imbalance uses the same mechanism to create desirable instability.</p>
+
+  <div class="cb mod"><div class="cl">Core Idea</div><p>Balance is not symmetry. Symmetry is one kind of balance — formal, predictable, and stable. Asymmetrical balance achieves the same settled visual stability through unequal means, and is almost always more dynamic and interesting than symmetry while still feeling resolved. Intentional imbalance uses visual instability as a communicative tool — but only works when the context calls for tension or energy.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 1</div>
+  <h2>Three Types of Balance</h2>
+
+  <div class="balance-row">
+    <div class="balance-box">
+      <div class="balance-box-head" style="background:var(--ml);color:var(--mod);">Symmetrical</div>
+      <div class="balance-box-body">
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:center;">
+          <div style="width:80px;height:16px;background:var(--mod);border-radius:3px;"></div>
+          <div style="display:flex;gap:8px;">
+            <div style="width:36px;height:36px;background:var(--mod);border-radius:3px;opacity:.6;"></div>
+            <div style="width:36px;height:36px;background:var(--mod);border-radius:3px;opacity:.6;"></div>
+          </div>
+          <div style="width:80px;height:8px;background:var(--rule);border-radius:3px;"></div>
+        </div>
+      </div>
+      <div style="padding:10px 14px;font-size:12px;color:var(--mid);">Mirror-image arrangement. Formal, authoritative, traditional. Appropriate for legal, institutional, ceremonial contexts.</div>
+    </div>
+    <div class="balance-box">
+      <div class="balance-box-head" style="background:var(--gnl);color:var(--green);">Asymmetrical</div>
+      <div class="balance-box-body">
+        <div style="display:flex;gap:12px;align-items:center;padding:16px;">
+          <div style="width:56px;height:56px;background:var(--mod);border-radius:3px;flex-shrink:0;"></div>
+          <div style="display:flex;flex-direction:column;gap:6px;flex:1;">
+            <div style="height:10px;background:var(--rule);border-radius:2px;"></div>
+            <div style="height:8px;background:var(--rule);border-radius:2px;width:80%;"></div>
+            <div style="height:8px;background:var(--rule);border-radius:2px;width:90%;"></div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:10px 14px;font-size:12px;color:var(--mid);">Unequal elements in stable equilibrium. Dynamic yet resolved. The most expressive and versatile balance type.</div>
+    </div>
+    <div class="balance-box">
+      <div class="balance-box-head" style="background:var(--al);color:var(--accent);">Intentional Imbalance</div>
+      <div class="balance-box-body">
+        <div style="position:relative;width:100%;height:100%;">
+          <div style="position:absolute;top:12px;left:12px;width:70px;height:70px;background:var(--accent);border-radius:3px;opacity:.8;"></div>
+          <div style="position:absolute;bottom:14px;right:20px;width:24px;height:24px;background:var(--rule);border-radius:50%;"></div>
+        </div>
+      </div>
+      <div style="padding:10px 14px;font-size:12px;color:var(--mid);">Deliberate instability creating tension, urgency, or energy. Requires clear intent — not accidental imbalance.</div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+  <div class="sl">Section 2</div>
+  <h2>Five Contributors to Visual Weight</h2>
+  <p>Visual weight is not determined by physical size alone. Five properties contribute to how heavy an element feels in a composition:</p>
+
+  <table class="compare">
+    <thead><tr><th>Property</th><th>Effect on Visual Weight</th><th>Design Implication</th></tr></thead>
+    <tbody>
+      <tr><td>Size</td><td>Larger elements are heavier — the primary weight contributor</td><td>A single large element can balance many smaller ones</td></tr>
+      <tr><td>Value</td><td>Darker elements feel heavier than lighter ones</td><td>A dark element can balance a larger light element</td></tr>
+      <tr><td>Saturation</td><td>More saturated colors feel heavier than desaturated or neutral ones</td><td>A small saturated accent can balance a large neutral area</td></tr>
+      <tr><td>Complexity</td><td>Denser, more detailed elements feel heavier than simple ones</td><td>A photograph typically weighs more than a text block of similar size</td></tr>
+      <tr><td>Isolation</td><td>An element surrounded by space feels heavier than one crowded by others</td><td>White space around an element increases its perceived weight</td></tr>
+    </tbody>
+  </table>
+
+  <div class="cb gold"><div class="cl">Asymmetrical Balance in Practice</div><p>A large light-value image on the left can be balanced by a smaller, darker, more saturated element on the right — because value and saturation increase the right element's visual weight enough to equilibrate with the larger left element. This is asymmetrical balance working through multiple properties simultaneously. Developing the ability to read visual weight intuitively — rather than just by size — is what makes asymmetrical layouts feel resolved rather than accidentally heavy.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 3</div>
+  <h2>When Imbalance Is Right</h2>
+  <p>Not every composition should feel stable. Sports brands, entertainment design, promotional advertising, and youth brands often use intentional imbalance to communicate energy, urgency, and disruption. The key distinction between intentional and accidental imbalance is control: intentional imbalance is a deliberate decision applied consistently throughout the composition. Accidental imbalance results from placing elements without considering their relative visual weight.</p>
+  <p>Intentional imbalance works when the viewer can sense that the instability is controlled — that the designer chose it. When imbalance looks like it happened by accident, it undermines trust rather than communicating energy.</p>
+
+  <div class="kt"><h4>Key Vocabulary — Lesson 1.8</h4><div class="tg">
+    <div><div class="tn">Visual Weight</div><div class="td">The relative ability of an element to attract attention and pull the composition in its direction — determined by size, value, saturation, complexity, and isolation.</div><div class="vu"><div class="vu-label">In Use</div><p>"The image has too much visual weight — it's pulling the whole composition right. Reduce its size or add weight to the left side."</p></div></div>
+    <div><div class="tn">Symmetrical Balance</div><div class="td">Balance achieved through mirror-image arrangement — equal elements on both sides of a central axis. Formal, stable, institutional.</div><div class="vu"><div class="vu-label">In Use</div><p>"They want the logo centered and everything mirrored — symmetrical balance. Right for their formal institutional positioning."</p></div></div>
+    <div><div class="tn">Asymmetrical Balance</div><div class="td">Balance achieved through unequal elements — large balanced by small, dark by light, saturated by neutral. Dynamic and expressive.</div><div class="vu"><div class="vu-label">In Use</div><p>"Move the headline to the left third and let the image occupy the right two-thirds — asymmetrical balance is more interesting than centering."</p></div></div>
+    <div><div class="tn">Visual Axis</div><div class="td">An imaginary line around which visual weight is distributed — horizontal, vertical, or diagonal — the organizing structure of a balanced composition.</div><div class="vu"><div class="vu-label">In Use</div><p>"The composition organizes around a diagonal axis — heavy upper-left, light lower-right. That diagonal creates movement."</p></div></div>
+    <div><div class="tn">Radial Balance</div><div class="td">Balance organized around a central point — elements radiating outward equally. Used in logos, icons, and decorative compositions.</div><div class="vu"><div class="vu-label">In Use</div><p>"The icon uses radial balance — four equal elements around a center. That symmetry communicates stability and wholeness."</p></div></div>
+    <div><div class="tn">Intentional Imbalance</div><div class="td">The deliberate use of visual instability to communicate energy, tension, or urgency — distinguished from accidental imbalance by control and intent.</div><div class="vu"><div class="vu-label">In Use</div><p>"The imbalance works because it's clearly intentional — the heavy element is dramatically positioned, not accidentally off-center."</p></div></div>
+  </div></div>
+
+  <div class="ex"><div class="exh"><span class="exb">Exercise 1.8</span><h4>Three Balance Compositions</h4></div>
+    <p>Create three compositions — symmetrical, asymmetrical, and intentionally imbalanced — using the same set of basic elements, demonstrating that identical content can communicate completely different feelings through balance decisions alone.</p>
+    <ol>
+      <li>Create a simple set of elements: one large rectangle, two medium rectangles, three small circles, and one text headline. No color — value only (black, grays, white).</li>
+      <li>Composition A — Symmetrical: arrange all elements in a mirrored layout around a vertical center axis. Document the feeling it creates.</li>
+      <li>Composition B — Asymmetrical: achieve visual stability through unequal means. Use size, value, and space to balance elements that are not mirrored. Identify which element balances which.</li>
+      <li>Composition C — Intentional Imbalance: deliberately create visual tension through weight imbalance. It must feel intentional, not accidental. What emotion or energy does the imbalance communicate?</li>
+      <li>Write one sentence for each composition describing what the balance type communicates about the imaginary brand using these elements.</li>
+    </ol>
+    <div class="tt">⏱ Estimated time: 45–55 minutes</div>
+  </div>
+
+  <div class="rf"><h4>Journal Reflection — Lesson 1.8</h4>
+    <p style="font-size:15px;font-style:italic;">Look at three brand identities you encounter regularly — one formal and stable, one dynamic and energetic, one modern and confident. Analyze the balance type in each. Is the formal brand symmetrical? Is the dynamic brand using intentional imbalance? What does the balance choice communicate about each brand's personality?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+  </div>
+</div></div>
+
+<div id="l08-scr" class="tc"><div class="wrap">
+  <div class="sl">Concept Video Script — Lesson 1.8</div>
+  <h2>Balance — Stability Without Symmetry</h2>
+  <p style="color:var(--mid);margin-bottom:28px;font-size:14px;">Live asymmetrical balance construction — visual weight demonstration</p>
+  <div class="sh">
+    <div><label>Video Type</label><span>Concept / Live Studio</span></div>
+    <div><label>Target Length</label><span>4:30 – 5:00 minutes</span></div>
+    <div><label>Key Visual</label><span>Three composition types built live</span></div>
+    <div><label>Music Tone</label><span>Settled — shifts energetic for imbalance</span></div>
+    <div><label>Production</label><span>Illustrator screen recording</span></div>
+    <div><label>Narration</label><span>ElevenLabs or AI Avatar</span></div>
+  </div>
+  <h3>OPENING</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:00–0:42</span></div><div class="sbb nt">The human visual system evolved to detect instability — things that might fall or move unexpectedly. When a composition is unbalanced, the brain registers it and produces a subtle sense of unease. You don't think "this is unbalanced." You think "something feels off." Balance exploits this in reverse — a balanced composition triggers the settled, stable response the brain associates with objects at rest. Today you'll learn three types of balance, and discover that the most interesting one has nothing to do with symmetry.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Unbalanced composition → unease visualization ]
+[ Title: "Lesson 1.8 — The Principle of Balance" ]</div></div>
+  <h3>SEGMENT 1 — Visual Weight</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:43–2:00</span></div><div class="sbb nt">Before we build, understand visual weight. Size is the primary contributor — larger is heavier. But four others matter. Value: darker feels heavier than lighter at the same size. Saturation: a saturated color feels heavier than a neutral gray of identical size. Complexity: a photograph weighs more than a text block of similar dimensions. Isolation: an element surrounded by white space feels heavier than one crowded by others. These five properties are what make asymmetrical balance possible — you can balance a large element with a smaller, darker, more saturated one.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Five weight contributors labeled — live demo ]
+[ Weight scale: large+light vs. small+dark ]</div></div>
+  <h3>SEGMENT 2 — Three Types + Exercise</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">2:01–4:30</span></div><div class="sbb nt">Symmetrical — mirror-image. Formal, authoritative. I mirror the layout and it feels official. Asymmetrical — the interesting one. Same elements, balanced without mirroring. Large light image left, balanced by smaller darker text right. Resolved and dynamic at once. And intentional imbalance — I push the heavy element dramatically off-center. The composition feels like it's moving. Right for a sports promotion or disruptive tech launch. For your exercise: three compositions, same elements, value only. See you in Lesson 1.9.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Three compositions built live ]
+[ Exercise card: "Exercise 1.8 — Three Balance Compositions" ]
+[ "Next: Lesson 1.9 — Contrast" ]</div></div>
+</div></div>
+
+<div id="l08-wb" class="tc"><div class="wrap">
+  <div class="wb">
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:6px;font-weight:500;">Volume 1 · Module 3 · Lesson 1.8</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:4px;">Balance</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:20px;">Three Composition Types — Visual Weight Analysis</div>
+    <div class="wr"></div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="border:2px solid var(--mod);border-radius:8px;padding:14px;">
+        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);font-weight:600;margin-bottom:8px;">COMPOSITION A — SYMMETRICAL</p>
+        <p style="font-size:11px;color:var(--mid);margin-bottom:4px;">How was symmetry achieved? What does the feeling communicate?</p>
+        <div class="wl"><div class="wln"></div><div class="wln"></div></div>
+      </div>
+      <div style="border:2px solid var(--green);border-radius:8px;padding:14px;">
+        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green);font-weight:600;margin-bottom:8px;">COMPOSITION B — ASYMMETRICAL</p>
+        <p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Which element balances which? Which weight properties did you use?</p>
+        <div class="wl"><div class="wln"></div><div class="wln"></div></div>
+      </div>
+      <div style="border:2px solid var(--accent);border-radius:8px;padding:14px;">
+        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);font-weight:600;margin-bottom:8px;">COMPOSITION C — INTENTIONAL IMBALANCE</p>
+        <p style="font-size:11px;color:var(--mid);margin-bottom:4px;">What energy does the imbalance communicate? Why does it feel intentional?</p>
+        <div class="wl"><div class="wln"></div><div class="wln"></div></div>
+      </div>
+    </div>
+    <div class="pn">Digital Design &amp; Media Technology · Volume 1 · Page 8</div>
+  </div>
+</div></div>
+
+<div id="l08-ass" class="tc"><div class="wrap">
+  <div class="sl">Lesson 1.8 Assessment</div>
+  <h2>Balance — Knowledge Check</h2>
+  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
+    <div class="qi"><div class="qn">Q01</div><div class="qt">A large, light-value photograph on the left balanced by a small, dark, highly saturated text block on the right demonstrates:</div><div class="qo">
+      <div class="qop">Symmetrical balance — equal visual weight on both sides</div>
+      <div class="qop">Asymmetrical balance — stability achieved through multiple weight properties, not mirror imaging</div>
+      <div class="qop">Intentional imbalance — the composition is deliberately unstable</div>
+      <div class="qop">Radial balance — elements organized around a central point</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q02</div><div class="qt">Which element would feel heaviest despite being the same physical size as its comparison?</div><div class="qo">
+      <div class="qop">A light gray rectangle on a white background</div>
+      <div class="qop">A black rectangle surrounded by white space</div>
+      <div class="qop">A gray rectangle crowded by many other elements</div>
+      <div class="qop">A white rectangle on a light background</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q03</div><div class="qt">Intentional imbalance is appropriate for:</div><div class="qo">
+      <div class="qop">A law firm's annual report — communicating authority</div>
+      <div class="qop">A hospital wayfinding system — communicating clarity</div>
+      <div class="qop">A sports brand's promotional campaign — communicating energy and urgency</div>
+      <div class="qop">A luxury hotel's brand identity — communicating calm refinement</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q04</div><div class="qt">The perceptual mechanism underlying balance is:</div><div class="qo">
+      <div class="qop">The brain's preference for geometric precision</div>
+      <div class="qop">The brain's instinct to detect instability — producing unease when visual weight is unresolved</div>
+      <div class="qop">The eye's tendency to track movement left to right</div>
+      <div class="qop">The cultural convention of centering important elements</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q05</div><div class="qt">Isolation increases an element's visual weight because:</div><div class="qo">
+      <div class="qop">Isolated elements are physically larger than surrounding elements</div>
+      <div class="qop">Surrounding white space reduces visual competition — making the element more prominent and attracting more attention</div>
+      <div class="qop">Isolated elements always have higher value contrast</div>
+      <div class="qop">The visual system interprets isolation as higher hierarchy regardless of size</div>
+    </div></div>
+    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-C &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
+  </div>
+  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
+    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.8: describe the specific balance properties you used in Composition B. Which weight contributors did you combine to achieve equilibrium between unequal elements?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q07</div><div class="qt">A poster has all content clustered in the upper-left corner with a large empty lower-right. Diagnose as accidental or intentional imbalance — and explain what evidence would tell you which.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q08</div><div class="qt">Connect balance to the audience principle (Lesson 1.5). For a conservative institutional client vs. a youth entertainment brand, how would appropriate balance differ, and why?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+  </div>
+</div></div>
+</div><!-- end l08 -->
+
+<!-- ═══════════════════════ LESSON 1.9 ═══════════════════════ -->
+<div id="l09" class="ls">
+<div class="hero" data-n="1.9">
+  <div class="vt">Volume 1 · Module 3 · Lesson 1.9</div>
+  <h1>The Principle of <em>Contrast</em></h1>
+  <p class="sub">Without contrast, nothing is visible. Without sufficient contrast, nothing is clear. Contrast is the mechanism that creates visibility, legibility, hierarchy, and visual interest — and it operates across multiple dimensions simultaneously: value, color, size, weight, and texture. This lesson teaches you to use contrast deliberately across all of them.</p>
+  <div class="mr">
+    <div class="mi"><label>Lesson Type</label><span>Principle + Applied Studio</span></div>
+    <div class="mi"><label>Duration</label><span>50–60 minutes</span></div>
+    <div class="mi"><label>App</label><span>Illustrator — contrast studies</span></div>
+    <div class="mi"><label>Deliverable</label><span>Contrast study — five dimensions</span></div>
+  </div>
+</div>
+<div class="itabs">
+  <button class="itab active" onclick="showI('l09-les',this,'l09')">📖 Lesson</button>
+  <button class="itab" onclick="showI('l09-scr',this,'l09')">🎬 Video Script</button>
+  <button class="itab" onclick="showI('l09-wb',this,'l09')">📄 Workbook</button>
+  <button class="itab" onclick="showI('l09-ass',this,'l09')">✅ Assessment</button>
+</div>
+
+<div id="l09-les" class="tc active"><div class="wrap">
+  <div class="obj"><h4>Learning Objectives — Lesson 1.9</h4><ul class="ol">
+    <li>Identify the five dimensions of contrast — value, color, size, weight, and texture — and explain how each creates visibility and interest</li>
+    <li>Apply value contrast correctly for legibility — measuring and meeting minimum contrast ratios for text</li>
+    <li>Use contrast to create and reinforce visual hierarchy — ensuring the highest-contrast element is the most important element</li>
+    <li>Diagnose insufficient contrast in real designs and prescribe specific corrections</li>
+    <li>Distinguish between productive contrast and random contrast (visual noise)</li>
+  </ul></div>
+
+  <div class="pb">
+    <div class="pb-label">The Problem</div>
+    <h3>Your design has eight typeface weights, five colors, three image styles, and varied border thicknesses throughout. It has enormous contrast — but the viewer's eye doesn't know where to look, because the contrast is random rather than purposeful.</h3>
+    <p>Contrast without purpose is visual noise. The principle of contrast is not "more different = better" — it is "contrast should create specific, intended differentiation between specific elements." The primary relationship contrast should establish is hierarchy: the most important element should have the most contrast from its surroundings. Supporting elements should have less. The relationship between contrast and importance must be consistent — otherwise the viewer receives contradictory signals about where to look. This lesson teaches contrast as a purposeful tool, not a stylistic decoration.</p>
+    <div class="pb-meta">
+      <div class="pb-meta-item"><label>Context</label><span>All visual elements in all compositions</span></div>
+      <div class="pb-meta-item"><label>Constraint</label><span>Random contrast = noise; purposeful contrast = hierarchy</span></div>
+      <div class="pb-meta-item"><label>Skill This Lesson Builds</label><span>Contrast as hierarchy tool, legibility standards, five dimensions</span></div>
+    </div>
+  </div>
+
+  <div class="sl">Introduction</div>
+  <h2>Contrast Is the Foundation of All Visual Communication</h2>
+  <p>In the absence of contrast, nothing is visible. A white circle on a white background does not exist as a design element — the eye has no way to distinguish it from its context. This is obvious. What is less obvious is that insufficient contrast — a light gray circle on a white background — is almost as problematic. The circle exists, technically, but the communication is so weak that it fails to register with the attention and clarity the design requires.</p>
+  <p>Contrast operates across five simultaneous dimensions, and a designer who understands all five has five independent tools for creating differentiation, visibility, and hierarchy. Using only one — typically size — leaves four tools unused and the design less powerful than it could be.</p>
+
+  <div class="cb mod"><div class="cl">Core Idea</div><p>Contrast is not decoration — it is communication. Every instance of contrast should be answerable by "this element contrasts with that one in order to communicate [specific relationship]." Contrast that cannot be justified creates visual noise. Contrast consistent with the hierarchy creates clarity. The question is not "is there enough contrast?" but "is the contrast directed at the right things?"</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 1</div>
+  <h2>Five Dimensions of Contrast</h2>
+
+  <div class="contrast-demo">
+    <div class="contrast-pair">
+      <div class="contrast-pair-head">Value Contrast — Lightness vs. Darkness</div>
+      <div class="contrast-samples">
+        <div class="contrast-sample" style="background:#1a1410;color:white;">Dark on light — maximum legibility. Black on white is 21:1 contrast — the standard for sustained body text reading.</div>
+        <div class="contrast-sample" style="background:#f0ead8;color:#9a9087;font-size:14px;">Low value contrast — difficult to read. Notice how much effort reading this requires compared to the high-contrast sample.</div>
+      </div>
+    </div>
+    <div class="contrast-pair">
+      <div class="contrast-pair-head">Size Contrast — Large vs. Small</div>
+      <div class="contrast-samples">
+        <div class="contrast-sample" style="display:flex;align-items:center;gap:16px;padding:16px 20px;">
+          <span style="font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:var(--mod);">Big</span>
+          <span style="font-size:12px;color:var(--mid);">Small supporting text — hierarchy established through size alone.</span>
+        </div>
+        <div class="contrast-sample" style="display:flex;align-items:center;gap:8px;padding:16px 20px;">
+          <span style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:var(--mod);">Title</span>
+          <span style="font-size:16px;color:var(--mid);">Body at similar scale — insufficient size contrast, hierarchy unclear.</span>
+        </div>
+      </div>
+    </div>
+    <div class="contrast-pair">
+      <div class="contrast-pair-head">Weight Contrast — Bold vs. Light</div>
+      <div class="contrast-samples">
+        <div class="contrast-sample"><strong>Bold headline</strong> against <span style="font-weight:300;">light body text</span> — the weight difference establishes which is primary without size difference.</div>
+        <div class="contrast-sample" style="font-weight:500;">Medium weight headline against medium weight body — insufficient weight contrast, both feel like body text.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+  <div class="sl">Section 2</div>
+  <h2>Contrast and Hierarchy — The Critical Relationship</h2>
+  <p>The most important rule of purposeful contrast: <strong>the element with the most contrast should be the most important element.</strong> If the highest-contrast element in a composition is a decorative border rather than the headline, the hierarchy is broken — the eye is drawn to the wrong place.</p>
+  <p>This means contrast must be rationed. The headline should have more contrast than the subheadline. The subheadline should have more than the body text. The body text should have more than the captions and supporting elements. This graduated contrast system is the mechanism of visual hierarchy — not just a matter of size, but of how much each element differentiates itself from its background.</p>
+
+  <div class="cb gold"><div class="cl">The Contrast Hierarchy Rule</div><p>Before finalizing any design, check that the contrast gradient aligns with the importance gradient. The element requiring the most viewer attention should be the element with the highest contrast. If any element that should be secondary has more contrast than the primary message element, fix it — reduce the secondary element's contrast or increase the primary's until the relationship is correct.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 3</div>
+  <h2>Value Contrast and Legibility Standards</h2>
+  <p>Value contrast — the difference in lightness between text and its background — has been formalized into accessibility standards that serve as both a legal requirement and a professional benchmark. The Web Content Accessibility Guidelines (WCAG) define minimum contrast ratios that ensure text is legible across the range of human visual ability.</p>
+  <p>WCAG AA requires a minimum 4.5:1 contrast ratio for normal body text and 3:1 for large text (18pt or larger). These ratios are not arbitrary — they reflect the contrast threshold at which text becomes difficult to read for viewers with mild to moderate vision impairment. Meeting these standards is not just accessible design practice — it is better design for everyone, including viewers reading on bright screens in daylight or glancing at small text quickly.</p>
+
+  <div class="kt"><h4>Key Vocabulary — Lesson 1.9</h4><div class="tg">
+    <div><div class="tn">Value Contrast</div><div class="td">The degree of difference between the lightness of two elements — the most fundamental legibility tool. Measured numerically as a contrast ratio.</div><div class="vu"><div class="vu-label">In Use</div><p>"Run the contrast ratio on that body text. If it's below 4.5:1 we can't ship it — darken the text or lighten the background."</p></div></div>
+    <div><div class="tn">Contrast Ratio</div><div class="td">A numerical measurement of value contrast — from 1:1 (identical) to 21:1 (maximum). WCAG AA requires 4.5:1 for normal text.</div><div class="vu"><div class="vu-label">In Use</div><p>"White text on the blue button is 3.2:1 — fails WCAG AA for normal text. Use a darker blue or switch to dark text."</p></div></div>
+    <div><div class="tn">Productive Contrast</div><div class="td">Contrast that communicates a specific intended relationship — size establishing hierarchy, value establishing legibility, color establishing focal points.</div><div class="vu"><div class="vu-label">In Use</div><p>"This contrast is productive — the headline's size clearly establishes it as primary. The other contrasts support that reading."</p></div></div>
+    <div><div class="tn">Visual Noise</div><div class="td">Random or inconsistent contrast that does not communicate a specific relationship — creating confusion rather than clarity.</div><div class="vu"><div class="vu-label">In Use</div><p>"Five font weights and three border styles — visual noise. Reduce to two weights and one border, then let contrast do focused work."</p></div></div>
+    <div><div class="tn">Color Contrast</div><div class="td">The use of temperature, saturation, or hue differences to create differentiation — a supplement to value contrast, never a replacement for it.</div><div class="vu"><div class="vu-label">In Use</div><p>"The warm accent against the cool background pulls the eye — but check value contrast too. Color alone isn't enough for accessibility."</p></div></div>
+    <div><div class="tn">Contrast Gradient</div><div class="td">The graduated system of contrast levels across a composition — most contrast for the most important element, least for background elements.</div><div class="vu"><div class="vu-label">In Use</div><p>"Map the contrast gradient: headline at maximum, body at medium, captions at minimum. Does the gradient match the importance hierarchy?"</p></div></div>
+  </div></div>
+
+  <div class="ex"><div class="exh"><span class="exb">Exercise 1.9</span><h4>Contrast Study — Five Dimensions</h4></div>
+    <p>Apply all five contrast dimensions to a single composition to demonstrate how each creates a different type of visual differentiation.</p>
+    <ol>
+      <li>Create a simple composition with a headline, subheadline, body paragraph, and two supporting labels — no styling yet, all the same default appearance.</li>
+      <li>Apply value contrast: make the headline dramatically darker than supporting elements. Check the body text contrast ratio using an online checker. Achieve at least 4.5:1.</li>
+      <li>Apply size contrast: establish the size gradient — headline dramatically larger than subheadline, clearly larger than body text.</li>
+      <li>Apply weight contrast: headline bold, subheadline medium, body regular. Weight should reinforce the size hierarchy.</li>
+      <li>Add color contrast: use one accent color on the most important call-to-action element only. Verify it has the highest contrast from its background of all elements.</li>
+      <li>Check the contrast gradient: is the most important element the highest contrast? Does each level have less contrast than the level above? Adjust until aligned.</li>
+    </ol>
+    <div class="tt">⏱ Estimated time: 45–55 minutes</div>
+  </div>
+
+  <div class="rf"><h4>Journal Reflection — Lesson 1.9</h4>
+    <p style="font-size:15px;font-style:italic;">Find a design where contrast works against the hierarchy — where the highest-contrast element is not the most important. What creates that false contrast? What specific change would correct it? How does seeing this failure change how you'll check your own work before delivery?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+  </div>
+</div></div>
+
+<div id="l09-scr" class="tc"><div class="wrap">
+  <div class="sl">Concept Video Script — Lesson 1.9</div>
+  <h2>Contrast — Making the Right Things Visible</h2>
+  <p style="color:var(--mid);margin-bottom:28px;font-size:14px;">Five contrast dimensions + hierarchy alignment + contrast ratio checking</p>
+  <div class="sh">
+    <div><label>Video Type</label><span>Concept / Live Studio</span></div>
+    <div><label>Target Length</label><span>4:30 – 5:00 minutes</span></div>
+    <div><label>Key Visual</label><span>Contrast gradient construction in sequence</span></div>
+    <div><label>Music Tone</label><span>Sharp, clear, decisive</span></div>
+    <div><label>Production</label><span>Illustrator recording + contrast checker</span></div>
+    <div><label>Narration</label><span>ElevenLabs or AI Avatar</span></div>
+  </div>
+  <h3>OPENING</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:00–0:40</span></div><div class="sbb nt">This design has eight typeface weights, five colors, three image styles, and varied borders. It has enormous contrast. But the eye doesn't know where to look — because the contrast is random. Contrast without purpose is visual noise. Contrast with purpose is hierarchy. Today you'll learn five dimensions of contrast and how to direct them at exactly the right elements.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Chaotic high-contrast design — "Where do I look?" ]
+[ Title: "Lesson 1.9 — The Principle of Contrast" ]</div></div>
+  <h3>SEGMENT 1 — Five Dimensions</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:41–2:10</span></div><div class="sbb nt">Value — lightness versus darkness, the foundation of legibility standards. Gray text on white — low contrast. I darken it. Immediately readable. Size — larger versus smaller, the fastest hierarchy signal. Weight — bold versus light, differentiation without size change. Color — warm versus cool, a fast-acting focal point. Texture — complex versus simple; a photograph weighs more than a flat color block. Most designers use one or two. All five together create a hierarchy system that works in every condition — screen, print, thumbnail, full size.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Each contrast type demonstrated live ]
+[ Value: contrast ratio checker for body text ]</div></div>
+  <h3>SEGMENT 2 — Contrast Gradient + Exercise</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">2:11–4:30</span></div><div class="sbb nt">The most important rule: the highest-contrast element must be the most important element. If a decorative border has more contrast than the headline, the eye goes to the border — a hierarchy failure from contrast misalignment. The fix: a contrast gradient. Headline at maximum, subheadline at medium, body at comfortable legibility but less than headline, supporting elements at minimum. Every level has less than the level above. Now the gradient matches the hierarchy. For your exercise: build this gradient live, apply all five dimensions, check your body text ratio, and verify the gradient matches the hierarchy before you finish. See you in Lesson 1.10.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Contrast gradient diagram ]
+[ Exercise card: "Exercise 1.9 — Contrast Study" ]
+[ "Next: Lesson 1.10 — Alignment" ]</div></div>
+</div></div>
+
+<div id="l09-wb" class="tc"><div class="wrap">
+  <div class="wb">
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:6px;font-weight:500;">Volume 1 · Module 3 · Lesson 1.9</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:4px;">Contrast</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:20px;">Contrast Gradient Study — Five Dimensions</div>
+    <div class="wr"></div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:12px;"><p style="font-size:10px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Value Contrast — measured body text ratio: <span style="border-bottom:1px solid var(--rule);display:inline-block;width:60px;"></span> &nbsp; WCAG AA pass? <span style="border-bottom:1px solid var(--rule);display:inline-block;width:40px;"></span></p></div>
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:12px;"><p style="font-size:10px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Size Contrast — Headline <span style="border-bottom:1px solid var(--rule);display:inline-block;width:40px;"></span>pt &nbsp; Sub <span style="border-bottom:1px solid var(--rule);display:inline-block;width:40px;"></span>pt &nbsp; Body <span style="border-bottom:1px solid var(--rule);display:inline-block;width:40px;"></span>pt</p></div>
+      <div style="border:1px solid var(--rule);border-radius:7px;padding:12px;"><p style="font-size:10px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Contrast Gradient Verification</p><p style="font-size:11px;color:var(--mid);">Which element has the highest contrast? Is it the most important? Is the gradient aligned with the hierarchy?</p><div class="wl"><div class="wln"></div><div class="wln"></div></div></div>
+    </div>
+    <p style="font-size:13px;font-weight:600;margin-bottom:8px;">One design where contrast works against hierarchy — what creates the false contrast, and how would you correct it?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+    <div class="pn">Digital Design &amp; Media Technology · Volume 1 · Page 9</div>
+  </div>
+</div></div>
+
+<div id="l09-ass" class="tc"><div class="wrap">
+  <div class="sl">Lesson 1.9 Assessment</div>
+  <h2>Contrast — Knowledge Check</h2>
+  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
+    <div class="qi"><div class="qn">Q01</div><div class="qt">A design with high overall contrast but random application of that contrast is best described as:</div><div class="qo">
+      <div class="qop">Highly effective — maximum contrast produces maximum impact</div>
+      <div class="qop">Visual noise — contrast without purposeful direction confuses the eye rather than guiding it</div>
+      <div class="qop">Appropriate for experimental or avant-garde contexts</div>
+      <div class="qop">A successful application needing only minor refinement</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q02</div><div class="qt">The "Contrast Hierarchy Rule" states that:</div><div class="qo">
+      <div class="qop">All elements should have maximum contrast for universal accessibility</div>
+      <div class="qop">The element requiring the most attention should have the highest contrast — and the contrast gradient should match the importance gradient</div>
+      <div class="qop">Contrast should be applied only to headlines and calls to action</div>
+      <div class="qop">Contrast between adjacent elements should be equal to avoid unintended hierarchy</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q03</div><div class="qt">WCAG AA requires a minimum 4.5:1 contrast ratio for normal body text because:</div><div class="qo">
+      <div class="qop">This ratio produces the most attractive text-background combination</div>
+      <div class="qop">This threshold reflects the level at which text becomes reliably legible for viewers with mild to moderate vision impairment — improving reading for all</div>
+      <div class="qop">4.5:1 is the contrast of black on white, which all designs must match</div>
+      <div class="qop">Legal requirements mandate this for all commercial publications</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q04</div><div class="qt">Why is color contrast "a supplement to value contrast, never a replacement"?</div><div class="qo">
+      <div class="qop">Color contrast is harder to perceive than value contrast for most viewers</div>
+      <div class="qop">Color contrast fails for color vision deficient viewers — elements differing only in hue and not value become indistinguishable for significant portions of the audience</div>
+      <div class="qop">Color contrast causes eye strain over reading-length passages</div>
+      <div class="qop">Color contrast cannot be reliably reproduced across screen types</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q05</div><div class="qt">Weight contrast between headline and body text creates hierarchy by:</div><div class="qo">
+      <div class="qop">Reducing the file size by using fewer typeface instances</div>
+      <div class="qop">Creating differentiation between importance levels without requiring size changes</div>
+      <div class="qop">Communicating the reading speed for each element</div>
+      <div class="qop">Making all text elements appear the same physical size</div>
+    </div></div>
+    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
+  </div>
+  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
+    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.9: what was the measured contrast ratio for your body text? If it failed WCAG AA, what specific adjustment did you make — and what was the resulting ratio?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q07</div><div class="qt">A sale flyer uses red decorative borders and red stickers throughout, but the sale price — the most important information — is set in medium gray. Diagnose the contrast problem and prescribe a specific fix.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q08</div><div class="qt">Connect contrast to channel alignment from Lesson 1.4. How does purposeful contrast serve channel alignment — and how does random contrast create channel contradiction?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+  </div>
+</div></div>
+</div><!-- end l09 -->
+
+<!-- ═══════════════════════ LESSON 1.10 ═══════════════════════ -->
+<div id="l10" class="ls">
+<div class="hero" data-n="1.10">
+  <div class="vt">Volume 1 · Module 3 · Lesson 1.10</div>
+  <h1>The Principle of <em>Alignment</em></h1>
+  <p class="sub">Nothing communicates "amateur" faster than elements that float freely, positioned by feel rather than connected to a shared structural logic. Alignment is the invisible architecture that makes professional layouts look intentional — and its absence is felt immediately even by viewers who have never heard the word.</p>
+  <div class="mr">
+    <div class="mi"><label>Lesson Type</label><span>Principle + Applied Studio</span></div>
+    <div class="mi"><label>Duration</label><span>50–60 minutes</span></div>
+    <div class="mi"><label>App</label><span>Illustrator — align panel and guides</span></div>
+    <div class="mi"><label>Deliverable</label><span>Alignment before/after study</span></div>
+  </div>
+</div>
+<div class="itabs">
+  <button class="itab active" onclick="showI('l10-les',this,'l10')">📖 Lesson</button>
+  <button class="itab" onclick="showI('l10-scr',this,'l10')">🎬 Video Script</button>
+  <button class="itab" onclick="showI('l10-wb',this,'l10')">📄 Workbook</button>
+  <button class="itab" onclick="showI('l10-ass',this,'l10')">✅ Assessment</button>
+</div>
+
+<div id="l10-les" class="tc active"><div class="wrap">
+  <div class="obj"><h4>Learning Objectives — Lesson 1.10</h4><ul class="ol">
+    <li>Explain the alignment principle and identify the perceptual mechanism that makes misalignment feel wrong</li>
+    <li>Distinguish between left, right, center, and edge alignment — and identify when each is appropriate</li>
+    <li>Diagnose and correct alignment failures — including near-misses, inconsistent margins, and random offsets</li>
+    <li>Explain why center alignment is often overused and when it is genuinely appropriate</li>
+    <li>Use invisible alignment structures — shared edges, gutters, and guides — to create professional layout order</li>
+  </ul></div>
+
+  <div class="pb">
+    <div class="pb-label">The Problem</div>
+    <h3>Every element has been carefully positioned by feel — each one moved until it "looked right." The result looks amateurish, though you can't explain why. The headline is centered. The body text is left-aligned. The call to action is centered. The logo sits slightly right of center. Nothing lines up with anything else.</h3>
+    <p>This is the alignment problem. In the absence of a shared structural logic — a set of alignment relationships connecting elements to each other — every positioning decision is arbitrary, and the accumulation of arbitrary decisions produces a layout that feels accidental rather than designed. The solution is not perfectionistic pixel-hunting — it is establishing a small number of clear alignment relationships and applying them consistently. Two or three shared edges, properly applied, transform the feeling of a layout from accidental to professional.</p>
+    <div class="pb-meta">
+      <div class="pb-meta-item"><label>Context</label><span>Every multi-element layout</span></div>
+      <div class="pb-meta-item"><label>Constraint</label><span>Arbitrary positioning feels accidental; aligned positioning feels designed</span></div>
+      <div class="pb-meta-item"><label>Skill This Lesson Builds</label><span>Edge alignment, consistency, near-miss detection</span></div>
+    </div>
+  </div>
+
+  <div class="sl">Introduction</div>
+  <h2>The Invisible Architecture</h2>
+  <p>Alignment is what makes a layout feel intentional. It is the set of invisible relationships — shared edges, shared centers, shared distances — that connect design elements to each other and to the page. When alignment is consistent, the eye moves through the composition with a sense of order. When it is inconsistent or absent, the eye feels restless, uncertain of where to land, detecting the disorder without being able to name it.</p>
+  <p>The perceptual mechanism: the brain automatically tries to find and complete patterns. Aligned elements form a clear pattern — a straight edge, a shared center, a consistent grid. Misaligned elements frustrate the pattern-finding mechanism, creating low-grade visual discomfort that the viewer experiences as "something feels off."</p>
+
+  <div class="cb mod"><div class="cl">The Core Rule</div><p>Every element should have a visual connection to at least one other element — a shared left edge, right edge, top edge, bottom edge, or centerline. An element with no visual connection to any other element is floating — and floating elements undermine the professional quality of a layout regardless of how carefully they were positioned by feel.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 1</div>
+  <h2>Four Alignment Types</h2>
+
+  <div class="align-types">
+    <div class="align-box">
+      <div class="align-box-head">Left Alignment</div>
+      <div class="align-box-body">
+        <div class="align-elem" style="width:100%;"></div>
+        <div class="align-elem" style="width:80%;opacity:.5;"></div>
+        <div class="align-elem" style="width:65%;opacity:.3;"></div>
+        <p style="font-size:12px;color:var(--mid);margin-top:8px;margin-bottom:0;">The most natural alignment for Western left-to-right reading. Creates a clear entry edge for the eye. Professional default for most layouts.</p>
+      </div>
+    </div>
+    <div class="align-box">
+      <div class="align-box-head" style="background:var(--gnl);color:var(--green);">Right Alignment</div>
+      <div class="align-box-body">
+        <div class="align-elem" style="width:100%;margin-left:auto;"></div>
+        <div class="align-elem" style="width:80%;margin-left:auto;opacity:.5;"></div>
+        <div class="align-elem" style="width:65%;margin-left:auto;opacity:.3;"></div>
+        <p style="font-size:12px;color:var(--mid);margin-top:8px;margin-bottom:0;">Creates a ragged left edge the eye must follow with effort. Appropriate for captions, callouts, or elements that intentionally push against the main flow.</p>
+      </div>
+    </div>
+    <div class="align-box">
+      <div class="align-box-head" style="background:var(--gl);color:var(--gold);">Center Alignment</div>
+      <div class="align-box-body">
+        <div class="align-elem" style="width:100%;"></div>
+        <div class="align-elem" style="width:70%;margin:0 auto;opacity:.5;"></div>
+        <div class="align-elem" style="width:50%;margin:0 auto;opacity:.3;"></div>
+        <p style="font-size:12px;color:var(--mid);margin-top:8px;margin-bottom:0;">Formal and symmetrical. Appropriate for headlines, invitations, ceremonial content. Overused — two centered elements don't align to each other, only to the page center.</p>
+      </div>
+    </div>
+    <div class="align-box">
+      <div class="align-box-head" style="background:var(--al);color:var(--accent);">Edge Alignment</div>
+      <div class="align-box-body">
+        <div style="display:flex;gap:6px;margin-bottom:8px;">
+          <div style="flex:1;height:36px;background:var(--mod);border-radius:3px;opacity:.7;"></div>
+          <div style="flex:1;height:36px;background:var(--mod);border-radius:3px;opacity:.7;"></div>
+          <div style="flex:1;height:36px;background:var(--mod);border-radius:3px;opacity:.7;"></div>
+        </div>
+        <p style="font-size:12px;color:var(--mid);margin:0;">Aligning the tops, bottoms, or sides of different elements creates visual connection across the layout — even between elements not in proximity.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+  <div class="sl">Section 2</div>
+  <h2>The Center Alignment Problem</h2>
+  <p>Center alignment is the most overused alignment in beginning design work — because centering feels "safe" and balanced. The problem: two centered elements don't actually align to each other. They each align independently to the page center, but their left and right edges float at different positions. The result is a ragged, indeterminate visual structure where nothing clearly connects to anything else.</p>
+  <p>Center alignment is genuinely appropriate in specific contexts: standalone headlines, formal invitations, commemorative certificates, symmetrical logo lockups, and short title cards. In these contexts, the centered axis IS the design structure. Outside these contexts — for body text, multi-element layouts, or anything requiring a reading path — center alignment typically produces weaker visual organization than left alignment would.</p>
+
+  <div class="div"></div>
+  <div class="sl">Section 3</div>
+  <h2>Near-Misses — The Most Damaging Alignment Error</h2>
+  <p>A near-miss is an alignment that is almost correct but visibly off — two elements that should share a left edge but are offset by 3 pixels, or a headline that is almost centered but slightly to the left. Near-misses are perceptually worse than obvious misalignment because they imply that alignment was attempted but failed — communicating inattention rather than intention.</p>
+  <p>The professional standard: if two elements should be aligned, they must be exactly aligned. Use Illustrator's Align panel, guides, or the grid to achieve precision. "Close enough" is never good enough in alignment — the eye detects near-misses at a subconscious level and registers them as carelessness.</p>
+
+  <div class="cb gold"><div class="cl">The Alignment Audit</div><p>Before finalizing any layout, trace every alignment relationship. For each element, ask: what does this align to? If the answer is "nothing," it is floating — give it a shared edge with another element. If the answer is "it's almost aligned to X," it is a near-miss — make it exact. Every element should answer the alignment question with a clear, intentional relationship.</p></div>
+
+  <div class="kt"><h4>Key Vocabulary — Lesson 1.10</h4><div class="tg">
+    <div><div class="tn">Alignment</div><div class="td">The visual connection between elements through shared edges or centerlines — the invisible architecture that makes layouts feel intentional rather than accidental.</div><div class="vu"><div class="vu-label">In Use</div><p>"Align that headline to the left edge of the body text. Not close — exact. Use the align panel to match the same X coordinate."</p></div></div>
+    <div><div class="tn">Near-Miss</div><div class="td">An alignment that is almost correct but visibly offset — perceptually worse than clear misalignment because it signals attempted-but-failed precision.</div><div class="vu"><div class="vu-label">In Use</div><p>"These are 4 pixels off — a near-miss, not a deliberate offset. Near-misses read as carelessness. Exact-align them."</p></div></div>
+    <div><div class="tn">Floating Element</div><div class="td">An element with no visual connection to any other — positioned by feel with no shared edge or structural relationship.</div><div class="vu"><div class="vu-label">In Use</div><p>"The logo is floating — it aligns to nothing. Align its left edge to the body text or its right edge to the page margin."</p></div></div>
+    <div><div class="tn">Center Alignment</div><div class="td">Alignment around a central vertical axis — appropriate for formal, symmetrical, or standalone content. Overused as a default, often weaker than left alignment.</div><div class="vu"><div class="vu-label">In Use</div><p>"Change the body text from centered to left-aligned — three paragraphs of centered text creates a very ragged reading path."</p></div></div>
+    <div><div class="tn">Edge Alignment</div><div class="td">Aligning different elements' edges (top, bottom, left, right) to create visual connections across the layout independent of proximity.</div><div class="vu"><div class="vu-label">In Use</div><p>"Align the top of the image to the top of the headline — that horizontal alignment connects the two columns."</p></div></div>
+    <div><div class="tn">Invisible Structure</div><div class="td">The network of alignment relationships connecting all elements — not visible in the final design but perceptible as a sense of order and intention.</div><div class="vu"><div class="vu-label">In Use</div><p>"Show me the invisible structure — where are the alignment lines? Every element should connect to it. What is this element aligning to?"</p></div></div>
+  </div></div>
+
+  <div class="brief">
+    <div class="brief-head">
+      <div class="bl">Design Brief — Lesson 1.10</div>
+      <h4>Alignment Before/After: Same Content, Two Structures</h4>
+    </div>
+    <div class="brief-body">
+      <div class="brief-section">
+        <div class="brief-section-label">The Problem</div>
+        <p>Alignment failures are invisible until you compare an aligned version to an unaligned one — at which point they become impossible to unsee. This brief creates that comparison deliberately, making the value of alignment immediately tangible.</p>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">The Constraints</div>
+        <ul>
+          <li>Take a simple set of elements: company name, tagline, three contact details, and a small logo shape</li>
+          <li>Version A — Unaligned: position every element by feel, mixing center and left alignment, with slight random offsets. This is the "before" — it should look amateurish</li>
+          <li>Version B — Aligned: establish two or three clear alignment relationships (e.g., all text left-aligned to a shared edge, logo top-aligned to the company name) and apply them with exact precision</li>
+          <li>Use Illustrator's Align panel and guides — no "eyeballing." Every alignment must be exact</li>
+          <li>Annotate Version B: draw the invisible alignment lines and label what each element aligns to</li>
+          <li>Write two sentences comparing how the two versions feel and why</li>
+        </ul>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">Your Deliverable</div>
+        <div class="brief-deliverable"><p>Two versions of the same layout (unaligned and aligned) + annotated alignment lines on Version B + two-sentence comparison of how each version feels.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rf"><h4>Journal Reflection — Lesson 1.10</h4>
+    <p style="font-size:15px;font-style:italic;">Look at a document you've made in the past — a resume, a flyer, a presentation slide. Trace the alignment relationships. How many elements were floating? How many near-misses can you find? Now that you can see them, how does the document feel different from how it felt when you made it?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+  </div>
+</div></div>
+
+<div id="l10-scr" class="tc"><div class="wrap">
+  <div class="sl">Concept Video Script — Lesson 1.10</div>
+  <h2>Alignment — The Invisible Architecture</h2>
+  <p style="color:var(--mid);margin-bottom:28px;font-size:14px;">Floating elements vs. aligned structure — before/after with alignment lines revealed</p>
+  <div class="sh">
+    <div><label>Video Type</label><span>Concept / Live Studio</span></div>
+    <div><label>Target Length</label><span>4:30 – 5:00 minutes</span></div>
+    <div><label>Key Visual</label><span>Alignment lines revealed over a layout</span></div>
+    <div><label>Music Tone</label><span>Precise, architectural, ordered</span></div>
+    <div><label>Production</label><span>Illustrator recording + After Effects</span></div>
+    <div><label>Narration</label><span>ElevenLabs or AI Avatar</span></div>
+  </div>
+  <h3>OPENING</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:00–0:42</span></div><div class="sbb nt">Nothing communicates "amateur" faster than elements that float freely. Here's a layout where everything was positioned by feel — moved until it "looked right." Headline centered, body left-aligned, call to action centered, logo slightly off-center. Nothing lines up with anything. It looks accidental — because it is. Today you'll learn alignment: the invisible architecture that connects every element and makes a layout feel intentional.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Floating-element layout — looks amateurish ]
+[ Title: "Lesson 1.10 — The Principle of Alignment" ]</div></div>
+  <h3>SEGMENT 1 — Four Alignment Types</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:43–2:00</span></div><div class="sbb nt">Four types. Left alignment — the natural choice for left-to-right reading, creating a clear entry edge. The professional default. Right alignment — a ragged left edge, used deliberately for captions or counter-flow elements. Center alignment — formal and symmetrical, right for headlines and invitations, but overused. Here's the trap: two centered elements don't align to each other. They align independently to the page center while their edges float at different positions. And edge alignment — connecting the tops, bottoms, or sides of different elements across the whole layout, even elements far apart.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Four alignment types demonstrated ]
+[ Center alignment trap: two centered elements, edges floating ]</div></div>
+  <h3>SEGMENT 2 — Near-Misses + Exercise</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">2:01–4:30</span></div><div class="sbb nt">The most damaging error: the near-miss. Two elements that should share an edge, offset by three pixels. It's worse than obvious misalignment because it signals that alignment was attempted and failed — it reads as carelessness. The standard is exact. Use the align panel, use guides — never eyeball it. Now watch — I take the floating layout and establish three alignment relationships. All text to a shared left edge. Logo top-aligned to the company name. Contact details left-aligned to each other. Exact, every time. The layout transforms from accidental to professional. For your exercise: build an unaligned version and an aligned version of the same content. Draw the alignment lines on the aligned one. See you in Lesson 1.11.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Near-miss highlighted — then corrected to exact ]
+[ Floating layout → aligned, lines revealed ]
+[ Exercise card: "Exercise 1.10 — Alignment Before/After" ]
+[ "Next: Lesson 1.11 — Repetition &amp; Proximity" ]</div></div>
+</div></div>
+
+<div id="l10-wb" class="tc"><div class="wrap">
+  <div class="wb">
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:6px;font-weight:500;">Volume 1 · Module 3 · Lesson 1.10</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:4px;">Alignment</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:20px;">Alignment Audit — Before/After</div>
+    <div class="wr"></div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="border:1px solid var(--accent);border-radius:8px;padding:14px;">
+        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);font-weight:600;margin-bottom:8px;">VERSION A — UNALIGNED (BEFORE)</p>
+        <p style="font-size:11px;color:var(--mid);margin-bottom:4px;">How many floating elements? How many near-misses?</p>
+        <div class="wl"><div class="wln"></div><div class="wln"></div></div>
+      </div>
+      <div style="border:2px solid var(--mod);border-radius:8px;padding:14px;">
+        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);font-weight:600;margin-bottom:8px;">VERSION B — ALIGNED (AFTER)</p>
+        <p style="font-size:11px;color:var(--mid);margin-bottom:6px;">List your alignment relationships — what aligns to what:</p>
+        <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+      </div>
+    </div>
+    <p style="font-size:13px;font-weight:600;margin:14px 0 6px;">Two-sentence comparison — how do the two versions feel, and why?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div></div>
+    <div class="pn">Digital Design &amp; Media Technology · Volume 1 · Page 10</div>
+  </div>
+</div></div>
+
+<div id="l10-ass" class="tc"><div class="wrap">
+  <div class="sl">Lesson 1.10 Assessment</div>
+  <h2>Alignment — Knowledge Check</h2>
+  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
+    <div class="qi"><div class="qn">Q01</div><div class="qt">Why is a "near-miss" alignment perceptually worse than an obvious misalignment?</div><div class="qo">
+      <div class="qop">Near-misses are harder to correct technically</div>
+      <div class="qop">A near-miss signals that alignment was attempted but failed — communicating carelessness rather than intention</div>
+      <div class="qop">Near-misses violate accessibility standards while obvious misalignment does not</div>
+      <div class="qop">There is no perceptual difference — both are equally problematic</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q02</div><div class="qt">The problem with using center alignment for a multi-element layout is:</div><div class="qo">
+      <div class="qop">Center alignment is never appropriate in professional design</div>
+      <div class="qop">Centered elements align independently to the page center but their edges float at different positions — creating a ragged, indeterminate structure with no clear element-to-element connection</div>
+      <div class="qop">Center alignment requires more technical skill to execute precisely</div>
+      <div class="qop">Centered text is illegible for viewers with reading difficulties</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q03</div><div class="qt">The perceptual mechanism underlying the alignment principle is:</div><div class="qo">
+      <div class="qop">The eye's preference for symmetrical compositions over asymmetrical ones</div>
+      <div class="qop">The brain's automatic pattern-finding — aligned elements form a clear pattern; misaligned elements frustrate the mechanism, creating low-grade discomfort</div>
+      <div class="qop">The cultural training to read text from left to right</div>
+      <div class="qop">The tendency of the eye to fixate on the largest element first</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q04</div><div class="qt">A "floating element" is one that:</div><div class="qo">
+      <div class="qop">Uses a drop shadow to appear lifted off the page</div>
+      <div class="qop">Has no visual connection — no shared edge or centerline — to any other element in the composition</div>
+      <div class="qop">Is positioned in the optical center rather than the mathematical center</div>
+      <div class="qop">Overlaps another element in the layout</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q05</div><div class="qt">Edge alignment is valuable because it:</div><div class="qo">
+      <div class="qop">Is the only alignment type that works for both text and images</div>
+      <div class="qop">Creates visual connections between elements across the layout — even between elements that are far apart and not in proximity</div>
+      <div class="qop">Requires no use of the align panel or guides</div>
+      <div class="qop">Automatically centers all elements on a shared axis</div>
+    </div></div>
+    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
+  </div>
+  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
+    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.10: describe the alignment relationships you established in Version B. How many shared edges did you create, and what aligned to what?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q07</div><div class="qt">A business card centers the name, left-aligns the address, and right-aligns the phone number. Diagnose the alignment problem and prescribe a specific correction that would create a coherent structure.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q08</div><div class="qt">Connect alignment to grid systems (which you'll study in Module 7). How does a grid automatically enforce the alignment principle — and why does that make grids so valuable for professional layout?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+  </div>
+</div></div>
+</div><!-- end l10 -->
+
+<!-- ═══════════════════════ LESSON 1.11 ═══════════════════════ -->
+<div id="l11" class="ls">
+<div class="hero" data-n="1.11">
+  <div class="vt">Volume 1 · Module 3 · Lesson 1.11</div>
+  <h1>Repetition <em>&amp; Proximity</em></h1>
+  <p class="sub">Two principles, one shared purpose: creating relationships. Repetition builds unity across a design by repeating visual elements; proximity builds meaning within a design by grouping related elements in space. Together, they are how a viewer understands what belongs with what — without reading a single word.</p>
+  <div class="mr">
+    <div class="mi"><label>Lesson Type</label><span>Principle + Applied Studio</span></div>
+    <div class="mi"><label>Duration</label><span>55–65 minutes</span></div>
+    <div class="mi"><label>App</label><span>Illustrator — grouping and style systems</span></div>
+    <div class="mi"><label>Deliverable</label><span>Repetition system + proximity grouping study</span></div>
+  </div>
+</div>
+<div class="itabs">
+  <button class="itab active" onclick="showI('l11-les',this,'l11')">📖 Lesson</button>
+  <button class="itab" onclick="showI('l11-scr',this,'l11')">🎬 Video Script</button>
+  <button class="itab" onclick="showI('l11-wb',this,'l11')">📄 Workbook</button>
+  <button class="itab" onclick="showI('l11-ass',this,'l11')">✅ Assessment</button>
+</div>
+
+<div id="l11-les" class="tc active"><div class="wrap">
+  <div class="obj"><h4>Learning Objectives — Lesson 1.11</h4><ul class="ol">
+    <li>Explain how repetition creates unity and brand recognition across a design or design system</li>
+    <li>Explain how proximity creates meaning by grouping related elements — the Gestalt principle of proximity</li>
+    <li>Diagnose proximity failures where spatial grouping contradicts logical relationships</li>
+    <li>Build a simple repetition system — consistent colors, type, spacing, and shape language</li>
+    <li>Apply both principles together to organize a complex information layout into clear, meaningful groups</li>
+  </ul></div>
+
+  <div class="pb">
+    <div class="pb-label">The Problem</div>
+    <h3>Your event flyer lists six sessions, each with a title, time, location, and speaker. Everything is evenly spaced down the page. The viewer can't tell which time goes with which session — because the spacing between a session's own details is the same as the spacing between separate sessions. The information is all there, but the relationships are invisible.</h3>
+    <p>This is a proximity failure — and it is one of the most common information design problems. When related items are not grouped more closely than unrelated items, the viewer cannot perceive the structure of the information. Proximity is the tool that solves it: group related elements together, separate unrelated elements with more space, and the structure becomes instantly visible without anyone reading a word. Repetition is its companion: by repeating consistent visual treatments across the groups, the whole design becomes unified and recognizable. This lesson teaches both — and how they work together.</p>
+    <div class="pb-meta">
+      <div class="pb-meta-item"><label>Context</label><span>Information layouts, design systems, brand identities</span></div>
+      <div class="pb-meta-item"><label>Constraint</label><span>Equal spacing destroys relationships; grouping reveals them</span></div>
+      <div class="pb-meta-item"><label>Skill This Lesson Builds</label><span>Proximity grouping, repetition systems, information structure</span></div>
+    </div>
+  </div>
+
+  <div class="sl">Introduction</div>
+  <h2>Two Principles That Create Relationships</h2>
+  <p>Repetition and proximity are grouped together in this lesson because they share a single underlying purpose: they create relationships between elements. Repetition creates relationships through similarity — elements that look alike are perceived as belonging to the same family. Proximity creates relationships through closeness — elements that are near each other are perceived as related. Both exploit the same fundamental property of human perception: the brain automatically groups things that are similar or close, and separates things that are different or distant.</p>
+  <p>This is the Gestalt psychology principle of grouping, and it operates below conscious awareness. The viewer does not decide that two closely-spaced items are related — they perceive the relationship automatically and instantly, before any reading occurs. The designer who controls similarity and proximity controls how the viewer understands the structure of the entire composition.</p>
+
+  <div class="cb mod"><div class="cl">Core Idea</div><p>Repetition creates unity (everything feels like part of one system). Proximity creates meaning (the viewer understands what belongs with what). Together they answer the viewer's unconscious question — "how is this information organized?" — through pure visual relationship, before a single word is read. Master both and you can organize any amount of information into instantly comprehensible structure.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 1</div>
+  <h2>Proximity — Grouping Creates Meaning</h2>
+  <p>The principle of proximity states: elements placed near each other are perceived as related; elements placed far apart are perceived as unrelated. This is not a stylistic guideline — it is a documented property of human perception. The eye groups by distance automatically and unconsciously.</p>
+
+  <div class="prox-demo">
+    <div class="prox-box">
+      <div class="prox-box-label" style="color:var(--accent);">✗ Proximity Failure — Even Spacing</div>
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <div style="height:9px;background:var(--ink);border-radius:2px;width:90%;"></div>
+        <div style="height:7px;background:var(--rule);border-radius:2px;width:60%;"></div>
+        <div style="height:9px;background:var(--ink);border-radius:2px;width:85%;"></div>
+        <div style="height:7px;background:var(--rule);border-radius:2px;width:55%;"></div>
+        <div style="height:9px;background:var(--ink);border-radius:2px;width:88%;"></div>
+        <div style="height:7px;background:var(--rule);border-radius:2px;width:62%;"></div>
+      </div>
+      <p style="font-size:11px;color:var(--mid);margin-top:12px;margin-bottom:0;">Equal gaps everywhere — the viewer cannot tell which detail belongs to which item. Structure is invisible.</p>
+    </div>
+    <div class="prox-box">
+      <div class="prox-box-label" style="color:var(--green);">✓ Proximity Applied — Grouped</div>
+      <div style="display:flex;flex-direction:column;gap:18px;">
+        <div style="display:flex;flex-direction:column;gap:3px;">
+          <div style="height:9px;background:var(--ink);border-radius:2px;width:90%;"></div>
+          <div style="height:7px;background:var(--rule);border-radius:2px;width:60%;"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:3px;">
+          <div style="height:9px;background:var(--ink);border-radius:2px;width:85%;"></div>
+          <div style="height:7px;background:var(--rule);border-radius:2px;width:55%;"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:3px;">
+          <div style="height:9px;background:var(--ink);border-radius:2px;width:88%;"></div>
+          <div style="height:7px;background:var(--rule);border-radius:2px;width:62%;"></div>
+        </div>
+      </div>
+      <p style="font-size:11px;color:var(--mid);margin-top:12px;margin-bottom:0;">Tight gaps within items, wide gaps between items — three groups instantly visible. Structure communicated by space alone.</p>
+    </div>
+  </div>
+
+  <p>The fix for nearly every proximity failure is the same: reduce the space within related groups and increase the space between unrelated groups. The contrast between intra-group and inter-group spacing is what makes the structure visible. If a session's title, time, and location are tightly grouped, and a generous gap separates each session, the viewer perceives the six sessions instantly — without reading anything.</p>
+
+  <div class="div"></div>
+  <div class="sl">Section 2</div>
+  <h2>Repetition — Similarity Creates Unity</h2>
+  <p>Repetition is the consistent reuse of visual elements throughout a design: the same colors, the same typefaces, the same spacing intervals, the same shape language, the same treatment of similar content. Repetition does two things. First, it creates unity — the design feels like a single coherent system rather than a collection of unrelated parts. Second, it creates recognition — when the same visual elements appear consistently across multiple touchpoints (a business card, a website, a sign, a social post), the audience learns to recognize the brand instantly.</p>
+  <p>Repetition is also a grouping tool in its own right. Elements that share a visual treatment — all the section headers in the same color and weight, all the captions in the same small italic — are perceived as belonging to the same category, even when they are far apart in the layout. This is how a reader knows that every blue underlined word on a webpage is a link: repetition has taught them the pattern.</p>
+
+  <div class="cb gold"><div class="cl">Building a Repetition System</div><p>A repetition system is a small set of consistent decisions applied everywhere: typically two typefaces, three or four colors, two or three spacing intervals, and one shape language (e.g., all corners rounded at the same radius). Define these once, apply them consistently, and the design gains unity automatically. The discipline is in the consistency — every deviation from the system weakens the unity and the recognition it builds.</p></div>
+
+  <div class="cs">
+    <div class="cs-head">Case Study — Repetition and Proximity Working Together</div>
+    <div class="cs-body">
+      <h4>The Conference Program</h4>
+      <p>A conference program must present dozens of sessions across multiple days and tracks. It is a perfect demonstration of both principles working together. Proximity organizes each session into a tight group — title, time, room, and speaker clustered together, separated from adjacent sessions by clear space. The viewer perceives each session as a discrete unit instantly. Repetition then unifies the whole: every session title uses the same type treatment, every time uses the same format and color, every track is marked with the same consistent color coding. The result is a complex information set that is instantly navigable — the reader can find a session, understand its details, and identify its track without conscious effort.</p>
+      <p>Remove proximity and the sessions blur into an undifferentiated list. Remove repetition and each session looks like it belongs to a different document. Together, they transform overwhelming complexity into effortless clarity.</p>
+      <div class="cs-takeaway"><p>Proximity organizes information into groups; repetition unifies the groups into a system. Complex information becomes navigable only when both principles are applied together.</p></div>
+    </div>
+  </div>
+
+  <div class="kt"><h4>Key Vocabulary — Lesson 1.11</h4><div class="tg">
+    <div><div class="tn">Proximity</div><div class="td">The Gestalt grouping principle: elements near each other are perceived as related; elements far apart are perceived as unrelated. Communicates structure through space alone.</div><div class="vu"><div class="vu-label">In Use</div><p>"The caption is closer to the wrong image than to its own. Proximity is creating a false relationship — move it tight to its own image and away from the other."</p></div></div>
+    <div><div class="tn">Repetition</div><div class="td">The consistent reuse of visual elements — colors, type, spacing, shapes — creating unity within a design and recognition across a design system.</div><div class="vu"><div class="vu-label">In Use</div><p>"The spacing is inconsistent — some gaps are 16px, others 24px. Standardize to one interval and repeat it everywhere. Repetition is what makes it feel unified."</p></div></div>
+    <div><div class="tn">Intra-group Spacing</div><div class="td">The space within a group of related elements — kept tight to signal that the elements belong together.</div><div class="vu"><div class="vu-label">In Use</div><p>"Tighten the intra-group spacing — the title and time belong together, so they should be close. Right now they look like separate items."</p></div></div>
+    <div><div class="tn">Inter-group Spacing</div><div class="td">The space between separate groups — kept wide to signal that the groups are distinct from each other.</div><div class="vu"><div class="vu-label">In Use</div><p>"Increase the inter-group spacing — there's not enough space between sessions, so they're bleeding into each other. The gap between groups must be bigger than the gap within them."</p></div></div>
+    <div><div class="tn">Gestalt Grouping</div><div class="td">The set of perceptual principles describing how the brain automatically organizes visual elements into groups based on similarity, proximity, and continuity.</div><div class="vu"><div class="vu-label">In Use</div><p>"This works because of Gestalt grouping — the eye automatically clusters the similar-colored items into one category. We're using perception, not instruction."</p></div></div>
+    <div><div class="tn">Repetition System</div><div class="td">A defined, small set of consistent visual decisions — typefaces, colors, spacing, shape language — applied everywhere to build unity and recognition.</div><div class="vu"><div class="vu-label">In Use</div><p>"Define the repetition system first: two typefaces, three colors, two spacing intervals. Then apply it everywhere without deviation. Consistency is the whole point."</p></div></div>
+  </div></div>
+
+  <div class="ex"><div class="exh"><span class="exb">Exercise 1.11</span><h4>Repetition System + Proximity Grouping</h4></div>
+    <p>Build a repetition system and apply it to a complex information layout that requires proximity grouping — demonstrating both principles working together.</p>
+    <ol>
+      <li>Define a repetition system: choose two typefaces (one display, one text), three colors, two spacing intervals (a tight intra-group gap and a wide inter-group gap), and one shape language (corner radius or line style).</li>
+      <li>Create the content: an event program with at least five sessions, each containing a title, time, location, and speaker name.</li>
+      <li>Apply proximity: group each session's details tightly together, separated from adjacent sessions by your wide inter-group spacing. The five sessions should be instantly distinguishable.</li>
+      <li>Apply repetition: every title uses the same type treatment, every time the same format and color, every session the same internal structure. The whole layout should feel unified.</li>
+      <li>Test: show the layout to someone for three seconds. Can they identify how many sessions there are without reading? If not, your proximity contrast is insufficient.</li>
+    </ol>
+    <div class="tt">⏱ Estimated time: 50–60 minutes</div>
+  </div>
+
+  <div class="rf"><h4>Journal Reflection — Lesson 1.11</h4>
+    <p style="font-size:15px;font-style:italic;">Find a piece of information design — a menu, a schedule, a directory, a product list. Analyze its proximity grouping: are related items grouped and unrelated items separated? Then analyze its repetition: is there a consistent system of type, color, and spacing? Where do both principles succeed, and where does either one fail?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+  </div>
+
+  <div class="intro-block">
+    <div class="intro-head">
+      <div class="intro-head-label">Professional Introspection — Module 3 Complete</div>
+      <h4>The Five Principles, Now in Depth</h4>
+      <p>Module 3 took the five principles from Lesson 1.7 and treated balance, contrast, alignment, repetition, and proximity each in depth. These questions consolidate that deeper understanding.</p>
+    </div>
+    <div class="intro-body">
+      <div class="intro-q">
+        <div class="intro-q-label">01 — From Naming to Wielding</div>
+        <div class="intro-q-text">In Module 2 you learned to name the five principles. After Module 3, which principle do you now feel you can actually wield — apply deliberately to fix a specific problem — rather than just recognize?</div>
+        <div class="intro-q-note">The difference between naming and wielding is the difference between a critic and a designer. Be specific about a problem you could now solve.</div>
+        <div class="intro-lines"><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div></div>
+      </div>
+      <div class="intro-q">
+        <div class="intro-q-label">02 — The Principles Compound</div>
+        <div class="intro-q-text">Choose two of the five principles and describe a specific situation where applying one well makes the other easier to apply. How do they reinforce each other?</div>
+        <div class="intro-q-note">Example: strong alignment makes a proximity grouping cleaner, because grouped elements that also share an edge read as an unmistakable unit.</div>
+        <div class="intro-lines"><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div></div>
+      </div>
+      <div class="intro-q">
+        <div class="intro-q-label">03 — Into Module 4</div>
+        <div class="intro-q-text">Module 4 covers typography in depth. Typography is where all five principles converge — type has balance, contrast, alignment, repetition, and proximity all at once. Which principle do you expect to matter most in typographic decisions, and why?</div>
+        <div class="intro-q-note">There's no single right answer — but forming the expectation now will make Module 4 more meaningful when you test it.</div>
+        <div class="intro-lines"><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<div id="l11-scr" class="tc"><div class="wrap">
+  <div class="sl">Concept Video Script — Lesson 1.11</div>
+  <h2>Repetition &amp; Proximity — Creating Relationships</h2>
+  <p style="color:var(--mid);margin-bottom:28px;font-size:14px;">Proximity grouping demonstration + repetition system construction</p>
+  <div class="sh">
+    <div><label>Video Type</label><span>Concept / Live Studio</span></div>
+    <div><label>Target Length</label><span>5:00 – 5:30 minutes</span></div>
+    <div><label>Key Visual</label><span>Even-spaced list → grouped layout; repetition system build</span></div>
+    <div><label>Music Tone</label><span>Organized, clarifying, satisfying</span></div>
+    <div><label>Production</label><span>Illustrator recording + After Effects</span></div>
+    <div><label>Narration</label><span>ElevenLabs or AI Avatar</span></div>
+  </div>
+  <h3>OPENING</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:00–0:45</span></div><div class="sbb nt">Here's an event flyer with six sessions — each has a title, time, location, and speaker. Everything is evenly spaced down the page. And the viewer can't tell which time goes with which session, because the space between a session's own details is the same as the space between separate sessions. The information is all there. The relationships are invisible. Today, two principles that fix this — and that share one purpose: creating relationships. Proximity creates meaning through closeness. Repetition creates unity through similarity.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Evenly-spaced session list — confusing ]
+[ Title: "Lesson 1.11 — Repetition &amp; Proximity" ]</div></div>
+  <h3>SEGMENT 1 — Proximity</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:46–2:15</span></div><div class="sbb nt">Proximity: elements near each other are perceived as related; elements far apart, unrelated. This is Gestalt psychology — it operates below conscious awareness. Watch. I take the evenly-spaced list and do one thing: I tighten the space within each session and widen the space between sessions. That's it. Suddenly six clear groups. The viewer perceives the structure instantly — without reading a word. The contrast between intra-group spacing and inter-group spacing is what makes the structure visible. The gap between groups must be bigger than the gap within them. That single relationship organizes any amount of information.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Even spacing → tight intra, wide inter — six groups emerge ]
+[ "Gap between > gap within" ]</div></div>
+  <h3>SEGMENT 2 — Repetition + Exercise</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">2:16–4:40</span></div><div class="sbb nt">Repetition: the consistent reuse of visual elements — same colors, same typefaces, same spacing, same shapes. It does two things. It creates unity — the design feels like one coherent system. And it creates recognition — when the same elements appear across touchpoints, the audience learns to recognize the brand instantly. It's also why you know every blue underlined word is a link — repetition taught you the pattern. A repetition system is small: two typefaces, three colors, two spacing intervals, one shape language. Define it once, apply it everywhere. For your exercise: build a repetition system, then apply both principles to an event program with five sessions. Test it — can someone count the sessions in three seconds without reading? That's both principles working together. See you in Module 4.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Repetition system shown: type, color, spacing, shape ]
+[ Conference program — grouped and unified ]
+[ Exercise card: "Exercise 1.11 — Repetition + Proximity" ]
+[ "Module 3 Complete → Module 4: Typography" ]</div></div>
+</div></div>
+
+<div id="l11-wb" class="tc"><div class="wrap">
+  <div class="wb">
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:6px;font-weight:500;">Volume 1 · Module 3 · Lesson 1.11</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:4px;">Repetition &amp; Proximity</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:20px;">Repetition System + Proximity Grouping</div>
+    <div class="wr"></div>
+    <div style="border:2px solid var(--mod);border-radius:8px;padding:14px;margin-bottom:14px;">
+      <p style="font-size:11px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Define Your Repetition System</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div><p style="font-size:10px;color:var(--mid);margin-bottom:4px;">Two typefaces:</p><div class="wln"></div></div>
+        <div><p style="font-size:10px;color:var(--mid);margin-bottom:4px;">Three colors:</p><div class="wln"></div></div>
+        <div><p style="font-size:10px;color:var(--mid);margin-bottom:4px;">Tight (intra-group) gap:</p><div class="wln"></div></div>
+        <div><p style="font-size:10px;color:var(--mid);margin-bottom:4px;">Wide (inter-group) gap:</p><div class="wln"></div></div>
+        <div style="grid-column:1/-1;"><p style="font-size:10px;color:var(--mid);margin-bottom:4px;">Shape language (corner radius / line style):</p><div class="wln"></div></div>
+      </div>
+    </div>
+    <div style="border:2px solid var(--green);border-radius:8px;padding:14px;">
+      <p style="font-size:11px;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Proximity Test</p>
+      <p style="font-size:11px;color:var(--mid);margin-bottom:6px;">3-second test result — could the viewer count the sessions without reading? If not, what spacing adjustment is needed?</p>
+      <div class="wl"><div class="wln"></div><div class="wln"></div></div>
+    </div>
+    <p style="font-size:13px;font-weight:600;margin:14px 0 6px;">How do repetition and proximity work together in your layout?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div></div>
+    <div class="pn">Digital Design &amp; Media Technology · Volume 1 · Page 11</div>
+  </div>
+</div></div>
+
+<div id="l11-ass" class="tc"><div class="wrap">
+  <div class="sl">Lesson 1.11 Assessment</div>
+  <h2>Repetition &amp; Proximity — Knowledge Check</h2>
+  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
+    <div class="qi"><div class="qn">Q01</div><div class="qt">An event listing where each session's title, time, and location are spaced exactly as far apart as separate sessions creates:</div><div class="qo">
+      <div class="qop">Effective use of even spacing for visual rhythm</div>
+      <div class="qop">A proximity failure — the viewer cannot perceive which details belong to which session because grouping is not communicated through space</div>
+      <div class="qop">A repetition failure — the sessions are not visually consistent</div>
+      <div class="qop">An alignment failure — the elements do not share a common edge</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q02</div><div class="qt">The fix for nearly every proximity failure is:</div><div class="qo">
+      <div class="qop">Adding borders or boxes around each group of related elements</div>
+      <div class="qop">Reducing the space within related groups and increasing the space between unrelated groups — making intra-group spacing clearly tighter than inter-group spacing</div>
+      <div class="qop">Using a different color for each group of related elements</div>
+      <div class="qop">Aligning all elements to a single shared left edge</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q03</div><div class="qt">Repetition contributes to brand recognition because:</div><div class="qo">
+      <div class="qop">Repeated elements take up more space and are therefore more memorable</div>
+      <div class="qop">Consistent reuse of visual elements across touchpoints trains the audience to recognize the brand instantly — before conscious reading</div>
+      <div class="qop">Repetition reduces the cost of producing multiple design pieces</div>
+      <div class="qop">Audiences prefer designs that look the same as designs they have seen before</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q04</div><div class="qt">The principle that the brain automatically groups elements that are similar or close together is known as:</div><div class="qo">
+      <div class="qop">The contrast principle</div>
+      <div class="qop">Gestalt grouping — a documented property of human perception</div>
+      <div class="qop">The hierarchy principle</div>
+      <div class="qop">Asymmetrical balance</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q05</div><div class="qt">Why are repetition and proximity described as both serving "the creation of relationships"?</div><div class="qo">
+      <div class="qop">Both principles require the use of repeated geometric shapes</div>
+      <div class="qop">Repetition creates relationships through similarity (like elements belong together); proximity creates relationships through closeness (near elements belong together)</div>
+      <div class="qop">Both principles are only relevant to information-heavy layouts</div>
+      <div class="qop">Both principles are alternative names for the same underlying technique</div>
+    </div></div>
+    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
+  </div>
+  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
+    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.11: describe your repetition system. Which decisions did you standardize, and how did consistency change the feeling of the layout compared to varied treatments?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q07</div><div class="qt">A restaurant menu lists each dish with a name, description, and price — but the description of one dish sits closer to the next dish's name than to its own. Diagnose the proximity problem and prescribe the spacing correction.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q08</div><div class="qt">Explain how repetition and proximity work together in a conference program or similar complex information layout. What happens if you apply one principle but not the other?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+  </div>
+</div></div>
+</div><!-- end l11 -->
+
+
+<script>
+function showL(id,btn){
+  document.querySelectorAll('.ls').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.ltab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:document.querySelector('.ltabs').offsetTop-10,behavior:'smooth'});
+}
+function showI(id,btn,lid){
+  const l=document.getElementById(lid);
+  l.querySelectorAll('.tc').forEach(t=>t.classList.remove('active'));
+  l.querySelectorAll('.itab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:l.querySelector('.itabs').offsetTop-10,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

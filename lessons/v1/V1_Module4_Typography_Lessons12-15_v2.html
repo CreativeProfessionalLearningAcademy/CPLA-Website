@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volume 1 · Module 4 — Typography · Lessons 1.12–1.15</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1410;--paper:#faf7f2;--cream:#f0ead8;
+  --accent:#c8401a;--al:#f5e6e0;
+  --gold:#b8860b;--gl:#faf6e8;
+  --mid:#6b5e52;--rule:#d4c9b8;
+  --green:#2d7a1a;--gnl:#f0fae8;
+  --blue:#1a56c4;--bl:#e8f0fe;
+  --mod:#0d9488;--ml:#ccfbf1;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.8;}
+nav{background:var(--ink);color:var(--paper);padding:14px 48px;display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;}
+nav .s{color:var(--mod);}nav .sep{color:var(--mid);}
+.mbanner{background:var(--mod);color:white;padding:16px 48px;display:flex;align-items:center;justify-content:space-between;}
+.mbanner h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;}
+.mbanner p{font-size:12px;opacity:.75;}
+.ltabs{background:var(--cream);border-bottom:2px solid var(--rule);display:flex;padding:0 48px;overflow-x:auto;position:sticky;top:0;z-index:200;}
+.ltab{padding:15px 20px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;font-family:'DM Sans',sans-serif;border:none;background:none;cursor:pointer;color:var(--mid);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s;}
+.ltab.active{color:var(--mod);border-bottom-color:var(--mod);}
+.ltab:hover:not(.active){color:var(--ink);}
+.ls{display:none;}.ls.active{display:block;}
+.hero{background:var(--ink);color:var(--paper);padding:60px 48px 48px;position:relative;overflow:hidden;}
+.hero::before{content:attr(data-n);position:absolute;right:48px;top:28px;font-family:'Playfair Display',serif;font-size:150px;font-weight:900;color:rgba(255,255,255,.04);line-height:1;pointer-events:none;}
+.vt{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:14px;font-weight:500;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(30px,5vw,58px);font-weight:900;line-height:1.08;max-width:660px;margin-bottom:18px;}
+.hero h1 em{font-style:italic;color:#5eead4;}
+.hero .sub{font-size:15px;color:rgba(250,247,242,.6);max-width:510px;line-height:1.7;}
+.hero .mr{display:flex;gap:32px;margin-top:36px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap;}
+.hero .mi label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,247,242,.4);display:block;margin-bottom:3px;}
+.hero .mi span{font-size:13px;color:var(--paper);font-weight:500;}
+.itabs{background:var(--cream);border-bottom:2px solid var(--rule);display:flex;padding:0 48px;}
+.itab{padding:15px 22px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;font-family:'DM Sans',sans-serif;border:none;background:none;cursor:pointer;color:var(--mid);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;}
+.itab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.itab:hover:not(.active){color:var(--ink);}
+.tc{display:none;}.tc.active{display:block;}
+.wrap{max-width:820px;margin:0 auto;padding:52px 48px;}
+.sl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:10px;}
+h2{font-family:'Playfair Display',serif;font-size:29px;font-weight:700;margin-bottom:17px;line-height:1.25;}
+h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin:42px 0 13px;}
+p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
+.cb{border-left:4px solid var(--accent);background:var(--al);padding:20px 24px;margin:30px 0;border-radius:0 8px 8px 0;}
+.cb .cl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:6px;}
+.cb p{margin:0;font-size:15px;}
+.cb.gold{border-left-color:var(--gold);background:var(--gl);}.cb.gold .cl{color:var(--gold);}
+.cb.green{border-left-color:var(--green);background:var(--gnl);}.cb.green .cl{color:var(--green);}
+.cb.mod{border-left-color:var(--mod);background:var(--ml);}.cb.mod .cl{color:var(--mod);}
+.obj{border:2px solid var(--rule);border-radius:12px;padding:26px 30px;margin-bottom:40px;background:white;}
+.obj h4{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:16px;font-weight:500;}
+.ol{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.ol li{display:flex;align-items:flex-start;gap:11px;font-size:15px;line-height:1.6;}
+.ol li::before{content:'';width:20px;height:20px;border-radius:50%;background:var(--mod);flex-shrink:0;margin-top:2px;}
+.pb{background:var(--ink);color:var(--paper);border-radius:14px;padding:36px;margin:0 0 40px;}
+.pb-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:10px;}
+.pb h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:white;margin:0 0 14px;line-height:1.3;}
+.pb p{font-size:15px;color:rgba(250,247,242,.75);margin:0 0 16px;line-height:1.75;}
+.pb-meta{display:flex;gap:28px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap;}
+.pb-meta-item label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,247,242,.4);display:block;margin-bottom:3px;}
+.pb-meta-item span{font-size:13px;color:var(--paper);font-weight:500;}
+.kt{background:var(--ink);color:var(--paper);padding:32px;border-radius:12px;margin:40px 0;}
+.kt h4{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mod);margin-bottom:18px;font-weight:500;}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+.tn{font-family:'DM Mono',monospace;font-size:13px;color:#5eead4;margin-bottom:3px;font-weight:500;}
+.td{font-size:13px;color:rgba(250,247,242,.7);line-height:1.6;}
+.vu{margin-top:10px;padding:10px 14px;background:rgba(255,255,255,.06);border-radius:6px;border-left:3px solid var(--mod);}
+.vu-label{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:4px;}
+.vu p{font-size:12px;color:rgba(250,247,242,.55);margin:0;font-style:italic;line-height:1.6;}
+.ex{background:var(--cream);border:1px solid var(--rule);border-radius:12px;padding:32px;margin:40px 0;}
+.exh{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.exb{background:var(--mod);color:white;font-size:10px;letter-spacing:.15em;text-transform:uppercase;padding:6px 14px;border-radius:100px;font-weight:500;flex-shrink:0;}
+.ex h4{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;}
+.ex ol{padding-left:20px;display:flex;flex-direction:column;gap:10px;}
+.ex ol li{font-size:15px;line-height:1.7;padding-left:5px;}
+.tt{font-size:12px;color:var(--mid);font-family:'DM Mono',monospace;margin-top:16px;display:inline-block;}
+.brief{border:2px solid var(--mod);border-radius:12px;overflow:hidden;margin:40px 0;}
+.brief-head{background:var(--mod);color:white;padding:18px 26px;}
+.brief-head .bl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;opacity:.75;margin-bottom:6px;}
+.brief-head h4{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;margin:0;}
+.brief-body{padding:28px 26px;background:white;}
+.brief-section{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--rule);}
+.brief-section:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.brief-section-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:8px;}
+.brief-section p{font-size:15px;margin:0;line-height:1.7;color:#2a2218;}
+.brief-section ul{padding-left:18px;display:flex;flex-direction:column;gap:6px;}
+.brief-section ul li{font-size:15px;line-height:1.6;color:#2a2218;}
+.brief-deliverable{background:var(--ml);border-radius:8px;padding:16px 18px;margin-top:14px;}
+.brief-deliverable p{font-size:14px;font-weight:600;color:var(--mod);margin:0;}
+.div{height:1px;background:var(--rule);margin:40px 0;}
+.rf{border:2px dashed var(--rule);border-radius:12px;padding:30px;margin:40px 0;}
+.rf h4{font-family:'Playfair Display',serif;font-size:17px;margin-bottom:12px;}
+.wl{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+.wln{height:1px;background:var(--rule);}
+.sh{background:var(--ink);color:var(--paper);padding:26px 32px;border-radius:12px;margin-bottom:32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;}
+.sh label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,247,242,.4);display:block;margin-bottom:3px;}
+.sh span{font-size:14px;font-weight:500;}
+.sb{margin-bottom:22px;border-radius:12px;overflow:hidden;border:1px solid var(--rule);}
+.sbh{padding:12px 20px;display:flex;align-items:center;gap:9px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:500;}
+.nh{background:var(--al);color:var(--accent);}
+.oh{background:var(--gl);color:var(--gold);}
+.sbb{padding:20px;background:white;font-size:15px;line-height:1.8;}
+.nt{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;line-height:2;}
+.ot{font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);font-weight:500;}
+.tc2{font-family:'DM Mono',monospace;font-size:11px;color:var(--mid);background:var(--cream);padding:3px 9px;border-radius:4px;margin-left:auto;}
+.wb{background:white;border:1px solid var(--rule);border-radius:12px;padding:48px;margin-bottom:24px;position:relative;box-shadow:0 4px 18px rgba(0,0,0,.04);}
+.wb .pn{position:absolute;bottom:18px;right:24px;font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);}
+.wr{height:1px;background:var(--rule);margin:18px 0;}
+.ab{background:white;border:2px solid var(--ink);border-radius:12px;padding:32px;margin:40px 0;}
+.ab h4{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:18px;font-weight:500;}
+.qi{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--rule);}
+.qi:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.qn{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);margin-bottom:4px;}
+.qt{font-size:15px;margin-bottom:9px;font-weight:500;}
+.qo{display:flex;flex-direction:column;gap:6px;}
+.qop{font-size:14px;color:var(--mid);display:flex;gap:8px;align-items:flex-start;}
+.qop::before{content:'';width:16px;height:16px;border:2px solid var(--rule);border-radius:50%;flex-shrink:0;margin-top:2px;}
+.ak{background:var(--gl);border:1px solid var(--gold);border-radius:7px;padding:14px 18px;margin-top:24px;}
+.ak p{font-size:13px;color:var(--gold);margin:0;}
+.intro-block{background:var(--ink);border-radius:14px;overflow:hidden;margin:40px 0;}
+.intro-head{background:linear-gradient(135deg,#0d9488,#0f766e);padding:22px 28px;}
+.intro-head-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.65);font-weight:600;margin-bottom:6px;}
+.intro-head h4{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:white;margin:0;line-height:1.3;}
+.intro-head p{font-size:14px;color:rgba(255,255,255,.7);margin:8px 0 0;line-height:1.6;}
+.intro-body{padding:28px;}
+.intro-q{margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.08);}
+.intro-q:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.intro-q-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:6px;}
+.intro-q-text{font-size:15px;color:rgba(250,247,242,.85);margin-bottom:10px;line-height:1.7;font-weight:500;}
+.intro-q-note{font-size:13px;color:rgba(250,247,242,.4);font-style:italic;margin-bottom:12px;line-height:1.6;}
+.intro-lines{display:flex;flex-direction:column;gap:13px;}
+.intro-line{height:1px;background:rgba(255,255,255,.12);}
+.compare{width:100%;border-collapse:collapse;margin:28px 0;border-radius:10px;overflow:hidden;border:1px solid var(--rule);}
+.compare th{background:var(--ink);color:var(--paper);padding:14px 18px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;text-align:left;}
+.compare th:first-child{color:var(--mod);}
+.compare td{padding:13px 18px;font-size:14px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.6;}
+.compare tr:last-child td{border-bottom:none;}
+.compare tr:nth-child(even) td{background:rgba(13,148,136,.03);}
+.compare td:first-child{font-weight:600;color:var(--ink);font-family:'DM Mono',monospace;font-size:13px;}
+.balance-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:28px 0;}
+.balance-box{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:white;}
+.balance-box-head{padding:8px 14px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;}
+.balance-box-body{height:120px;position:relative;display:flex;align-items:center;justify-content:center;}
+.contrast-demo{display:flex;flex-direction:column;gap:14px;margin:28px 0;}
+.contrast-pair{border:1px solid var(--rule);border-radius:10px;overflow:hidden;}
+.contrast-pair-head{padding:8px 16px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;background:var(--cream);}
+.contrast-samples{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.contrast-sample{padding:18px 20px;font-size:15px;font-weight:500;}
+.align-types{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0;}
+.align-box{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:white;}
+.align-box-head{padding:10px 14px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;background:var(--ml);color:var(--mod);}
+.align-box-body{padding:14px;}
+.align-elem{height:8px;background:var(--mod);border-radius:2px;margin-bottom:8px;opacity:.7;}
+.prox-demo{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0;}
+.prox-box{border:1px solid var(--rule);border-radius:10px;padding:16px;background:white;}
+.prox-box-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:12px;}
+.cs{border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin:40px 0;}
+.cs-head{background:var(--cream);padding:14px 22px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);font-weight:600;}
+.cs-body{padding:24px 26px;background:white;}
+.cs-body h4{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin:0 0 12px;}
+.cs-body p{font-size:14px;line-height:1.8;color:#2a2218;margin-bottom:12px;}
+.cs-takeaway{border-left:3px solid var(--gold);background:var(--gl);padding:12px 16px;border-radius:0 6px 6px 0;margin-top:8px;}
+.cs-takeaway p{font-size:13px;font-weight:600;color:var(--ink);margin:0;}
+@media(max-width:700px){
+  nav,.hero,.mbanner{padding-left:24px;padding-right:24px;}
+  .ltabs,.itabs{padding:0 12px;}
+  .wrap{padding:36px 24px;}
+  .tg,.sh,.balance-row,.align-types,.prox-demo{grid-template-columns:1fr;}
+  .hero::before{display:none;}
+}
+</style>
+</head>
+<body>
+
+<nav><span class="s">Digital Design &amp; Media Technology</span><span class="sep">·</span><span>Volume 1 — Design Thinking</span><span class="sep">·</span><span>Module 4 — Typography</span></nav>
+
+<div class="mbanner">
+  <div><h2>Module 4 — Typography</h2><p>Lessons 1.12 · 1.13 · 1.14 · 1.15 &nbsp;·&nbsp; Typeface Classification · Type Anatomy · Choosing &amp; Pairing Type · Typographic Hierarchy</p></div>
+  <div style="font-size:28px;opacity:.6;">🔤</div>
+</div>
+
+<div class="ltabs">
+  <button class="ltab active" onclick="showL('l12',this)">L1.12 — Typeface Classification</button>
+  <button class="ltab" onclick="showL('l13',this)">L1.13 — Type Anatomy</button>
+  <button class="ltab" onclick="showL('l14',this)">L1.14 — Choosing &amp; Pairing Type</button>
+  <button class="ltab" onclick="showL('l15',this)">L1.15 — Typographic Hierarchy</button>
+</div>
+
+
+<!-- ═══════════════════════ LESSON 1.12 ═══════════════════════ -->
+<div id="l12" class="ls active">
+<div class="hero" data-n="1.12">
+  <div class="vt">Volume 1 · Module 4 · Lesson 1.12</div>
+  <h1>Typeface <em>Classification</em></h1>
+  <p class="sub">Type is the voice of design. Before a single word is read, the typeface has already established tone, era, authority, and personality. Learning to classify typefaces — serif, sans-serif, slab, script, display — is learning to hear what type is saying, and to choose the voice that matches your message.</p>
+  <div class="mr">
+    <div class="mi"><label>Lesson Type</label><span>Concept + Classification</span></div>
+    <div class="mi"><label>Duration</label><span>50–60 minutes</span></div>
+    <div class="mi"><label>App</label><span>Illustrator / font library</span></div>
+    <div class="mi"><label>Deliverable</label><span>Typeface classification chart — 10 specimens</span></div>
+  </div>
+</div>
+<div class="itabs">
+  <button class="itab active" onclick="showI('l12-les',this,'l12')">📖 Lesson</button>
+  <button class="itab" onclick="showI('l12-scr',this,'l12')">🎬 Video Script</button>
+  <button class="itab" onclick="showI('l12-wb',this,'l12')">📄 Workbook</button>
+  <button class="itab" onclick="showI('l12-ass',this,'l12')">✅ Assessment</button>
+</div>
+
+<div id="l12-les" class="tc active"><div class="wrap">
+  <div class="obj"><h4>Learning Objectives — Lesson 1.12</h4><ul class="ol">
+    <li>Identify the five major typeface classifications — serif, sans-serif, slab serif, script, and display — by sight</li>
+    <li>Describe the historical era and personality associations of each classification</li>
+    <li>Explain what each classification communicates and which contexts it suits</li>
+    <li>Distinguish sub-categories within serif (old style, transitional, modern) and sans-serif (grotesque, humanist, geometric)</li>
+    <li>Match a typeface classification to a brand personality and communication goal</li>
+  </ul></div>
+
+  <div class="pb">
+    <div class="pb-label">The Problem</div>
+    <h3>You chose a typeface because it "looked nice" in the font menu. But it's a high-contrast modern serif on a children's daycare flyer — and it's communicating cold sophistication and formality to an audience that needs warmth and playfulness. The typeface is fighting the message.</h3>
+    <p>Every typeface carries built-in associations — of era, of authority, of personality — accumulated over centuries of use. A designer who chooses type by appearance alone, without understanding what each classification communicates, will routinely select voices that contradict their message. Learning to classify typefaces is learning to hear those voices: to know that a transitional serif sounds authoritative and established, that a geometric sans-serif sounds modern and rational, that a script sounds personal and elegant. This lesson teaches you to recognize the classifications and the voices they carry.</p>
+    <div class="pb-meta">
+      <div class="pb-meta-item"><label>Context</label><span>Every design decision involving text</span></div>
+      <div class="pb-meta-item"><label>Constraint</label><span>Type communicates before it is read</span></div>
+      <div class="pb-meta-item"><label>Skill This Lesson Builds</label><span>Classification recognition, type-personality matching</span></div>
+    </div>
+  </div>
+
+  <div class="sl">Introduction</div>
+  <h2>Type Has a Voice</h2>
+  <p>Imagine the same sentence — "Welcome to our restaurant" — set in three different typefaces. In an elegant script, it whispers fine dining and special occasions. In a bold condensed sans-serif, it shouts fast, modern, urban. In a friendly rounded sans-serif, it smiles family-friendly and approachable. The words are identical. The voice — carried entirely by the typeface — is completely different. This is the foundational truth of typography: type communicates before it is read, and what it communicates is determined by its classification.</p>
+  <p>Classification is the system designers use to organize the thousands of available typefaces into families that share visual characteristics and, crucially, share personality associations. Knowing the classifications lets you predict what a typeface will communicate and choose deliberately rather than by appearance.</p>
+
+  <div class="cb mod"><div class="cl">Core Idea</div><p>Every typeface belongs to a classification, and every classification carries a personality and a set of associations built over centuries of use. Choosing type is choosing a voice. The skill is matching the voice of the typeface to the voice of the message and the expectations of the audience — not selecting by appearance alone.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 1</div>
+  <h2>The Five Major Classifications</h2>
+
+  <table class="compare">
+    <thead><tr><th>Classification</th><th>Defining Feature</th><th>Personality &amp; Associations</th></tr></thead>
+    <tbody>
+      <tr><td>Serif</td><td>Small strokes (serifs) at the ends of letterforms</td><td>Tradition, authority, elegance, established credibility. Newspapers, books, law, luxury, institutions.</td></tr>
+      <tr><td>Sans-Serif</td><td>No serifs — clean stroke endings</td><td>Modernity, clarity, simplicity, accessibility. Technology, signage, interfaces, contemporary brands.</td></tr>
+      <tr><td>Slab Serif</td><td>Thick, block-like rectangular serifs</td><td>Boldness, sturdiness, confidence, impact. Headlines, posters, brands wanting solidity and presence.</td></tr>
+      <tr><td>Script</td><td>Flowing, connected letterforms imitating handwriting</td><td>Elegance, personality, femininity, formality or casualness depending on style. Invitations, luxury, personal brands.</td></tr>
+      <tr><td>Display</td><td>Highly stylized, designed for large sizes and impact</td><td>Personality, theme, distinctiveness. Logos, posters, headlines — never body text.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="cb gold"><div class="cl">The Body Text Rule</div><p>Display and script typefaces are designed for impact at large sizes — headlines, logos, short statements. They become illegible and exhausting when used for body text. The reliable rule: body text uses serif or sans-serif classifications only. Save display and script for the moments that need personality and impact, where they will be read in small doses.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 2</div>
+  <h2>Sub-Classifications — Serif and Sans-Serif in Depth</h2>
+
+  <h3>Three Serif Sub-Categories</h3>
+  <p><strong>Old Style</strong> serifs (like Garamond) have low contrast between thick and thin strokes and angled stress — they feel warm, classic, and humanist, evoking centuries of book typography. <strong>Transitional</strong> serifs (like Times New Roman, Baskerville) have higher contrast and more vertical stress — they feel authoritative, neutral, and established. <strong>Modern</strong> serifs (like Didot, Bodoni) have extreme contrast between hairline-thin and thick strokes — they feel elegant, high-fashion, and sophisticated, but can feel cold.</p>
+
+  <h3>Three Sans-Serif Sub-Categories</h3>
+  <p><strong>Grotesque</strong> sans-serifs (like Helvetica) are the early, neutral sans-serifs — clean, objective, and ubiquitous. <strong>Humanist</strong> sans-serifs (like Gill Sans, Frutiger) carry subtle calligraphic influence — warmer and more approachable than grotesques. <strong>Geometric</strong> sans-serifs (like Futura, Avant Garde) are built from pure geometric forms — circles and straight lines — feeling modern, rational, and architectural.</p>
+
+  <div class="cs">
+    <div class="cs-head">Case Study — When Classification Choice Defines a Brand</div>
+    <div class="cs-body">
+      <h4>Luxury Fashion and the Modern Serif</h4>
+      <p>Look at the wordmarks of high-fashion houses — Vogue, Harper's Bazaar, and countless luxury brands. They overwhelmingly use modern serifs with extreme thick-thin contrast — Didot and Bodoni and their relatives. This is not coincidence. The extreme contrast of a modern serif communicates refinement, exclusivity, and high cost. The hairline strokes feel delicate and precise; the thick strokes feel confident and authoritative. Together they signal "expensive and sophisticated" before a single word is read.</p>
+      <p>Now imagine a luxury fashion magazine set in a friendly rounded geometric sans-serif. Instantly the brand would feel accessible, casual, mass-market — the opposite of the exclusivity it depends on. The classification choice alone would undermine the entire brand positioning. This is the power of classification: it communicates the brand's fundamental personality before any other design decision.</p>
+      <div class="cs-takeaway"><p>Typeface classification is one of the most powerful brand-positioning tools available. The right classification reinforces the brand's personality; the wrong one contradicts it — regardless of how attractive the individual typeface is.</p></div>
+    </div>
+  </div>
+
+  <div class="kt"><h4>Key Vocabulary — Lesson 1.12</h4><div class="tg">
+    <div><div class="tn">Serif</div><div class="td">A typeface classification characterized by small strokes at the ends of letterforms — communicating tradition, authority, and established credibility.</div><div class="vu"><div class="vu-label">In Use</div><p>"This needs to feel established and trustworthy — use a transitional serif. The serifs themselves signal heritage and authority."</p></div></div>
+    <div><div class="tn">Sans-Serif</div><div class="td">A typeface classification without serifs — clean stroke endings communicating modernity, clarity, and accessibility.</div><div class="vu"><div class="vu-label">In Use</div><p>"For the app interface, use a humanist sans-serif — clean and legible at small sizes, but warmer than a grotesque like Helvetica."</p></div></div>
+    <div><div class="tn">Slab Serif</div><div class="td">A typeface classification with thick, block-like rectangular serifs — communicating boldness, sturdiness, and confident presence.</div><div class="vu"><div class="vu-label">In Use</div><p>"The headline needs more impact and weight — try a slab serif. The blocky serifs give it a solid, confident presence that a thin serif can't."</p></div></div>
+    <div><div class="tn">Script</div><div class="td">A typeface classification with flowing, connected letterforms imitating handwriting — communicating elegance, personality, and formality or casualness.</div><div class="vu"><div class="vu-label">In Use</div><p>"The wedding invitation calls for a script — but only for the names and headline. Set the details in a legible serif. Script body text is unreadable."</p></div></div>
+    <div><div class="tn">Display Typeface</div><div class="td">A highly stylized typeface designed for large-size impact — used for logos, posters, and headlines, never for body text.</div><div class="vu"><div class="vu-label">In Use</div><p>"That's a display face — gorgeous at 80pt for the poster headline, illegible at 11pt for the body. Use it big or not at all."</p></div></div>
+    <div><div class="tn">Stress &amp; Contrast</div><div class="td">The variation between thick and thin strokes in a typeface (contrast) and the angle of that variation (stress) — key distinguishing features within serif classifications.</div><div class="vu"><div class="vu-label">In Use</div><p>"The extreme contrast here — hairline thins against thick stems — is what makes this modern serif feel high-fashion and expensive."</p></div></div>
+  </div></div>
+
+  <div class="ex"><div class="exh"><span class="exb">Exercise 1.12</span><h4>Typeface Classification Chart</h4></div>
+    <p>Build a reference chart that classifies ten typefaces and analyzes what each one communicates — developing your eye for classification recognition.</p>
+    <ol>
+      <li>Select ten typefaces from your system or a font library, aiming to include at least one from each of the five major classifications.</li>
+      <li>For each, set the same sample text (a word and a sentence) at the same size so you can compare them fairly.</li>
+      <li>Classify each: serif, sans-serif, slab serif, script, or display. For serifs and sans-serifs, identify the sub-category if you can.</li>
+      <li>For each, write one sentence describing its personality and one brand context it would suit (e.g., "feels authoritative and established — suits a law firm or university").</li>
+      <li>Identify the two typefaces you find most distinctive in voice, and explain what specific letterform features create that distinctiveness.</li>
+    </ol>
+    <div class="tt">⏱ Estimated time: 45–55 minutes</div>
+  </div>
+
+  <div class="rf"><h4>Journal Reflection — Lesson 1.12</h4>
+    <p style="font-size:15px;font-style:italic;">Look at the typefaces of three brands you interact with regularly. Classify each one. Does the classification match the brand's personality? Find one brand where you think the typeface classification is working hard to communicate the right thing — and describe specifically what it's saying.</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+  </div>
+</div></div>
+
+<div id="l12-scr" class="tc"><div class="wrap">
+  <div class="sl">Concept Video Script — Lesson 1.12</div>
+  <h2>Typeface Classification — The Voice of Type</h2>
+  <p style="color:var(--mid);margin-bottom:28px;font-size:14px;">Same words, different voices — classification demonstration</p>
+  <div class="sh">
+    <div><label>Video Type</label><span>Concept / Classification</span></div>
+    <div><label>Target Length</label><span>4:30 – 5:00 minutes</span></div>
+    <div><label>Key Visual</label><span>Same phrase set in 5 classifications — voice comparison</span></div>
+    <div><label>Music Tone</label><span>Shifts to match each classification's personality</span></div>
+    <div><label>Production</label><span>After Effects type animation</span></div>
+    <div><label>Narration</label><span>ElevenLabs or AI Avatar</span></div>
+  </div>
+  <h3>OPENING</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:00–0:42</span></div><div class="sbb nt">"Welcome to our restaurant." Five words. Watch what happens when I set them in different typefaces. In an elegant script — fine dining, special occasion. In a bold condensed sans-serif — fast, modern, urban. In a friendly rounded sans — family-friendly, approachable. Same words. Completely different voice. That voice is carried entirely by the typeface. This is the foundational truth of typography: type communicates before it is read. Today you'll learn the five classifications and the voice each one carries.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Same phrase morphing through 5 typefaces ]
+[ Title: "Lesson 1.12 — Typeface Classification" ]</div></div>
+  <h3>SEGMENT 1 — Five Classifications</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:43–2:30</span></div><div class="sbb nt">Serif — small strokes at the ends of letters. Tradition, authority, elegance. Newspapers, books, law, institutions. Sans-serif — no serifs, clean endings. Modernity, clarity, accessibility. Technology, signage, interfaces. Slab serif — thick, block-like serifs. Boldness, sturdiness, confident presence. Headlines and impact. Script — flowing connected letters imitating handwriting. Elegance, personality, formality. Invitations and luxury. And display — highly stylized, built for large-size impact. Logos, posters, headlines — never body text. Remember the body text rule: only serif and sans-serif are legible for sustained reading. Display and script are for impact in small doses.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Each classification shown with specimen + associations ]
+[ "Body text = serif or sans-serif only" ]</div></div>
+  <h3>SEGMENT 2 — Sub-Categories + Exercise</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">2:31–4:30</span></div><div class="sbb nt">Within serif and sans-serif are sub-categories that matter. Serifs: old style — warm and classic, like Garamond. Transitional — authoritative and neutral, like Times. Modern — extreme thick-thin contrast, elegant and high-fashion, like Didot. That's why luxury fashion magazines use modern serifs: the hairline strokes signal refinement and expense. Sans-serifs: grotesque — neutral, like Helvetica. Humanist — warmer, with calligraphic influence, like Gill Sans. Geometric — built from circles and lines, modern and rational, like Futura. For your exercise: classify ten typefaces, identify sub-categories, and describe the voice of each. See you in Lesson 1.13.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Serif sub-categories: old style / transitional / modern ]
+[ Sans sub-categories: grotesque / humanist / geometric ]
+[ Exercise card: "Exercise 1.12 — Classification Chart" ]
+[ "Next: Lesson 1.13 — Type Anatomy" ]</div></div>
+</div></div>
+
+<div id="l12-wb" class="tc"><div class="wrap">
+  <div class="wb">
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:6px;font-weight:500;">Volume 1 · Module 4 · Lesson 1.12</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:4px;">Typeface Classification</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:20px;">Classification Chart — 10 Specimens</div>
+    <div class="wr"></div>
+    <div style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;">
+      <div style="background:var(--mod);color:white;display:grid;grid-template-columns:1.4fr 1fr 1.6fr;">
+        <div style="padding:8px 12px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-right:1px solid rgba(255,255,255,.2);">Typeface</div>
+        <div style="padding:8px 12px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-right:1px solid rgba(255,255,255,.2);">Classification</div>
+        <div style="padding:8px 12px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;">Voice + Suited Context</div>
+      </div>
+      <div style="display:flex;flex-direction:column;">
+        <div style="display:grid;grid-template-columns:1.4fr 1fr 1.6fr;border-bottom:1px solid var(--rule);"><div style="padding:9px 12px;border-right:1px solid var(--rule);font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);">01</div><div style="padding:9px 12px;border-right:1px solid var(--rule);"></div><div style="padding:9px 12px;"></div></div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr 1.6fr;border-bottom:1px solid var(--rule);"><div style="padding:9px 12px;border-right:1px solid var(--rule);font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);">02</div><div style="padding:9px 12px;border-right:1px solid var(--rule);"></div><div style="padding:9px 12px;"></div></div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr 1.6fr;border-bottom:1px solid var(--rule);"><div style="padding:9px 12px;border-right:1px solid var(--rule);font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);">03</div><div style="padding:9px 12px;border-right:1px solid var(--rule);"></div><div style="padding:9px 12px;"></div></div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr 1.6fr;border-bottom:1px solid var(--rule);"><div style="padding:9px 12px;border-right:1px solid var(--rule);font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);">04</div><div style="padding:9px 12px;border-right:1px solid var(--rule);"></div><div style="padding:9px 12px;"></div></div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr 1.6fr;border-bottom:1px solid var(--rule);"><div style="padding:9px 12px;border-right:1px solid var(--rule);font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);">05</div><div style="padding:9px 12px;border-right:1px solid var(--rule);"></div><div style="padding:9px 12px;"></div></div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr 1.6fr;border-bottom:1px solid var(--rule);"><div style="padding:9px 12px;border-right:1px solid var(--rule);font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);">06</div><div style="padding:9px 12px;border-right:1px solid var(--rule);"></div><div style="padding:9px 12px;"></div></div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr 1.6fr;border-bottom:1px solid var(--rule);"><div style="padding:9px 12px;border-right:1px solid var(--rule);font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);">07</div><div style="padding:9px 12px;border-right:1px solid var(--rule);"></div><div style="padding:9px 12px;"></div></div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr 1.6fr;border-bottom:1px solid var(--rule);"><div style="padding:9px 12px;border-right:1px solid var(--rule);font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);">08</div><div style="padding:9px 12px;border-right:1px solid var(--rule);"></div><div style="padding:9px 12px;"></div></div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr 1.6fr;border-bottom:1px solid var(--rule);"><div style="padding:9px 12px;border-right:1px solid var(--rule);font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);">09</div><div style="padding:9px 12px;border-right:1px solid var(--rule);"></div><div style="padding:9px 12px;"></div></div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr 1.6fr;border-bottom:1px solid var(--rule);"><div style="padding:9px 12px;border-right:1px solid var(--rule);font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);">10</div><div style="padding:9px 12px;border-right:1px solid var(--rule);"></div><div style="padding:9px 12px;"></div></div>
+      </div>
+    </div>
+    <p style="font-size:13px;font-weight:600;margin:14px 0 6px;">Two most distinctive voices — what letterform features create the distinctiveness?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+    <div class="pn">Digital Design &amp; Media Technology · Volume 1 · Page 12</div>
+  </div>
+</div></div>
+
+<div id="l12-ass" class="tc"><div class="wrap">
+  <div class="sl">Lesson 1.12 Assessment</div>
+  <h2>Typeface Classification — Knowledge Check</h2>
+  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
+    <div class="qi"><div class="qn">Q01</div><div class="qt">A typeface with small strokes at the ends of its letterforms, communicating tradition and authority, belongs to which classification?</div><div class="qo">
+      <div class="qop">Sans-serif</div>
+      <div class="qop">Serif</div>
+      <div class="qop">Geometric</div>
+      <div class="qop">Display</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q02</div><div class="qt">Why should display and script typefaces never be used for body text?</div><div class="qo">
+      <div class="qop">They are more expensive to license than serif and sans-serif typefaces</div>
+      <div class="qop">They are designed for large-size impact and become illegible and exhausting at body-text sizes and lengths</div>
+      <div class="qop">They are only available in a limited range of weights</div>
+      <div class="qop">They cannot be reproduced accurately in print</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q03</div><div class="qt">Luxury fashion brands overwhelmingly use modern serifs (like Didot) because:</div><div class="qo">
+      <div class="qop">Modern serifs are the easiest typefaces to read at small sizes</div>
+      <div class="qop">The extreme contrast between hairline-thin and thick strokes communicates refinement, exclusivity, and high cost</div>
+      <div class="qop">Modern serifs are the oldest typefaces and signal heritage</div>
+      <div class="qop">Modern serifs are required by fashion industry standards</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q04</div><div class="qt">A geometric sans-serif (like Futura) is built from pure geometric forms and communicates:</div><div class="qo">
+      <div class="qop">Warmth, tradition, and humanist craft</div>
+      <div class="qop">Modernity, rationality, and architectural precision</div>
+      <div class="qop">Elegance, formality, and personal expression</div>
+      <div class="qop">Boldness, impact, and sturdy presence</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q05</div><div class="qt">A daycare flyer set in a high-contrast modern serif represents:</div><div class="qo">
+      <div class="qop">An appropriate choice — modern serifs are versatile across all contexts</div>
+      <div class="qop">A classification mismatch — the cold, formal sophistication of a modern serif contradicts the warmth and playfulness a daycare audience needs</div>
+      <div class="qop">A technically correct choice limited only by color selection</div>
+      <div class="qop">An acceptable choice as long as the typeface is legible</div>
+    </div></div>
+    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
+  </div>
+  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
+    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.12: which two typefaces had the most distinctive voices? Describe the specific letterform features that create each one's distinctiveness.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q07</div><div class="qt">A new financial-technology startup wants to feel both trustworthy (like an established bank) and modern (like a tech company). Which classification(s) would you recommend, and how would you balance the two communication goals?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q08</div><div class="qt">Connect typeface classification to channel theory (Lesson 1.4). How is the typeface one of the five communication channels, and what happens when its classification contradicts the other channels?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+  </div>
+</div></div>
+</div><!-- end l12 -->
+
+<!-- ═══════════════════════ LESSON 1.13 ═══════════════════════ -->
+<div id="l13" class="ls">
+<div class="hero" data-n="1.13">
+  <div class="vt">Volume 1 · Module 4 · Lesson 1.13</div>
+  <h1>Type <em>Anatomy</em></h1>
+  <p class="sub">To control type, you need the vocabulary to describe it precisely. Baseline, x-height, ascender, descender, counter, bowl, stem — these are not academic trivia. They are the language professionals use to make and explain typographic decisions, and to control the spacing that determines whether text is comfortable or exhausting to read.</p>
+  <div class="mr">
+    <div class="mi"><label>Lesson Type</label><span>Technical Foundations</span></div>
+    <div class="mi"><label>Duration</label><span>45–55 minutes</span></div>
+    <div class="mi"><label>App</label><span>Illustrator — Character panel</span></div>
+    <div class="mi"><label>Deliverable</label><span>Annotated type anatomy diagram + spacing study</span></div>
+  </div>
+</div>
+<div class="itabs">
+  <button class="itab active" onclick="showI('l13-les',this,'l13')">📖 Lesson</button>
+  <button class="itab" onclick="showI('l13-scr',this,'l13')">🎬 Video Script</button>
+  <button class="itab" onclick="showI('l13-wb',this,'l13')">📄 Workbook</button>
+  <button class="itab" onclick="showI('l13-ass',this,'l13')">✅ Assessment</button>
+</div>
+
+<div id="l13-les" class="tc active"><div class="wrap">
+  <div class="obj"><h4>Learning Objectives — Lesson 1.13</h4><ul class="ol">
+    <li>Identify the core anatomical features of letterforms: baseline, x-height, cap height, ascender, descender, counter, bowl, stem, serif, and terminal</li>
+    <li>Explain why x-height affects perceived size and legibility between typefaces of the same point size</li>
+    <li>Define kerning, tracking, and leading — the three spacing controls — and their effect on readability</li>
+    <li>Use anatomical vocabulary to describe and compare typefaces precisely</li>
+    <li>Diagnose spacing problems in real text using the correct terminology</li>
+  </ul></div>
+
+  <div class="pb">
+    <div class="pb-label">The Problem</div>
+    <h3>You set two typefaces at exactly the same point size — 24pt — but one looks noticeably larger and more readable than the other. Your client asks why. You don't have the vocabulary to explain it, so you say "they're just different fonts." That answer doesn't build confidence.</h3>
+    <p>The difference is x-height — the height of the lowercase letters relative to the cap height. A typeface with a large x-height looks bigger and reads more easily at small sizes, even at an identical point size. Without the anatomical vocabulary, this difference is invisible and inexplicable. With it, you can predict legibility, explain decisions to clients, and control spacing with precision. Type anatomy is not academic — it is the language of professional typographic control. This lesson gives you that language.</p>
+    <div class="pb-meta">
+      <div class="pb-meta-item"><label>Context</label><span>Every typographic decision and client conversation</span></div>
+      <div class="pb-meta-item"><label>Constraint</label><span>You can't control what you can't name</span></div>
+      <div class="pb-meta-item"><label>Skill This Lesson Builds</label><span>Anatomical vocabulary, spacing control, legibility prediction</span></div>
+    </div>
+  </div>
+
+  <div class="sl">Introduction</div>
+  <h2>The Vocabulary of Precision</h2>
+  <p>Professionals in every field share a precise vocabulary that lets them communicate exactly. A doctor doesn't say "the bone in your upper arm" — they say "humerus." A typographer doesn't say "the round part of the letter" — they say "bowl." This precision is not pretension; it is the prerequisite for accurate communication and deliberate control. When you can name the parts of a letterform, you can see differences you couldn't see before, describe them to colleagues and clients, and make decisions about them with intention.</p>
+
+  <div class="cb mod"><div class="cl">Core Idea</div><p>Type anatomy is the system of names for the parts of letterforms and the lines that organize them. Learning this vocabulary does two things: it sharpens your ability to perceive differences between typefaces, and it gives you the language to control and explain typographic decisions. The most consequential anatomical feature for legibility is x-height — and you can only work with it once you can name it.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 1</div>
+  <h2>The Organizing Lines</h2>
+
+  <table class="compare">
+    <thead><tr><th>Line</th><th>Definition</th><th>Why It Matters</th></tr></thead>
+    <tbody>
+      <tr><td>Baseline</td><td>The invisible line on which letters sit</td><td>The reference for all vertical alignment — text aligns to the baseline, not the bottom of descenders</td></tr>
+      <tr><td>X-height</td><td>The height of lowercase letters (like 'x'), from baseline to the top of lowercase letters</td><td>Determines perceived size and legibility — large x-height reads bigger and clearer at small sizes</td></tr>
+      <tr><td>Cap height</td><td>The height of capital letters from the baseline</td><td>Usually slightly shorter than ascender height; defines the uppercase visual weight</td></tr>
+      <tr><td>Ascender</td><td>The part of lowercase letters rising above the x-height (in b, d, h, k, l)</td><td>Contributes to the recognizable shape of words; height affects elegance vs. compactness</td></tr>
+      <tr><td>Descender</td><td>The part of lowercase letters extending below the baseline (in g, j, p, q, y)</td><td>Requires space below the baseline; affects how tight lines can be set</td></tr>
+    </tbody>
+  </table>
+
+  <div class="cb gold"><div class="cl">Why X-Height Is the Most Important Measurement</div><p>Two typefaces at the same point size can look dramatically different in size because of x-height. A typeface with a large x-height (like Verdana) uses more of its point size for the lowercase letters, making it look bigger and read more easily — especially at small sizes and on screens. A typeface with a small x-height (like many elegant serifs) looks smaller and more refined but can be harder to read at small sizes. When choosing type for legibility — interfaces, signage, body text — x-height is one of the most important factors to evaluate.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 2</div>
+  <h2>The Parts of a Letterform</h2>
+
+  <table class="compare">
+    <thead><tr><th>Feature</th><th>Definition</th></tr></thead>
+    <tbody>
+      <tr><td>Stem</td><td>The main vertical or diagonal stroke of a letterform</td></tr>
+      <tr><td>Bowl</td><td>The fully closed, rounded part of a letter enclosing space (in b, d, o, p)</td></tr>
+      <tr><td>Counter</td><td>The enclosed or partially enclosed space within a letter (the hole in 'o', the space in 'e')</td></tr>
+      <tr><td>Serif</td><td>The small stroke projecting from the end of a main stroke (present in serif typefaces)</td></tr>
+      <tr><td>Terminal</td><td>The end of a stroke that has no serif — its shape (sharp, rounded, flared) gives a typeface character</td></tr>
+      <tr><td>Aperture</td><td>The opening of a partially enclosed counter (the gap in 'c', 'e', 's') — wider apertures aid legibility</td></tr>
+    </tbody>
+  </table>
+
+  <p>These features are what distinguish one typeface from another within the same classification. Two transitional serifs might share the same overall classification but differ in the shape of their terminals, the size of their counters, and the proportion of their bowls — and those differences are what give each typeface its individual character.</p>
+
+  <div class="div"></div>
+  <div class="sl">Section 3</div>
+  <h2>The Three Spacing Controls</h2>
+  <p>Beyond the shapes of letters, typography is controlled by three spacing adjustments — and each has its own term and its own effect on readability.</p>
+
+  <h3>Kerning — Space Between Specific Letter Pairs</h3>
+  <p>Kerning adjusts the space between two specific adjacent letters. Some letter combinations (like "AV" or "To") create awkward gaps when set with default spacing, and kerning tightens or loosens those specific pairs for visual evenness. Kerning is a fine, local adjustment — usually applied to headlines and logos where every letter pair is visible and matters.</p>
+
+  <h3>Tracking — Uniform Spacing Across a Range</h3>
+  <p>Tracking applies uniform spacing adjustment across a word, line, or block of text. Positive tracking opens the text up; negative tracking tightens it. Tracking is set tight or at zero for body text, and positive for all-caps labels and navigation (which look cramped at default spacing).</p>
+
+  <h3>Leading — Vertical Space Between Lines</h3>
+  <p>Leading (pronounced "ledding," from the strips of lead historically used between lines) is the vertical distance between baselines of consecutive lines. Set at 1.4–1.6× the font size for comfortable body text. Too tight and lines crowd; too loose and paragraph cohesion is lost.</p>
+
+  <div class="kt"><h4>Key Vocabulary — Lesson 1.13</h4><div class="tg">
+    <div><div class="tn">Baseline</div><div class="td">The invisible line on which letters sit — the reference for all vertical text alignment.</div><div class="vu"><div class="vu-label">In Use</div><p>"Align the caption to the baseline of the body text, not the bottom of the descenders — the baseline is what the eye reads as the line."</p></div></div>
+    <div><div class="tn">X-height</div><div class="td">The height of lowercase letters from baseline to the top of the lowercase 'x' — the key determinant of perceived size and small-size legibility.</div><div class="vu"><div class="vu-label">In Use</div><p>"This typeface has a small x-height — it'll be hard to read at 11pt on screen. For the interface, choose something with a larger x-height."</p></div></div>
+    <div><div class="tn">Counter</div><div class="td">The enclosed or partially enclosed space within a letter — like the hole in 'o' or the space in 'e'. Open counters aid legibility.</div><div class="vu"><div class="vu-label">In Use</div><p>"The counters close up at small sizes in this typeface — the 'e' fills in and becomes a blob. We need more open counters for body text."</p></div></div>
+    <div><div class="tn">Kerning</div><div class="td">The adjustment of space between two specific adjacent letters — a fine, local adjustment for visual evenness, used mostly in headlines and logos.</div><div class="vu"><div class="vu-label">In Use</div><p>"The 'AV' in the logo has an awkward gap — kern those two letters tighter. At logo size, every letter pair has to be right."</p></div></div>
+    <div><div class="tn">Tracking</div><div class="td">The uniform spacing adjustment across a word, line, or block — tight for body text, positive for all-caps labels and navigation.</div><div class="vu"><div class="vu-label">In Use</div><p>"Add positive tracking to those all-caps nav labels — capitals look cramped at default spacing. 80 to 100 units opens them up."</p></div></div>
+    <div><div class="tn">Leading</div><div class="td">The vertical space between baselines of consecutive lines — set at 1.4–1.6× the font size for comfortable body text reading.</div><div class="vu"><div class="vu-label">In Use</div><p>"The leading is too tight — set it to 150% of the font size. Right now the descenders of one line almost touch the ascenders of the next."</p></div></div>
+  </div></div>
+
+  <div class="ex"><div class="exh"><span class="exb">Exercise 1.13</span><h4>Type Anatomy Diagram + Spacing Study</h4></div>
+    <p>Build an annotated anatomy diagram and a spacing study to internalize both the vocabulary and the controls.</p>
+    <ol>
+      <li>In Illustrator, set a few large letters (include letters with ascenders, descenders, bowls, and counters — for example "bdgpqe") at 200pt or larger.</li>
+      <li>Draw and label the organizing lines: baseline, x-height, cap height, ascender height, descender depth.</li>
+      <li>Label the letterform features: stem, bowl, counter, serif (if present), terminal, aperture.</li>
+      <li>Spacing study: set the same paragraph three times — once with default spacing, once with leading too tight (100%), once with comfortable leading (150%). Document how each affects readability.</li>
+      <li>Set a short all-caps label three ways — at zero tracking, at negative tracking, and at +100 tracking — and identify which is most legible and why.</li>
+    </ol>
+    <div class="tt">⏱ Estimated time: 45–55 minutes</div>
+  </div>
+
+  <div class="rf"><h4>Journal Reflection — Lesson 1.13</h4>
+    <p style="font-size:15px;font-style:italic;">Find two typefaces at the same point size where one looks noticeably bigger than the other. Can you now name why? Describe the x-height difference in your own words. How does having the vocabulary change what you can see — and what you could explain to a client?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+  </div>
+</div></div>
+
+<div id="l13-scr" class="tc"><div class="wrap">
+  <div class="sl">Concept Video Script — Lesson 1.13</div>
+  <h2>Type Anatomy — The Vocabulary of Control</h2>
+  <p style="color:var(--mid);margin-bottom:28px;font-size:14px;">Anatomical labels animated onto large letterforms + spacing demonstration</p>
+  <div class="sh">
+    <div><label>Video Type</label><span>Technical / Animated Diagram</span></div>
+    <div><label>Target Length</label><span>4:30 – 5:00 minutes</span></div>
+    <div><label>Key Visual</label><span>Labels animating onto large letterforms; spacing demos</span></div>
+    <div><label>Music Tone</label><span>Precise, instructional, clear</span></div>
+    <div><label>Production</label><span>After Effects type animation</span></div>
+    <div><label>Narration</label><span>ElevenLabs or AI Avatar</span></div>
+  </div>
+  <h3>OPENING</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:00–0:40</span></div><div class="sbb nt">Here are two typefaces. Same point size — 24pt. But one looks clearly bigger and easier to read. Your client asks why. If all you can say is "they're just different fonts," you haven't built confidence. The real answer is x-height — and to give it, you need the vocabulary of type anatomy. Today you'll learn the names for the parts of letterforms and the lines that organize them. Because you cannot control what you cannot name.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Two typefaces, same point size, different apparent size ]
+[ Title: "Lesson 1.13 — Type Anatomy" ]</div></div>
+  <h3>SEGMENT 1 — Lines and Features</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:41–2:20</span></div><div class="sbb nt">The organizing lines. The baseline — where letters sit, the reference for all alignment. The x-height — the height of lowercase letters. This is the most important measurement, because it determines perceived size and legibility. Cap height — the height of capitals. Ascenders rise above the x-height in letters like b, d, h. Descenders drop below the baseline in g, j, p, y. Now the parts of the letter itself. The stem — the main stroke. The bowl — the closed rounded part of a b or o. The counter — the enclosed space inside, the hole in the o. The serif — the small projecting stroke. The terminal — the end of a stroke with no serif. These names are what let you see and describe the differences between typefaces.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Lines labeled on large letters: baseline, x-height, cap height, ascender, descender ]
+[ Features labeled: stem, bowl, counter, serif, terminal ]</div></div>
+  <h3>SEGMENT 2 — Three Spacing Controls + Exercise</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">2:21–4:30</span></div><div class="sbb nt">Three spacing controls, three names. Kerning — the space between two specific letters. The "AV" pair, the "To" pair — they create awkward gaps that kerning fixes. A fine, local adjustment for headlines and logos. Tracking — uniform spacing across a range of text. Tight for body, positive for all-caps labels that look cramped at default. And leading — the vertical space between lines, named for the lead strips printers once used. Set it at 1.4 to 1.6 times the font size for comfortable body text. Too tight and lines crowd; too loose and the paragraph falls apart. For your exercise: build a labeled anatomy diagram, then a spacing study with three leading values and three tracking values. See you in Lesson 1.14.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Kerning: AV pair tightened ]
+[ Tracking: all-caps label opened up ]
+[ Leading: three line-spacing values compared ]
+[ Exercise card: "Exercise 1.13 — Anatomy + Spacing Study" ]
+[ "Next: Lesson 1.14 — Choosing &amp; Pairing Type" ]</div></div>
+</div></div>
+
+<div id="l13-wb" class="tc"><div class="wrap">
+  <div class="wb">
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:6px;font-weight:500;">Volume 1 · Module 4 · Lesson 1.13</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:4px;">Type Anatomy</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:20px;">Anatomy Labels + Spacing Study</div>
+    <div class="wr"></div>
+    <p style="font-size:13px;font-weight:600;margin-bottom:10px;">Define each anatomical term in your own words:</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">
+      <div style="border:1px solid var(--rule);border-radius:6px;padding:10px;"><p style="font-size:10px;color:var(--mod);font-weight:600;margin-bottom:4px;">BASELINE</p><div class="wln"></div></div>
+      <div style="border:1px solid var(--rule);border-radius:6px;padding:10px;"><p style="font-size:10px;color:var(--mod);font-weight:600;margin-bottom:4px;">X-HEIGHT</p><div class="wln"></div></div>
+      <div style="border:1px solid var(--rule);border-radius:6px;padding:10px;"><p style="font-size:10px;color:var(--mod);font-weight:600;margin-bottom:4px;">ASCENDER</p><div class="wln"></div></div>
+      <div style="border:1px solid var(--rule);border-radius:6px;padding:10px;"><p style="font-size:10px;color:var(--mod);font-weight:600;margin-bottom:4px;">DESCENDER</p><div class="wln"></div></div>
+      <div style="border:1px solid var(--rule);border-radius:6px;padding:10px;"><p style="font-size:10px;color:var(--mod);font-weight:600;margin-bottom:4px;">COUNTER</p><div class="wln"></div></div>
+      <div style="border:1px solid var(--rule);border-radius:6px;padding:10px;"><p style="font-size:10px;color:var(--mod);font-weight:600;margin-bottom:4px;">BOWL</p><div class="wln"></div></div>
+    </div>
+    <div class="wr"></div>
+    <p style="font-size:13px;font-weight:600;margin-bottom:10px;">Spacing Study Results:</p>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="border:1px solid var(--rule);border-radius:6px;padding:10px;"><p style="font-size:11px;color:var(--mid);">KERNING — which letter pair needed the most adjustment, and why?</p><div class="wln" style="margin-top:6px;"></div></div>
+      <div style="border:1px solid var(--rule);border-radius:6px;padding:10px;"><p style="font-size:11px;color:var(--mid);">TRACKING — which value was most legible for your all-caps label?</p><div class="wln" style="margin-top:6px;"></div></div>
+      <div style="border:1px solid var(--rule);border-radius:6px;padding:10px;"><p style="font-size:11px;color:var(--mid);">LEADING — describe how 100% vs. 150% leading changed the reading experience:</p><div class="wln" style="margin-top:6px;"></div></div>
+    </div>
+    <div class="pn">Digital Design &amp; Media Technology · Volume 1 · Page 13</div>
+  </div>
+</div></div>
+
+<div id="l13-ass" class="tc"><div class="wrap">
+  <div class="sl">Lesson 1.13 Assessment</div>
+  <h2>Type Anatomy — Knowledge Check</h2>
+  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
+    <div class="qi"><div class="qn">Q01</div><div class="qt">Two typefaces set at the same point size appear different in size primarily because of differences in:</div><div class="qo">
+      <div class="qop">Their cap height — the height of capital letters</div>
+      <div class="qop">Their x-height — the height of lowercase letters, which determines perceived size and small-size legibility</div>
+      <div class="qop">Their leading — the space between lines</div>
+      <div class="qop">Their tracking — the spacing between letters</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q02</div><div class="qt">The baseline is:</div><div class="qo">
+      <div class="qop">The bottom edge of the lowest descender in a line of text</div>
+      <div class="qop">The invisible line on which letters sit — the reference for all vertical text alignment</div>
+      <div class="qop">The horizontal center line of a capital letter</div>
+      <div class="qop">The top edge of the x-height</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q03</div><div class="qt">Kerning differs from tracking in that:</div><div class="qo">
+      <div class="qop">Kerning adjusts vertical spacing while tracking adjusts horizontal spacing</div>
+      <div class="qop">Kerning adjusts the space between two specific adjacent letters, while tracking applies uniform spacing across a range of text</div>
+      <div class="qop">Kerning is used only for body text while tracking is used only for headlines</div>
+      <div class="qop">Kerning and tracking are two names for the same adjustment</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q04</div><div class="qt">Leading is set at 1.4–1.6× the font size for body text because:</div><div class="qo">
+      <div class="qop">This is the maximum spacing browsers and print software will allow</div>
+      <div class="qop">This range provides comfortable reading space — tighter crowds the lines, looser destroys paragraph cohesion</div>
+      <div class="qop">This ratio matches the golden ratio used throughout design</div>
+      <div class="qop">Leading has no measurable effect on readability and the value is arbitrary</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q05</div><div class="qt">A typeface whose counters "close up" at small sizes — the 'e' filling into a blob — has a legibility problem related to its:</div><div class="qo">
+      <div class="qop">Excessive leading</div>
+      <div class="qop">Counters and apertures being too small or closed — reducing legibility at small sizes</div>
+      <div class="qop">Cap height being taller than its ascenders</div>
+      <div class="qop">Negative tracking applied to the body text</div>
+    </div></div>
+    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
+  </div>
+  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
+    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.13: describe how changing leading from 100% to 150% changed the reading experience of your paragraph. Use the correct terminology.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q07</div><div class="qt">A client is choosing between two typefaces for a mobile app interface. Using anatomical vocabulary, explain which features you would evaluate to predict which will be more legible at small screen sizes.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q08</div><div class="qt">Why is having the precise anatomical vocabulary described as "the prerequisite for deliberate control" rather than just academic knowledge? Give a specific example of a decision the vocabulary enables.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+  </div>
+</div></div>
+</div><!-- end l13 -->
+
+<!-- ═══════════════════════ LESSON 1.14 ═══════════════════════ -->
+<div id="l14" class="ls">
+<div class="hero" data-n="1.14">
+  <div class="vt">Volume 1 · Module 4 · Lesson 1.14</div>
+  <h1>Choosing <em>&amp; Pairing Type</em></h1>
+  <p class="sub">Selecting one typeface is a decision about voice. Pairing two is a decision about conversation — how a display face and a text face talk to each other. Get the pairing right and the design feels considered and sophisticated. Get it wrong and the two voices argue, undermining everything else.</p>
+  <div class="mr">
+    <div class="mi"><label>Lesson Type</label><span>Concept + Applied Studio</span></div>
+    <div class="mi"><label>Duration</label><span>55–65 minutes</span></div>
+    <div class="mi"><label>App</label><span>Illustrator — pairing studies</span></div>
+    <div class="mi"><label>Deliverable</label><span>Three type pairings with rationale</span></div>
+  </div>
+</div>
+<div class="itabs">
+  <button class="itab active" onclick="showI('l14-les',this,'l14')">📖 Lesson</button>
+  <button class="itab" onclick="showI('l14-scr',this,'l14')">🎬 Video Script</button>
+  <button class="itab" onclick="showI('l14-wb',this,'l14')">📄 Workbook</button>
+  <button class="itab" onclick="showI('l14-ass',this,'l14')">✅ Assessment</button>
+</div>
+
+<div id="l14-les" class="tc active"><div class="wrap">
+  <div class="obj"><h4>Learning Objectives — Lesson 1.14</h4><ul class="ol">
+    <li>Apply the "contrast with compatibility" principle to evaluate and create type pairings</li>
+    <li>Use reliable pairing strategies: superfamily pairing, classification contrast, and same-era pairing</li>
+    <li>Identify why two typefaces clash — and diagnose the specific source of the conflict</li>
+    <li>Limit a design to an appropriate number of typefaces and justify each one's role</li>
+    <li>Select type for a brand based on audience, message, and the personality of each classification</li>
+  </ul></div>
+
+  <div class="pb">
+    <div class="pb-label">The Problem</div>
+    <h3>You paired a display headline with a body typeface, and something feels wrong. They're both fine typefaces on their own. But together they look awkward — like two people wearing clothes that almost match but not quite. You can't tell whether they're too similar or too different.</h3>
+    <p>That uncertainty is the central challenge of type pairing. Two typefaces that are too similar create a vague, muddy relationship — the eye senses they're different but can't tell why, which feels like a mistake. Two typefaces that are too different clash — they have no shared qualities to make them feel intentional together. The sweet spot is "contrast with compatibility": clearly different in role and feel, but sharing underlying qualities that make the pairing feel deliberate. This lesson gives you reliable strategies to find that sweet spot instead of guessing.</p>
+    <div class="pb-meta">
+      <div class="pb-meta-item"><label>Context</label><span>Any design using more than one typeface</span></div>
+      <div class="pb-meta-item"><label>Constraint</label><span>Too similar = muddy; too different = clashing</span></div>
+      <div class="pb-meta-item"><label>Skill This Lesson Builds</label><span>Pairing strategy, conflict diagnosis, typeface limiting</span></div>
+    </div>
+  </div>
+
+  <div class="sl">Introduction</div>
+  <h2>Pairing Is a Conversation</h2>
+  <p>When a design uses two typefaces — typically a display face for headlines and a text face for body — those two typefaces are in conversation with each other on every page. A good pairing is like a good conversation between two distinct personalities: they're clearly different, but they get along, complement each other, and create something more interesting together than either alone. A bad pairing is like two people talking over each other, or two people so alike there's no point in both being there.</p>
+  <p>The goal of pairing is contrast with compatibility — enough difference that each typeface has a clear, distinct role, and enough shared quality that they feel like they belong together. This lesson gives you reliable strategies to achieve that balance deliberately.</p>
+
+  <div class="cb mod"><div class="cl">Core Idea</div><p>A successful type pairing achieves contrast with compatibility: the two typefaces are clearly different in classification, weight, or role (contrast), but share underlying qualities — proportions, era, or design logic (compatibility). Too much similarity creates a muddy, accidental-looking relationship. Too much difference creates a clash. The strategies in this lesson help you find the productive middle.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 1</div>
+  <h2>Three Reliable Pairing Strategies</h2>
+
+  <table class="compare">
+    <thead><tr><th>Strategy</th><th>How It Works</th><th>Why It's Reliable</th></tr></thead>
+    <tbody>
+      <tr><td>Superfamily</td><td>Pair a serif and sans-serif designed by the same designer as companion families (e.g., a serif and sans built to work together)</td><td>They were engineered to harmonize — shared proportions and design logic guarantee compatibility</td></tr>
+      <tr><td>Classification Contrast</td><td>Pair across classifications: a serif headline with a sans-serif body, or vice versa</td><td>Clear role difference (contrast) while both are reading-grade classifications (compatibility)</td></tr>
+      <tr><td>Same-Era Pairing</td><td>Pair two typefaces from the same historical period or design movement</td><td>Shared era gives them common underlying proportions and sensibility, even across classifications</td></tr>
+      <tr><td>Weight Contrast</td><td>Pair a bold/black weight of one family with a light/regular weight of another or the same family</td><td>Strong visual difference without classification conflict — works within a single typeface too</td></tr>
+    </tbody>
+  </table>
+
+  <div class="cb gold"><div class="cl">The Reliable Default: Serif + Sans-Serif</div><p>The most dependable pairing for beginners is one serif and one sans-serif — a serif headline with a sans-serif body, or a sans-serif headline with a serif body. This pairing has built-in contrast (different classifications, different roles) and built-in compatibility (both are reading-grade, both serve clear functions). When in doubt, reach for a serif/sans pairing — and choose ones with similar x-heights and proportions to strengthen the compatibility.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 2</div>
+  <h2>Why Pairings Clash — Diagnosing Conflict</h2>
+  <p>When a pairing feels wrong, the cause is usually one of three specific conflicts:</p>
+  <p><strong>Too Similar:</strong> Two sans-serifs that are almost but not quite alike, or two serifs from the same sub-category. The eye registers a difference but can't justify it — the pairing looks like an error rather than a decision. Fix: increase the contrast, usually by changing one to a different classification.</p>
+  <p><strong>Competing for Attention:</strong> Two display or high-personality typefaces, each demanding to be the star. Neither recedes to a supporting role. Fix: one typeface must be the lead (the display/headline), the other the support (the neutral text face). Personality typefaces don't pair with other personality typefaces.</p>
+  <p><strong>Mismatched Eras or Moods:</strong> A futuristic geometric sans paired with an ornate Victorian display face. The historical and emotional associations clash. Fix: pair within a shared era or a deliberately complementary mood, not a random combination.</p>
+
+  <div class="div"></div>
+  <div class="sl">Section 3</div>
+  <h2>How Many Typefaces?</h2>
+  <p>The reliable guideline: <strong>two typefaces for most designs, three at most.</strong> One typeface can work beautifully if it has enough weights and styles to create hierarchy (a single superfamily with light, regular, bold, and black weights provides plenty of range). Two typefaces — one display, one text — is the standard professional approach. Three is the upper limit, and the third must have a clear, distinct role (e.g., a serif for body, a sans for labels, and a display for the logo only).</p>
+  <p>Beyond three, designs almost always become incoherent. Each additional typeface dilutes the repetition that builds unity (Lesson 1.11) and increases the chance of conflict. When you feel the urge to add a fourth typeface, the answer is almost always to use a different weight or style of a typeface you already have.</p>
+
+  <div class="kt"><h4>Key Vocabulary — Lesson 1.14</h4><div class="tg">
+    <div><div class="tn">Type Pairing</div><div class="td">The combination of two typefaces — typically display and text — chosen to work together through contrast with compatibility.</div><div class="vu"><div class="vu-label">In Use</div><p>"The pairing isn't working — both are geometric sans-serifs, too similar. Try a serif headline against the sans body. That contrast reads as intentional."</p></div></div>
+    <div><div class="tn">Contrast with Compatibility</div><div class="td">The pairing principle: typefaces should be clearly different in role and feel, but share underlying qualities that make them belong together.</div><div class="vu"><div class="vu-label">In Use</div><p>"Aim for contrast with compatibility — different enough to have distinct roles, similar enough in proportion that they feel like a deliberate pair."</p></div></div>
+    <div><div class="tn">Superfamily</div><div class="td">A set of serif and sans-serif typefaces designed by the same designer to work together — guaranteeing compatibility through shared design logic.</div><div class="vu"><div class="vu-label">In Use</div><p>"Use the superfamily — the serif and sans were built as companions, so the pairing is foolproof. Same proportions, same designer, guaranteed harmony."</p></div></div>
+    <div><div class="tn">Display / Text Roles</div><div class="td">The two functional roles in a pairing: the display face leads (headlines, impact), the text face supports (body, sustained reading).</div><div class="vu"><div class="vu-label">In Use</div><p>"You have two personality typefaces competing. One must take the display role and one the text role — personality faces don't pair with each other."</p></div></div>
+    <div><div class="tn">Typeface Limit</div><div class="td">The professional guideline of two typefaces (three at most) per design — each with a clear, distinct role.</div><div class="vu"><div class="vu-label">In Use</div><p>"You're up to four typefaces — that's too many. Drop to two and use different weights for the hierarchy you were trying to create with the extras."</p></div></div>
+    <div><div class="tn">Era Matching</div><div class="td">Pairing typefaces from the same historical period or design movement — giving them shared underlying proportions and sensibility.</div><div class="vu"><div class="vu-label">In Use</div><p>"The futuristic sans and the Victorian display clash because their eras clash. Match the era or pick a deliberately complementary mood — not a random combination."</p></div></div>
+  </div></div>
+
+  <div class="brief">
+    <div class="brief-head">
+      <div class="bl">Design Brief — Lesson 1.14</div>
+      <h4>Three Type Pairings for One Brand</h4>
+    </div>
+    <div class="brief-body">
+      <div class="brief-section">
+        <div class="brief-section-label">The Problem</div>
+        <p>You can't learn pairing by reading about it — only by trying pairings and developing judgment about which work and why. This brief has you build three pairings for the same brand and evaluate them against the contrast-with-compatibility principle.</p>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">The Constraints</div>
+        <ul>
+          <li>Choose a fictional brand with a clear personality (e.g., an artisan bakery, a fintech startup, a wilderness outfitter)</li>
+          <li>Create three different type pairings for it — each with one display/headline typeface and one body typeface</li>
+          <li>Use a different pairing strategy for each: one superfamily or same-era pairing, one serif/sans classification contrast, one of your own choosing</li>
+          <li>Set the same sample (a headline, a subheadline, and a paragraph of body text) in all three pairings so you can compare fairly</li>
+          <li>For each pairing, write the rationale: what is the contrast, what is the compatibility, and how well does it serve the brand's personality?</li>
+          <li>Select the strongest pairing and explain why it beats the other two</li>
+        </ul>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">Your Deliverable</div>
+        <div class="brief-deliverable"><p>Three type pairings applied to identical sample content + a rationale for each (contrast, compatibility, brand fit) + a selection of the strongest pairing with justification.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rf"><h4>Journal Reflection — Lesson 1.14</h4>
+    <p style="font-size:15px;font-style:italic;">Find a piece of design with an excellent type pairing — one where the headline and body typefaces clearly work together. Identify the contrast (how are they different?) and the compatibility (what do they share?). Then find a pairing that doesn't work, and diagnose which of the three conflict types it suffers from.</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+  </div>
+</div></div>
+
+<div id="l14-scr" class="tc"><div class="wrap">
+  <div class="sl">Concept Video Script — Lesson 1.14</div>
+  <h2>Choosing &amp; Pairing Type — The Conversation Between Typefaces</h2>
+  <p style="color:var(--mid);margin-bottom:28px;font-size:14px;">Pairing strategies demonstrated — working and clashing pairings compared</p>
+  <div class="sh">
+    <div><label>Video Type</label><span>Concept / Live Pairing</span></div>
+    <div><label>Target Length</label><span>5:00 – 5:30 minutes</span></div>
+    <div><label>Key Visual</label><span>Pairings built live — working vs. clashing comparisons</span></div>
+    <div><label>Music Tone</label><span>Considered, conversational, refined</span></div>
+    <div><label>Production</label><span>Illustrator recording + After Effects</span></div>
+    <div><label>Narration</label><span>ElevenLabs or AI Avatar</span></div>
+  </div>
+  <h3>OPENING</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:00–0:42</span></div><div class="sbb nt">Selecting one typeface is a decision about voice. Pairing two is a decision about conversation — how the headline face and the body face talk to each other on every page. Here's a pairing that feels wrong. Both typefaces are fine on their own. But together they're awkward — like two people in clothes that almost match but not quite. The question is: are they too similar, or too different? Today you'll learn to answer that — and to build pairings that feel intentional, using the principle of contrast with compatibility.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Awkward pairing shown — "too similar or too different?" ]
+[ Title: "Lesson 1.14 — Choosing &amp; Pairing Type" ]</div></div>
+  <h3>SEGMENT 1 — Contrast with Compatibility + Strategies</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:43–2:30</span></div><div class="sbb nt">The goal is contrast with compatibility. Enough difference that each typeface has a clear role; enough shared quality that they belong together. Three reliable strategies. Superfamily — a serif and sans designed by the same person as companions. They were engineered to harmonize, so it's foolproof. Classification contrast — a serif headline with a sans body, or the reverse. Clear role difference, both reading-grade. And same-era pairing — two typefaces from the same period share underlying proportions even across classifications. The reliable default for beginners: one serif, one sans-serif. Built-in contrast, built-in compatibility. When in doubt, reach for it — and choose ones with similar x-heights to strengthen the harmony.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Three strategies demonstrated with live pairings ]
+[ "Reliable default: serif + sans-serif" ]</div></div>
+  <h3>SEGMENT 2 — Why Pairings Clash + Exercise</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">2:31–4:45</span></div><div class="sbb nt">When a pairing clashes, it's one of three conflicts. Too similar — two sans-serifs almost alike. The eye sees a difference it can't justify, so it reads as a mistake. Fix: increase contrast, change one classification. Competing for attention — two personality typefaces, each demanding to be the star. Fix: one leads, one supports. Personality faces don't pair with other personality faces. Mismatched eras — a futuristic sans with a Victorian display. The associations clash. Fix: match the era or choose a deliberately complementary mood. And how many typefaces? Two for most designs, three at most. Beyond that, designs become incoherent. When you want a fourth, use a different weight of one you already have. For your exercise: three pairings for one brand, three strategies, full rationale. See you in Lesson 1.15.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Three conflict types shown with fixes ]
+[ "Two typefaces. Three at most." ]
+[ Exercise card: "Exercise 1.14 — Three Type Pairings" ]
+[ "Next: Lesson 1.15 — Typographic Hierarchy" ]</div></div>
+</div></div>
+
+<div id="l14-wb" class="tc"><div class="wrap">
+  <div class="wb">
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:6px;font-weight:500;">Volume 1 · Module 4 · Lesson 1.14</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:4px;">Choosing &amp; Pairing Type</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:20px;">Three Pairings — Contrast, Compatibility, Brand Fit</div>
+    <div class="wr"></div>
+    <p style="font-size:12px;color:var(--mid);margin-bottom:14px;">Brand + personality: <span style="border-bottom:1px solid var(--rule);display:inline-block;min-width:300px;">&nbsp;</span></p>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="border:1px solid var(--rule);border-radius:8px;padding:14px;">
+        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);font-weight:600;margin-bottom:8px;">PAIRING 1 — Strategy: <span style="border-bottom:1px solid var(--rule);display:inline-block;width:160px;"></span></p>
+        <p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Display face: <span style="border-bottom:1px solid var(--rule);display:inline-block;width:140px;"></span> Body face: <span style="border-bottom:1px solid var(--rule);display:inline-block;width:140px;"></span></p>
+        <p style="font-size:11px;color:var(--mid);margin:6px 0 4px;">Contrast / Compatibility / Brand fit:</p><div class="wl"><div class="wln"></div><div class="wln"></div></div>
+      </div>
+      <div style="border:1px solid var(--rule);border-radius:8px;padding:14px;">
+        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);font-weight:600;margin-bottom:8px;">PAIRING 2 — Strategy: <span style="border-bottom:1px solid var(--rule);display:inline-block;width:160px;"></span></p>
+        <p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Display face: <span style="border-bottom:1px solid var(--rule);display:inline-block;width:140px;"></span> Body face: <span style="border-bottom:1px solid var(--rule);display:inline-block;width:140px;"></span></p>
+        <p style="font-size:11px;color:var(--mid);margin:6px 0 4px;">Contrast / Compatibility / Brand fit:</p><div class="wl"><div class="wln"></div><div class="wln"></div></div>
+      </div>
+      <div style="border:1px solid var(--rule);border-radius:8px;padding:14px;">
+        <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--mod);font-weight:600;margin-bottom:8px;">PAIRING 3 — Strategy: <span style="border-bottom:1px solid var(--rule);display:inline-block;width:160px;"></span></p>
+        <p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Display face: <span style="border-bottom:1px solid var(--rule);display:inline-block;width:140px;"></span> Body face: <span style="border-bottom:1px solid var(--rule);display:inline-block;width:140px;"></span></p>
+        <p style="font-size:11px;color:var(--mid);margin:6px 0 4px;">Contrast / Compatibility / Brand fit:</p><div class="wl"><div class="wln"></div><div class="wln"></div></div>
+      </div>
+    </div>
+    <p style="font-size:13px;font-weight:600;margin:14px 0 6px;">Strongest pairing + why it beats the other two:</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+    <div class="pn">Digital Design &amp; Media Technology · Volume 1 · Page 14</div>
+  </div>
+</div></div>
+
+<div id="l14-ass" class="tc"><div class="wrap">
+  <div class="sl">Lesson 1.14 Assessment</div>
+  <h2>Choosing &amp; Pairing Type — Knowledge Check</h2>
+  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
+    <div class="qi"><div class="qn">Q01</div><div class="qt">The principle "contrast with compatibility" means a type pairing should be:</div><div class="qo">
+      <div class="qop">As similar as possible so the two typefaces blend seamlessly</div>
+      <div class="qop">Clearly different in role and feel, but sharing underlying qualities that make them belong together</div>
+      <div class="qop">As different as possible to maximize visual interest</div>
+      <div class="qop">Limited to typefaces from the same foundry regardless of style</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q02</div><div class="qt">A "superfamily" pairing is reliable because:</div><div class="qo">
+      <div class="qop">It uses only typefaces that are free to license</div>
+      <div class="qop">The serif and sans-serif were designed by the same designer as companions — sharing proportions and design logic that guarantee harmony</div>
+      <div class="qop">It limits the design to a single typeface, eliminating conflict</div>
+      <div class="qop">Superfamilies are the only typefaces with sufficient weights for hierarchy</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q03</div><div class="qt">Two sans-serifs that are "almost but not quite alike" create a pairing problem because:</div><div class="qo">
+      <div class="qop">Sans-serifs can never be paired with each other</div>
+      <div class="qop">The eye registers a difference it cannot justify — the pairing reads as a mistake rather than a deliberate decision</div>
+      <div class="qop">Two sans-serifs always compete for attention</div>
+      <div class="qop">Sans-serifs from different eras cannot share a page</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q04</div><div class="qt">The professional guideline for the number of typefaces in most designs is:</div><div class="qo">
+      <div class="qop">One typeface only — multiple typefaces always create conflict</div>
+      <div class="qop">Two typefaces (three at most), each with a clear, distinct role</div>
+      <div class="qop">Four to five typefaces to create rich visual variety</div>
+      <div class="qop">As many as needed to give each content type its own typeface</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q05</div><div class="qt">When you feel the urge to add a fourth typeface to a design, the recommended solution is usually to:</div><div class="qo">
+      <div class="qop">Add the fourth typeface — four is acceptable for complex designs</div>
+      <div class="qop">Use a different weight or style of a typeface you already have, rather than introducing a new one</div>
+      <div class="qop">Remove all existing typefaces and start with a fresh set of four</div>
+      <div class="qop">Replace the body typeface with the new one to keep the count at three</div>
+    </div></div>
+    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
+  </div>
+  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
+    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.14: which of your three pairings was strongest, and why did it beat the others? Reference the contrast and compatibility of the winning pairing specifically.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q07</div><div class="qt">A design uses two ornate display typefaces — one for the headline and one for the subheadline. Diagnose the conflict type and prescribe a specific fix.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q08</div><div class="qt">Connect type pairing to the repetition principle (Lesson 1.11). How does limiting the number of typefaces support repetition — and how does adding too many typefaces undermine the unity repetition creates?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+  </div>
+</div></div>
+</div><!-- end l14 -->
+
+<!-- ═══════════════════════ LESSON 1.15 ═══════════════════════ -->
+<div id="l15" class="ls">
+<div class="hero" data-n="1.15">
+  <div class="vt">Volume 1 · Module 4 · Lesson 1.15</div>
+  <h1>Typographic <em>Hierarchy</em></h1>
+  <p class="sub">This is where everything in Module 4 comes together. Classification gives type its voice, anatomy gives you control, pairing gives you a system — and hierarchy organizes it all into a clear reading order. Typographic hierarchy is the practical skill of making a multi-level text layout instantly navigable using type alone.</p>
+  <div class="mr">
+    <div class="mi"><label>Lesson Type</label><span>Applied Studio — Capstone</span></div>
+    <div class="mi"><label>Duration</label><span>60–75 minutes</span></div>
+    <div class="mi"><label>App</label><span>Illustrator — full type system</span></div>
+    <div class="mi"><label>Deliverable</label><span>Complete typographic hierarchy for a real layout</span></div>
+  </div>
+</div>
+<div class="itabs">
+  <button class="itab active" onclick="showI('l15-les',this,'l15')">📖 Lesson</button>
+  <button class="itab" onclick="showI('l15-scr',this,'l15')">🎬 Video Script</button>
+  <button class="itab" onclick="showI('l15-wb',this,'l15')">📄 Workbook</button>
+  <button class="itab" onclick="showI('l15-ass',this,'l15')">✅ Assessment</button>
+</div>
+
+<div id="l15-les" class="tc active"><div class="wrap">
+  <div class="obj"><h4>Learning Objectives — Lesson 1.15</h4><ul class="ol">
+    <li>Build a complete typographic hierarchy with at least four levels using the tools of type</li>
+    <li>Apply the four typographic hierarchy tools — size, weight, style, and space — to create clear reading order</li>
+    <li>Establish a type scale (a consistent set of sizes) rather than choosing sizes arbitrarily</li>
+    <li>Integrate everything from Module 4 — classification, anatomy, pairing — into one functional system</li>
+    <li>Evaluate a typographic hierarchy with the squint test and correct insufficient differentiation</li>
+  </ul></div>
+
+  <div class="pb">
+    <div class="pb-label">The Problem</div>
+    <h3>Your layout has a headline, subheadline, body text, a pull quote, and a caption — five levels of text. They're all set in the same typeface at sizes that are only slightly different. The reader can't tell at a glance which is the headline and which is the caption. The hierarchy is technically present but perceptually invisible.</h3>
+    <p>Typographic hierarchy failure is the single most common problem in text-heavy design — and it almost always comes from timid differentiation. The size gap between levels is too small, the weight contrast too subtle, the spacing too uniform. The fix is to make the differences dramatic and systematic: a real type scale where each level is clearly, visibly distinct from the others. This lesson brings together everything from Module 4 — the voice of classification, the control of anatomy, the system of pairing — to build hierarchy that works at a glance.</p>
+    <div class="pb-meta">
+      <div class="pb-meta-item"><label>Context</label><span>Every multi-level text layout</span></div>
+      <div class="pb-meta-item"><label>Constraint</label><span>Timid differentiation = invisible hierarchy</span></div>
+      <div class="pb-meta-item"><label>Skill This Lesson Builds</label><span>Type scale, four hierarchy tools, system integration</span></div>
+    </div>
+  </div>
+
+  <div class="sl">Introduction</div>
+  <h2>Where Module 4 Comes Together</h2>
+  <p>Everything you've learned in this module converges here. In Lesson 1.12 you learned that classification gives type a voice. In 1.13 you learned the anatomy that gives you precise control. In 1.14 you learned to pair typefaces into a system. Now, in 1.15, you organize that system into a hierarchy — a clear, instantly readable order of importance that guides the reader through the content using type alone.</p>
+  <p>Typographic hierarchy is the visual hierarchy principle from Lesson 1.6, applied specifically through typographic tools. Where Lesson 1.6 used size, weight, color, position, and space across all design elements, here we focus on how type itself creates hierarchy: through size, weight, style, and spacing decisions that make a complex text layout navigable at a glance.</p>
+
+  <div class="cb mod"><div class="cl">Core Idea</div><p>Typographic hierarchy organizes multiple levels of text into a clear order of importance using the tools of type: size, weight, style, and space. The reader should be able to identify the role of every text element — headline, subheadline, body, caption — at a glance, without reading. When hierarchy fails, it is almost always because the differentiation between levels is too timid. The fix is a systematic type scale with dramatic, visible differences.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 1</div>
+  <h2>The Four Typographic Hierarchy Tools</h2>
+
+  <table class="compare">
+    <thead><tr><th>Tool</th><th>How It Creates Hierarchy</th><th>Application Note</th></tr></thead>
+    <tbody>
+      <tr><td>Size</td><td>Larger text reads as more important — the most reliable typographic hierarchy tool</td><td>Each level should be at least 30–40% different in size from adjacent levels</td></tr>
+      <tr><td>Weight</td><td>Bolder text reads as more important — creates hierarchy without changing size</td><td>Reserve the boldest weight for the single most important element; vary weight across levels</td></tr>
+      <tr><td>Style</td><td>Italic, small caps, or a different family signals a distinct role (quotes, captions, emphasis)</td><td>Use style to differentiate role, not just importance — italics for quotes, small caps for labels</td></tr>
+      <tr><td>Space</td><td>Space above, below, and around text isolates and elevates it — more space signals more importance</td><td>Generous space around a headline reinforces its dominance; tight space groups related items</td></tr>
+    </tbody>
+  </table>
+
+  <div class="cb gold"><div class="cl">The Type Scale</div><p>Rather than choosing each size arbitrarily, professionals use a type scale — a consistent set of sizes derived from a base size and a ratio. For example, starting at 16pt body and multiplying by 1.5 gives 16, 24, 36, 54, 81 — a harmonious progression where each level is clearly distinct from the next. Using a scale guarantees the size gaps are large enough to create visible hierarchy and keeps the sizes related to each other, reinforcing the repetition principle. Define the scale once, then assign each text level to a step on it.</p></div>
+
+  <div class="div"></div>
+  <div class="sl">Section 2</div>
+  <h2>Building a Four-Level Hierarchy</h2>
+  <p>A standard typographic hierarchy has at least four levels, each clearly distinct:</p>
+  <p><strong>Level 1 — Headline (H1):</strong> The largest, most dominant text. Set in the display typeface, at the top of the type scale (often 2.5–4× the body size), usually bold. This is what the reader sees first.</p>
+  <p><strong>Level 2 — Subheadline (H2):</strong> Clearly smaller than the headline but clearly larger than body — a distinct middle step on the scale. Establishes section structure.</p>
+  <p><strong>Level 3 — Body:</strong> The reading text. Set in the text typeface at the base size (typically 9–14pt depending on medium), with comfortable leading and line length. The foundation everything else is measured against.</p>
+  <p><strong>Level 4 — Caption / Label:</strong> Smaller than body, often in a different style (italic or small caps) to signal its supporting role. Used for annotations, credits, and labels.</p>
+  <p>The critical test: each level must be distinguishable from the others at a glance, without reading. If you have to read the text to tell which level it is, the differentiation is too timid — increase the size gaps, the weight contrast, or the spacing until the hierarchy is obvious.</p>
+
+  <div class="cs">
+    <div class="cs-head">Case Study — Hierarchy Integrating the Whole Module</div>
+    <div class="cs-body">
+      <h4>The Editorial Page</h4>
+      <p>A well-designed magazine article is a complete demonstration of Module 4. The classification choice sets the voice — perhaps a transitional serif for the body, communicating editorial authority. The pairing adds a contrasting display sans-serif for the headline, creating the contrast-with-compatibility relationship. The anatomy knowledge ensures comfortable leading and line length for sustained reading. And the hierarchy organizes it all: a dominant headline, a smaller deck (subheadline), readable body text, italic pull quotes that punctuate the columns, and small-caps captions beneath images. The reader navigates the entire complex page effortlessly — finding the headline, scanning the structure, settling into the body, and noticing the supporting elements — all guided by type alone.</p>
+      <p>Remove the hierarchy and the same content becomes an undifferentiated gray block that no one wants to read. Hierarchy is what transforms text from a wall of words into a navigable, inviting reading experience.</p>
+      <div class="cs-takeaway"><p>Typographic hierarchy is where classification, anatomy, and pairing converge into a working system. The skill is not knowing the parts — it is integrating them into a hierarchy that makes complex text effortless to navigate.</p></div>
+    </div>
+  </div>
+
+  <div class="kt"><h4>Key Vocabulary — Lesson 1.15</h4><div class="tg">
+    <div><div class="tn">Typographic Hierarchy</div><div class="td">The organization of multiple text levels into a clear order of importance using size, weight, style, and space — making a layout navigable at a glance.</div><div class="vu"><div class="vu-label">In Use</div><p>"The typographic hierarchy is flat — every level looks the same. Build a real scale and make the headline dramatically bigger than the body."</p></div></div>
+    <div><div class="tn">Type Scale</div><div class="td">A consistent set of sizes derived from a base size and a ratio — guaranteeing visible, harmonious differences between hierarchy levels.</div><div class="vu"><div class="vu-label">In Use</div><p>"Don't pick sizes by eye — use a type scale. Base 16, ratio 1.5: that's 16, 24, 36, 54. Now every level is clearly distinct and related."</p></div></div>
+    <div><div class="tn">Hierarchy Level</div><div class="td">A distinct tier in the typographic order — H1 headline, H2 subheadline, body, caption — each with defined size, weight, style, and spacing.</div><div class="vu"><div class="vu-label">In Use</div><p>"Define every hierarchy level before you lay anything out — H1, H2, body, caption. Each one needs its own clear specification on the scale."</p></div></div>
+    <div><div class="tn">Differentiation</div><div class="td">The degree of visible difference between hierarchy levels — sufficient differentiation makes levels distinguishable without reading; timid differentiation fails.</div><div class="vu"><div class="vu-label">In Use</div><p>"The differentiation is too timid — I have to read the text to tell the headline from the subhead. Double the size gap."</p></div></div>
+    <div><div class="tn">Style Variation</div><div class="td">Using italic, small caps, or a different family to signal a distinct role — differentiating role rather than just importance.</div><div class="vu"><div class="vu-label">In Use</div><p>"Set the pull quotes in italic and the captions in small caps — style variation signals their distinct roles without needing another typeface."</p></div></div>
+    <div><div class="tn">Squint Test</div><div class="td">Blurring the view of a text layout to verify the hierarchy is visible — the most important element should dominate even when the words are unreadable.</div><div class="vu"><div class="vu-label">In Use</div><p>"Squint at it. Does the headline still dominate when the words blur? If everything looks the same blurred, the hierarchy isn't working."</p></div></div>
+  </div></div>
+
+  <div class="brief">
+    <div class="brief-head">
+      <div class="bl">Design Brief — Lesson 1.15</div>
+      <h4>Complete Typographic Hierarchy: Module 4 Capstone</h4>
+    </div>
+    <div class="brief-body">
+      <div class="brief-section">
+        <div class="brief-section-label">The Problem</div>
+        <p>This capstone integrates everything from Module 4 into one working system. You will choose a classification and pairing, control the spacing with your anatomy knowledge, and organize it all into a four-level hierarchy that makes a real text layout navigable at a glance.</p>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">The Constraints</div>
+        <ul>
+          <li>Choose a real text-heavy layout to design: a magazine article spread, an event program, a one-page newsletter, or a product information page</li>
+          <li>Select a type pairing using a strategy from Lesson 1.14 — one display, one text typeface — and justify the choice for the content's voice</li>
+          <li>Build a type scale: choose a base size and ratio, and generate at least four sizes</li>
+          <li>Establish a four-level hierarchy (H1, H2, body, caption) assigning each to a scale step, with defined weight, style, leading, and spacing</li>
+          <li>Apply correct leading (1.4–1.6× for body) and comfortable line length (50–75 characters) using your anatomy knowledge from Lesson 1.13</li>
+          <li>Run the squint test: blur the layout and confirm the headline dominates and the levels remain distinguishable. Revise any level that fails.</li>
+        </ul>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">Your Deliverable</div>
+        <div class="brief-deliverable"><p>A complete text layout with a documented type system: pairing + rationale, type scale, four-level hierarchy specification (size, weight, style, leading per level), and a squint-test verification note.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rf"><h4>Journal Reflection — Lesson 1.15</h4>
+    <p style="font-size:15px;font-style:italic;">Look back at the four lessons of Module 4. How did each one contribute to your final hierarchy in this capstone? Which lesson's concepts did you rely on most heavily, and which did you find yourself applying almost unconsciously by the end? What does that tell you about how typographic skill develops?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div>
+  </div>
+
+  <div class="intro-block">
+    <div class="intro-head">
+      <div class="intro-head-label">Professional Introspection — Module 4 Complete</div>
+      <h4>Typography, From Voice to System</h4>
+      <p>Module 4 took you from recognizing typeface voices to building complete typographic systems. These questions consolidate that journey and prepare you for what comes next.</p>
+    </div>
+    <div class="intro-body">
+      <div class="intro-q">
+        <div class="intro-q-label">01 — The Shift in How You See Type</div>
+        <div class="intro-q-text">Before this module, type was probably something you chose by appearance. After it, what do you now notice about type that you couldn't see before? Name a specific typographic feature or decision you now perceive in the designed world around you.</div>
+        <div class="intro-q-note">The most useful answers describe a concrete moment of changed perception — a sign, a package, a screen you read differently now.</div>
+        <div class="intro-lines"><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div></div>
+      </div>
+      <div class="intro-q">
+        <div class="intro-q-label">02 — The Convergence</div>
+        <div class="intro-q-text">Lesson 1.15 brought classification, anatomy, and pairing together into hierarchy. Describe a specific decision in your capstone where two of those threads had to work together — where you couldn't have made the decision with just one.</div>
+        <div class="intro-q-note">Example: choosing a body typeface required both classification knowledge (which voice) and anatomy knowledge (large enough x-height for legibility).</div>
+        <div class="intro-lines"><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div></div>
+      </div>
+      <div class="intro-q">
+        <div class="intro-q-label">03 — Into Module 5</div>
+        <div class="intro-q-text">Module 5 covers color. Type and color are the two most expressive tools in a designer's kit. Based on what you now know about how type communicates personality, what do you expect to discover about how color does the same — and how the two might work together?</div>
+        <div class="intro-q-note">Forming the expectation now will make the color module more meaningful when you test it against what you predicted.</div>
+        <div class="intro-lines"><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div><div class="intro-line"></div></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<div id="l15-scr" class="tc"><div class="wrap">
+  <div class="sl">Concept Video Script — Lesson 1.15</div>
+  <h2>Typographic Hierarchy — Where It All Comes Together</h2>
+  <p style="color:var(--mid);margin-bottom:28px;font-size:14px;">Building a complete four-level hierarchy live — type scale and squint test</p>
+  <div class="sh">
+    <div><label>Video Type</label><span>Capstone / Live Build</span></div>
+    <div><label>Target Length</label><span>5:30 – 6:00 minutes</span></div>
+    <div><label>Key Visual</label><span>Flat text layout → full hierarchy built live</span></div>
+    <div><label>Music Tone</label><span>Building, integrative, satisfying resolution</span></div>
+    <div><label>Production</label><span>Illustrator screen recording</span></div>
+    <div><label>Narration</label><span>ElevenLabs or AI Avatar</span></div>
+  </div>
+  <h3>OPENING</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:00–0:45</span></div><div class="sbb nt">This is where Module 4 comes together. A layout with five levels of text — headline, subheadline, body, pull quote, caption — all in the same typeface at sizes only slightly different. The reader can't tell at a glance which is which. The hierarchy is technically there but perceptually invisible. Today we fix that — using everything you've learned. Classification gave type its voice. Anatomy gave you control. Pairing gave you a system. Now hierarchy organizes it all into a clear reading order.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Flat, undifferentiated text layout ]
+[ Title: "Lesson 1.15 — Typographic Hierarchy" ]</div></div>
+  <h3>SEGMENT 1 — Four Tools + Type Scale</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">0:46–2:40</span></div><div class="sbb nt">Four tools build typographic hierarchy. Size — larger reads as more important, the most reliable tool. Weight — bolder reads as more important, hierarchy without size change. Style — italic, small caps, or a different family signals a distinct role. And space — more space around text elevates it. But here's the professional move: don't pick sizes by eye. Use a type scale. Start with a base — 16pt body — and a ratio, say 1.5. That gives you 16, 24, 36, 54, 81. A harmonious progression where every level is clearly distinct and clearly related. Define the scale once, then assign each text level to a step.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Four tools demonstrated ]
+[ Type scale generated: 16 → 24 → 36 → 54 → 81 ]</div></div>
+  <h3>SEGMENT 2 — Building Four Levels + Squint Test</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">2:41–4:40</span></div><div class="sbb nt">Now I build four levels. Headline — display typeface, top of the scale, bold. The first thing seen. Subheadline — clearly smaller, a distinct middle step. Body — text typeface, base size, comfortable leading at 1.5 times, line length under 75 characters. And caption — smaller than body, set in italic to signal its supporting role. Watch the squint test. I blur the whole layout. The headline still dominates. The levels are still distinguishable even when I can't read a word. That's a working hierarchy. If everything looked the same blurred, the differentiation would be too timid and I'd increase the gaps.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Four levels built live on the scale ]
+[ Squint test: layout blurred, headline still dominant ]</div></div>
+  <h3>CLOSING — Capstone + Module Complete</h3>
+  <div class="sb"><div class="sbh nh">🎙 Narration <span class="tc2">4:41–6:00</span></div><div class="sbb nt">For your capstone, bring all of Module 4 together. Choose a pairing. Build a type scale. Establish a four-level hierarchy with defined weight, style, leading, and spacing for each. Apply comfortable leading and line length from your anatomy knowledge. Run the squint test and revise anything too timid. This single exercise integrates classification, anatomy, pairing, and hierarchy into one working system — which is exactly what professional typography is. That completes Module 4. Next, Module 5: color — the other great expressive tool. See you there.</div></div>
+  <div class="sb"><div class="sbh oh">📺 On-Screen</div><div class="sbb ot">[ Complete editorial layout with full hierarchy ]
+[ Exercise card: "Exercise 1.15 — Hierarchy Capstone" ]
+[ "Module 4 Complete → Module 5: Color Fundamentals" ]</div></div>
+</div></div>
+
+<div id="l15-wb" class="tc"><div class="wrap">
+  <div class="wb">
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mod);margin-bottom:6px;font-weight:500;">Volume 1 · Module 4 · Lesson 1.15</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:4px;">Typographic Hierarchy</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:20px;">Capstone Type System Specification</div>
+    <div class="wr"></div>
+    <div style="border:1px solid var(--rule);border-radius:8px;padding:14px;margin-bottom:14px;">
+      <p style="font-size:11px;color:var(--mod);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Pairing + Type Scale</p>
+      <p style="font-size:11px;color:var(--mid);margin-bottom:4px;">Display face: <span style="border-bottom:1px solid var(--rule);display:inline-block;width:140px;"></span> Body face: <span style="border-bottom:1px solid var(--rule);display:inline-block;width:140px;"></span></p>
+      <p style="font-size:11px;color:var(--mid);margin:6px 0 4px;">Base size: <span style="border-bottom:1px solid var(--rule);display:inline-block;width:50px;"></span>pt &nbsp; Ratio: <span style="border-bottom:1px solid var(--rule);display:inline-block;width:50px;"></span> &nbsp; Scale steps: <span style="border-bottom:1px solid var(--rule);display:inline-block;width:180px;"></span></p>
+    </div>
+    <div style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:14px;">
+      <div style="background:var(--mod);color:white;display:grid;grid-template-columns:1fr 0.8fr 0.8fr 0.8fr 0.8fr;">
+        <div style="padding:8px 10px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-right:1px solid rgba(255,255,255,.2);">Level</div>
+        <div style="padding:8px 10px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-right:1px solid rgba(255,255,255,.2);">Size</div>
+        <div style="padding:8px 10px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-right:1px solid rgba(255,255,255,.2);">Weight</div>
+        <div style="padding:8px 10px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-right:1px solid rgba(255,255,255,.2);">Style</div>
+        <div style="padding:8px 10px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;">Leading</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 0.8fr 0.8fr 0.8fr 0.8fr;border-bottom:1px solid var(--rule);"><div style="padding:10px;border-right:1px solid var(--rule);font-size:12px;font-weight:700;">H1 Headline</div><div style="padding:10px;border-right:1px solid var(--rule);"></div><div style="padding:10px;border-right:1px solid var(--rule);"></div><div style="padding:10px;border-right:1px solid var(--rule);"></div><div style="padding:10px;"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 0.8fr 0.8fr 0.8fr 0.8fr;border-bottom:1px solid var(--rule);"><div style="padding:10px;border-right:1px solid var(--rule);font-size:12px;font-weight:700;">H2 Subhead</div><div style="padding:10px;border-right:1px solid var(--rule);"></div><div style="padding:10px;border-right:1px solid var(--rule);"></div><div style="padding:10px;border-right:1px solid var(--rule);"></div><div style="padding:10px;"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 0.8fr 0.8fr 0.8fr 0.8fr;border-bottom:1px solid var(--rule);"><div style="padding:10px;border-right:1px solid var(--rule);font-size:12px;font-weight:700;">Body</div><div style="padding:10px;border-right:1px solid var(--rule);"></div><div style="padding:10px;border-right:1px solid var(--rule);"></div><div style="padding:10px;border-right:1px solid var(--rule);"></div><div style="padding:10px;"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 0.8fr 0.8fr 0.8fr 0.8fr;"><div style="padding:10px;border-right:1px solid var(--rule);font-size:12px;font-weight:700;">Caption</div><div style="padding:10px;border-right:1px solid var(--rule);"></div><div style="padding:10px;border-right:1px solid var(--rule);"></div><div style="padding:10px;border-right:1px solid var(--rule);"></div><div style="padding:10px;"></div></div>
+    </div>
+    <p style="font-size:12px;font-weight:600;margin-bottom:6px;">Squint test result — does the headline dominate and do levels stay distinguishable when blurred? Any revisions made?</p>
+    <div class="wl"><div class="wln"></div><div class="wln"></div></div>
+    <div class="pn">Digital Design &amp; Media Technology · Volume 1 · Page 15</div>
+  </div>
+</div></div>
+
+<div id="l15-ass" class="tc"><div class="wrap">
+  <div class="sl">Lesson 1.15 Assessment</div>
+  <h2>Typographic Hierarchy — Knowledge Check</h2>
+  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
+    <div class="qi"><div class="qn">Q01</div><div class="qt">The most common cause of typographic hierarchy failure is:</div><div class="qo">
+      <div class="qop">Using too many different typefaces in one layout</div>
+      <div class="qop">Timid differentiation — the size gaps, weight contrast, and spacing differences between levels are too small to be visible at a glance</div>
+      <div class="qop">Using a serif typeface for the body text</div>
+      <div class="qop">Choosing colors that do not meet accessibility standards</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q02</div><div class="qt">A type scale is:</div><div class="qo">
+      <div class="qop">A tool for measuring the physical size of printed type</div>
+      <div class="qop">A consistent set of sizes derived from a base size and a ratio — guaranteeing visible, harmonious differences between hierarchy levels</div>
+      <div class="qop">The maximum number of typefaces allowed in a single design</div>
+      <div class="qop">The range of weights available within a single typeface family</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q03</div><div class="qt">The four typographic hierarchy tools are:</div><div class="qo">
+      <div class="qop">Color, texture, position, and alignment</div>
+      <div class="qop">Size, weight, style, and space</div>
+      <div class="qop">Kerning, tracking, leading, and baseline</div>
+      <div class="qop">Serif, sans-serif, slab, and script</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q04</div><div class="qt">Style variation (italic, small caps, different family) is best used to:</div><div class="qo">
+      <div class="qop">Make all hierarchy levels appear the same importance</div>
+      <div class="qop">Signal a distinct role — such as italics for quotes or small caps for labels — rather than just signaling importance</div>
+      <div class="qop">Replace the need for size and weight differences entirely</div>
+      <div class="qop">Add visual decoration to text that lacks personality</div>
+    </div></div>
+    <div class="qi"><div class="qn">Q05</div><div class="qt">The squint test verifies typographic hierarchy by:</div><div class="qo">
+      <div class="qop">Measuring the exact contrast ratio between text and background</div>
+      <div class="qop">Blurring the layout to confirm the most important element still dominates and levels remain distinguishable even when words are unreadable</div>
+      <div class="qop">Reducing the layout to grayscale to check value contrast</div>
+      <div class="qop">Counting the number of typefaces used in the composition</div>
+    </div></div>
+    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
+  </div>
+  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
+    <div class="qi"><div class="qn">Q06</div><div class="qt">From the Module 4 capstone: describe your type scale (base size and ratio) and how it ensured visible differentiation between your four hierarchy levels.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q07</div><div class="qt">A layout's headline is only 4pt larger than its body text, set in the same weight. Diagnose the hierarchy problem and prescribe a specific fix using the type scale concept.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+    <div class="qi"><div class="qn">Q08</div><div class="qt">Explain how this lesson integrated the previous three lessons of Module 4 (classification, anatomy, pairing). Give one specific decision in a typographic hierarchy that requires knowledge from all three.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
+  </div>
+</div></div>
+</div><!-- end l15 -->
+
+
+<script>
+function showL(id,btn){
+  document.querySelectorAll('.ls').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.ltab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:document.querySelector('.ltabs').offsetTop-10,behavior:'smooth'});
+}
+function showI(id,btn,lid){
+  const l=document.getElementById(lid);
+  l.querySelectorAll('.tc').forEach(t=>t.classList.remove('active'));
+  l.querySelectorAll('.itab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:l.querySelector('.itabs').offsetTop-10,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
