@@ -292,7 +292,7 @@
 
     // If already signed in, go straight to dashboard
     auth.onAuthStateChanged(function(user) {
-      if (user) window.location.href = 'dashboard.html';
+      if (user) window.location.href = 'workspace.html';
     });
 
     function showError(msg) {
@@ -322,7 +322,7 @@
       setLoading(signBtn, true);
       try {
         await auth.signInWithEmailAndPassword(email, pass);
-        window.location.href = 'dashboard.html';
+        window.location.href = 'workspace.html';
       } catch (err) {
         setLoading(signBtn, false);
         signBtn.innerHTML = '<i class="ti ti-arrow-right"></i> Sign in';
@@ -343,7 +343,7 @@
       guestBtn.innerHTML = '<div class="spinner spinner-gold"></div>';
       try {
         await auth.signInWithEmailAndPassword(GUEST_EMAIL, GUEST_PASSWORD);
-        window.location.href = 'dashboard.html';
+        window.location.href = 'workspace.html';
       } catch (err) {
         guestBtn.disabled = false;
         guestBtn.innerHTML = '<i class="ti ti-eye"></i> Review as Guest';
