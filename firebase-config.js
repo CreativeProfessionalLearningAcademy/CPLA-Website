@@ -18,7 +18,7 @@ if (!firebase.apps.length) {
 // Shared service references used throughout the app
 const auth = firebase.auth();
 const db   = firebase.firestore();
-const storage = firebase.storage();
+const storage = (typeof firebase !== 'undefined' && typeof firebase.storage === 'function') ? firebase.storage() : null;
 
 // Guest reviewer credentials — create this account once in Firebase Console
 // (Authentication → Add user) then run seed-guest.html to populate progress data.
