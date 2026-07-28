@@ -369,14 +369,18 @@
           </div>
         </div>
 
-        <!-- ── SCREEN 3: SUCCESS ── -->
+        <!-- ── SCREEN 3: WELCOME / DECLARATION ── -->
         <div class="success-card" id="success-screen">
           <div class="success-icon"><i class="ti ti-check"></i></div>
-          <h3 id="success-name">Welcome!</h3>
-          <p>Your account is ready. Save your CPLA User ID — you'll use it on assignments and evaluations.</p>
+          <h3 id="success-welcome">Welcome!</h3>
+          <p id="success-declaration" style="font-size:14px;color:var(--ink);margin-bottom:16px;line-height:1.75;">You're all set.</p>
           <div class="user-id-chip" id="success-user-id">CPLA-—</div>
-          <p style="margin-bottom:20px;font-size:12px">Taking you to your dashboard…</p>
-          <a href="dashboard.html" class="submit-btn gold" style="text-decoration:none;">
+          <p style="font-size:11px;color:var(--mid);margin-bottom:22px;">Save your CPLA User ID — you'll use it on assignments and evaluations.</p>
+          <p style="font-size:12px;color:var(--mid);margin-bottom:10px;letter-spacing:.02em;font-weight:500;">To get started, here's your first lesson:</p>
+          <a href="lessons/v1/V1_Module1_What_Design_Is_Lessons01-03_v2.html" class="submit-btn gold" style="text-decoration:none;margin-bottom:10px;">
+            <i class="ti ti-player-play"></i> Start Lesson 1 — What Design Is
+          </a>
+          <a href="dashboard.html" class="submit-btn" style="text-decoration:none;background:transparent;color:var(--mid);border:1px solid var(--rule);">
             <i class="ti ti-layout-dashboard"></i> Go to my dashboard
           </a>
         </div>
@@ -536,15 +540,16 @@
           updatedAt:     firebase.firestore.FieldValue.serverTimestamp()
         });
 
-        // 6. Show success screen
+        // 6. Show welcome / declaration screen
+        var roleTitle = accountType === 'professional' ? 'Creative Professional' : 'Junior Designer';
         document.getElementById('reg-screen').style.display = 'none';
         document.getElementById('success-screen').style.display = 'block';
-        document.getElementById('card-title').textContent = 'Account created';
-        document.getElementById('success-name').textContent = 'Welcome, ' + firstName + '.';
+        document.getElementById('card-title').textContent = 'Welcome aboard';
+        document.getElementById('success-welcome').textContent = 'Welcome to ' + verifiedClass.name + '!';
+        document.getElementById('success-declaration').innerHTML =
+          firstName + ', you’re now a <strong>' + roleTitle + '</strong> at the Muncie Area Career Center!';
         document.getElementById('success-user-id').textContent = cpla_id;
-
-        // Auto-redirect after 4 seconds (longer — give them time to note their ID)
-        setTimeout(function() { window.location.href = 'dashboard.html'; }, 4000);
+        // No auto-redirect — let the student read the welcome and click into their first lesson.
 
       } catch (err) {
         btn.disabled = false;

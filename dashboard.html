@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CPLA Studio — Dashboard</title>
+  <title>CPLA Studio — Workspace</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
   <style>
@@ -302,34 +302,24 @@
         </div>
       </div>
 
-      <!-- ── STUDENT VIEW ── -->
+      <!-- ── STUDENT VIEW (Workspace) ── -->
       <div id="student-view" style="display:none">
-      <div class="task-card">
+      <div class="task-card" id="tour-mission">
         <div class="tc-head">
-          <div class="tc-badge" id="tc-badge">Video · Lesson 2.9</div>
-          <div class="tc-step-label" id="tc-step-label">Step 1 of 4</div>
+          <div class="tc-badge" id="tc-badge">Volume 1 · Module 1</div>
+          <div class="tc-step-label" id="tc-step-label">Foundations of Design Thinking</div>
         </div>
         <div class="tc-body">
-          <div class="tc-vol">Volume 2 · Illustrator — Module 3</div>
-          <div class="tc-title">The Pen tool: thinking in <em>paths</em></div>
-          <div class="tc-desc">Before you touch a handle, you need to understand what a path actually is.</div>
+          <div class="tc-vol">Volume 1 · Foundations of Design Thinking</div>
+          <div class="tc-title">Start here: <em>What Design Is</em></div>
+          <div class="tc-desc">Before the software comes the thinking. Learn to see, reason, and solve problems like a professional designer.</div>
           <div class="tc-meta">
-            <span><i class="ti ti-clock"></i> 55–70 min</span>
-            <span><i class="ti ti-file-description"></i> Cloud path study</span>
+            <span><i class="ti ti-stack-2"></i> 8 modules · 30 lessons</span>
+            <span><i class="ti ti-briefcase"></i> Portfolio project</span>
           </div>
-          <a href="lesson.html" class="continue-btn" id="continue-btn">
-            <i class="ti ti-player-play"></i> <span id="continue-label">Watch now</span>
+          <a href="volume1.html" class="continue-btn" id="continue-btn">
+            <i class="ti ti-player-play"></i> <span id="continue-label">Open Volume 1</span>
           </a>
-
-          <!-- Step strip -->
-          <div class="step-strip" id="step-strip">
-            <div class="si" id="si-0"><div class="sd" id="sd-0">1</div><div class="sn">Read lesson</div></div>
-            <div class="si" id="si-1"><div class="sd" id="sd-1">2</div><div class="sn">Watch video</div></div>
-            <div class="si" id="si-2"><div class="sd" id="sd-2">3</div><div class="sn">Workbook</div></div>
-            <div class="si" id="si-3"><div class="sd" id="sd-3">4</div><div class="sn">Practice</div></div>
-            <div class="si" id="si-4"><div class="sd" id="sd-4">5</div><div class="sn">Assessment</div></div>
-            <div class="si" id="si-5"><div class="sd" id="sd-5">6</div><div class="sn">Submit work</div></div>
-          </div>
         </div>
       </div>
 
@@ -341,15 +331,19 @@
         </div>
         <div class="journey-body">
           <div class="vol-item">
-            <div class="vol-label"><span>Volume 1 — Photoshop</span><span style="color:var(--green)">Complete</span></div>
-            <div class="vol-bar-wrap"><div class="vol-bar" style="width:100%"></div></div>
+            <div class="vol-label"><span>Volume 1 — Foundations of Design Thinking</span><span style="color:var(--mod)">In progress</span></div>
+            <div class="vol-bar-wrap"><div class="vol-bar" style="width:0%"></div></div>
           </div>
           <div class="vol-item">
-            <div class="vol-label"><span>Volume 2 — Illustrator</span><span id="v2-pct">—</span></div>
-            <div class="vol-bar-wrap"><div class="vol-bar" id="v2-bar" style="width:0%"></div></div>
+            <div class="vol-label"><span>Volume 2 — Drawing &amp; Vector</span><span style="color:var(--mid)">Upcoming</span></div>
+            <div class="vol-bar-wrap"><div class="vol-bar" style="width:0%;background:var(--rule)"></div></div>
           </div>
           <div class="vol-item">
-            <div class="vol-label"><span>Volume 3 — InDesign</span><span style="color:var(--mid)">Upcoming</span></div>
+            <div class="vol-label"><span>Volume 3 — Photography &amp; Lightroom</span><span style="color:var(--mid)">Upcoming</span></div>
+            <div class="vol-bar-wrap"><div class="vol-bar" style="width:0%;background:var(--rule)"></div></div>
+          </div>
+          <div class="vol-item">
+            <div class="vol-label"><span>Volume 4 — Photoshop &amp; Raster Imaging</span><span style="color:var(--mid)">Upcoming</span></div>
             <div class="vol-bar-wrap"><div class="vol-bar" style="width:0%;background:var(--rule)"></div></div>
           </div>
         </div>
@@ -415,41 +409,21 @@
 
       if (isInstructor) {
         // ── INSTRUCTOR DASHBOARD ──
-        document.getElementById('nav-crumb').textContent = 'Instructor Dashboard';
+        document.getElementById('nav-crumb').textContent = 'Instructor Workspace';
         document.getElementById('greeting-h').innerHTML =
           timeGreet + ', <em>' + firstName + '</em>. Here are your classes.';
         document.getElementById('instructor-view').style.display = 'block';
         document.getElementById('student-view').style.display = 'none';
         await loadClasses(user.uid);
       } else {
-        // ── STUDENT DASHBOARD ──
+        // ── STUDENT WORKSPACE ──
         document.getElementById('nav-crumb').innerHTML =
-          '<a href="volume.html" style="color:inherit;text-decoration:none;transition:color .15s" onmouseover="this.style.color=\'rgba(250,247,242,.8)\'" onmouseout="this.style.color=\'\'">Vol 2</a> · <a href="module.html" style="color:inherit;text-decoration:none;transition:color .15s" onmouseover="this.style.color=\'rgba(250,247,242,.8)\'" onmouseout="this.style.color=\'\'">Module 3</a>';
+          '<a href="volume1.html" style="color:inherit;text-decoration:none;transition:color .15s" onmouseover="this.style.color=\'rgba(250,247,242,.8)\'" onmouseout="this.style.color=\'\'">Volume 1</a>';
         document.getElementById('greeting-h').innerHTML =
-          timeGreet + ', <em>' + firstName + '</em>. Here\'s your assignment.';
+          timeGreet + ', <em>' + firstName + '</em>. Here\'s your workspace.';
         document.getElementById('student-view').style.display = 'block';
         document.getElementById('instructor-view').style.display = 'none';
         document.getElementById('journey-card').style.display = 'block';
-
-        // Load progress
-        let steps = ['active', 'locked', 'locked', 'locked', 'locked', 'locked'];
-        let currentStep = 0;
-        try {
-          const docRef = db.collection('progress').doc(user.uid + '_' + CURRENT_LESSON);
-          const snap = await docRef.get();
-          if (snap.exists) {
-            const data = snap.data();
-            steps = data.steps || steps;
-            currentStep = data.currentStep || 0;
-          }
-        } catch (e) { console.warn('Could not load progress:', e); }
-        renderSteps(steps, currentStep);
-
-        // Journey bar
-        const lessonNum = 9;
-        const pct = Math.min(100, Math.round((lessonNum / 27) * 100));
-        document.getElementById('v2-bar').style.width = pct + '%';
-        document.getElementById('v2-pct').textContent = pct + '%';
       }
 
       // Show content
