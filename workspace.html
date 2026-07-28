@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPLA Studio — Workspace</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ink:#1a1410; --paper:#faf7f2; --cream:#f0ead8; --rule:#d4c9b8;
+    --mid:#6b5e52; --mod:#1a56c4; --ml:#e8f0fe;
+    --green:#2d7a1a; --gnl:#f0fae8;
+    --blue:#01123a; --nav2:#0a1c44; --gold:#da9e2b;
+  }
+  html,body{height:100%;font-family:'DM Sans',sans-serif;font-weight:300;background:var(--cream);color:var(--ink)}
+  button{cursor:pointer;font:inherit}
+
+  .app{height:100vh;display:grid;grid-template-columns:70px 1fr;overflow:hidden}
+
+  /* LEFT RAIL */
+  .rail{background:var(--blue);display:flex;flex-direction:column;align-items:center;padding:14px 8px;gap:6px;z-index:5}
+  .brand{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--gold);color:var(--blue);font-weight:900;font-size:18px;margin-bottom:10px}
+  .rail-btn{width:44px;height:44px;border:0;border-radius:11px;color:rgba(250,247,242,.55);background:transparent;font-size:21px;display:grid;place-items:center;position:relative;transition:background .15s,color .15s}
+  .rail-btn:hover{background:var(--nav2);color:#fff}
+  .rail-btn.active{background:var(--nav2);color:var(--gold)}
+  .rail-btn .tip{position:absolute;left:56px;top:50%;transform:translateY(-50%) scale(.9);background:var(--ink);color:#fff;font-size:11px;font-weight:500;padding:5px 9px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;z-index:40;letter-spacing:.02em}
+  .rail-btn:hover .tip{opacity:1;transform:translateY(-50%) scale(1)}
+  .rail-spacer{flex:1}
+  .rail-av{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:600;margin-bottom:4px}
+  .rail-btn.small{width:40px;height:40px;font-size:17px}
+
+  /* MAIN */
+  .main{display:grid;grid-template-rows:auto 1fr;min-width:0;overflow:hidden}
+  .statusbar{background:var(--blue);color:#fff;padding:12px 24px;display:flex;align-items:center;gap:14px}
+  .sb-logo img{height:24px;display:block}
+  .sb-sep{color:rgba(255,255,255,.2)}
+  .sb-status{display:flex;flex-direction:column;line-height:1.25}
+  .sb-status .lbl{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(218,158,43,.85);font-family:'DM Mono',monospace}
+  .sb-status .val{font-size:13px;font-weight:500;color:#fff}
+  .sb-r{margin-left:auto;display:flex;align-items:center;gap:12px}
+  .sb-role{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:rgba(218,158,43,.12);border:1px solid rgba(218,158,43,.3);padding:3px 10px;border-radius:100px}
+  .sb-name{font-size:13px;color:rgba(255,255,255,.85)}
+
+  .canvas{overflow:auto;padding:28px 32px 48px}
+  .greet-date{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-family:'DM Mono',monospace;margin-bottom:5px}
+  .greet-h{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--ink);margin-bottom:26px;line-height:1.3}
+  .greet-h em{font-style:italic;color:var(--mod)}
+
+  .layout{display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start;max-width:1060px}
+  @media(max-width:860px){.layout{grid-template-columns:1fr}}
+
+  /* MISSION (dominant) */
+  .mission{background:linear-gradient(150deg,#14213f,#25324d);color:#fff;border-radius:20px;padding:30px 32px;box-shadow:0 14px 40px rgba(20,27,38,.18);position:relative;overflow:hidden}
+  .mission::before{content:"1";position:absolute;right:-6px;top:-30px;font-family:'Playfair Display',serif;font-size:210px;font-weight:900;color:rgba(255,255,255,.04);line-height:1;pointer-events:none}
+  .mission .kick{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  .mission h2{font-family:'Playfair Display',serif;font-size:27px;font-weight:900;line-height:1.12;margin-bottom:10px}
+  .mission h2 em{color:var(--gold);font-style:italic}
+  .mission p{font-size:14px;color:rgba(255,255,255,.65);line-height:1.75;max-width:520px;margin-bottom:20px}
+  .mission-meta{display:flex;gap:22px;margin-bottom:22px;flex-wrap:wrap}
+  .mission-meta span{font-size:12px;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:6px}
+  .mission-meta i{font-size:15px;color:var(--gold)}
+  .mission-actions{display:flex;gap:10px;flex-wrap:wrap}
+  .btn-primary{background:var(--gold);color:var(--blue);border:0;border-radius:11px;padding:12px 20px;font-size:14px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .15s,box-shadow .15s}
+  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(218,158,43,.35)}
+  .btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:11px;padding:11px 18px;font-size:14px;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background .15s}
+  .btn-ghost:hover{background:rgba(255,255,255,.08)}
+
+  /* SIDE CARDS */
+  .side{display:flex;flex-direction:column;gap:16px}
+  .card{background:#fff;border:1px solid var(--rule);border-radius:16px;overflow:hidden}
+  .card-h{padding:14px 18px 11px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #efeae0}
+  .card-h i{font-size:16px;color:var(--mod)}
+  .card-h .t{font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--ink);flex:1}
+  .card-b{padding:16px 18px}
+
+  .prog-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:8px}
+  .prog-pct{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--ink);line-height:1}
+  .prog-tag{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--green);background:var(--gnl);border:1px solid #b6d9a8;padding:2px 8px;border-radius:100px}
+  .bar{height:6px;background:var(--cream);border-radius:100px;overflow:hidden;margin-bottom:16px}
+  .bar>span{display:block;height:100%;background:var(--mod);border-radius:100px}
+  .vol-row{display:flex;align-items:center;gap:9px;padding:7px 0;font-size:12px;color:var(--mid);border-top:1px solid #f2ede3}
+  .vol-row:first-child{border-top:0}
+  .vol-dot{width:8px;height:8px;border-radius:50%;background:var(--rule);flex-shrink:0}
+  .vol-row.cur .vol-dot{background:var(--mod)}
+  .vol-row.cur{color:var(--ink);font-weight:500}
+  .vol-row .st{margin-left:auto;font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-family:'DM Mono',monospace}
+  .vol-row.cur .st{color:var(--mod)}
+
+  .msg-empty{text-align:center;padding:8px 4px 4px;color:var(--mid);font-size:12px;line-height:1.6}
+  .msg-empty i{font-size:26px;color:var(--rule);display:block;margin-bottom:8px}
+  .msg-row{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-top:1px solid #f2ede3}
+  .msg-row:first-child{border-top:0}
+  .msg-av{width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:600;flex-shrink:0}
+  .msg-txt{font-size:12px;line-height:1.5;color:var(--mid)}
+  .msg-txt b{color:var(--ink);font-weight:600;display:block;font-size:12px;margin-bottom:2px}
+
+  /* DRAWER */
+  .scrim{position:fixed;inset:0;background:rgba(10,14,28,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}
+  .scrim.open{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;left:70px;bottom:0;width:300px;max-width:80vw;background:var(--paper);z-index:51;transform:translateX(-110%);transition:transform .25s ease;box-shadow:0 0 40px rgba(0,0,0,.25);display:flex;flex-direction:column}
+  .drawer.open{transform:translateX(0)}
+  .drawer-h{padding:18px 20px;border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between}
+  .drawer-h h3{font-size:14px;font-weight:600;color:var(--ink)}
+  .drawer-h button{background:none;border:0;color:var(--mid);font-size:18px}
+  .drawer-b{padding:12px;overflow:auto}
+  .res{display:flex;align-items:center;gap:12px;padding:12px 12px;border-radius:11px;text-decoration:none;color:var(--ink);transition:background .12s}
+  .res:hover{background:var(--cream)}
+  .res i{font-size:19px;color:var(--mod);width:24px;text-align:center}
+  .res .rt{font-size:13px;font-weight:500}
+  .res .rs{font-size:11px;color:var(--mid)}
+  .res .soon{margin-left:auto;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);background:var(--cream);border:1px solid var(--rule);padding:2px 7px;border-radius:100px}
+
+  #loading{padding:40px 32px;color:var(--mid);font-size:13px}
+  #wsmain{display:none}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(16px);opacity:0;background:var(--ink);color:#fff;padding:10px 16px;border-radius:100px;font-size:12px;z-index:60;transition:.2s;pointer-events:none}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div id="loading">Loading your studio…</div>
+
+<div class="app" id="wsmain">
+  <!-- LEFT RAIL -->
+  <aside class="rail">
+    <div class="brand">C</div>
+    <button class="rail-btn active" title="Workspace"><i class="ti ti-home-2"></i><span class="tip">Workspace</span></button>
+    <a class="rail-btn" href="volume1.html" style="text-decoration:none"><i class="ti ti-books"></i><span class="tip">Lessons</span></a>
+    <button class="rail-btn" onclick="document.getElementById('prog-card').scrollIntoView({behavior:'smooth'})"><i class="ti ti-chart-arcs"></i><span class="tip">Progress</span></button>
+    <button class="rail-btn" onclick="document.getElementById('msg-card').scrollIntoView({behavior:'smooth'})"><i class="ti ti-mail"></i><span class="tip">Messages</span></button>
+    <button class="rail-btn" id="res-btn"><i class="ti ti-folders"></i><span class="tip">Resources</span></button>
+    <div class="rail-spacer"></div>
+    <div class="rail-av" id="rail-av">—</div>
+    <button class="rail-btn small" id="signout"><i class="ti ti-logout"></i><span class="tip">Sign out</span></button>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="statusbar">
+      <a class="sb-logo" href="workspace.html"><img src="CPLA-logo-mark-rev.svg" alt="CPLA"></a>
+      <div class="sb-sep">·</div>
+      <div class="sb-status">
+        <div class="lbl">Currently</div>
+        <div class="val">Volume 1 · Module 1 — What Design Is</div>
+      </div>
+      <div class="sb-r">
+        <div class="sb-role" id="sb-role">Student</div>
+        <div class="sb-name" id="sb-name">—</div>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="greet-date" id="greet-date"></div>
+      <div class="greet-h" id="greet-h">Welcome to your studio.</div>
+
+      <div class="layout">
+        <!-- MISSION -->
+        <section class="mission">
+          <div class="kick">Your Mission</div>
+          <h2>Foundations of <em>Design Thinking</em></h2>
+          <p>Before the software comes the thinking. Learn to see, reason, and solve problems the way a professional designer does — the elements, principles, type, and color behind every good decision.</p>
+          <div class="mission-meta">
+            <span><i class="ti ti-stack-2"></i> 8 modules · 30 lessons</span>
+            <span><i class="ti ti-briefcase"></i> Portfolio project</span>
+          </div>
+          <div class="mission-actions">
+            <a class="btn-primary" href="volume1.html"><i class="ti ti-player-play"></i> Continue Volume 1</a>
+            <a class="btn-ghost" href="lessons/v1/V1_Module1_What_Design_Is_Lessons01-03_v2.html"><i class="ti ti-book"></i> Start Lesson 1</a>
+          </div>
+        </section>
+
+        <!-- SIDE -->
+        <div class="side">
+          <div class="card" id="prog-card">
+            <div class="card-h"><i class="ti ti-chart-arcs"></i><span class="t">Progress &amp; Journey</span></div>
+            <div class="card-b">
+              <div class="prog-top"><div class="prog-pct" id="prog-pct">0%</div><div class="prog-tag">On track</div></div>
+              <div class="bar"><span id="prog-bar" style="width:0%"></span></div>
+              <div class="vol-row cur"><span class="vol-dot"></span>Volume 1 — Design Thinking<span class="st">Now</span></div>
+              <div class="vol-row"><span class="vol-dot"></span>Volume 2 — Drawing &amp; Vector<span class="st">Next</span></div>
+              <div class="vol-row"><span class="vol-dot"></span>Volume 3 — Photography<span class="st">Soon</span></div>
+              <div class="vol-row"><span class="vol-dot"></span>Volume 4 — Photoshop<span class="st">Soon</span></div>
+            </div>
+          </div>
+
+          <div class="card" id="msg-card">
+            <div class="card-h"><i class="ti ti-mail"></i><span class="t">Instructor</span></div>
+            <div class="card-b">
+              <div class="msg-empty" id="msg-empty">
+                <i class="ti ti-message-2"></i>
+                No messages yet. Feedback from your instructor will appear here.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESOURCES DRAWER -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-h"><h3>Studio Tools &amp; Resources</h3><button id="drawer-close"><i class="ti ti-x"></i></button></div>
+  <div class="drawer-b">
+    <a class="res" href="volume1.html"><i class="ti ti-books"></i><div><div class="rt">Lessons</div><div class="rs">Open Volume 1</div></div></a>
+    <a class="res" data-soon href="#"><i class="ti ti-file-text"></i><div><div class="rt">Field Manuals</div><div class="rs">Course reference guides</div></div><span class="soon">Soon</span></a>
+    <a class="res" data-soon href="#"><i class="ti ti-vocabulary"></i><div><div class="rt">Vocabulary</div><div class="rs">Key terms by module</div></div><span class="soon">Soon</span></a>
+    <a class="res" data-soon href="#"><i class="ti ti-template"></i><div><div class="rt">Templates</div><div class="rs">Approved project files</div></div><span class="soon">Soon</span></a>
+    <a class="res" data-soon href="#"><i class="ti ti-layout-grid"></i><div><div class="rt">Portfolio</div><div class="rs">Your best work</div></div><span class="soon">Soon</span></a>
+    <a class="res" data-soon href="#"><i class="ti ti-help-circle"></i><div><div class="rt">Help</div><div class="rs">Technical support</div></div><span class="soon">Soon</span></a>
+  </div>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script>
+  function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},1600);}
+
+  // Drawer
+  var scrim=document.getElementById('scrim'), drawer=document.getElementById('drawer');
+  function openDrawer(){scrim.classList.add('open');drawer.classList.add('open');}
+  function closeDrawer(){scrim.classList.remove('open');drawer.classList.remove('open');}
+  document.getElementById('res-btn').onclick=openDrawer;
+  document.getElementById('drawer-close').onclick=closeDrawer;
+  scrim.onclick=closeDrawer;
+  document.querySelectorAll('.res[data-soon]').forEach(function(a){a.onclick=function(e){e.preventDefault();toast('Coming soon');};});
+
+  // Sign out
+  document.getElementById('signout').onclick=function(){auth.signOut().then(function(){window.location.href='login';});};
+
+  // Auth + data
+  auth.onAuthStateChanged(async function(user){
+    if(!user){window.location.href='login';return;}
+    try{
+      var snap=await db.collection('users').doc(user.uid).get();
+      var d=snap.exists?snap.data():{};
+      // Instructors use the classic instructor dashboard for now
+      if(d.accountType==='instructor'){window.location.href='dashboard.html';return;}
+      var first=d.firstName || (user.displayName?user.displayName.split(' ')[0]:'there');
+      var initials=user.displayName?user.displayName.split(' ').map(function(n){return n[0];}).join('').toUpperCase().slice(0,2):user.email.slice(0,2).toUpperCase();
+      var isGuest=(typeof GUEST_EMAIL!=='undefined')&&user.email===GUEST_EMAIL;
+      document.getElementById('rail-av').textContent=initials;
+      document.getElementById('sb-name').textContent=user.displayName||first;
+      document.getElementById('sb-role').textContent=isGuest?'Reviewer':(d.role||'Junior Designer');
+      var now=new Date();
+      var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+      document.getElementById('greet-date').textContent=days[now.getDay()]+', '+months[now.getMonth()]+' '+now.getDate();
+      var hr=now.getHours(), g=hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';
+      document.getElementById('greet-h').innerHTML=g+', <em>'+first+'</em>. Here’s your studio.';
+    }catch(e){console.warn(e);}
+    document.getElementById('loading').style.display='none';
+    document.getElementById('wsmain').style.display='grid';
+  });
+</script>
+</body>
+</html>
