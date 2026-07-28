@@ -248,6 +248,23 @@
     }
     .create-class-btn:hover { opacity: .85; }
     .create-class-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* ── ONBOARDING TOUR ── */
+    #tour-launch { background:rgba(218,158,43,.12); border:1px solid rgba(218,158,43,.35); color:#8a6410; border-radius:100px; padding:5px 13px; font-size:11px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; align-items:center; gap:6px; margin:-14px 0 22px; }
+    #tour-launch:hover { background:rgba(218,158,43,.2); }
+    #tour-launch i { font-size:14px; }
+    #tour-block { position:fixed; inset:0; z-index:9996; cursor:pointer; }
+    .tour-hi { position:absolute; border-radius:12px; box-shadow:0 0 0 9999px rgba(10,14,28,.74); z-index:9998; pointer-events:none; transition:all .25s ease; opacity:0; }
+    .tour-tip { position:absolute; z-index:9999; background:#fff; color:var(--ink); border-radius:14px; padding:17px 19px; width:300px; max-width:88vw; box-shadow:0 18px 50px rgba(0,0,0,.4); }
+    .tour-tip-center { transform:translate(-50%,-50%); }
+    .tour-tip-count { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--mid); margin-bottom:6px; }
+    .tour-tip-title { font-family:'Playfair Display',serif; font-size:19px; font-weight:700; color:var(--ink); margin-bottom:6px; line-height:1.25; }
+    .tour-tip-body { font-size:13px; line-height:1.65; color:var(--mid); margin-bottom:15px; }
+    .tour-tip-actions { display:flex; align-items:center; justify-content:space-between; }
+    .tour-skip { background:none; border:none; color:var(--mid); font-size:12px; cursor:pointer; font-family:'DM Sans',sans-serif; padding:4px; }
+    .tour-skip:hover { color:var(--ink); }
+    .tour-next { background:var(--ink); color:#faf7f2; border:none; border-radius:8px; padding:9px 17px; font-size:13px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; }
+    .tour-next:hover { opacity:.88; }
   </style>
 </head>
 <body>
@@ -275,6 +292,7 @@
     <div id="loaded-state">
       <div class="greeting-date" id="greeting-date"></div>
       <div class="greeting-h" id="greeting-h">Welcome back.</div>
+      <button id="tour-launch" style="display:none"><i class="ti ti-route"></i> Take a quick tour</button>
 
       <!-- ── INSTRUCTOR VIEW ── -->
       <div id="instructor-view" style="display:none">
@@ -424,6 +442,15 @@
         document.getElementById('student-view').style.display = 'block';
         document.getElementById('instructor-view').style.display = 'none';
         document.getElementById('journey-card').style.display = 'block';
+
+        // Onboarding tour: show re-run button + auto-run once for new students
+        var _tl = document.getElementById('tour-launch');
+        if (_tl) { _tl.style.display = 'inline-flex'; _tl.onclick = function(){ startWorkspaceTour(firstName); }; }
+        try {
+          if (!localStorage.getItem('cpla_tour_v1_seen')) {
+            setTimeout(function(){ startWorkspaceTour(firstName); }, 700);
+          }
+        } catch (e) {}
       }
 
       // Show content
@@ -587,6 +614,72 @@
     document.getElementById('journey-card').addEventListener('click', function() {
       this.classList.toggle('open');
     });
+  </script>
+
+  <!-- Workspace onboarding tour -->
+  <script>
+  (function(){
+    var steps=[], idx=0, hi, tip, block;
+    function make(){
+      if(document.getElementById('tour-block')) return;
+      block=document.createElement('div'); block.id='tour-block'; block.onclick=next;
+      hi=document.createElement('div'); hi.className='tour-hi'; hi.id='tour-hi';
+      tip=document.createElement('div'); tip.className='tour-tip'; tip.id='tour-tip';
+      document.body.appendChild(block); document.body.appendChild(hi); document.body.appendChild(tip);
+    }
+    function done(){
+      ['tour-block','tour-hi','tour-tip'].forEach(function(id){var e=document.getElementById(id); if(e) e.remove();});
+      window.removeEventListener('resize', reflow);
+      try{ localStorage.setItem('cpla_tour_v1_seen','1'); }catch(e){}
+    }
+    function place(){
+      var s=steps[idx], el=s.target?document.querySelector(s.target):null;
+      if(s.center || !el){
+        hi.style.opacity='0'; hi.style.width='0'; hi.style.height='0'; hi.style.left='50%'; hi.style.top='50%';
+        tip.classList.add('tour-tip-center'); tip.style.left='50%'; tip.style.top='42%';
+        return;
+      }
+      tip.classList.remove('tour-tip-center');
+      el.scrollIntoView({behavior:'smooth', block:'center'});
+      setTimeout(function(){
+        var r=el.getBoundingClientRect(), pad=8;
+        var top=r.top+window.scrollY-pad, left=r.left+window.scrollX-pad;
+        hi.style.opacity='1'; hi.style.left=left+'px'; hi.style.top=top+'px';
+        hi.style.width=(r.width+pad*2)+'px'; hi.style.height=(r.height+pad*2)+'px';
+        var below=top+r.height+pad*2+12, tipW=300, maxLeft=window.scrollX+window.innerWidth-tipW-16;
+        tip.style.left=Math.min(Math.max(window.scrollX+16,left), maxLeft)+'px';
+        if(below+180 > window.scrollY+window.innerHeight){ tip.style.top=(top-12)+'px'; tip.style.transform='translateY(-100%)'; }
+        else { tip.style.top=below+'px'; tip.style.transform=''; }
+      }, 260);
+    }
+    function draw(){
+      make();
+      var s=steps[idx];
+      tip.innerHTML='<div class="tour-tip-count">'+(idx+1)+' of '+steps.length+'</div>'+
+        '<div class="tour-tip-title">'+s.title+'</div>'+
+        '<div class="tour-tip-body">'+s.body+'</div>'+
+        '<div class="tour-tip-actions"><button class="tour-skip" id="tSkip">Skip</button>'+
+        '<button class="tour-next" id="tNext">'+(idx===steps.length-1?'Start ›':'Next ›')+'</button></div>';
+      document.getElementById('tNext').onclick=function(ev){ev.stopPropagation(); next();};
+      document.getElementById('tSkip').onclick=function(ev){ev.stopPropagation(); done();};
+      place();
+    }
+    function next(){ if(idx<steps.length-1){ idx++; draw(); } else { done(); } }
+    function reflow(){ if(document.getElementById('tour-hi')) place(); }
+    window.startWorkspaceTour=function(name){
+      var n=name||'there';
+      steps=[
+        {center:true,title:'Welcome to your Workspace, '+n+'.',body:'This is your home base at CPLA. Give me 30 seconds and I’ll show you around — you can skip anytime.'},
+        {target:'#tour-mission',title:'Your Mission',body:'This card is always your next step. Right now it’s Volume 1, where you learn to think and work like a designer.'},
+        {target:'#continue-btn',title:'Open your lessons',body:'Click here whenever you’re ready to open Volume 1 and choose a module.'},
+        {target:'#journey-card',title:'Your Journey',body:'These are the volumes you’ll complete on your way to becoming a Creative Professional. Volume 1 comes first.'},
+        {target:'#nav-role',title:'Your title',body:'You’re a Junior Designer at the Muncie Area Career Center. As your skills grow, so will your role.'},
+        {target:'#sign-out-btn',title:'Signing out',body:'When you’re done for the day, sign out here — your progress is always saved.'},
+        {center:true,title:'You’re all set.',body:'That’s your Workspace. Ready to begin? Open Volume 1 and start Lesson 1.'}
+      ];
+      idx=0; draw(); window.addEventListener('resize', reflow);
+    };
+  })();
   </script>
 </body>
 </html>
