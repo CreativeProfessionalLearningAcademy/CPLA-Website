@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPLA — Instructor Guide · Lesson 1.11</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ink:#1a1410;--paper:#faf7f2;--cream:#f0ead8;--rule:#d4c9b8;
+    --mid:#6b5e52;--mod:#1a56c4;--ml:#e8f0fe;--green:#2d7a1a;--gnl:#f0fae8;
+    --blue:#01123a;--nav2:#0a1c44;--gold:#da9e2b;--rose:#b0472f;--rosel:#fbeee9;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;font-weight:300;background:var(--cream);color:var(--ink);line-height:1.6}
+  .wrap{max-width:940px;margin:0 auto;padding:0 22px}
+
+  /* HERO */
+  .hero{background:linear-gradient(150deg,#0a1c44,#25324d);color:#fff;padding:52px 0 44px}
+  .hero .eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(218,158,43,.95);font-family:'DM Mono',monospace;margin-bottom:14px}
+  .hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:42px;line-height:1.08;margin-bottom:14px}
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero .lede{font-size:16px;color:rgba(255,255,255,.8);max-width:640px}
+  .hero .meta{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+  .pill{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-family:'DM Mono',monospace;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.25);padding:5px 12px;border-radius:100px}
+
+  /* HOW TO USE */
+  .howto{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:26px 28px;margin:34px auto}
+  .howto h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:12px}
+  .howto p{font-size:14.5px;color:#3a332a;margin-bottom:12px}
+  .howto p:last-child{margin-bottom:0}
+  .legend{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin-top:16px}
+  @media(max-width:680px){.legend{grid-template-columns:1fr}}
+  .legend .li{font-size:13px;color:var(--mid);display:flex;gap:9px;align-items:flex-start}
+  .legend .li i{color:var(--mod);font-size:17px;margin-top:1px}
+  .legend .li b{color:var(--ink);font-weight:600}
+
+  /* MINI NAV */
+  .toc{position:sticky;top:0;z-index:20;background:rgba(240,234,216,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule);padding:12px 0;margin-bottom:8px}
+  .toc .wrap{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .toc .lbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-family:'DM Mono',monospace;margin-right:4px}
+  .toc a{font-size:13px;font-weight:600;color:var(--blue);text-decoration:none;border:1px solid var(--rule);background:#fff;padding:6px 12px;border-radius:100px;transition:.15s}
+  .toc a:hover{border-color:var(--gold);background:var(--paper)}
+
+  /* LESSON SECTION */
+  .lesson{margin:40px auto 0}
+  .lband{background:linear-gradient(150deg,#14213f,#25324d);color:#fff;border-radius:16px 16px 0 0;padding:30px 28px}
+  .lband .lbl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(218,158,43,.9);font-family:'DM Mono',monospace;margin-bottom:10px}
+  .lband h2{font-family:'Playfair Display',serif;font-size:31px;font-weight:900;line-height:1.1;margin-bottom:6px}
+  .lband .sub{font-size:14px;color:rgba(255,255,255,.68);font-family:'DM Mono',monospace}
+  .lbody{background:#fff;border:1px solid var(--rule);border-top:0;border-radius:0 0 16px 16px;padding:30px 28px 34px}
+
+  .sec{margin-bottom:30px}.sec:last-child{margin-bottom:0}
+  .sec-h{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:9px;padding-bottom:9px;border-bottom:1px solid #efeae0}
+  .sec-h i{font-size:17px}
+  .bigidea{background:var(--ml);border-left:3px solid var(--mod);border-radius:0 10px 10px 0;padding:16px 20px;font-size:16px;line-height:1.6;color:var(--blue)}
+  .bigidea b{font-weight:600}
+  p.body{font-size:14.5px;color:#3a332a;margin-bottom:12px}
+  p.body:last-child{margin-bottom:0}
+
+  /* FACTS */
+  .facts{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .facts li{font-size:14.5px;line-height:1.62;color:#3a332a;padding-left:26px;position:relative}
+  .facts li::before{content:"\ea60";font-family:"tabler-icons";position:absolute;left:0;top:1px;color:var(--gold);font-size:16px}
+  .facts b{color:var(--ink);font-weight:600}
+
+  /* SCENARIOS */
+  .scen{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:680px){.scen{grid-template-columns:1fr}}
+  .scard{border:1px solid var(--rule);border-radius:11px;padding:15px 17px;background:var(--paper)}
+  .scard h5{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:5px}
+  .scard p{font-size:13px;color:var(--mid);line-height:1.55}
+
+  /* STEPS */
+  .steps{counter-reset:st;display:flex;flex-direction:column;gap:2px}
+  .step{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:15px 0;border-bottom:1px dashed #e6ddcd}
+  .step:last-child{border-bottom:0}
+  .step .num{counter-increment:st;width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-family:'DM Mono',monospace;font-weight:500;font-size:14px}
+  .step .num::before{content:counter(st)}
+  .step .txt h5{font-size:15.5px;font-weight:600;color:var(--ink);margin-bottom:4px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .step .txt .time{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mod);background:var(--ml);padding:2px 8px;border-radius:100px;font-family:'DM Mono',monospace;font-weight:500}
+  .step .txt p{font-size:14px;color:#3a332a;line-height:1.6}
+  .step .txt .say{font-size:13.5px;color:var(--mid);font-style:italic;margin-top:6px;padding-left:12px;border-left:2px solid var(--gold)}
+
+  /* CALLOUTS */
+  .call{border-radius:11px;padding:16px 20px;font-size:14px;line-height:1.6}
+  .call.fm{background:var(--gnl);border:1px solid #cfe6bf}
+  .call.del{background:#fff7e8;border:1px solid #eddcae}
+  .call .ct{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:9px}
+  .call.fm .ct i{color:var(--green)} .call.del .ct i{color:var(--gold)}
+  .call .lead{font-size:12px;letter-spacing:.04em;color:var(--mid);margin-bottom:8px}
+  .call ul{list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:8px}
+  .call li{padding-left:22px;position:relative;font-size:13.5px;color:#3a332a}
+  .call li::before{content:"\ea5e";font-family:"tabler-icons";position:absolute;left:0;top:0;font-size:15px}
+  .call.fm li::before{color:var(--green)} .call.del li::before{color:var(--gold)}
+
+  /* WATCH FOR */
+  .watch{background:var(--rosel);border:1px solid #eccabf;border-radius:11px;padding:16px 20px}
+  .watch li{list-style:none;font-size:14px;line-height:1.58;color:#5a2a1c;padding-left:24px;position:relative;margin-bottom:9px}
+  .watch li:last-child{margin-bottom:0}
+  .watch li::before{content:"\eb4d";font-family:"tabler-icons";position:absolute;left:0;top:1px;color:var(--rose);font-size:15px}
+  .watch b{color:var(--rose);font-weight:600}
+
+  /* DISCUSSION */
+  .disc{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .disc li{font-size:14.5px;color:#3a332a;padding-left:26px;position:relative;line-height:1.55}
+  .disc li::before{content:"\eb46";font-family:"tabler-icons";position:absolute;left:0;top:1px;color:var(--mod);font-size:16px}
+
+  /* REFERENCE GRID */
+  .ref{display:grid;grid-template-columns:1fr 1fr;gap:22px;background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:20px 22px}
+  @media(max-width:680px){.ref{grid-template-columns:1fr}}
+  .ref h6{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);font-weight:600;margin-bottom:10px}
+  .ref ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .ref .obj li{font-size:13px;color:#3a332a;padding-left:15px;position:relative;line-height:1.5}
+  .ref .obj li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+  .ref .voc li{font-size:13px;line-height:1.5}
+  .ref .voc .t{font-weight:600;color:var(--ink)}.ref .voc .d{color:var(--mid)}
+
+  /* FOOTER */
+  .foot{margin:44px 0 60px}
+  .foot .note{background:#fff;border:1px solid var(--rule);border-radius:14px;padding:22px 26px;font-size:13.5px;color:var(--mid);line-height:1.65}
+  .foot .note b{color:var(--ink);font-weight:600}
+  .foot .sig{margin-top:14px;font-size:12px;color:var(--mid);font-family:'DM Mono',monospace}
+
+  @media print{
+    .toc{display:none}.hero{background:#14213f !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .lband{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .lesson{page-break-inside:avoid}
+  }
+
+  /* single-page title controls */
+  .lband{position:relative}
+  .lband-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+  .gback{font-size:13px;font-weight:600;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(255,255,255,.28);padding:7px 14px;border-radius:100px;transition:.15s}
+  .gback:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.55)}
+  .gback i{font-size:16px}
+  .gpdf{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--blue);background:var(--gold);border:0;border-radius:100px;padding:8px 16px;display:inline-flex;align-items:center;gap:7px;cursor:pointer;transition:.15s}
+  .gpdf:hover{filter:brightness(1.06)}
+  .gpdf i{font-size:16px}
+  @media print{.lband-top{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap" style="padding-top:34px">
+<section class="lesson"><div class="lband"><div class="lband-top"><a class="gback" href="../../studio-director.html"><i class="ti ti-arrow-left"></i> Studio Director</a><button class="gpdf" onclick="window.print()"><i class="ti ti-file-type-pdf"></i> Save as PDF</button></div><div class="lbl">Volume 1 · Module 3 · Lesson 1.11</div><h2>Repetition &amp; Proximity</h2><div class="sub">Creating relationships through space and consistency</div></div><div class="lbody"><div class="sec"><div class="sec-h"><i class="ti ti-bulb"></i> The Big Idea</div><div class="bigidea"><b>Two principles, one purpose — creating relationships.</b> Repetition builds unity <em>across</em> a design by repeating visual elements; proximity builds meaning <em>within</em> a design by grouping related elements in space. Together they let a viewer understand what belongs with what, without reading a single word.</div></div><div class="sec"><div class="sec-h"><i class="ti ti-book-2"></i> What you're really teaching</div><ul class="facts"><li><b>Proximity is a Gestalt principle:</b> elements near each other are perceived as related, elements far apart as unrelated. Structure is communicated through space alone — perception, not instruction.</li><li><b>The classic failure is equal spacing.</b> On an event flyer where a session's own details are spaced the same as the gaps between sessions, the information is all there but the relationships are invisible. The gap between groups must be bigger than the gap within them.</li><li><b>Intra-group versus inter-group spacing.</b> Keep related items tight (intra), separate groups wide (inter). The <em>contrast</em> between those two spacings is what makes structure visible.</li><li><b>Repetition is proximity's companion.</b> Consistent type, color, spacing, and shape across the groups makes the whole design unified and recognizable — and is the foundation of brand recognition.</li><li><b>A repetition system is small and strict:</b> for example two typefaces, three colors, two spacing intervals, one shape language — defined first, then applied everywhere without deviation.</li></ul></div><div class="sec"><div class="sec-h"><i class="ti ti-map-2"></i> Scenarios &amp; hooks to open the room</div><div class="scen"><div class="scard"><h5>The evenly-spaced flyer</h5><p>Six sessions, everything equally spaced. You can't tell which time goes with which session. The canonical proximity failure.</p></div><div class="scard"><h5>Tighten and separate</h5><p>Same flyer — group each session tight, widen the gaps between them. The structure appears instantly.</p></div><div class="scard"><h5>The three-second count</h5><p>Flash a layout for three seconds. Can students count the sessions without reading? If not, the proximity contrast is too weak.</p></div><div class="scard"><h5>The style system</h5><p>Two fonts, three colors, two spacing intervals applied everywhere. Watch unity emerge from repetition alone.</p></div></div></div><div class="sec"><div class="sec-h"><i class="ti ti-list-numbers"></i> Teaching the lesson — step by step</div><div class="steps"><div class="step"><div class="num"></div><div class="txt"><h5>Hook: count the sessions in three seconds <span class="time">6 min</span></h5><p>Flash an evenly-spaced list; students can't count it. A proximity failure, felt immediately.</p></div></div><div class="step"><div class="num"></div><div class="txt"><h5>Proximity as Gestalt <span class="time">10 min</span></h5><p>Near equals related. The gap between groups must exceed the gap within — intra versus inter spacing.</p></div></div><div class="step"><div class="num"></div><div class="txt"><h5>Fix a proximity failure live <span class="time">8 min</span></h5><p>Tighten intra-group, widen inter-group. The structure snaps into view with no new content.</p></div></div><div class="step"><div class="num"></div><div class="txt"><h5>Repetition and the repetition system <span class="time">10 min</span></h5><p>Define a small system — two fonts, three colors, two gaps, one shape — and apply it. Unity from consistency.</p></div></div><div class="step"><div class="num"></div><div class="txt"><h5>Set up the combined exercise <span class="time">6 min</span></h5><p>Repetition system plus proximity grouping on a five-session program, verified by the three-second test.</p></div></div><div class="step"><div class="num"></div><div class="txt"><h5>Close on real information design <span class="time">5 min</span></h5><p>Students critique one real menu or schedule for both proximity and repetition.</p></div></div></div></div><div class="sec"><div class="sec-h"><i class="ti ti-pencil"></i> Facilitating the Field Manual — <em>Repetition System + Proximity Grouping</em></div><div class="call fm"><div class="ct"><i class="ti ti-pencil"></i> Running the exercise</div><p class="lead">Students define a repetition system and apply it to a multi-session program that lives or dies on proximity grouping.</p><ul><li>Define the repetition system first — two typefaces, three colors, two spacing intervals (a tight intra gap and a wide inter gap), one shape language — before laying anything out.</li><li>Build real structure: an event program of at least five sessions, each with title, time, location, and speaker.</li><li>Apply proximity — group each session's details tight, separate sessions with the wide gap — so the sessions are instantly distinguishable.</li><li>Apply repetition — identical treatment for every title, time, and session structure, with no deviation.</li><li>Run the three-second test: can a viewer count the sessions without reading? If not, widen the inter-group gap until they can.</li></ul></div></div><div class="sec"><div class="sec-h"><i class="ti ti-checkbox"></i> The Assignment &amp; Deliverable — <em>Repetition + Proximity Study</em></div><div class="call del"><div class="ct"><i class="ti ti-checkbox"></i> What good work looks like</div><p class="lead">An event program on a defined repetition system, grouped so the session count reads in a three-second glance.</p><ul><li><b>Meets the bar:</b> a clear contrast between intra- and inter-group spacing and a consistently applied system.</li><li><b>Exceeds:</b> the layout passes the three-second count test cleanly and the repetition system is documented — fonts, colors, and gaps named.</li><li><b>Redirect:</b> sessions bleeding into each other means the inter-group gap must exceed the intra-group gap.</li></ul></div></div><div class="sec"><div class="sec-h"><i class="ti ti-alert-triangle"></i> Watch for</div><ul class="watch"><li><b>Equal spacing everywhere.</b> The relationship-killer — and the whole point of the lesson.</li><li><b>A system defined but not followed.</b> Any deviation breaks the unity repetition is meant to create.</li><li><b>Grouping with boxes and lines instead of space.</b> Let proximity do the work before adding dividers.</li><li><b>Intra-group gaps as wide as inter-group gaps.</b> The contrast between them is what communicates structure.</li></ul></div><div class="sec"><div class="sec-h"><i class="ti ti-message-2"></i> Discussion questions</div><ul class="disc"><li>Why can equal spacing make information unreadable even when every fact is present?</li><li>Where have you seen proximity done well — a menu, a schedule, an app — and how did it help you?</li><li>Why is a small, strictly-followed repetition system more powerful than lots of variety?</li></ul></div><div class="ref"><div class="obj"><h6>Lesson objectives</h6><ul><li>Explain how repetition creates unity and brand recognition across a design or design system</li><li>Explain how proximity creates meaning by grouping related elements — the Gestalt principle of proximity</li><li>Diagnose proximity failures where spatial grouping contradicts logical relationships</li><li>Build a simple repetition system — consistent colors, type, spacing, and shape language</li><li>Apply both principles together to organize a complex information layout into clear, meaningful groups</li></ul></div><div class="voc"><h6>Key vocabulary</h6><ul><li><span class="t">Proximity</span> <span class="d">— the Gestalt rule that near elements read as related and distant ones as unrelated — structure from space alone.</span></li><li><span class="t">Repetition</span> <span class="d">— consistent reuse of colors, type, spacing, and shapes — unity within a design, recognition across a system.</span></li><li><span class="t">Intra-group Spacing</span> <span class="d">— the tight space within a group, signaling its elements belong together.</span></li><li><span class="t">Inter-group Spacing</span> <span class="d">— the wide space between groups, signaling they are distinct.</span></li><li><span class="t">Gestalt Grouping</span> <span class="d">— the perceptual principles by which the brain clusters elements by similarity, proximity, and continuity.</span></li><li><span class="t">Repetition System</span> <span class="d">— a small fixed set of decisions — typefaces, colors, spacing, shape language — applied everywhere for unity.</span></li></ul></div></div></div></section>
+<footer class="foot">
+    <div class="note">
+      <p><b>A note on authority.</b> This guide is authored teaching support — big ideas, facts, scenarios, and a suggested flow. The student lesson pages remain the <b>source of truth</b> for exact definitions, the precise names and number of process stages, and any figures. Where this guide and the lesson differ, follow the lesson and let us know so we can reconcile the two.</p>
+      <p style="margin-top:12px"><b>Timing is a guide, not a rule.</b> The step minutes assume a ~45-minute period and are meant to be compressed or expanded. Trim the case study or discussion first if you're short; they're the most elastic.</p>
+      <div class="sig">CPLA · Volume 1 · Module 1 — What Design Is · Instructor Guide · Companion to the Studio Director</div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPLA — Instructor Guide · Lesson 1.10</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ink:#1a1410;--paper:#faf7f2;--cream:#f0ead8;--rule:#d4c9b8;
+    --mid:#6b5e52;--mod:#1a56c4;--ml:#e8f0fe;--green:#2d7a1a;--gnl:#f0fae8;
+    --blue:#01123a;--nav2:#0a1c44;--gold:#da9e2b;--rose:#b0472f;--rosel:#fbeee9;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;font-weight:300;background:var(--cream);color:var(--ink);line-height:1.6}
+  .wrap{max-width:940px;margin:0 auto;padding:0 22px}
+
+  /* HERO */
+  .hero{background:linear-gradient(150deg,#0a1c44,#25324d);color:#fff;padding:52px 0 44px}
+  .hero .eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(218,158,43,.95);font-family:'DM Mono',monospace;margin-bottom:14px}
+  .hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:42px;line-height:1.08;margin-bottom:14px}
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero .lede{font-size:16px;color:rgba(255,255,255,.8);max-width:640px}
+  .hero .meta{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+  .pill{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-family:'DM Mono',monospace;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.25);padding:5px 12px;border-radius:100px}
+
+  /* HOW TO USE */
+  .howto{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:26px 28px;margin:34px auto}
+  .howto h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:12px}
+  .howto p{font-size:14.5px;color:#3a332a;margin-bottom:12px}
+  .howto p:last-child{margin-bottom:0}
+  .legend{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin-top:16px}
+  @media(max-width:680px){.legend{grid-template-columns:1fr}}
+  .legend .li{font-size:13px;color:var(--mid);display:flex;gap:9px;align-items:flex-start}
+  .legend .li i{color:var(--mod);font-size:17px;margin-top:1px}
+  .legend .li b{color:var(--ink);font-weight:600}
+
+  /* MINI NAV */
+  .toc{position:sticky;top:0;z-index:20;background:rgba(240,234,216,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule);padding:12px 0;margin-bottom:8px}
+  .toc .wrap{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .toc .lbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-family:'DM Mono',monospace;margin-right:4px}
+  .toc a{font-size:13px;font-weight:600;color:var(--blue);text-decoration:none;border:1px solid var(--rule);background:#fff;padding:6px 12px;border-radius:100px;transition:.15s}
+  .toc a:hover{border-color:var(--gold);background:var(--paper)}
+
+  /* LESSON SECTION */
+  .lesson{margin:40px auto 0}
+  .lband{background:linear-gradient(150deg,#14213f,#25324d);color:#fff;border-radius:16px 16px 0 0;padding:30px 28px}
+  .lband .lbl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(218,158,43,.9);font-family:'DM Mono',monospace;margin-bottom:10px}
+  .lband h2{font-family:'Playfair Display',serif;font-size:31px;font-weight:900;line-height:1.1;margin-bottom:6px}
+  .lband .sub{font-size:14px;color:rgba(255,255,255,.68);font-family:'DM Mono',monospace}
+  .lbody{background:#fff;border:1px solid var(--rule);border-top:0;border-radius:0 0 16px 16px;padding:30px 28px 34px}
+
+  .sec{margin-bottom:30px}.sec:last-child{margin-bottom:0}
+  .sec-h{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:9px;padding-bottom:9px;border-bottom:1px solid #efeae0}
+  .sec-h i{font-size:17px}
+  .bigidea{background:var(--ml);border-left:3px solid var(--mod);border-radius:0 10px 10px 0;padding:16px 20px;font-size:16px;line-height:1.6;color:var(--blue)}
+  .bigidea b{font-weight:600}
+  p.body{font-size:14.5px;color:#3a332a;margin-bottom:12px}
+  p.body:last-child{margin-bottom:0}
+
+  /* FACTS */
+  .facts{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .facts li{font-size:14.5px;line-height:1.62;color:#3a332a;padding-left:26px;position:relative}
+  .facts li::before{content:"\ea60";font-family:"tabler-icons";position:absolute;left:0;top:1px;color:var(--gold);font-size:16px}
+  .facts b{color:var(--ink);font-weight:600}
+
+  /* SCENARIOS */
+  .scen{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:680px){.scen{grid-template-columns:1fr}}
+  .scard{border:1px solid var(--rule);border-radius:11px;padding:15px 17px;background:var(--paper)}
+  .scard h5{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:5px}
+  .scard p{font-size:13px;color:var(--mid);line-height:1.55}
+
+  /* STEPS */
+  .steps{counter-reset:st;display:flex;flex-direction:column;gap:2px}
+  .step{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:15px 0;border-bottom:1px dashed #e6ddcd}
+  .step:last-child{border-bottom:0}
+  .step .num{counter-increment:st;width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-family:'DM Mono',monospace;font-weight:500;font-size:14px}
+  .step .num::before{content:counter(st)}
+  .step .txt h5{font-size:15.5px;font-weight:600;color:var(--ink);margin-bottom:4px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .step .txt .time{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mod);background:var(--ml);padding:2px 8px;border-radius:100px;font-family:'DM Mono',monospace;font-weight:500}
+  .step .txt p{font-size:14px;color:#3a332a;line-height:1.6}
+  .step .txt .say{font-size:13.5px;color:var(--mid);font-style:italic;margin-top:6px;padding-left:12px;border-left:2px solid var(--gold)}
+
+  /* CALLOUTS */
+  .call{border-radius:11px;padding:16px 20px;font-size:14px;line-height:1.6}
+  .call.fm{background:var(--gnl);border:1px solid #cfe6bf}
+  .call.del{background:#fff7e8;border:1px solid #eddcae}
+  .call .ct{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:9px}
+  .call.fm .ct i{color:var(--green)} .call.del .ct i{color:var(--gold)}
+  .call .lead{font-size:12px;letter-spacing:.04em;color:var(--mid);margin-bottom:8px}
+  .call ul{list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:8px}
+  .call li{padding-left:22px;position:relative;font-size:13.5px;color:#3a332a}
+  .call li::before{content:"\ea5e";font-family:"tabler-icons";position:absolute;left:0;top:0;font-size:15px}
+  .call.fm li::before{color:var(--green)} .call.del li::before{color:var(--gold)}
+
+  /* WATCH FOR */
+  .watch{background:var(--rosel);border:1px solid #eccabf;border-radius:11px;padding:16px 20px}
+  .watch li{list-style:none;font-size:14px;line-height:1.58;color:#5a2a1c;padding-left:24px;position:relative;margin-bottom:9px}
+  .watch li:last-child{margin-bottom:0}
+  .watch li::before{content:"\eb4d";font-family:"tabler-icons";position:absolute;left:0;top:1px;color:var(--rose);font-size:15px}
+  .watch b{color:var(--rose);font-weight:600}
+
+  /* DISCUSSION */
+  .disc{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .disc li{font-size:14.5px;color:#3a332a;padding-left:26px;position:relative;line-height:1.55}
+  .disc li::before{content:"\eb46";font-family:"tabler-icons";position:absolute;left:0;top:1px;color:var(--mod);font-size:16px}
+
+  /* REFERENCE GRID */
+  .ref{display:grid;grid-template-columns:1fr 1fr;gap:22px;background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:20px 22px}
+  @media(max-width:680px){.ref{grid-template-columns:1fr}}
+  .ref h6{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);font-weight:600;margin-bottom:10px}
+  .ref ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .ref .obj li{font-size:13px;color:#3a332a;padding-left:15px;position:relative;line-height:1.5}
+  .ref .obj li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+  .ref .voc li{font-size:13px;line-height:1.5}
+  .ref .voc .t{font-weight:600;color:var(--ink)}.ref .voc .d{color:var(--mid)}
+
+  /* FOOTER */
+  .foot{margin:44px 0 60px}
+  .foot .note{background:#fff;border:1px solid var(--rule);border-radius:14px;padding:22px 26px;font-size:13.5px;color:var(--mid);line-height:1.65}
+  .foot .note b{color:var(--ink);font-weight:600}
+  .foot .sig{margin-top:14px;font-size:12px;color:var(--mid);font-family:'DM Mono',monospace}
+
+  @media print{
+    .toc{display:none}.hero{background:#14213f !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .lband{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .lesson{page-break-inside:avoid}
+  }
+
+  /* single-page title controls */
+  .lband{position:relative}
+  .lband-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+  .gback{font-size:13px;font-weight:600;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(255,255,255,.28);padding:7px 14px;border-radius:100px;transition:.15s}
+  .gback:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.55)}
+  .gback i{font-size:16px}
+  .gpdf{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--blue);background:var(--gold);border:0;border-radius:100px;padding:8px 16px;display:inline-flex;align-items:center;gap:7px;cursor:pointer;transition:.15s}
+  .gpdf:hover{filter:brightness(1.06)}
+  .gpdf i{font-size:16px}
+  @media print{.lband-top{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap" style="padding-top:34px">
+<section class="lesson"><div class="lband"><div class="lband-top"><a class="gback" href="../../studio-director.html"><i class="ti ti-arrow-left"></i> Studio Director</a><button class="gpdf" onclick="window.print()"><i class="ti ti-file-type-pdf"></i> Save as PDF</button></div><div class="lbl">Volume 1 · Module 3 · Lesson 1.10</div><h2>The Principle of Alignment</h2><div class="sub">The invisible architecture of professional layout</div></div><div class="lbody"><div class="sec"><div class="sec-h"><i class="ti ti-bulb"></i> The Big Idea</div><div class="bigidea"><b>Nothing communicates “amateur” faster than elements that float, positioned by feel.</b> Alignment is the invisible architecture that makes layouts look intentional — two or three shared edges, applied with exact precision, transform a layout from accidental to professional. The fix isn't pixel-hunting; it's a few consistent relationships.</div></div><div class="sec"><div class="sec-h"><i class="ti ti-book-2"></i> What you're really teaching</div><ul class="facts"><li><b>Misalignment is felt by everyone</b>, even people who've never heard the word — the eye detects broken edges. A near-miss (four pixels off) reads <em>worse</em> than an obvious offset, because it signals attempted-but-failed precision: carelessness.</li><li><b>Four alignment types, different jobs.</b> Left, right, center, and edge. Left is usually the strongest default for text; center suits formal or standalone content but is overused — three centered paragraphs create a ragged, hard-to-follow reading edge.</li><li><b>A few exact edges beat perfectionism.</b> Two or three shared alignment relationships, applied consistently, do the work. The goal is a clear structure, not fussing over every pixel of every element.</li><li><b>Edge alignment connects across the layout</b> independent of proximity — aligning the top of an image to the top of a headline links two separate columns into one structure.</li><li><b>Invisible structure is the network of alignment lines.</b> Every element should align to something. The diagnostic question for any floating element is simply: “what is this aligning to?”</li></ul></div><div class="sec"><div class="sec-h"><i class="ti ti-map-2"></i> Scenarios &amp; hooks to open the room</div><div class="scen"><div class="scard"><h5>The float</h5><p>Headline centered, body left, call to action centered, logo slightly right — nothing lines up. It looks amateur, and students can't say why until they see the lines.</p></div><div class="scard"><h5>The near-miss</h5><p>Two elements four pixels apart. Worse than a bold, deliberate offset. Exact-align them and the unease disappears.</p></div><div class="scard"><h5>Centered body text</h5><p>Three centered paragraphs versus the same text left-aligned. The ragged reading path makes the case on its own.</p></div><div class="scard"><h5>Draw the invisible lines</h5><p>Overlay alignment guides on a professional layout — the hidden architecture suddenly appears.</p></div></div></div><div class="sec"><div class="sec-h"><i class="ti ti-list-numbers"></i> Teaching the lesson — step by step</div><div class="steps"><div class="step"><div class="num"></div><div class="txt"><h5>Hook: what's wrong here? <span class="time">5 min</span></h5><p>Show the floating layout. Students feel “amateur” immediately but can't yet name the cause.</p></div></div><div class="step"><div class="num"></div><div class="txt"><h5>The mechanism and the near-miss <span class="time">8 min</span></h5><p>The eye detects broken edges; near-misses read as carelessness — worse than clear offsets. Name why exactness matters.</p></div></div><div class="step"><div class="num"></div><div class="txt"><h5>Alignment types and center overuse <span class="time">8 min</span></h5><p>Left, right, center, edge — when each fits, and why centered body text creates a ragged path.</p></div></div><div class="step"><div class="num"></div><div class="txt"><h5>Impose invisible structure <span class="time">10 min</span></h5><p>Take the floating layout and apply two or three exact shared edges with the Align panel. Watch it snap to “designed.”</p></div></div><div class="step"><div class="num"></div><div class="txt"><h5>Set up the before/after study <span class="time">7 min</span></h5><p>Version A by feel, Version B exact-aligned with annotated alignment lines.</p></div></div><div class="step"><div class="num"></div><div class="txt"><h5>Close on the diagnostic question <span class="time">5 min</span></h5><p>Students point at a classroom object and name what aligns to what.</p></div></div></div></div><div class="sec"><div class="sec-h"><i class="ti ti-pencil"></i> Facilitating the Field Manual — <em>Alignment Before / After</em></div><div class="call fm"><div class="ct"><i class="ti ti-pencil"></i> Running the exercise</div><p class="lead">Students build the same layout unaligned and aligned, then annotate the invisible structure of the aligned version.</p><ul><li>Version A is intentionally positioned by feel — mixed center and left, slight offsets. The “before” should look amateur on purpose.</li><li>Version B establishes two or three clear alignment relationships applied with exact precision using Illustrator's Align panel and guides — no eyeballing.</li><li>Require the annotation on B: draw the invisible alignment lines and label what each element aligns to. That's where the understanding shows.</li><li>The two-sentence comparison should name the felt difference — “accidental” versus “intentional” — not just the visual one.</li><li>Hunt for near-misses in B; exact alignment is the entire point of the exercise.</li></ul></div></div><div class="sec"><div class="sec-h"><i class="ti ti-checkbox"></i> The Assignment &amp; Deliverable — <em>Alignment Before/After Study</em></div><div class="call del"><div class="ct"><i class="ti ti-checkbox"></i> What good work looks like</div><p class="lead">Two versions of one layout — unaligned and aligned — with annotated alignment lines and a two-sentence feel comparison.</p><ul><li><b>Meets the bar:</b> Version B uses exact shared edges and the alignment lines are annotated and labeled.</li><li><b>Exceeds:</b> B reaches full order with just two or three relationships (restraint) and the comparison names the perceptual reason it feels professional.</li><li><b>Redirect:</b> near-misses in B get exact-aligned — “aligned by eye” is not aligned.</li></ul></div></div><div class="sec"><div class="sec-h"><i class="ti ti-alert-triangle"></i> Watch for</div><ul class="watch"><li><b>Eyeballing instead of the Align panel.</b> Near-misses creep in and read as carelessness.</li><li><b>Defaulting to center alignment.</b> Often weaker; reserve it for formal or standalone content.</li><li><b>Pixel-perfectionism on everything.</b> A few consistent edges beat fussing over every element.</li><li><b>Floating elements with no relationship.</b> Every element should align to something.</li></ul></div><div class="sec"><div class="sec-h"><i class="ti ti-message-2"></i> Discussion questions</div><ul class="disc"><li>Why does a four-pixel near-miss look worse than an element that's obviously offset?</li><li>When is center alignment genuinely the right call?</li><li>How can just two or three shared edges make an entire layout feel intentional?</li></ul></div><div class="ref"><div class="obj"><h6>Lesson objectives</h6><ul><li>Explain the alignment principle and identify the perceptual mechanism that makes misalignment feel wrong</li><li>Distinguish between left, right, center, and edge alignment — and identify when each is appropriate</li><li>Diagnose and correct alignment failures — including near-misses, inconsistent margins, and random offsets</li><li>Explain why center alignment is often overused and when it is genuinely appropriate</li><li>Use invisible alignment structures — shared edges, gutters, and guides — to create professional layout order</li></ul></div><div class="voc"><h6>Key vocabulary</h6><ul><li><span class="t">Alignment</span> <span class="d">— visual connection through shared edges or centerlines — the invisible architecture that reads as intentional.</span></li><li><span class="t">Near-Miss</span> <span class="d">— an almost-correct alignment that's visibly off — worse than a clear offset because it signals failed precision.</span></li><li><span class="t">Floating Element</span> <span class="d">— an element connected to nothing — positioned by feel with no shared edge.</span></li><li><span class="t">Center Alignment</span> <span class="d">— alignment on a central axis — right for formal or standalone content, overused as a default, often weaker than left.</span></li><li><span class="t">Edge Alignment</span> <span class="d">— aligning elements' edges to connect them across the layout, independent of proximity.</span></li><li><span class="t">Invisible Structure</span> <span class="d">— the network of alignment lines connecting every element — unseen in the design but felt as order.</span></li></ul></div></div></div></section>
+<footer class="foot">
+    <div class="note">
+      <p><b>A note on authority.</b> This guide is authored teaching support — big ideas, facts, scenarios, and a suggested flow. The student lesson pages remain the <b>source of truth</b> for exact definitions, the precise names and number of process stages, and any figures. Where this guide and the lesson differ, follow the lesson and let us know so we can reconcile the two.</p>
+      <p style="margin-top:12px"><b>Timing is a guide, not a rule.</b> The step minutes assume a ~45-minute period and are meant to be compressed or expanded. Trim the case study or discussion first if you're short; they're the most elastic.</p>
+      <div class="sig">CPLA · Volume 1 · Module 1 — What Design Is · Instructor Guide · Companion to the Studio Director</div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

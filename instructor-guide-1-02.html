@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPLA — Instructor Guide · Lesson 1.2 Design vs. Decoration</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ink:#1a1410;--paper:#faf7f2;--cream:#f0ead8;--rule:#d4c9b8;
+    --mid:#6b5e52;--mod:#1a56c4;--ml:#e8f0fe;--green:#2d7a1a;--gnl:#f0fae8;
+    --blue:#01123a;--nav2:#0a1c44;--gold:#da9e2b;--rose:#b0472f;--rosel:#fbeee9;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;font-weight:300;background:var(--cream);color:var(--ink);line-height:1.6}
+  .wrap{max-width:940px;margin:0 auto;padding:0 22px}
+
+  /* HERO */
+  .hero{background:linear-gradient(150deg,#0a1c44,#25324d);color:#fff;padding:52px 0 44px}
+  .hero .eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(218,158,43,.95);font-family:'DM Mono',monospace;margin-bottom:14px}
+  .hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:42px;line-height:1.08;margin-bottom:14px}
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero .lede{font-size:16px;color:rgba(255,255,255,.8);max-width:640px}
+  .hero .meta{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+  .pill{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-family:'DM Mono',monospace;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.25);padding:5px 12px;border-radius:100px}
+
+  /* HOW TO USE */
+  .howto{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:26px 28px;margin:34px auto}
+  .howto h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:12px}
+  .howto p{font-size:14.5px;color:#3a332a;margin-bottom:12px}
+  .howto p:last-child{margin-bottom:0}
+  .legend{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin-top:16px}
+  @media(max-width:680px){.legend{grid-template-columns:1fr}}
+  .legend .li{font-size:13px;color:var(--mid);display:flex;gap:9px;align-items:flex-start}
+  .legend .li i{color:var(--mod);font-size:17px;margin-top:1px}
+  .legend .li b{color:var(--ink);font-weight:600}
+
+  /* MINI NAV */
+  .toc{position:sticky;top:0;z-index:20;background:rgba(240,234,216,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule);padding:12px 0;margin-bottom:8px}
+  .toc .wrap{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .toc .lbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-family:'DM Mono',monospace;margin-right:4px}
+  .toc a{font-size:13px;font-weight:600;color:var(--blue);text-decoration:none;border:1px solid var(--rule);background:#fff;padding:6px 12px;border-radius:100px;transition:.15s}
+  .toc a:hover{border-color:var(--gold);background:var(--paper)}
+
+  /* LESSON SECTION */
+  .lesson{margin:40px auto 0}
+  .lband{background:linear-gradient(150deg,#14213f,#25324d);color:#fff;border-radius:16px 16px 0 0;padding:30px 28px}
+  .lband .lbl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(218,158,43,.9);font-family:'DM Mono',monospace;margin-bottom:10px}
+  .lband h2{font-family:'Playfair Display',serif;font-size:31px;font-weight:900;line-height:1.1;margin-bottom:6px}
+  .lband .sub{font-size:14px;color:rgba(255,255,255,.68);font-family:'DM Mono',monospace}
+  .lbody{background:#fff;border:1px solid var(--rule);border-top:0;border-radius:0 0 16px 16px;padding:30px 28px 34px}
+
+  .sec{margin-bottom:30px}.sec:last-child{margin-bottom:0}
+  .sec-h{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:9px;padding-bottom:9px;border-bottom:1px solid #efeae0}
+  .sec-h i{font-size:17px}
+  .bigidea{background:var(--ml);border-left:3px solid var(--mod);border-radius:0 10px 10px 0;padding:16px 20px;font-size:16px;line-height:1.6;color:var(--blue)}
+  .bigidea b{font-weight:600}
+  p.body{font-size:14.5px;color:#3a332a;margin-bottom:12px}
+  p.body:last-child{margin-bottom:0}
+
+  /* FACTS */
+  .facts{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .facts li{font-size:14.5px;line-height:1.62;color:#3a332a;padding-left:26px;position:relative}
+  .facts li::before{content:"\ea60";font-family:"tabler-icons";position:absolute;left:0;top:1px;color:var(--gold);font-size:16px}
+  .facts b{color:var(--ink);font-weight:600}
+
+  /* SCENARIOS */
+  .scen{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:680px){.scen{grid-template-columns:1fr}}
+  .scard{border:1px solid var(--rule);border-radius:11px;padding:15px 17px;background:var(--paper)}
+  .scard h5{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:5px}
+  .scard p{font-size:13px;color:var(--mid);line-height:1.55}
+
+  /* STEPS */
+  .steps{counter-reset:st;display:flex;flex-direction:column;gap:2px}
+  .step{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:15px 0;border-bottom:1px dashed #e6ddcd}
+  .step:last-child{border-bottom:0}
+  .step .num{counter-increment:st;width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-family:'DM Mono',monospace;font-weight:500;font-size:14px}
+  .step .num::before{content:counter(st)}
+  .step .txt h5{font-size:15.5px;font-weight:600;color:var(--ink);margin-bottom:4px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .step .txt .time{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mod);background:var(--ml);padding:2px 8px;border-radius:100px;font-family:'DM Mono',monospace;font-weight:500}
+  .step .txt p{font-size:14px;color:#3a332a;line-height:1.6}
+  .step .txt .say{font-size:13.5px;color:var(--mid);font-style:italic;margin-top:6px;padding-left:12px;border-left:2px solid var(--gold)}
+
+  /* CALLOUTS */
+  .call{border-radius:11px;padding:16px 20px;font-size:14px;line-height:1.6}
+  .call.fm{background:var(--gnl);border:1px solid #cfe6bf}
+  .call.del{background:#fff7e8;border:1px solid #eddcae}
+  .call .ct{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:9px}
+  .call.fm .ct i{color:var(--green)} .call.del .ct i{color:var(--gold)}
+  .call .lead{font-size:12px;letter-spacing:.04em;color:var(--mid);margin-bottom:8px}
+  .call ul{list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:8px}
+  .call li{padding-left:22px;position:relative;font-size:13.5px;color:#3a332a}
+  .call li::before{content:"\ea5e";font-family:"tabler-icons";position:absolute;left:0;top:0;font-size:15px}
+  .call.fm li::before{color:var(--green)} .call.del li::before{color:var(--gold)}
+
+  /* WATCH FOR */
+  .watch{background:var(--rosel);border:1px solid #eccabf;border-radius:11px;padding:16px 20px}
+  .watch li{list-style:none;font-size:14px;line-height:1.58;color:#5a2a1c;padding-left:24px;position:relative;margin-bottom:9px}
+  .watch li:last-child{margin-bottom:0}
+  .watch li::before{content:"\eb4d";font-family:"tabler-icons";position:absolute;left:0;top:1px;color:var(--rose);font-size:15px}
+  .watch b{color:var(--rose);font-weight:600}
+
+  /* DISCUSSION */
+  .disc{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .disc li{font-size:14.5px;color:#3a332a;padding-left:26px;position:relative;line-height:1.55}
+  .disc li::before{content:"\eb46";font-family:"tabler-icons";position:absolute;left:0;top:1px;color:var(--mod);font-size:16px}
+
+  /* REFERENCE GRID */
+  .ref{display:grid;grid-template-columns:1fr 1fr;gap:22px;background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:20px 22px}
+  @media(max-width:680px){.ref{grid-template-columns:1fr}}
+  .ref h6{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);font-weight:600;margin-bottom:10px}
+  .ref ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .ref .obj li{font-size:13px;color:#3a332a;padding-left:15px;position:relative;line-height:1.5}
+  .ref .obj li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+  .ref .voc li{font-size:13px;line-height:1.5}
+  .ref .voc .t{font-weight:600;color:var(--ink)}.ref .voc .d{color:var(--mid)}
+
+  /* FOOTER */
+  .foot{margin:44px 0 60px}
+  .foot .note{background:#fff;border:1px solid var(--rule);border-radius:14px;padding:22px 26px;font-size:13.5px;color:var(--mid);line-height:1.65}
+  .foot .note b{color:var(--ink);font-weight:600}
+  .foot .sig{margin-top:14px;font-size:12px;color:var(--mid);font-family:'DM Mono',monospace}
+
+  @media print{
+    .toc{display:none}.hero{background:#14213f !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .lband{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .lesson{page-break-inside:avoid}
+  }
+
+  /* single-page title controls */
+  .lband{position:relative}
+  .lband-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+  .gback{font-size:13px;font-weight:600;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(255,255,255,.28);padding:7px 14px;border-radius:100px;transition:.15s}
+  .gback:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.55)}
+  .gback i{font-size:16px}
+  .gpdf{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--blue);background:var(--gold);border:0;border-radius:100px;padding:8px 16px;display:inline-flex;align-items:center;gap:7px;cursor:pointer;transition:.15s}
+  .gpdf:hover{filter:brightness(1.06)}
+  .gpdf i{font-size:16px}
+  @media print{.lband-top{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap" style="padding-top:34px">
+<section class="lesson" id="l12">
+    <div class="lband"><div class="lband-top"><a class="gback" href="../../studio-director.html"><i class="ti ti-arrow-left"></i> Studio Director</a><button class="gpdf" onclick="window.print()"><i class="ti ti-file-type-pdf"></i> Save as PDF</button></div>
+      <div class="lbl">Volume 1 · Module 1 · Lesson 1.2</div>
+      <h2>Design vs. Decoration</h2>
+      <div class="sub">Every element must earn its place</div>
+    </div>
+    <div class="lbody">
+
+      <div class="sec">
+        <div class="sec-h"><i class="ti ti-bulb"></i> The Big Idea</div>
+        <div class="bigidea"><b>A design decision communicates; decoration is added without a job.</b> Experienced designers <em>subtract</em> — they remove anything that doesn't earn its place. Beginners add. This lesson is where students first feel that reversal.</div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-h"><i class="ti ti-book-2"></i> What you're really teaching</div>
+        <ul class="facts">
+          <li><b>The Removal Test is a decision tool, not an opinion.</b> If you remove an element and the communication doesn't get weaker, the element was decorative. It turns "do I like this?" into "does this do work?"</li>
+          <li><b>Swiss design is the historical proof.</b> The mid-20th-century International Typographic Style — Josef Müller-Brockmann, Armin Hofmann, and the 1957 typeface Helvetica — showed that stripping ornament to clean grids, sans-serif type, and white space made communication <em>stronger,</em> not colder.</li>
+          <li><b>The masters said it in one line each.</b> Dieter Rams: "Good design is as little design as possible." Antoine de Saint-Exupéry: perfection is reached "not when there is nothing more to add, but when there is nothing left to take away." These are memorable anchors for restraint.</li>
+          <li><b>Restraint is not the same as boring or empty.</b> The goal isn't minimalism for its own sake — it's that <em>every remaining element has a reason.</em> A dense design can pass the Removal Test if every part is working.</li>
+          <li><b>Context sets the dial.</b> A wedding invitation earns more ornament than a fire-exit sign. Teach the decoration-to-design spectrum, not a rule that decoration is bad.</li>
+        </ul>
+      </div>
+
+      <div class="sec">
+        <div class="sec-h"><i class="ti ti-map-2"></i> Scenarios &amp; hooks to open the room</div>
+        <div class="scen">
+          <div class="scard"><h5>The over-decorated slide</h5><p>Show a PowerPoint slide with a photo background, three fonts, a drop shadow, and clip art. Remove elements live until the message appears. Instant "aha."</p></div>
+          <div class="scard"><h5>Two menus</h5><p>A cluttered diner menu vs. a clean one. Which makes you find the thing you want faster? Decoration can literally cost the business a sale.</p></div>
+          <div class="scard"><h5>The search homepage</h5><p>A famous search engine is a logo and a box. Ask what's <em>missing</em> and why removing everything else was the design.</p></div>
+          <div class="scard"><h5>Road sign vs. wedding invite</h5><p>Put them side by side. Both are "good design" — but the acceptable amount of decoration is opposite. Context, not taste.</p></div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-h"><i class="ti ti-list-numbers"></i> Teaching the lesson — step by step</div>
+        <div class="steps">
+          <div class="step"><div class="num"></div><div class="txt"><h5>Hook: subtract in real time <span class="time">6 min</span></h5><p>Open the cluttered slide and delete one element at a time, asking after each: "Did the message get weaker?" Stop when it's cleanest. They just watched the Removal Test.</p></div></div>
+          <div class="step"><div class="num"></div><div class="txt"><h5>Define the two words precisely <span class="time">6 min</span></h5><p>Design decision = has a communicative job. Decoration = added for appearance alone. Neither is automatically wrong; decoration just has to be <em>justified.</em></p></div></div>
+          <div class="step"><div class="num"></div><div class="txt"><h5>Teach the Removal Test + the Five Justification Questions <span class="time">8 min</span></h5><p>Give them the exact procedure they'll use on paper: for each element, remove it and the ask whether communication suffered; if not, cut it.</p></div></div>
+          <div class="step"><div class="num"></div><div class="txt"><h5>Introduce the decoration-to-design spectrum <span class="time">6 min</span></h5><p>Draw a line: fire-exit sign at one end, ornate invitation at the other. Place several real designs on it as a class. Establish that context sets how much decoration is right.</p></div></div>
+          <div class="step"><div class="num"></div><div class="txt"><h5>Set up the Field Manual audit <span class="time">5 min</span></h5><p>Hand out (or have students pick) one real design. Model auditing the first element together, then release them.</p></div></div>
+          <div class="step"><div class="num"></div><div class="txt"><h5>Close on the reversal <span class="time">5 min</span></h5><p>Land the line: "Beginners add. Designers subtract." Ask each student for one element they'd cut from something in the room.</p></div></div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-h"><i class="ti ti-pencil"></i> Facilitating the Field Manual — <em>The Removal Test Audit</em></div>
+        <div class="call fm">
+          <div class="ct"><i class="ti ti-pencil"></i> Running the exercise</div>
+          <p class="lead">Students take a real design and go element by element, applying the Removal Test and the Five Justification Questions.</p>
+          <ul>
+            <li>Give them a design with a real mix — some working elements, some decorative — so the audit has stakes. A local flyer or ad works well.</li>
+            <li>Require a verdict per element: <em>keep (has a job)</em> or <em>cut (decorative).</em> No "maybe." The forced call is where the learning is.</li>
+            <li>Remind them the goal is not to cut everything — a kept decorative element is fine <em>if</em> they can justify it by context.</li>
+            <li>Watch for students cutting things they simply dislike; make them name the missing communicative job before they cut.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-h"><i class="ti ti-checkbox"></i> The Assignment &amp; Deliverable — <em>Decoration-to-Design Audit</em></div>
+        <div class="call del">
+          <div class="ct"><i class="ti ti-checkbox"></i> What good work looks like</div>
+          <p class="lead">A marked-up analysis placing the design on the decoration-to-design spectrum, justifying or removing each element, plus a revised "subtracted" version.</p>
+          <ul>
+            <li><b>Meets the bar:</b> every element gets a keep/cut verdict with a one-line reason tied to the message.</li>
+            <li><b>Exceeds:</b> the "subtracted" version is visibly cleaner <em>and</em> the student can defend one decorative element they chose to keep on context grounds.</li>
+            <li><b>Redirect:</b> if a student cut everything to nothing, ask what the design still needs to <em>do</em> — restraint isn't erasure.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-h"><i class="ti ti-alert-triangle"></i> Watch for</div>
+        <ul class="watch">
+          <li><b>"More elements = more effort = better grade."</b> The add-more instinct is strong. Reward the reasoning behind removal, not the amount on the page.</li>
+          <li><b>Treating minimalism as the goal.</b> The goal is <em>justified</em> elements, not the fewest. Don't let "clean" become a new kind of thoughtless default.</li>
+          <li><b>Cutting on taste.</b> "I'd remove it because it's ugly" fails the test. The test is whether communication weakens.</li>
+        </ul>
+      </div>
+
+      <div class="sec">
+        <div class="sec-h"><i class="ti ti-message-2"></i> Discussion questions</div>
+        <ul class="disc">
+          <li>Name a design where decoration is doing a real job. What would be lost if you removed it?</li>
+          <li>Why do beginners add and experts subtract — what changes with experience?</li>
+          <li>Where should a fast-food menu sit on the decoration-to-design spectrum, and why?</li>
+        </ul>
+      </div>
+
+      <div class="ref">
+        <div class="obj"><h6>Lesson objectives</h6><ul>
+          <li>Articulate the difference between a decorative choice and a design decision</li>
+          <li>Apply the Removal Test to any element in a composition</li>
+          <li>Place real designs on the decoration-to-design spectrum and explain why</li>
+          <li>Use the Five Design Justification Questions as a self-editing framework</li>
+          <li>Explain why experienced designers subtract while beginners add</li>
+        </ul></div>
+        <div class="voc"><h6>Key vocabulary</h6><ul>
+          <li><span class="t">Decoration</span> <span class="d">— visual elements added for appearance without a specific communicative purpose.</span></li>
+          <li><span class="t">Visual Hierarchy</span> <span class="d">— arranging elements so the eye moves in the intended order, most to least important.</span></li>
+          <li><span class="t">Restraint</span> <span class="d">— deliberately using fewer elements, each with clear purpose, instead of filling space.</span></li>
+          <li><span class="t">Removal Test</span> <span class="d">— if removing an element doesn't weaken communication, it's likely decorative.</span></li>
+          <li><span class="t">Swiss Design</span> <span class="d">— mid-century movement of grids, sans-serif type, and white space; proof that less can communicate more.</span></li>
+          <li><span class="t">Ornament</span> <span class="d">— a decorative detail added for enrichment, not function; not always wrong, but always requiring justification.</span></li>
+        </ul></div>
+      </div>
+
+    </div>
+  </section>
+<footer class="foot">
+    <div class="note">
+      <p><b>A note on authority.</b> This guide is authored teaching support — big ideas, facts, scenarios, and a suggested flow. The student lesson pages remain the <b>source of truth</b> for exact definitions, the precise names and number of process stages, and any figures. Where this guide and the lesson differ, follow the lesson and let us know so we can reconcile the two.</p>
+      <p style="margin-top:12px"><b>Timing is a guide, not a rule.</b> The step minutes assume a ~45-minute period and are meant to be compressed or expanded. Trim the case study or discussion first if you're short; they're the most elastic.</p>
+      <div class="sig">CPLA · Volume 1 · Module 1 — What Design Is · Instructor Guide · Companion to the Studio Director</div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
