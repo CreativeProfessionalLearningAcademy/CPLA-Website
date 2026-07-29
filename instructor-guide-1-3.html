@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPLA — Instructor Guide · Lesson 1.3 The Design Process</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ink:#1a1410;--paper:#faf7f2;--cream:#f0ead8;--rule:#d4c9b8;
+    --mid:#6b5e52;--mod:#1a56c4;--ml:#e8f0fe;--green:#2d7a1a;--gnl:#f0fae8;
+    --blue:#01123a;--nav2:#0a1c44;--gold:#da9e2b;--rose:#b0472f;--rosel:#fbeee9;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;font-weight:300;background:var(--cream);color:var(--ink);line-height:1.6}
+  .wrap{max-width:940px;margin:0 auto;padding:0 22px}
+
+  /* HERO */
+  .hero{background:linear-gradient(150deg,#0a1c44,#25324d);color:#fff;padding:52px 0 44px}
+  .hero .eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(218,158,43,.95);font-family:'DM Mono',monospace;margin-bottom:14px}
+  .hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:42px;line-height:1.08;margin-bottom:14px}
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero .lede{font-size:16px;color:rgba(255,255,255,.8);max-width:640px}
+  .hero .meta{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+  .pill{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-family:'DM Mono',monospace;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.25);padding:5px 12px;border-radius:100px}
+
+  /* HOW TO USE */
+  .howto{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:26px 28px;margin:34px auto}
+  .howto h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:12px}
+  .howto p{font-size:14.5px;color:#3a332a;margin-bottom:12px}
+  .howto p:last-child{margin-bottom:0}
+  .legend{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin-top:16px}
+  @media(max-width:680px){.legend{grid-template-columns:1fr}}
+  .legend .li{font-size:13px;color:var(--mid);display:flex;gap:9px;align-items:flex-start}
+  .legend .li i{color:var(--mod);font-size:17px;margin-top:1px}
+  .legend .li b{color:var(--ink);font-weight:600}
+
+  /* MINI NAV */
+  .toc{position:sticky;top:0;z-index:20;background:rgba(240,234,216,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule);padding:12px 0;margin-bottom:8px}
+  .toc .wrap{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .toc .lbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-family:'DM Mono',monospace;margin-right:4px}
+  .toc a{font-size:13px;font-weight:600;color:var(--blue);text-decoration:none;border:1px solid var(--rule);background:#fff;padding:6px 12px;border-radius:100px;transition:.15s}
+  .toc a:hover{border-color:var(--gold);background:var(--paper)}
+
+  /* LESSON SECTION */
+  .lesson{margin:40px auto 0}
+  .lband{background:linear-gradient(150deg,#14213f,#25324d);color:#fff;border-radius:16px 16px 0 0;padding:30px 28px}
+  .lband .lbl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(218,158,43,.9);font-family:'DM Mono',monospace;margin-bottom:10px}
+  .lband h2{font-family:'Playfair Display',serif;font-size:31px;font-weight:900;line-height:1.1;margin-bottom:6px}
+  .lband .sub{font-size:14px;color:rgba(255,255,255,.68);font-family:'DM Mono',monospace}
+  .lbody{background:#fff;border:1px solid var(--rule);border-top:0;border-radius:0 0 16px 16px;padding:30px 28px 34px}
+
+  .sec{margin-bottom:30px}.sec:last-child{margin-bottom:0}
+  .sec-h{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--mod);font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:9px;padding-bottom:9px;border-bottom:1px solid #efeae0}
+  .sec-h i{font-size:17px}
+  .bigidea{background:var(--ml);border-left:3px solid var(--mod);border-radius:0 10px 10px 0;padding:16px 20px;font-size:16px;line-height:1.6;color:var(--blue)}
+  .bigidea b{font-weight:600}
+  p.body{font-size:14.5px;color:#3a332a;margin-bottom:12px}
+  p.body:last-child{margin-bottom:0}
+
+  /* FACTS */
+  .facts{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .facts li{font-size:14.5px;line-height:1.62;color:#3a332a;padding-left:26px;position:relative}
+  .facts li::before{content:"\ea60";font-family:"tabler-icons";position:absolute;left:0;top:1px;color:var(--gold);font-size:16px}
+  .facts b{color:var(--ink);font-weight:600}
+
+  /* SCENARIOS */
+  .scen{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:680px){.scen{grid-template-columns:1fr}}
+  .scard{border:1px solid var(--rule);border-radius:11px;padding:15px 17px;background:var(--paper)}
+  .scard h5{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:5px}
+  .scard p{font-size:13px;color:var(--mid);line-height:1.55}
+
+  /* STEPS */
+  .steps{counter-reset:st;display:flex;flex-direction:column;gap:2px}
+  .step{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:15px 0;border-bottom:1px dashed #e6ddcd}
+  .step:last-child{border-bottom:0}
+  .step .num{counter-increment:st;width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-family:'DM Mono',monospace;font-weight:500;font-size:14px}
+  .step .num::before{content:counter(st)}
+  .step .txt h5{font-size:15.5px;font-weight:600;color:var(--ink);margin-bottom:4px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .step .txt .time{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mod);background:var(--ml);padding:2px 8px;border-radius:100px;font-family:'DM Mono',monospace;font-weight:500}
+  .step .txt p{font-size:14px;color:#3a332a;line-height:1.6}
+  .step .txt .say{font-size:13.5px;color:var(--mid);font-style:italic;margin-top:6px;padding-left:12px;border-left:2px solid var(--gold)}
+
+  /* CALLOUTS */
+  .call{border-radius:11px;padding:16px 20px;font-size:14px;line-height:1.6}
+  .call.fm{background:var(--gnl);border:1px solid #cfe6bf}
+  .call.del{background:#fff7e8;border:1px solid #eddcae}
+  .call .ct{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:9px}
+  .call.fm .ct i{color:var(--green)} .call.del .ct i{color:var(--gold)}
+  .call .lead{font-size:12px;letter-spacing:.04em;color:var(--mid);margin-bottom:8px}
+  .call ul{list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:8px}
+  .call li{padding-left:22px;position:relative;font-size:13.5px;color:#3a332a}
+  .call li::before{content:"\ea5e";font-family:"tabler-icons";position:absolute;left:0;top:0;font-size:15px}
+  .call.fm li::before{color:var(--green)} .call.del li::before{color:var(--gold)}
+
+  /* WATCH FOR */
+  .watch{background:var(--rosel);border:1px solid #eccabf;border-radius:11px;padding:16px 20px}
+  .watch li{list-style:none;font-size:14px;line-height:1.58;color:#5a2a1c;padding-left:24px;position:relative;margin-bottom:9px}
+  .watch li:last-child{margin-bottom:0}
+  .watch li::before{content:"\eb4d";font-family:"tabler-icons";position:absolute;left:0;top:1px;color:var(--rose);font-size:15px}
+  .watch b{color:var(--rose);font-weight:600}
+
+  /* DISCUSSION */
+  .disc{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .disc li{font-size:14.5px;color:#3a332a;padding-left:26px;position:relative;line-height:1.55}
+  .disc li::before{content:"\eb46";font-family:"tabler-icons";position:absolute;left:0;top:1px;color:var(--mod);font-size:16px}
+
+  /* REFERENCE GRID */
+  .ref{display:grid;grid-template-columns:1fr 1fr;gap:22px;background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:20px 22px}
+  @media(max-width:680px){.ref{grid-template-columns:1fr}}
+  .ref h6{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);font-weight:600;margin-bottom:10px}
+  .ref ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .ref .obj li{font-size:13px;color:#3a332a;padding-left:15px;position:relative;line-height:1.5}
+  .ref .obj li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+  .ref .voc li{font-size:13px;line-height:1.5}
+  .ref .voc .t{font-weight:600;color:var(--ink)}.ref .voc .d{color:var(--mid)}
+
+  /* FOOTER */
+  .foot{margin:44px 0 60px}
+  .foot .note{background:#fff;border:1px solid var(--rule);border-radius:14px;padding:22px 26px;font-size:13.5px;color:var(--mid);line-height:1.65}
+  .foot .note b{color:var(--ink);font-weight:600}
+  .foot .sig{margin-top:14px;font-size:12px;color:var(--mid);font-family:'DM Mono',monospace}
+
+  @media print{
+    .toc{display:none}.hero{background:#14213f !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .lband{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .lesson{page-break-inside:avoid}
+  }
+
+  /* single-page title controls */
+  .lband{position:relative}
+  .lband-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+  .gback{font-size:13px;font-weight:600;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(255,255,255,.28);padding:7px 14px;border-radius:100px;transition:.15s}
+  .gback:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.55)}
+  .gback i{font-size:16px}
+  .gpdf{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--blue);background:var(--gold);border:0;border-radius:100px;padding:8px 16px;display:inline-flex;align-items:center;gap:7px;cursor:pointer;transition:.15s}
+  .gpdf:hover{filter:brightness(1.06)}
+  .gpdf i{font-size:16px}
+  @media print{.lband-top{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap" style="padding-top:34px">
+<section class="lesson" id="l13">
+    <div class="lband"><div class="lband-top"><a class="gback" href="studio-director.html"><i class="ti ti-arrow-left"></i> Studio Director</a><button class="gpdf" onclick="window.print()"><i class="ti ti-file-type-pdf"></i> Save as PDF</button></div>
+      <div class="lbl">Volume 1 · Module 1 · Lesson 1.3</div>
+      <h2>The Design Process</h2>
+      <div class="sub">How professionals move from brief to finished work</div>
+    </div>
+    <div class="lbody">
+
+      <div class="sec">
+        <div class="sec-h"><i class="ti ti-bulb"></i> The Big Idea</div>
+        <div class="bigidea"><b>Good design comes from a repeatable, brief-driven process — not from waiting for inspiration.</b> The process is <em>iterative,</em> not a straight line: designers loop back when critique or testing reveals a problem. Teaching the process gives students a way to work when they're stuck.</div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-h"><i class="ti ti-book-2"></i> What you're really teaching</div>
+        <ul class="facts">
+          <li><b>The brief is the foundation of everything.</b> Message, audience, tone, deliverables, constraints, timeline — a project without a brief has no way to know if it succeeded. Every later stage answers back to it.</li>
+          <li><b>Ideation is divergent on purpose.</b> The point of thumbnail sketching is quantity without judgment — generate many concepts before evaluating any. J. P. Guilford's distinction between <em>divergent</em> (generate options) and <em>convergent</em> (narrow to one) thinking is the mental gear-shift students must learn to make deliberately.</li>
+          <li><b>Iteration is the engine, not a sign of failure.</b> Designers expect to make version after version, each improved by critique. Students often think a redo means they got it "wrong" — reframe iteration as how the work gets good.</li>
+          <li><b>Critique is measured against the brief, not personal taste.</b> "I don't like the blue" is not critique; "the blue reads as cold, and the brief asked for warm and welcoming" is. This keeps feedback professional and useful.</li>
+          <li><b>The London 2012 case study shows process enabling courage.</b> The 2012 Olympic identity was polarizing on release, but it flowed from a clear, deliberate brief — a strong example of how a defensible process lets designers make bold, brief-driven decisions and stand behind them.</li>
+        </ul>
+      </div>
+
+      <div class="sec">
+        <div class="sec-h"><i class="ti ti-map-2"></i> Scenarios &amp; hooks to open the room</div>
+        <div class="scen">
+          <div class="scard"><h5>Rebrand the coffee shop</h5><p>Pick a real local spot. Write its brief together in five minutes — message, audience, tone. Students feel how much a brief decides before any drawing.</p></div>
+          <div class="scard"><h5>The London 2012 debate</h5><p>Show the reaction to a famous, divisive identity. Ask: could a designer defend this? What in the brief would make it the right call?</p></div>
+          <div class="scard"><h5>The iteration reel</h5><p>Show a well-known logo's evolution across versions. Every step was a loop, not a failure. Iteration made it inevitable.</p></div>
+          <div class="scard"><h5>School event poster</h5><p>A concrete, low-stakes brief students can actually do: promote a real upcoming event. Constraints and audience are already real.</p></div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-h"><i class="ti ti-list-numbers"></i> Teaching the lesson — step by step</div>
+        <div class="steps">
+          <div class="step"><div class="num"></div><div class="txt"><h5>Hook: "where do you start?" <span class="time">5 min</span></h5><p>Ask how they'd begin designing a poster. Most say "start drawing." Use that to reveal the missing first step — the brief.</p></div></div>
+          <div class="step"><div class="num"></div><div class="txt"><h5>Walk the stages in order <span class="time">10 min</span></h5><p>Present the process end to end, brief to reflection, in the exact sequence and names the lesson uses. Emphasize the loop-backs — where and why designers return to an earlier stage.</p><p class="say">Align stage names to the student lesson page; it is the source of truth for the exact list.</p></div></div>
+          <div class="step"><div class="num"></div><div class="txt"><h5>Read a brief together <span class="time">8 min</span></h5><p>Project a sample brief. Identify what's present, what's missing, and what questions a designer would ask before starting. This models professional judgment.</p></div></div>
+          <div class="step"><div class="num"></div><div class="txt"><h5>Model divergent ideation <span class="time">7 min</span></h5><p>Give one prompt and thumbnail six wildly different concepts on the board in two minutes — badly, fast, no erasing. Show that quantity-without-judgment is a skill, not chaos.</p></div></div>
+          <div class="step"><div class="num"></div><div class="txt"><h5>Case study: process enables courage <span class="time">8 min</span></h5><p>Run the London 2012 discussion. Tie the bold decision back to the brief. Land that a good process is what lets you defend a risky choice.</p></div></div>
+          <div class="step"><div class="num"></div><div class="txt"><h5>Set up the Field Manual brief <span class="time">5 min</span></h5><p>Hand out the scenario. Clarify every required field of the brief and what a complete one contains before students write their own.</p></div></div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-h"><i class="ti ti-pencil"></i> Facilitating the Field Manual — <em>Write the Brief</em></div>
+        <div class="call fm">
+          <div class="ct"><i class="ti ti-pencil"></i> Running the exercise</div>
+          <p class="lead">From a given scenario, students write a complete design brief, then generate thumbnail sketches for it.</p>
+          <ul>
+            <li>Insist every brief field is filled — an empty "constraints" or "timeline" line is the most common gap and the most important in real work.</li>
+            <li>Separate the two modes out loud: <em>first</em> write the brief (convergent, decisions), <em>then</em> thumbnail (divergent, options). Don't let them sketch a finished logo — thumbnails are small, fast, and plural.</li>
+            <li>Set a minimum number of thumbnails (six is a good floor) so students can't stop at their first idea.</li>
+            <li>Circulate and ask "what does the brief say the tone is?" to keep sketches accountable to the brief rather than to preference.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-h"><i class="ti ti-checkbox"></i> The Assignment &amp; Deliverable — <em>Design Brief + Ideation Sheet</em></div>
+        <div class="call del">
+          <div class="ct"><i class="ti ti-checkbox"></i> What good work looks like</div>
+          <p class="lead">A complete design brief for the scenario with every field filled, paired with an ideation sheet of multiple distinct thumbnail concepts.</p>
+          <ul>
+            <li><b>Meets the bar:</b> all brief fields present and internally consistent; at least six thumbnails that are genuinely different, not one idea drawn six times.</li>
+            <li><b>Exceeds:</b> the thumbnails visibly respond to the brief's stated tone and audience, and the student can point to which direction they'd develop and why.</li>
+            <li><b>Redirect:</b> if thumbnails are all variations of one concept, send them back to diverge — the deliverable is about range, not polish.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-h"><i class="ti ti-alert-triangle"></i> Watch for</div>
+        <ul class="watch">
+          <li><b>"Just start designing."</b> Skipping the brief is the default instinct. Make the brief non-optional and show how it prevents wasted work.</li>
+          <li><b>Treating iteration as failure.</b> Students hear "revise" as "you got it wrong." Reframe every loop as the normal way good work is made.</li>
+          <li><b>Polishing one thumbnail.</b> The point of ideation is many rough options. A single beautiful sketch has skipped the divergent step.</li>
+          <li><b>Taste-based critique.</b> Keep all feedback anchored to the brief, not to "I like / I don't like."</li>
+        </ul>
+      </div>
+
+      <div class="sec">
+        <div class="sec-h"><i class="ti ti-message-2"></i> Discussion questions</div>
+        <ul class="disc">
+          <li>Why write a brief at all — what goes wrong on a project that never had one?</li>
+          <li>When is it right to loop back to an earlier stage, and when is that just avoiding a decision?</li>
+          <li>The London 2012 identity was divisive. Can a design be "good" if many people dislike it? What would settle the question?</li>
+        </ul>
+      </div>
+
+      <div class="ref">
+        <div class="obj"><h6>Lesson objectives</h6><ul>
+          <li>Name and describe the seven stages of the professional design process in sequence</li>
+          <li>Explain why the process is iterative rather than linear — and what triggers a return loop</li>
+          <li>Read and evaluate a brief: what's present, what's missing, what to ask</li>
+          <li>Write a complete design brief for a given scenario using all required fields</li>
+          <li>Use the London 2012 case study to explain how process enables bold, brief-driven decisions</li>
+        </ul></div>
+        <div class="voc"><h6>Key vocabulary</h6><ul>
+          <li><span class="t">Design Brief</span> <span class="d">— the document defining a project: message, audience, tone, deliverables, constraints, timeline.</span></li>
+          <li><span class="t">Ideation</span> <span class="d">— the divergent phase: generate as many concepts as possible before evaluating any.</span></li>
+          <li><span class="t">Iteration</span> <span class="d">— cyclical refinement through successive versions, each informed by critique.</span></li>
+          <li><span class="t">Critique</span> <span class="d">— structured feedback on work-in-progress, judged against the brief, not preference.</span></li>
+          <li><span class="t">Thumbnail Sketch</span> <span class="d">— small, fast, rough sketches to explore many concepts quickly.</span></li>
+          <li><span class="t">Divergent Thinking</span> <span class="d">— generating many options without judgment; the opposite of narrowing to one.</span></li>
+          <li><span class="t">Deliverable</span> <span class="d">— the specific file or output the designer must produce, defined in the brief.</span></li>
+          <li><span class="t">Production Specifications</span> <span class="d">— technical parameters of the final file: resolution, color mode, format, bleed, trim.</span></li>
+        </ul></div>
+      </div>
+
+    </div>
+  </section>
+<footer class="foot">
+    <div class="note">
+      <p><b>A note on authority.</b> This guide is authored teaching support — big ideas, facts, scenarios, and a suggested flow. The student lesson pages remain the <b>source of truth</b> for exact definitions, the precise names and number of process stages, and any figures. Where this guide and the lesson differ, follow the lesson and let us know so we can reconcile the two.</p>
+      <p style="margin-top:12px"><b>Timing is a guide, not a rule.</b> The step minutes assume a ~45-minute period and are meant to be compressed or expanded. Trim the case study or discussion first if you're short; they're the most elastic.</p>
+      <div class="sig">CPLA · Volume 1 · Module 1 — What Design Is · Instructor Guide · Companion to the Studio Director</div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

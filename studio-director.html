@@ -75,7 +75,11 @@
   .lesson-pick select{border:1px solid var(--rule);border-radius:8px;padding:8px 10px;font-size:13px;background:#fff;color:var(--ink);outline:none}
   .lesson-pick select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(218,158,43,.12)}
 
-  .lesson-band{background:linear-gradient(150deg,#14213f,#25324d);color:#fff;padding:34px 24px;text-align:center;border-bottom:1px solid #efeae0}
+  .lesson-band{position:relative;background:linear-gradient(150deg,#14213f,#25324d);color:#fff;padding:34px 24px;text-align:center;border-bottom:1px solid #efeae0}
+  .lb-guide{position:absolute;right:20px;top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--blue);background:var(--gold);text-decoration:none;padding:8px 14px;border-radius:100px;transition:.15s}
+  .lb-guide:hover{filter:brightness(1.07)}
+  .lb-guide i{font-size:15px}
+  @media(max-width:640px){.lb-guide{position:static;transform:none;margin:14px auto 0;width:max-content}}
   .lesson-band .lbl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(218,158,43,.9);font-family:'DM Mono',monospace;margin-bottom:12px}
   .lesson-band .title{font-family:'Playfair Display',serif;font-size:34px;font-weight:900;line-height:1.1;margin-bottom:10px}
   .lesson-band .sub{font-size:15px;color:rgba(255,255,255,.72);font-family:'DM Mono',monospace;letter-spacing:.04em}
@@ -285,7 +289,7 @@
         '</div>'+
         '<div class="lesson-pick"><label>Class is currently on</label><select id="lesson-select">'+options+'</select></div>'+
       '</div>'+
-      '<div class="lesson-band"><div class="lbl">'+MODULE.volume+' · '+MODULE.module+' · Lesson '+L.id+'</div><div class="title">'+esc(L.title)+'</div><div class="sub">'+esc(MODULE.moduleTitle)+'</div></div>'+
+      '<div class="lesson-band"><div class="lbl">'+MODULE.volume+' · '+MODULE.module+' · Lesson '+L.id+'</div><div class="title">'+esc(L.title)+'</div><div class="sub">'+esc(MODULE.moduleTitle)+'</div><a class="lb-guide" href="instructor-guide-'+L.id.replace(/\./g,'-')+'.html" target="_blank" title="Open the full instructor guide for this lesson"><i class="ti ti-book-2"></i> Lesson Guide</a></div>'+
       '<div class="panel-body">'+
         '<div class="blk"><div class="blk-h">Roster &amp; Status</div>'+roster+'</div>'+
         '<div class="blk"><div class="blk-h">Teaching Lesson '+L.id+' <span class="note">— '+esc(L.title)+'</span></div>'+
