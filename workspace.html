@@ -42,6 +42,9 @@
   .sb-r{margin-left:auto;display:flex;align-items:center;gap:12px}
   .sb-role{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:rgba(218,158,43,.12);border:1px solid rgba(218,158,43,.3);padding:3px 10px;border-radius:100px}
   .sb-name{font-size:13px;color:rgba(255,255,255,.85)}
+  .sb-av{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:600}
+  .sb-signout{background:none;border:0;color:rgba(255,255,255,.55);font-size:18px;display:grid;place-items:center;padding:6px;border-radius:8px;cursor:pointer;transition:color .15s,background .15s}
+  .sb-signout:hover{color:#fff;background:rgba(255,255,255,.1)}
 
   .canvas{overflow:auto;padding:28px 32px 48px}
   .greet-date{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-family:'DM Mono',monospace;margin-bottom:5px}
@@ -148,8 +151,6 @@
     <button class="rail-btn" onclick="document.getElementById('msg-card').scrollIntoView({behavior:'smooth'})"><i class="ti ti-mail"></i><span class="tip">Messages</span></button>
     <button class="rail-btn" id="res-btn"><i class="ti ti-folders"></i><span class="tip">Resources</span></button>
     <div class="rail-spacer"></div>
-    <div class="rail-av" id="rail-av">—</div>
-    <button class="rail-btn small" id="signout"><i class="ti ti-logout"></i><span class="tip">Sign out</span></button>
   </aside>
 
   <!-- MAIN -->
@@ -164,6 +165,8 @@
       <div class="sb-r">
         <div class="sb-role" id="sb-role">Student</div>
         <div class="sb-name" id="sb-name">—</div>
+        <div class="sb-av" id="sb-av">—</div>
+        <button class="sb-signout" id="signout" title="Sign out"><i class="ti ti-logout"></i></button>
       </div>
     </div>
 
@@ -264,7 +267,7 @@
       var first=d.firstName || (user.displayName?user.displayName.split(' ')[0]:'there');
       var initials=user.displayName?user.displayName.split(' ').map(function(n){return n[0];}).join('').toUpperCase().slice(0,2):user.email.slice(0,2).toUpperCase();
       var isGuest=(typeof GUEST_EMAIL!=='undefined')&&user.email===GUEST_EMAIL;
-      document.getElementById('rail-av').textContent=initials;
+      document.getElementById('sb-av').textContent=initials;
       document.getElementById('sb-name').textContent=user.displayName||first;
       document.getElementById('sb-role').textContent=isGuest?'Reviewer':(d.role||'Junior Designer');
       var now=new Date();
