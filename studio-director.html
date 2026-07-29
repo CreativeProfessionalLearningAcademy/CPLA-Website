@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPLA — Studio Director</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ink:#1a1410;--paper:#faf7f2;--cream:#f0ead8;--rule:#d4c9b8;
+    --mid:#6b5e52;--mod:#1a56c4;--ml:#e8f0fe;--green:#2d7a1a;--gnl:#f0fae8;
+    --blue:#01123a;--nav2:#0a1c44;--gold:#da9e2b;
+  }
+  html,body{height:100%;font-family:'DM Sans',sans-serif;font-weight:300;background:var(--cream);color:var(--ink)}
+  button{cursor:pointer;font:inherit}
+  .app{height:100vh;display:grid;grid-template-columns:70px 1fr;overflow:hidden}
+
+  /* RAIL */
+  .rail{background:var(--blue);display:flex;flex-direction:column;align-items:center;padding:14px 8px;gap:6px}
+  .brand{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--gold);color:var(--blue);font-weight:900;font-size:18px;margin-bottom:10px}
+  .rail-btn{width:44px;height:44px;border:0;border-radius:11px;color:rgba(250,247,242,.55);background:transparent;font-size:21px;display:grid;place-items:center;position:relative;transition:background .15s,color .15s}
+  .rail-btn:hover{background:var(--nav2);color:#fff}
+  .rail-btn.active{background:var(--nav2);color:var(--gold)}
+  .rail-btn .tip{position:absolute;left:56px;top:50%;transform:translateY(-50%) scale(.9);background:var(--ink);color:#fff;font-size:11px;font-weight:500;padding:5px 9px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;z-index:40}
+  .rail-btn:hover .tip{opacity:1;transform:translateY(-50%) scale(1)}
+  .rail-spacer{flex:1}
+
+  /* MAIN */
+  .main{display:grid;grid-template-rows:auto 1fr;min-width:0;overflow:hidden}
+  .statusbar{background:var(--blue);color:#fff;padding:12px 24px;display:flex;align-items:center;gap:14px}
+  .sb-logo img{height:24px;display:block}
+  .sb-sep{color:rgba(255,255,255,.2)}
+  .sb-status .lbl{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(218,158,43,.85);font-family:'DM Mono',monospace}
+  .sb-status .val{font-size:13px;font-weight:500}
+  .sb-r{margin-left:auto;display:flex;align-items:center;gap:12px}
+  .sb-role{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:rgba(218,158,43,.12);border:1px solid rgba(218,158,43,.3);padding:3px 10px;border-radius:100px}
+  .sb-name{font-size:13px;color:rgba(255,255,255,.85)}
+  .sb-av{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:600}
+  .sb-signout{background:none;border:0;color:rgba(255,255,255,.55);font-size:18px;display:grid;place-items:center;padding:6px;border-radius:8px;transition:color .15s,background .15s}
+  .sb-signout:hover{color:#fff;background:rgba(255,255,255,.1)}
+
+  .canvas{overflow:auto;padding:28px 32px 48px}
+  .greet-date{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-family:'DM Mono',monospace;margin-bottom:5px}
+  .greet-h{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:24px;line-height:1.3}
+  .greet-h em{font-style:italic;color:var(--mod)}
+  .wrap{max-width:1060px}
+
+  /* SECTION */
+  .section{margin-bottom:26px}
+  .section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .section-label::after{content:"";flex:1;height:1px;background:var(--rule)}
+
+  /* STATUS STATS */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media(max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stat{background:#fff;border:1px solid var(--rule);border-radius:14px;padding:16px 18px}
+  .stat .n{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--ink);line-height:1}
+  .stat .l{font-size:11px;color:var(--mid);margin-top:5px;letter-spacing:.02em}
+  .stat.accent{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .stat.accent .n{color:#fff}.stat.accent .l{color:rgba(255,255,255,.6)}
+
+  /* CARD */
+  .card{background:#fff;border:1px solid var(--rule);border-radius:16px;overflow:hidden;margin-bottom:12px}
+  .card-h{padding:15px 18px;display:flex;align-items:center;gap:10px;cursor:pointer}
+  .card-h i.lead{font-size:18px;color:var(--mod)}
+  .card-h .t{font-size:14px;font-weight:600;color:var(--ink);flex:1}
+  .code-chip{font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.14em;color:var(--blue);background:#f0f4fa;padding:3px 9px;border-radius:5px;border:1px solid #d0daea}
+  .copy-btn{background:none;border:1px solid var(--rule);border-radius:6px;padding:3px 9px;font-size:11px;color:var(--mid);display:inline-flex;align-items:center;gap:4px;transition:background .12s,color .12s}
+  .copy-btn:hover{background:var(--cream);color:var(--ink)}
+  .copy-btn.copied{color:var(--green);border-color:#b6d9a8;background:var(--gnl)}
+  .chev{font-size:16px;color:var(--mid);transition:transform .2s}
+  .card.open .chev{transform:rotate(180deg)}
+  .roster{max-height:0;overflow:hidden;transition:max-height .3s ease;border-top:0 solid var(--rule)}
+  .card.open .roster{max-height:600px;border-top:1px solid #efeae0}
+  .stu{display:flex;align-items:center;gap:12px;padding:11px 18px;border-bottom:1px solid #f2ede3;font-size:13px}
+  .stu:last-child{border-bottom:0}
+  .stu-av{width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:600;flex-shrink:0}
+  .stu .nm{font-weight:500;color:var(--ink)}
+  .stu .em{color:var(--mid);font-size:11px}
+  .stu .id{margin-left:auto;font-family:'DM Mono',monospace;font-size:11px;color:var(--mid)}
+  .roster-empty{padding:14px 18px;font-size:12px;color:var(--mid);font-style:italic}
+
+  /* CREATE CLASS */
+  .create{background:#fff;border:1px dashed var(--rule);border-radius:14px;padding:16px 18px}
+  .create label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:6px;font-weight:500}
+  .create input{width:100%;max-width:360px;padding:9px 12px;border:1px solid var(--rule);border-radius:8px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;margin-right:8px}
+  .create input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(218,158,43,.12)}
+  .btn{background:var(--blue);color:#fff;border:0;border-radius:8px;padding:10px 18px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:7px;transition:opacity .15s}
+  .btn:hover{opacity:.9}.btn:disabled{opacity:.45}
+  .create-row{display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap}
+
+  /* LESSON BRIEF */
+  .brief{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:22px 24px}
+  .brief h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-bottom:3px}
+  .brief .sub{font-size:12px;color:var(--mid);margin-bottom:18px}
+  .brief-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:720px){.brief-grid{grid-template-columns:1fr}}
+  .brief-block h4{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mod);margin-bottom:8px;font-weight:600}
+  .brief-block ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+  .brief-block li{font-size:13px;line-height:1.55;color:#3a332a;padding-left:16px;position:relative}
+  .brief-block li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+
+  /* NOTES */
+  .notes{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:18px 20px}
+  .notes textarea{width:100%;min-height:120px;border:1px solid var(--rule);border-radius:10px;padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.6;color:var(--ink);resize:vertical;outline:none}
+  .notes textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(218,158,43,.12)}
+  .notes-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+  .notes-foot .hint{font-size:11px;color:var(--mid)}
+  .saved{font-size:11px;color:var(--green);opacity:0;transition:opacity .2s}.saved.show{opacity:1}
+
+  /* COMING SOON */
+  .soon-card{background:var(--cream);border:1px dashed var(--rule);border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;color:var(--mid)}
+  .soon-card i{font-size:24px;color:var(--gold)}
+  .soon-card .st{font-size:13px;font-weight:600;color:var(--ink)}
+  .soon-card .ss{font-size:12px;color:var(--mid)}
+  .soon-badge{margin-left:auto;font-size:9px;letter-spacing:.1em;text-transform:uppercase;background:#fff;border:1px solid var(--rule);padding:3px 8px;border-radius:100px;font-family:'DM Mono',monospace}
+
+  #loading{padding:40px 32px;color:var(--mid);font-size:13px}
+  #sdmain{display:none}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(16px);opacity:0;background:var(--ink);color:#fff;padding:10px 16px;border-radius:100px;font-size:12px;z-index:60;transition:.2s;pointer-events:none}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div id="loading">Loading your studio…</div>
+
+<div class="app" id="sdmain">
+  <aside class="rail">
+    <div class="brand">C</div>
+    <button class="rail-btn active" title="Studio Director"><i class="ti ti-home-2"></i><span class="tip">Studio Director</span></button>
+    <button class="rail-btn" onclick="scrollTo2('sec-classes')"><i class="ti ti-school"></i><span class="tip">Classes &amp; Roster</span></button>
+    <button class="rail-btn" onclick="scrollTo2('sec-brief')"><i class="ti ti-clipboard-text"></i><span class="tip">Lesson Brief</span></button>
+    <button class="rail-btn" onclick="scrollTo2('sec-notes')"><i class="ti ti-notes"></i><span class="tip">Instructor Notes</span></button>
+    <div class="rail-spacer"></div>
+  </aside>
+
+  <div class="main">
+    <div class="statusbar">
+      <a class="sb-logo" href="studio-director.html"><img src="CPLA-logo-mark-rev.svg" alt="CPLA"></a>
+      <div class="sb-sep">·</div>
+      <div class="sb-status"><div class="lbl">Current Lesson</div><div class="val">Volume 1 · Module 1 — What Design Is</div></div>
+      <div class="sb-r">
+        <div class="sb-role">Studio Director</div>
+        <div class="sb-name" id="sb-name">—</div>
+        <div class="sb-av" id="sb-av">—</div>
+        <button class="sb-signout" id="signout" title="Sign out"><i class="ti ti-logout"></i></button>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="wrap">
+        <div class="greet-date" id="greet-date"></div>
+        <div class="greet-h" id="greet-h">Here’s your studio.</div>
+
+        <!-- CLASS STATUS -->
+        <div class="section">
+          <div class="section-label">Class Status</div>
+          <div class="stats">
+            <div class="stat accent"><div class="n" id="stat-students">0</div><div class="l">Students enrolled</div></div>
+            <div class="stat"><div class="n" id="stat-classes">0</div><div class="l">Active classes</div></div>
+            <div class="stat"><div class="n">V1 · M1</div><div class="l">Current lesson</div></div>
+            <div class="stat"><div class="n">30</div><div class="l">Lessons in Volume 1</div></div>
+          </div>
+        </div>
+
+        <!-- CLASSES & ROSTER -->
+        <div class="section" id="sec-classes">
+          <div class="section-label">Classes &amp; Roster</div>
+          <div id="classes-list"></div>
+          <div class="create">
+            <label for="new-class">Create a new class</label>
+            <div class="create-row">
+              <input type="text" id="new-class" placeholder="e.g. Digital Design 2026–27">
+              <button class="btn" id="create-btn" onclick="createClass()"><i class="ti ti-plus"></i> Create Class</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- LESSON BRIEF -->
+        <div class="section" id="sec-brief">
+          <div class="section-label">Lesson Brief</div>
+          <div class="brief">
+            <h3>Module 1 — What Design Is</h3>
+            <div class="sub">Volume 1 · Lessons 1.1–1.3 · Foundations of Design Thinking</div>
+            <div class="brief-grid">
+              <div class="brief-block">
+                <h4>Objectives</h4>
+                <ul>
+                  <li>Students can define design as intentional problem-solving, not decoration.</li>
+                  <li>Students can identify design in everyday objects and communication.</li>
+                  <li>Students can describe the basic stages of the design process.</li>
+                </ul>
+              </div>
+              <div class="brief-block">
+                <h4>Talking Points</h4>
+                <ul>
+                  <li>"Design is how it works, not just how it looks."</li>
+                  <li>Every designed thing solves a problem for a person.</li>
+                  <li>Professionals design on purpose — with a brief, an audience, and constraints.</li>
+                </ul>
+              </div>
+              <div class="brief-block">
+                <h4>Common Misconceptions</h4>
+                <ul>
+                  <li>"Design = making things pretty." (It's problem-solving first.)</li>
+                  <li>"Good designers just have talent." (It's a repeatable process.)</li>
+                  <li>"There's one right answer." (Design weighs trade-offs.)</li>
+                </ul>
+              </div>
+              <div class="brief-block">
+                <h4>Demonstrate &amp; Discuss</h4>
+                <ul>
+                  <li>Show two versions of an everyday object; ask which "works" better and why.</li>
+                  <li>Walk the design process: understand → ideate → make → refine.</li>
+                  <li>Discussion: "What's something you use daily that's well designed? Poorly?"</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- INSTRUCTOR NOTES -->
+        <div class="section" id="sec-notes">
+          <div class="section-label">Instructor Notes <span style="text-transform:none;letter-spacing:0;color:var(--mid)">· private</span></div>
+          <div class="notes">
+            <textarea id="notes-text" placeholder="Private notes for yourself — what worked, what to change, ideas for next year. Saved automatically."></textarea>
+            <div class="notes-foot">
+              <span class="hint">Only you can see these. They're a great seed for curriculum revisions.</span>
+              <span class="saved" id="notes-saved"><i class="ti ti-check"></i> Saved</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- COMING SOON (fast-follow vision) -->
+        <div class="section">
+          <div class="section-label">Coming as the class begins</div>
+          <div class="soon-card">
+            <i class="ti ti-layout-dashboard"></i>
+            <div>
+              <div class="st">Live Classroom Map &amp; Progress</div>
+              <div class="ss">See each student's workflow stage — Learning, Practicing, Creating, Reviewing, Awaiting Feedback, Certified — plus a help queue and assignment review.</div>
+            </div>
+            <span class="soon-badge">Fast-follow</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script>
+  function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},1600);}
+  function scrollTo2(id){var e=document.getElementById(id);if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
+  document.getElementById('signout').onclick=function(){auth.signOut().then(function(){window.location.href='login';});};
+
+  var CURRENT_UID=null;
+
+  auth.onAuthStateChanged(async function(user){
+    if(!user){window.location.href='login';return;}
+    CURRENT_UID=user.uid;
+    var d={};
+    try{ var s=await db.collection('users').doc(user.uid).get(); d=s.exists?s.data():{}; }catch(e){}
+    if(d.accountType!=='instructor'){ window.location.href='workspace.html'; return; }
+
+    var first=d.firstName||(user.displayName?user.displayName.split(' ')[0]:'Director');
+    var initials=user.displayName?user.displayName.split(' ').map(function(n){return n[0];}).join('').toUpperCase().slice(0,2):user.email.slice(0,2).toUpperCase();
+    document.getElementById('sb-name').textContent=user.displayName||first;
+    document.getElementById('sb-av').textContent=initials;
+    var now=new Date();
+    var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    document.getElementById('greet-date').textContent=days[now.getDay()]+', '+months[now.getMonth()]+' '+now.getDate();
+    var hr=now.getHours(), g=hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';
+    document.getElementById('greet-h').innerHTML=g+', <em>'+first+'</em>. Here’s your studio.';
+
+    loadClasses(user.uid);
+    loadNotes(user.uid);
+
+    document.getElementById('loading').style.display='none';
+    document.getElementById('sdmain').style.display='grid';
+  });
+
+  function genCode(){var c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',s='';for(var i=0;i<6;i++)s+=c[Math.floor(Math.random()*c.length)];return s;}
+
+  async function loadClasses(uid){
+    var list=document.getElementById('classes-list');
+    list.innerHTML='<div class="roster-empty">Loading classes…</div>';
+    try{
+      var snap=await db.collection('classes').where('instructorId','==',uid).get();
+      if(snap.empty){ list.innerHTML='<div class="roster-empty">No classes yet — create your first one below.</div>'; return; }
+      var docs=snap.docs.slice().sort(function(a,b){var ta=a.data().createdAt?a.data().createdAt.toMillis():0,tb=b.data().createdAt?b.data().createdAt.toMillis():0;return tb-ta;});
+      list.innerHTML='';
+      var totalStudents=0;
+      document.getElementById('stat-classes').textContent=docs.length;
+      for(var i=0;i<docs.length;i++){
+        var doc=docs[i], c=doc.data();
+        var card=document.createElement('div'); card.className='card';
+        card.innerHTML=
+          '<div class="card-h">'+
+            '<i class="ti ti-school lead"></i>'+
+            '<span class="t">'+c.name+'</span>'+
+            '<span class="code-chip">'+c.inviteCode+'</span>'+
+            '<button class="copy-btn"><i class="ti ti-copy"></i> Copy code</button>'+
+            '<i class="ti ti-chevron-down chev"></i>'+
+          '</div>'+
+          '<div class="roster"><div class="roster-empty">Loading roster…</div></div>';
+        list.appendChild(card);
+        (function(card,c){
+          var head=card.querySelector('.card-h'), copy=card.querySelector('.copy-btn');
+          head.addEventListener('click',function(e){ if(e.target.closest('.copy-btn'))return; card.classList.toggle('open'); });
+          copy.addEventListener('click',function(e){ e.stopPropagation(); navigator.clipboard.writeText(c.inviteCode).then(function(){ copy.classList.add('copied'); copy.innerHTML='<i class="ti ti-check"></i> Copied'; setTimeout(function(){copy.classList.remove('copied');copy.innerHTML='<i class="ti ti-copy"></i> Copy code';},1800); }); });
+        })(card,c);
+        // roster
+        try{
+          var rs=await db.collection('users').where('classId','==',doc.id).get();
+          var rEl=card.querySelector('.roster');
+          if(rs.empty){ rEl.innerHTML='<div class="roster-empty">No students enrolled yet. Share the invite code above.</div>'; }
+          else{
+            totalStudents+=rs.size;
+            var rows=rs.docs.map(function(u){var x=u.data();var ini=(x.firstName?x.firstName[0]:'')+(x.lastName?x.lastName[0]:'');return '<div class="stu"><div class="stu-av">'+(ini||'?').toUpperCase()+'</div><div><div class="nm">'+((x.firstName||'')+' '+(x.lastName||'')).trim()+'</div><div class="em">'+(x.email||'')+'</div></div><div class="id">'+(x.cpla_id||'')+'</div></div>';}).join('');
+            rEl.innerHTML=rows;
+          }
+          document.getElementById('stat-students').textContent=totalStudents;
+        }catch(e){ card.querySelector('.roster').innerHTML='<div class="roster-empty">Could not load roster (check permissions).</div>'; }
+      }
+    }catch(e){ list.innerHTML='<div class="roster-empty">Could not load classes. Please refresh.</div>'; }
+  }
+
+  async function createClass(){
+    var name=document.getElementById('new-class').value.trim();
+    var btn=document.getElementById('create-btn');
+    if(!name){document.getElementById('new-class').focus();return;}
+    btn.disabled=true; btn.innerHTML='Creating…';
+    try{
+      await db.collection('classes').add({name:name,inviteCode:genCode(),instructorId:CURRENT_UID,active:true,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+      document.getElementById('new-class').value='';
+      toast('Class created');
+      loadClasses(CURRENT_UID);
+    }catch(e){ toast('Could not create class'); }
+    btn.disabled=false; btn.innerHTML='<i class="ti ti-plus"></i> Create Class';
+  }
+  document.getElementById('new-class').addEventListener('keydown',function(e){if(e.key==='Enter')createClass();});
+
+  // INSTRUCTOR NOTES (autosave to Firestore)
+  var notesTimer=null;
+  async function loadNotes(uid){
+    try{ var s=await db.collection('instructor_notes').doc(uid).get(); if(s.exists&&s.data().text) document.getElementById('notes-text').value=s.data().text; }catch(e){}
+  }
+  document.getElementById('notes-text').addEventListener('input',function(){
+    clearTimeout(notesTimer);
+    notesTimer=setTimeout(async function(){
+      try{
+        await db.collection('instructor_notes').doc(CURRENT_UID).set({text:document.getElementById('notes-text').value,updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
+        var sv=document.getElementById('notes-saved'); sv.classList.add('show'); setTimeout(function(){sv.classList.remove('show');},1500);
+      }catch(e){}
+    },800);
+  });
+</script>
+</body>
+</html>

@@ -426,7 +426,10 @@
       const timeGreet = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
 
       if (isInstructor) {
-        // ── INSTRUCTOR DASHBOARD ──
+        // ── INSTRUCTOR → Studio Director ──
+        window.location.replace('studio-director.html');
+        return;
+        // Legacy instructor view below (unused; instructors now use studio-director.html):
         document.getElementById('nav-crumb').textContent = 'Instructor Workspace';
         document.getElementById('greeting-h').innerHTML =
           timeGreet + ', <em>' + firstName + '</em>. Here are your classes.';

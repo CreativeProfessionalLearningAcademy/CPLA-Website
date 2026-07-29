@@ -263,7 +263,7 @@
       var snap=await db.collection('users').doc(user.uid).get();
       var d=snap.exists?snap.data():{};
       // Instructors use the classic instructor dashboard for now
-      if(d.accountType==='instructor'){window.location.href='dashboard.html';return;}
+      if(d.accountType==='instructor'){window.location.href='studio-director.html';return;}
       var first=d.firstName || (user.displayName?user.displayName.split(' ')[0]:'there');
       var initials=user.displayName?user.displayName.split(' ').map(function(n){return n[0];}).join('').toUpperCase().slice(0,2):user.email.slice(0,2).toUpperCase();
       var isGuest=(typeof GUEST_EMAIL!=='undefined')&&user.email===GUEST_EMAIL;
