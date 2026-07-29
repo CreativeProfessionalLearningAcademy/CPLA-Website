@@ -11,13 +11,12 @@
   :root{
     --ink:#1a1410;--paper:#faf7f2;--cream:#f0ead8;--rule:#d4c9b8;
     --mid:#6b5e52;--mod:#1a56c4;--ml:#e8f0fe;--green:#2d7a1a;--gnl:#f0fae8;
-    --gold-t:#8a6410;--blue:#01123a;--nav2:#0a1c44;--gold:#da9e2b;
+    --blue:#01123a;--nav2:#0a1c44;--gold:#da9e2b;
   }
   html,body{height:100%;font-family:'DM Sans',sans-serif;font-weight:300;background:var(--cream);color:var(--ink)}
-  button{cursor:pointer;font:inherit}
+  button,select{cursor:pointer;font:inherit}
   .app{height:100vh;display:grid;grid-template-columns:70px 1fr;overflow:hidden}
 
-  /* RAIL */
   .rail{background:var(--blue);display:flex;flex-direction:column;align-items:center;padding:14px 8px;gap:6px}
   .brand{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--gold);color:var(--blue);font-weight:900;font-size:18px;margin-bottom:10px}
   .rail-btn{width:44px;height:44px;border:0;border-radius:11px;color:rgba(250,247,242,.55);background:transparent;font-size:21px;display:grid;place-items:center;position:relative;transition:background .15s,color .15s}
@@ -27,7 +26,6 @@
   .rail-btn:hover .tip{opacity:1;transform:translateY(-50%) scale(1)}
   .rail-spacer{flex:1}
 
-  /* MAIN */
   .main{display:grid;grid-template-rows:auto 1fr;min-width:0;overflow:hidden}
   .statusbar{background:var(--blue);color:#fff;padding:12px 24px;display:flex;align-items:center;gap:14px}
   .sb-logo img{height:24px;display:block}
@@ -48,21 +46,23 @@
   .summary{font-size:13px;color:var(--mid);margin-bottom:22px}
   .wrap{max-width:1080px}
 
-  /* TABS */
   .tabs{display:flex;gap:4px;flex-wrap:wrap;border-bottom:2px solid var(--rule)}
   .tab{padding:11px 18px;font-size:13px;font-weight:600;color:var(--mid);background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-2px;display:flex;align-items:center;gap:8px;transition:color .15s}
   .tab:hover{color:var(--ink)}
   .tab.active{color:var(--blue);border-bottom-color:var(--gold)}
   .tab .cnt{font-size:11px;color:var(--mid);background:var(--cream);border-radius:100px;padding:1px 8px;font-weight:600}
   .tab.active .cnt{background:var(--ml);color:var(--mod)}
-  .tab.add{color:var(--mod)}
-  .tab.add:hover{color:var(--blue)}
+  .tab.add{color:var(--mod)}.tab.add:hover{color:var(--blue)}
 
-  /* PANEL */
-  .panel{background:#fff;border:1px solid var(--rule);border-top:0;border-radius:0 0 16px 16px;padding:0}
+  .panel{background:#fff;border:1px solid var(--rule);border-top:0;border-radius:0 0 16px 16px}
   .panel-head{padding:22px 26px;border-bottom:1px solid #efeae0;display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap}
   .ph-l{flex:1;min-width:220px}
-  .ph-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);line-height:1.15;margin-bottom:8px}
+  .ph-name-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .ph-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);line-height:1.15}
+  .edit-name{background:none;border:0;color:var(--mid);font-size:16px;padding:5px;border-radius:6px;transition:color .15s,background .15s}
+  .edit-name:hover{color:var(--mod);background:var(--ml)}
+  .name-input{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);border:1px solid var(--gold);border-radius:8px;padding:4px 10px;outline:none;box-shadow:0 0 0 3px rgba(218,158,43,.12)}
+  .name-cancel{background:none;border:1px solid var(--rule);color:var(--mid);border-radius:8px;padding:8px 10px;font-size:14px}
   .ph-meta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
   .ph-chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--mid)}
   .ph-chip i{font-size:15px;color:var(--mod)}
@@ -70,24 +70,22 @@
   .copy-btn{background:none;border:1px solid var(--rule);border-radius:6px;padding:3px 9px;font-size:11px;color:var(--mid);display:inline-flex;align-items:center;gap:4px;transition:background .12s,color .12s}
   .copy-btn:hover{background:var(--cream);color:var(--ink)}
   .copy-btn.copied{color:var(--green);border-color:#b6d9a8;background:var(--gnl)}
+  .lesson-pick{display:flex;flex-direction:column;gap:5px;min-width:190px}
+  .lesson-pick label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-family:'DM Mono',monospace}
+  .lesson-pick select{border:1px solid var(--rule);border-radius:8px;padding:8px 10px;font-size:13px;background:#fff;color:var(--ink);outline:none}
+  .lesson-pick select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(218,158,43,.12)}
+
   .lesson-band{background:linear-gradient(150deg,#14213f,#25324d);color:#fff;padding:34px 24px;text-align:center;border-bottom:1px solid #efeae0}
   .lesson-band .lbl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(218,158,43,.9);font-family:'DM Mono',monospace;margin-bottom:12px}
   .lesson-band .title{font-family:'Playfair Display',serif;font-size:34px;font-weight:900;line-height:1.1;margin-bottom:10px}
   .lesson-band .sub{font-size:15px;color:rgba(255,255,255,.72);font-family:'DM Mono',monospace;letter-spacing:.04em}
-  .ph-name-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-  .edit-name{background:none;border:0;color:var(--mid);font-size:16px;padding:5px;border-radius:6px;transition:color .15s,background .15s}
-  .edit-name:hover{color:var(--mod);background:var(--ml)}
-  .name-input{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);border:1px solid var(--gold);border-radius:8px;padding:4px 10px;outline:none;box-shadow:0 0 0 3px rgba(218,158,43,.12)}
-  .name-cancel{background:none;border:1px solid var(--rule);color:var(--mid);border-radius:8px;padding:8px 10px;font-size:14px}
-  .btn.sm{padding:8px 11px;font-size:14px}
 
   .panel-body{padding:22px 26px}
-  .blk{margin-bottom:26px}
-  .blk:last-child{margin-bottom:0}
+  .blk{margin-bottom:26px}.blk:last-child{margin-bottom:0}
   .blk-h{font-size:16px;font-weight:600;letter-spacing:.01em;color:var(--ink);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-  .blk-h .note{text-transform:none;letter-spacing:0;font-family:'DM Sans',sans-serif;color:var(--mid);font-weight:400;font-size:11px;font-style:italic}
+  .blk-h .note{font-size:11px;color:var(--mid);font-style:italic;font-weight:400}
+  .suggest{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);background:var(--cream);border:1px solid var(--rule);padding:2px 8px;border-radius:100px;font-family:'DM Mono',monospace}
 
-  /* ROSTER */
   .stu{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px}
   .stu:nth-child(odd){background:var(--paper)}
   .stu-av{width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:600;flex-shrink:0}
@@ -97,36 +95,30 @@
   .stu-ind{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .ind{font-size:11px;display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:100px;border:1px solid var(--rule);color:var(--mid);background:#fff}
   .ind.mod{color:var(--mod);border-color:#c4d3ea;background:var(--ml)}
-  .ind.stage{color:var(--mid)}
   .ind .dot{width:7px;height:7px;border-radius:50%;background:var(--rule)}
   .roster-empty{padding:16px 12px;font-size:12px;color:var(--mid);font-style:italic}
   .roster-cap{font-size:11px;color:var(--mid);margin-top:10px;font-style:italic}
 
-  /* TEACHING */
   .teach-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
   @media(max-width:760px){.teach-grid{grid-template-columns:1fr}}
-  .tblk h4{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mod);margin-bottom:10px;font-weight:600}
+  .tblk h4{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mod);margin-bottom:10px;font-weight:600;display:flex;align-items:center;gap:8px}
   .tblk ul{list-style:none;display:flex;flex-direction:column;gap:8px}
   .tblk li{font-size:14px;line-height:1.6;color:#3a332a;padding-left:16px;position:relative}
   .tblk li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
-  .vocab li{padding-left:0}
-  .vocab li::before{display:none}
-  .vocab .term{font-weight:600;color:var(--ink)}
-  .vocab .def{color:var(--mid)}
+  .vocab li{padding-left:0}.vocab li::before{display:none}
+  .vocab .term{font-weight:600;color:var(--ink)}.vocab .def{color:var(--mid)}
+  .fm-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.25}
+  .fm-sum{font-size:14px;line-height:1.65;color:#3a332a}
 
-  /* CREATE */
   .create{padding:26px}
   .create label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:6px;font-weight:500}
   .create input{width:100%;max-width:380px;padding:10px 12px;border:1px solid var(--rule);border-radius:8px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none}
   .create input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(218,158,43,.12)}
   .create-row{display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap;margin-top:6px}
   .btn{background:var(--blue);color:#fff;border:0;border-radius:8px;padding:10px 18px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:7px;transition:opacity .15s}
-  .btn:hover{opacity:.9}.btn:disabled{opacity:.45}
+  .btn:hover{opacity:.9}.btn:disabled{opacity:.45}.btn.sm{padding:8px 11px;font-size:14px}
 
-  /* NOTES */
-  .notes-wrap{margin-top:26px}
-  .notes{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:18px 20px}
-  .notes textarea{width:100%;min-height:110px;border:1px solid var(--rule);border-radius:10px;padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:var(--ink);resize:vertical;outline:none}
+  .notes textarea{width:100%;min-height:120px;border:1px solid var(--rule);border-radius:10px;padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:var(--ink);resize:vertical;outline:none}
   .notes textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(218,158,43,.12)}
   .notes-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
   .notes-foot .hint{font-size:11px;color:var(--mid)}
@@ -146,7 +138,7 @@
     <div class="brand">C</div>
     <button class="rail-btn active" title="Studio Director"><i class="ti ti-home-2"></i><span class="tip">Studio Director</span></button>
     <button class="rail-btn" onclick="document.getElementById('sec-classes').scrollIntoView({behavior:'smooth'})"><i class="ti ti-school"></i><span class="tip">Classes</span></button>
-    <button class="rail-btn" onclick="document.getElementById('sec-notes').scrollIntoView({behavior:'smooth'})"><i class="ti ti-notes"></i><span class="tip">Instructor Notes</span></button>
+    <button class="rail-btn" onclick="var n=document.getElementById('panel-notes');if(n)n.scrollIntoView({behavior:'smooth'})"><i class="ti ti-notes"></i><span class="tip">Instructor Notes</span></button>
     <div class="rail-spacer"></div>
   </aside>
 
@@ -154,7 +146,7 @@
     <div class="statusbar">
       <a class="sb-logo" href="studio-director.html"><img src="CPLA-logo-mark-rev.svg" alt="CPLA"></a>
       <div class="sb-sep">·</div>
-      <div class="sb-status"><div class="lbl">Current Lesson</div><div class="val">Volume 1 · Module 1 — What Design Is</div></div>
+      <div class="sb-status"><div class="lbl">Volume in progress</div><div class="val">Volume 1 · Foundations of Design Thinking</div></div>
       <div class="sb-r">
         <div class="sb-role">Studio Director</div>
         <div class="sb-name" id="sb-name">—</div>
@@ -168,23 +160,10 @@
         <div class="greet-date" id="greet-date"></div>
         <div class="greet-h" id="greet-h">Here’s your studio.</div>
         <div class="summary" id="summary">—</div>
-
         <div class="section" id="sec-classes">
           <div class="tabs" id="tabs"></div>
           <div id="panel-host"></div>
         </div>
-
-        <div class="notes-wrap" id="sec-notes">
-          <div class="blk-h" style="margin-bottom:10px">Instructor Notes · private</div>
-          <div class="notes">
-            <textarea id="notes-text" placeholder="Private notes for yourself — what worked, what to change, ideas for next year. Saved automatically."></textarea>
-            <div class="notes-foot">
-              <span class="hint">Only you can see these. A great seed for curriculum revisions.</span>
-              <span class="saved" id="notes-saved"><i class="ti ti-check"></i> Saved</span>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -198,24 +177,21 @@
 <script src="firebase-config.js"></script>
 <script>
   function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},1600);}
-  document.getElementById('signout').onclick=function(){auth.signOut().then(function(){window.location.href='login';});};
   function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  document.getElementById('signout').onclick=function(){auth.signOut().then(function(){window.location.href='login';});};
 
   var CURRENT_UID=null, classesData=[], activeTab=0;
 
-  // Current-lesson teaching content (static for the pilot; per-lesson generation comes later)
-  var LESSON = { badge:'Volume 1 · M1', title:'What Design Is', sub:'Lessons 1.1–1.3' };
-  var GUIDE = ['Open with a real object and ask "what problem does this solve?"','Emphasize design = intentional problem-solving, not decoration.','Model the design process out loud: understand → ideate → make → refine.','Keep the first day low-stakes; build curiosity before critique.'];
-  var HINTS = ['Have students name one well-designed and one poorly-designed everyday item.','Watch for "design = pretty" — gently redirect to purpose and audience.','Use think-pair-share for the discussion question to lower anxiety.','Praise reasoning ("why") more than the answer itself.'];
-  var VOCAB = [
-    ['Design','Intentional problem-solving for a person and a purpose — not just decoration.'],
-    ['Function','What a design does / how well it works for its user.'],
-    ['Aesthetics','How a design looks and feels; serves function, doesn’t replace it.'],
-    ['Design process','Understand → ideate → make → refine (repeat).'],
-    ['Brief','The problem statement: audience, goal, and constraints.'],
-    ['Constraints','The limits (time, size, budget, medium) that shape a solution.'],
-    ['Iteration','Improving a design through repeated cycles of feedback.']
+  var MODULE={volume:"Volume 1",module:"Module 1",moduleTitle:"What Design Is"};
+  // Lesson objectives + vocabulary are pulled verbatim from the Module 1 lesson (source of truth).
+  var LESSONS=[
+    {"id":"1.1","title":"Design Is Everywhere","objectives":["Define design as intentional visual problem-solving — not decoration, not art","Recognize designed objects and environments in everyday life using the three foundational questions","Distinguish between visual choices that are accidental and those that are deliberate","Explain why design must serve an audience — and why that shift changes everything","Begin developing a vocabulary for analyzing what you observe in designed objects"],"vocab":[["Design","The intentional arrangement of visual elements to communicate a message or solve a problem for a specific audience."],["Visual Communication","The use of images, typography, color, and layout to convey information or emotion — often more efficiently than words alone."],["Audience","The specific person or group for whom a design is created; the primary consideration in all design decisions."],["Intentionality","Making deliberate, considered choices in design rather than defaulting to habit, personal preference, or accident."],["Design Eye","The trained ability to observe and analyze visual decisions in any designed object or environment — seeing choices rather than just experiencing results."],["Wayfinding","A category of design focused on helping people navigate physical spaces — signs, maps, symbols, and color coding that guide behavior without requiring instruction."]],"fm":{"title":"The Design Eye Walk","summary":"Students move through an everyday space and record several designed objects and environments in their Field Manual, applying the three foundational questions to each — what problem does this solve, who is it for, and what visual choices were made. The goal is to build the habit of seeing deliberate decisions rather than simply experiencing the result."},"del":{"title":"Design Eye Observation Log","summary":"Students submit a completed observation log documenting at least three designed objects with the three foundational questions answered for each, plus one clearly well-designed and one poorly-designed everyday item identified with a short reason explaining the visual choices behind each."}},
+    {"id":"1.2","title":"Design vs. Decoration","objectives":["Articulate the specific difference between a decorative visual choice and a design decision","Apply the Removal Test to evaluate any element in a composition","Identify where real designs fall on the decoration-to-design spectrum — and explain why some contexts justify more decoration than others","Use the Five Design Justification Questions as a practical self-editing framework","Explain why experienced designers subtract while beginners add"],"vocab":[["Decoration","Visual elements added to improve appearance without a specific communicative purpose; ornamentation for its own sake."],["Visual Hierarchy","The arrangement of elements so the viewer's eye moves through the design in the intended order — from most to least important."],["Restraint","The deliberate practice of using fewer visual elements, each with clear purpose, rather than adding elements to fill space or increase apparent complexity."],["Removal Test","A design evaluation method: if removing an element doesn't reduce the effectiveness of the communication, that element is likely decorative rather than functional."],["Swiss Design","A mid-20th century design movement emphasizing clean grids, sans-serif typography, photography, and white space — the proof that removing decoration improves communication."],["Ornament","A decorative detail added to a design for aesthetic enrichment rather than functional purpose — not always wrong, but always requiring justification."]],"fm":{"title":"The Removal Test Audit","summary":"Students choose a real design and work through it element by element in the Field Manual, applying the Removal Test to decide whether each choice actually communicates or merely decorates, then run the Five Design Justification Questions to defend or cut it. The exercise trains the designer's instinct to subtract rather than add."},"del":{"title":"Decoration-to-Design Audit","summary":"Students submit a marked-up analysis that places their chosen design on the decoration-to-design spectrum, justifies or removes each element using the Removal Test, and includes a revised 'subtracted' version showing what the design looks like once every non-functional element is stripped away."}},
+    {"id":"1.3","title":"The Design Process","objectives":["Name and describe all seven stages of the professional design process in sequence","Explain why the design process is iterative rather than linear — and what triggers a return loop","Read and evaluate a design brief — identifying what information is present, what is missing, and what questions to ask","Write a complete design brief for a given scenario using all required fields","Apply the London 2012 case study to explain how process enables courageous, brief-driven design decisions"],"vocab":[["Design Brief","A document defining the parameters of a design project: message, audience, tone, deliverables, constraints, and timeline. The foundation of every project."],["Ideation","The divergent phase of the design process in which as many concepts as possible are generated through rapid sketching before any are evaluated or developed."],["Iteration","The cyclical refinement of a design through successive versions, each informed by critique and testing — the primary mechanism of design improvement."],["Critique","A structured professional practice of presenting work-in-progress for feedback, evaluated against the brief rather than personal preference."],["Thumbnail Sketch","Small, fast, rough sketches made during ideation to explore multiple concepts quickly without committing to any single direction."],["Deliverable","The specific file, format, or physical output that the designer is required to produce at the conclusion of a project — defined in the brief."],["Divergent Thinking","The cognitive mode of generating many possible ideas without judgment — essential during ideation. Contrasts with convergent thinking, which narrows options toward a single solution."],["Production Specifications","Technical parameters for a final design file: resolution, color mode, file format, bleed, trim size, and any requirements for print or digital output."]],"fm":{"title":"Write the Brief","summary":"Working from a given scenario in the Field Manual, students write a complete design brief — naming the message, audience, tone, deliverables, constraints, and timeline — and then generate rapid thumbnail sketches for it. The exercise lets them practice reading a brief and experience the divergent ideation phase before committing to any single concept."},"del":{"title":"Design Brief + Ideation Sheet","summary":"Students submit a finished design brief for the assigned scenario with every required field completed, paired with an ideation sheet of multiple thumbnail sketches that show a range of concepts explored — evidence of divergent thinking rather than a single first idea."}}
   ];
+  // Facilitation tips are suggested/general (not yet from an authored Instructor Guide).
+  var GUIDE=["Open with a real object and ask “what problem does this solve, and for whom?”","Model the thinking out loud — narrate the choices, not just the steps.","Anchor every point back to audience and purpose.","Keep it low-stakes early; build curiosity before critique."];
+  var HINTS=["Watch for “design = making things pretty” — redirect to purpose and audience.","Use think-pair-share for discussion questions to lower anxiety.","Praise the reasoning (“why”) more than the answer itself.","Have students name one well-designed and one poorly-designed everyday item."];
 
   auth.onAuthStateChanged(async function(user){
     if(!user){window.location.href='login';return;}
@@ -223,21 +199,15 @@
     var d={};
     try{ var s=await db.collection('users').doc(user.uid).get(); d=s.exists?s.data():{}; }catch(e){}
     if(d.accountType!=='instructor'){ window.location.href='workspace.html'; return; }
-
     var first=d.firstName||(user.displayName?user.displayName.split(' ')[0]:'Director');
     var initials=user.displayName?user.displayName.split(' ').map(function(n){return n[0];}).join('').toUpperCase().slice(0,2):user.email.slice(0,2).toUpperCase();
     document.getElementById('sb-name').textContent=user.displayName||first;
     document.getElementById('sb-av').textContent=initials;
-    var now=new Date();
-    var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var now=new Date(), days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], months=['January','February','March','April','May','June','July','August','September','October','November','December'];
     document.getElementById('greet-date').textContent=days[now.getDay()]+', '+months[now.getMonth()]+' '+now.getDate();
     var hr=now.getHours(), g=hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';
     document.getElementById('greet-h').innerHTML=g+', <em>'+esc(first)+'</em>. Here’s your studio.';
-
     await loadClasses(user.uid);
-    loadNotes(user.uid);
-
     document.getElementById('loading').style.display='none';
     document.getElementById('sdmain').style.display='grid';
   });
@@ -255,8 +225,8 @@
         classesData.push(c);
       }
     }catch(e){}
-    var totalStudents=classesData.reduce(function(a,c){return a+(c.students?c.students.length:0);},0);
-    document.getElementById('summary').textContent=totalStudents+' student'+(totalStudents===1?'':'s')+' across '+classesData.length+' class'+(classesData.length===1?'':'es')+'.';
+    var total=classesData.reduce(function(a,c){return a+(c.students?c.students.length:0);},0);
+    document.getElementById('summary').textContent=total+' student'+(total===1?'':'s')+' across '+classesData.length+' class'+(classesData.length===1?'':'es')+'.';
     renderTabs();
   }
 
@@ -265,44 +235,29 @@
     classesData.forEach(function(c,i){
       var b=document.createElement('button'); b.className='tab'+(i===activeTab?' active':'');
       b.innerHTML='<i class="ti ti-school"></i> '+esc(c.name)+' <span class="cnt">'+(c.students?c.students.length:0)+'</span>';
-      b.onclick=function(){ activeTab=i; renderTabs(); };
-      tabs.appendChild(b);
+      b.onclick=function(){activeTab=i;renderTabs();}; tabs.appendChild(b);
     });
     var add=document.createElement('button'); add.className='tab add'+(activeTab===-1?' active':'');
-    add.innerHTML='<i class="ti ti-plus"></i> New Class';
-    add.onclick=function(){ activeTab=-1; renderTabs(); };
-    tabs.appendChild(add);
+    add.innerHTML='<i class="ti ti-plus"></i> New Class'; add.onclick=function(){activeTab=-1;renderTabs();}; tabs.appendChild(add);
     renderPanel();
   }
 
+  function lessonById(id){ for(var i=0;i<LESSONS.length;i++) if(LESSONS[i].id===id) return LESSONS[i]; return LESSONS[0]; }
+
   function renderPanel(){
     var host=document.getElementById('panel-host');
-    if(activeTab===-1){ host.innerHTML=createPanelHTML(); wireCreate(); return; }
-    if(!classesData.length){ host.innerHTML='<div class="panel"><div class="create"><label>No classes yet — create your first one</label><div class="create-row"><input id="new-class" placeholder="e.g. Digital Design 2026–27"><button class="btn" id="create-btn"><i class="ti ti-plus"></i> Create Class</button></div></div></div>'; wireCreate(); return; }
+    if(activeTab===-1 || !classesData.length){ host.innerHTML=createPanelHTML(); wireCreate(); return; }
     var c=classesData[activeTab]; if(!c){activeTab=0;c=classesData[0];}
-    host.innerHTML=classPanelHTML(c);
-    // wire copy
+    var L=lessonById(c.currentLesson||LESSONS[0].id);
+    host.innerHTML=classPanelHTML(c,L);
     var copy=host.querySelector('.copy-btn');
     if(copy) copy.onclick=function(){ navigator.clipboard.writeText(c.inviteCode).then(function(){ copy.classList.add('copied'); copy.innerHTML='<i class="ti ti-check"></i> Copied'; setTimeout(function(){copy.classList.remove('copied');copy.innerHTML='<i class="ti ti-copy"></i> Copy code';},1800); }); };
-    var editBtn=host.querySelector('#edit-name');
-    if(editBtn) editBtn.onclick=function(){ startNameEdit(c); };
+    var eb=host.querySelector('#edit-name'); if(eb) eb.onclick=function(){startNameEdit(c);};
+    var sel=host.querySelector('#lesson-select'); if(sel) sel.onchange=function(){ setCurrentLesson(c, sel.value); };
+    loadPanelNotes(c,L);
   }
 
-  function startNameEdit(c){
-    var row=document.querySelector('.ph-name-row'); if(!row) return;
-    row.innerHTML='<input class="name-input" id="name-input"><button class="btn sm" id="name-save"><i class="ti ti-check"></i></button><button class="name-cancel" id="name-cancel"><i class="ti ti-x"></i></button>';
-    var inp=document.getElementById('name-input'); inp.value=c.name; inp.focus(); inp.select();
-    document.getElementById('name-save').onclick=function(){ saveName(c, inp.value.trim()); };
-    document.getElementById('name-cancel').onclick=function(){ renderPanel(); };
-    inp.addEventListener('keydown',function(e){ if(e.key==='Enter'){saveName(c, inp.value.trim());} if(e.key==='Escape'){renderPanel();} });
-  }
-  async function saveName(c, name){
-    if(!name){ return; }
-    try{ await db.collection('classes').doc(c.id).update({name:name}); c.name=name; toast('Class renamed'); renderTabs(); }
-    catch(e){ toast('Could not rename — check permissions'); }
-  }
-
-  function classPanelHTML(c){
+  function classPanelHTML(c,L){
     var roster;
     if(c.rosterError){ roster='<div class="roster-empty">Could not load roster — check the Firestore rules (instructor read access).</div>'; }
     else if(!c.students.length){ roster='<div class="roster-empty">No students enrolled yet. Share the invite code above so students can register.</div>'; }
@@ -310,16 +265,13 @@
       roster=c.students.map(function(x){
         var ini=((x.firstName?x.firstName[0]:'')+(x.lastName?x.lastName[0]:'')||'?').toUpperCase();
         var nm=esc(((x.firstName||'')+' '+(x.lastName||'')).trim()||'Student');
-        return '<div class="stu"><div class="stu-av">'+ini+'</div>'+
-          '<div class="stu-main"><div class="stu-nm">'+nm+'</div><div class="stu-em">'+esc(x.email||'')+'</div></div>'+
-          '<div class="stu-ind">'+
-            '<span class="ind mod">Module 1</span>'+
-            '<span class="ind stage"><span class="dot"></span> Not started</span>'+
-          '</div></div>';
+        return '<div class="stu"><div class="stu-av">'+ini+'</div><div class="stu-main"><div class="stu-nm">'+nm+'</div><div class="stu-em">'+esc(x.email||'')+'</div></div><div class="stu-ind"><span class="ind mod">Lesson '+L.id+'</span><span class="ind"><span class="dot"></span> Not started</span></div></div>';
       }).join('');
-      roster+='<div class="roster-cap">Status indicators next to each student go live once progress tracking is turned on — you’ll see their workflow stage (Learning, Practicing, Creating, Reviewing, Awaiting Feedback, Certified).</div>';
+      roster+='<div class="roster-cap">Live status (Learning · Practicing · Creating · Reviewing · Awaiting Feedback · Certified) activates once progress tracking is turned on.</div>';
     }
-    var vocab=VOCAB.map(function(v){return '<li><span class="term">'+esc(v[0])+'</span> — <span class="def">'+esc(v[1])+'</span></li>';}).join('');
+    var options=LESSONS.map(function(x){return '<option value="'+x.id+'"'+(x.id===L.id?' selected':'')+'>Lesson '+x.id+' — '+esc(x.title)+'</option>';}).join('');
+    var objectives=L.objectives.map(function(o){return '<li>'+esc(o)+'</li>';}).join('');
+    var vocab=L.vocab.map(function(v){return '<li><span class="term">'+esc(v[0])+'</span> — <span class="def">'+esc(v[1])+'</span></li>';}).join('');
     var guide=GUIDE.map(function(t){return '<li>'+esc(t)+'</li>';}).join('');
     var hints=HINTS.map(function(t){return '<li>'+esc(t)+'</li>';}).join('');
     return '<div class="panel">'+
@@ -331,34 +283,55 @@
             '<span class="ph-chip"><span class="code-chip">'+esc(c.inviteCode)+'</span><button class="copy-btn"><i class="ti ti-copy"></i> Copy code</button></span>'+
           '</div>'+
         '</div>'+
+        '<div class="lesson-pick"><label>Class is currently on</label><select id="lesson-select">'+options+'</select></div>'+
       '</div>'+
-      '<div class="lesson-band"><div class="lbl">Currently working on</div><div class="title">'+LESSON.title+'</div><div class="sub">Volume 1 · Module 1 · '+LESSON.sub+'</div></div>'+
+      '<div class="lesson-band"><div class="lbl">'+MODULE.volume+' · '+MODULE.module+' · Lesson '+L.id+'</div><div class="title">'+esc(L.title)+'</div><div class="sub">'+esc(MODULE.moduleTitle)+'</div></div>'+
       '<div class="panel-body">'+
         '<div class="blk"><div class="blk-h">Roster &amp; Status</div>'+roster+'</div>'+
-        '<div class="blk"><div class="blk-h">Teaching this lesson <span class="note">— '+LESSON.title+'</span></div>'+
+        '<div class="blk"><div class="blk-h">Teaching Lesson '+L.id+' <span class="note">— '+esc(L.title)+'</span></div>'+
           '<div class="teach-grid">'+
-            '<div class="tblk"><h4>Instructor Guide Tips</h4><ul>'+guide+'</ul></div>'+
-            '<div class="tblk"><h4>Helpful Hints</h4><ul>'+hints+'</ul></div>'+
+            '<div class="tblk"><h4>Lesson Objectives</h4><ul>'+objectives+'</ul></div>'+
+            '<div class="tblk"><h4>Key Vocabulary</h4><ul class="vocab">'+vocab+'</ul></div>'+
           '</div>'+
-          '<div class="tblk" style="margin-top:20px"><h4>Vocabulary Tips</h4><ul class="vocab">'+vocab+'</ul></div>'+
+          '<div class="teach-grid" style="margin-top:22px">'+
+            '<div class="tblk"><h4>Instructor Guide Tips <span class="suggest">suggested</span></h4><ul>'+guide+'</ul></div>'+
+            '<div class="tblk"><h4>Helpful Hints <span class="suggest">suggested</span></h4><ul>'+hints+'</ul></div>'+
+          '</div>'+
+          '<div class="teach-grid" style="margin-top:22px">'+
+            '<div class="tblk"><h4>Field Manual Exercise</h4><div class="fm-title">'+esc(L.fm.title)+'</div><p class="fm-sum">'+esc(L.fm.summary)+'</p></div>'+
+            '<div class="tblk"><h4>Assignment &amp; Deliverable</h4><div class="fm-title">'+esc(L.del.title)+'</div><p class="fm-sum">'+esc(L.del.summary)+'</p></div>'+
+          '</div>'+
+        '</div>'+
+        '<div class="blk notes" id="panel-notes"><div class="blk-h">Instructor Notes <span class="note">— private · '+MODULE.volume+' · '+MODULE.module+' · Lesson '+L.id+'</span></div>'+
+          '<textarea id="panel-notes-text"></textarea>'+
+          '<div class="notes-foot"><span class="hint">Notes are saved per class and per lesson, so they trace back to '+MODULE.module+' · Lesson '+L.id+'.</span><span class="saved" id="panel-notes-saved"><i class="ti ti-check"></i> Saved</span></div>'+
         '</div>'+
       '</div>'+
     '</div>';
   }
 
   function createPanelHTML(){
-    return '<div class="panel"><div class="create"><label for="new-class">Create a new class</label>'+
-      '<div class="create-row"><input type="text" id="new-class" placeholder="e.g. Digital Design 2026–27"><button class="btn" id="create-btn"><i class="ti ti-plus"></i> Create Class</button></div></div></div>';
+    return '<div class="panel"><div class="create"><label for="new-class">'+(classesData.length?'Create a new class':'No classes yet — create your first one')+'</label><div class="create-row"><input type="text" id="new-class" placeholder="e.g. Digital Design 2026–27"><button class="btn" id="create-btn"><i class="ti ti-plus"></i> Create Class</button></div></div></div>';
   }
 
+  function startNameEdit(c){
+    var row=document.querySelector('.ph-name-row'); if(!row) return;
+    row.innerHTML='<input class="name-input" id="name-input"><button class="btn sm" id="name-save"><i class="ti ti-check"></i></button><button class="name-cancel" id="name-cancel"><i class="ti ti-x"></i></button>';
+    var inp=document.getElementById('name-input'); inp.value=c.name; inp.focus(); inp.select();
+    document.getElementById('name-save').onclick=function(){ saveName(c, inp.value.trim()); };
+    document.getElementById('name-cancel').onclick=function(){ renderPanel(); };
+    inp.addEventListener('keydown',function(e){ if(e.key==='Enter'){saveName(c, inp.value.trim());} if(e.key==='Escape'){renderPanel();} });
+  }
+  async function saveName(c,name){ if(!name)return; try{ await db.collection('classes').doc(c.id).update({name:name}); c.name=name; toast('Class renamed'); renderTabs(); }catch(e){ toast('Could not rename — check permissions'); } }
+
+  async function setCurrentLesson(c,lid){ c.currentLesson=lid; try{ await db.collection('classes').doc(c.id).update({currentLesson:lid}); toast('Now on Lesson '+lid); }catch(e){} renderPanel(); }
+
   function wireCreate(){
-    var inp=document.getElementById('new-class'), btn=document.getElementById('create-btn');
-    if(!btn) return;
+    var inp=document.getElementById('new-class'), btn=document.getElementById('create-btn'); if(!btn)return;
     btn.onclick=async function(){
       var name=inp.value.trim(); if(!name){inp.focus();return;}
       btn.disabled=true; btn.innerHTML='Creating…';
-      try{
-        var ref=await db.collection('classes').add({name:name,inviteCode:genCode(),instructorId:CURRENT_UID,active:true,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+      try{ var ref=await db.collection('classes').add({name:name,inviteCode:genCode(),instructorId:CURRENT_UID,active:true,currentLesson:LESSONS[0].id,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
         toast('Class created'); await loadClasses(CURRENT_UID);
         var idx=classesData.findIndex(function(c){return c.id===ref.id;}); activeTab=idx>=0?idx:0; renderTabs();
       }catch(e){ toast('Could not create class'); btn.disabled=false; btn.innerHTML='<i class="ti ti-plus"></i> Create Class'; }
@@ -366,17 +339,23 @@
     if(inp) inp.addEventListener('keydown',function(e){if(e.key==='Enter')btn.onclick();});
   }
 
-  // INSTRUCTOR NOTES (global, autosave)
+  // NOTES — per class + per lesson (doc id starts with uid so rules pass)
   var notesTimer=null;
-  async function loadNotes(uid){ try{ var s=await db.collection('instructor_notes').doc(uid).get(); if(s.exists&&s.data().text) document.getElementById('notes-text').value=s.data().text; }catch(e){} }
-  document.getElementById('notes-text').addEventListener('input',function(){
-    clearTimeout(notesTimer);
-    notesTimer=setTimeout(async function(){
-      try{ await db.collection('instructor_notes').doc(CURRENT_UID).set({text:document.getElementById('notes-text').value,updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
-        var sv=document.getElementById('notes-saved'); sv.classList.add('show'); setTimeout(function(){sv.classList.remove('show');},1500);
-      }catch(e){}
-    },800);
-  });
+  function notesId(c,L){ return CURRENT_UID+'_'+c.id+'_'+L.id; }
+  async function loadPanelNotes(c,L){
+    var ta=document.getElementById('panel-notes-text'); if(!ta) return;
+    var stamp='['+MODULE.volume+' · '+MODULE.module+' · Lesson '+L.id+' — '+L.title+']\n\n';
+    try{ var s=await db.collection('instructor_notes').doc(notesId(c,L)).get(); ta.value=(s.exists&&s.data().text)?s.data().text:stamp; }
+    catch(e){ ta.value=stamp; }
+    ta.oninput=function(){
+      clearTimeout(notesTimer);
+      notesTimer=setTimeout(async function(){
+        try{ await db.collection('instructor_notes').doc(notesId(c,L)).set({text:ta.value,classId:c.id,lessonId:L.id,updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
+          var sv=document.getElementById('panel-notes-saved'); if(sv){sv.classList.add('show');setTimeout(function(){sv.classList.remove('show');},1500);}
+        }catch(e){}
+      },800);
+    };
+  }
 </script>
 </body>
 </html>
