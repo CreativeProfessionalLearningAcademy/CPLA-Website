@@ -132,6 +132,41 @@
   #sdmain{display:none}
   .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(16px);opacity:0;background:var(--ink);color:#fff;padding:10px 16px;border-radius:100px;font-size:12px;z-index:60;transition:.2s;pointer-events:none}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  /* MESSAGING */
+  .sd-msg{display:grid;grid-template-columns:210px 1fr;gap:14px;min-height:230px}
+  @media(max-width:720px){.sd-msg{grid-template-columns:1fr}}
+  .sd-msg-side{display:flex;flex-direction:column;gap:8px}
+  .sd-ann-btn{display:flex;align-items:center;gap:7px;justify-content:center;font-size:12px;font-weight:600;color:var(--blue);background:var(--ml);border:1px solid #cddcf7;border-radius:9px;padding:9px 10px;cursor:pointer}
+  .sd-ann-btn:hover{background:#dbe7fb}
+  .sd-thread-list{display:flex;flex-direction:column;gap:4px;overflow:auto;max-height:300px}
+  .sd-tl-empty{color:var(--mid);font-size:12.5px;line-height:1.5;padding:12px 6px}
+  .sd-tl-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 11px;border:1px solid var(--rule);border-radius:9px;background:#fff;cursor:pointer;font-size:13px;color:var(--ink);text-align:left}
+  .sd-tl-row:hover{border-color:var(--gold);background:var(--paper)}
+  .sd-tl-row.active{border-color:var(--mod);background:var(--ml)}
+  .sd-tl-nm{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sd-tl-badge{flex-shrink:0;min-width:18px;height:18px;padding:0 5px;border-radius:100px;background:var(--rose,#b0472f);color:#fff;font-size:11px;font-weight:600;display:grid;place-items:center}
+  .sd-msg-main{display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:11px;background:var(--paper);overflow:hidden}
+  .sd-thread{flex:1;overflow:auto;max-height:300px;padding:12px 14px;display:flex;flex-direction:column;gap:9px}
+  .sd-thread-empty{color:var(--mid);font-size:12.5px;line-height:1.5;padding:20px 14px;text-align:center;margin:auto}
+  .sd-thread-empty i{display:block;font-size:26px;color:var(--rule);margin-bottom:8px}
+  .sd-thread-h{font-size:12px;font-weight:600;color:var(--blue);display:flex;align-items:center;gap:7px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+  .sd-thread-h i{color:var(--mod)}
+  .sd-b{max-width:82%;padding:8px 11px;border-radius:12px;font-size:13px;line-height:1.5}
+  .sd-b-meta{font-size:10px;color:var(--mid);margin-bottom:3px}
+  .sd-b-txt{word-wrap:break-word}
+  .sd-b.in{align-self:flex-start;background:#fff;border:1px solid var(--rule);border-bottom-left-radius:3px}
+  .sd-b.out{align-self:flex-end;background:var(--blue);color:#fff;border-bottom-right-radius:3px}
+  .sd-b.out .sd-b-meta{color:rgba(255,255,255,.7)}
+  .sd-b.ann{align-self:stretch;max-width:100%;background:#fff7e8;border:1px solid #eddcae;color:var(--ink)}
+  .sd-b.ann .sd-b-meta{color:var(--mid)}
+  .sd-reply{display:flex;gap:8px;padding:10px;border-top:1px solid var(--rule);background:#fff}
+  .sd-reply:empty{display:none}
+  .sd-reply-ta{flex:1;resize:vertical;min-height:38px;border:1px solid var(--rule);border-radius:8px;padding:8px 10px;font:inherit;font-size:13px;outline:none}
+  .sd-reply-ta:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(218,158,43,.12)}
+  .sd-reply-send{flex-shrink:0;display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#fff;background:var(--blue);border:0;border-radius:8px;padding:0 14px;cursor:pointer}
+  .sd-reply-send:hover{filter:brightness(1.1)}
+  .sd-reply-send:disabled{opacity:.5}
 </style>
 </head>
 <body>
@@ -185,7 +220,9 @@
   function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   document.getElementById('signout').onclick=function(){auth.signOut().then(function(){window.location.href='login';});};
 
-  var CURRENT_UID=null, classesData=[], activeTab=0;
+  var CURRENT_UID=null, CURRENT_NAME='Instructor', classesData=[], activeTab=0;
+  // Messaging state (per-class conversations + announcements)
+  var msgUnsub=null, msgDocs=[], selThread=null, msgDrafts={};
 
   // Single source of truth for all instructor-facing lesson data — see data/lessons-v1.js.
   // Loaded via <script src="data/lessons-v1.js">, which sets window.CPLA_MODULES / window.CPLA_LESSONS.
@@ -215,6 +252,7 @@
     try{ var s=await db.collection('users').doc(user.uid).get(); d=s.exists?s.data():{}; }catch(e){}
     if(d.accountType!=='instructor'){ window.location.href='workspace.html'; return; }
     var first=d.firstName||(user.displayName?user.displayName.split(' ')[0]:'Director');
+    CURRENT_NAME=user.displayName||first||'Instructor';
     var initials=user.displayName?user.displayName.split(' ').map(function(n){return n[0];}).join('').toUpperCase().slice(0,2):user.email.slice(0,2).toUpperCase();
     document.getElementById('sb-name').textContent=user.displayName||first;
     document.getElementById('sb-av').textContent=initials;
@@ -236,7 +274,7 @@
       var docs=snap.docs.slice().sort(function(a,b){var ta=a.data().createdAt?a.data().createdAt.toMillis():0,tb=b.data().createdAt?b.data().createdAt.toMillis():0;return ta-tb;});
       for(var i=0;i<docs.length;i++){
         var c=docs[i].data(); c.id=docs[i].id; c.students=[];
-        try{ var rs=await db.collection('users').where('classId','==',c.id).get(); c.students=rs.docs.map(function(u){return u.data();}); }catch(e){ c.rosterError=true; }
+        try{ var rs=await db.collection('users').where('classId','==',c.id).get(); c.students=rs.docs.map(function(u){var sd=u.data(); sd.uid=u.id; return sd;}); }catch(e){ c.rosterError=true; }
         classesData.push(c);
       }
     }catch(e){}
@@ -270,6 +308,7 @@
     var eb=host.querySelector('#edit-name'); if(eb) eb.onclick=function(){startNameEdit(c);};
     var sel=host.querySelector('#lesson-select'); if(sel) sel.onchange=function(){ setCurrentLesson(c, sel.value); };
     loadPanelNotes(c,L);
+    initClassMessaging(c);
   }
 
   function classPanelHTML(c,L){
@@ -328,6 +367,18 @@
           '<textarea id="panel-notes-text"></textarea>'+
           '<div class="notes-foot"><span class="hint">Notes are saved per class and per lesson, so they trace back to '+M.module+' · Lesson '+L.id+'.</span><span class="saved" id="panel-notes-saved"><i class="ti ti-check"></i> Saved</span></div>'+
         '</div>'+
+        '<div class="blk"><div class="blk-h">Messages <span class="note">— private conversations with your students</span></div>'+
+          '<div class="sd-msg">'+
+            '<div class="sd-msg-side">'+
+              '<button class="sd-ann-btn" id="sd-ann-btn"><i class="ti ti-speakerphone"></i> Announce to whole class</button>'+
+              '<div class="sd-thread-list" id="sd-thread-list"><div class="sd-tl-empty">No students in this class yet.</div></div>'+
+            '</div>'+
+            '<div class="sd-msg-main">'+
+              '<div class="sd-thread" id="sd-thread"><div class="sd-thread-empty"><i class="ti ti-messages"></i>Select a student to open your conversation, or send a class-wide announcement.</div></div>'+
+              '<div class="sd-reply" id="sd-reply"></div>'+
+            '</div>'+
+          '</div>'+
+        '</div>'+
       '</div>'+
     '</div>';
   }
@@ -378,6 +429,93 @@
       },800);
     };
   }
+
+  // ---- MESSAGING: per-class 1:1 threads + class announcements ----
+  function msgTime(ts){ try{ var d=ts&&ts.toDate?ts.toDate():new Date(); var h=d.getHours(),m=d.getMinutes(),ap=h<12?'AM':'PM'; h=h%12||12; return (d.getMonth()+1)+'/'+d.getDate()+' '+h+':'+(m<10?'0':'')+m+' '+ap; }catch(e){ return ''; } }
+  function byTime(a,b){ var ta=a.createdAt&&a.createdAt.toMillis?a.createdAt.toMillis():0, tb=b.createdAt&&b.createdAt.toMillis?b.createdAt.toMillis():0; return ta-tb; }
+
+  function initClassMessaging(c){
+    if(msgUnsub){ try{msgUnsub();}catch(e){} msgUnsub=null; }
+    msgDocs=[];
+    var annBtn=document.getElementById('sd-ann-btn');
+    if(annBtn) annBtn.onclick=function(){ selThread='__announce__'; renderMsgBlock(c); };
+    if(!c || !c.id) return;
+    msgUnsub=db.collection('messages').where('classId','==',c.id).onSnapshot(function(snap){
+      msgDocs=snap.docs.map(function(dd){var o=dd.data();o.id=dd.id;return o;});
+      renderMsgBlock(c);
+    }, function(err){ var le=document.getElementById('sd-thread-list'); if(le) le.innerHTML='<div class="sd-tl-empty">Messages unavailable — the Firestore rules for the "messages" collection may not be set yet.</div>'; });
+  }
+
+  function unread1to1(uid){ var n=0; for(var i=0;i<msgDocs.length;i++){var m=msgDocs[i]; if(m.type==='1to1'&&m.studentId===uid&&m.senderRole==='student'&&!m.readByInstructor) n++;} return n; }
+
+  function renderMsgBlock(c){
+    var listEl=document.getElementById('sd-thread-list'), threadEl=document.getElementById('sd-thread'), replyEl=document.getElementById('sd-reply');
+    if(!listEl||!threadEl||!replyEl) return;
+    var studs=(c.students||[]).filter(function(s){return s.uid;});
+    if(!studs.length){ listEl.innerHTML='<div class="sd-tl-empty">No students in this class yet.</div>'; }
+    else{
+      listEl.innerHTML=studs.map(function(s){
+        var nm=((s.firstName||'')+' '+(s.lastName||'')).trim()||s.email||'Student';
+        var u=unread1to1(s.uid), active=(selThread===s.uid)?' active':'';
+        return '<button class="sd-tl-row'+active+'" data-uid="'+esc(s.uid)+'"><span class="sd-tl-nm">'+esc(nm)+'</span>'+(u?'<span class="sd-tl-badge">'+u+'</span>':'')+'</button>';
+      }).join('');
+      listEl.querySelectorAll('.sd-tl-row').forEach(function(b){ b.onclick=function(){ selThread=b.getAttribute('data-uid'); markThreadRead(selThread); renderMsgBlock(c); }; });
+    }
+    if(selThread==='__announce__'){
+      var anns=msgDocs.filter(function(m){return m.type==='announcement';}).sort(byTime);
+      threadEl.innerHTML='<div class="sd-thread-h"><i class="ti ti-speakerphone"></i> Class announcements</div>'+
+        (anns.length?anns.map(function(m){return bubble(m,'out');}).join(''):'<div class="sd-thread-empty">No announcements yet. Write one below — every student in this class will see it.</div>');
+      replyEl.innerHTML=composerHTML('Write an announcement to the whole class…','Send to class');
+      wireComposer(c, function(text){ return sendMessage(c, {type:'announcement', studentId:'*', studentName:'', text:text}); });
+      scrollThread();
+    } else if(selThread){
+      var stu=studs.filter(function(s){return s.uid===selThread;})[0];
+      var nm=stu?(((stu.firstName||'')+' '+(stu.lastName||'')).trim()||stu.email||'Student'):'Student';
+      var thread=msgDocs.filter(function(m){return m.type==='1to1'&&m.studentId===selThread;}).sort(byTime);
+      threadEl.innerHTML='<div class="sd-thread-h"><i class="ti ti-user"></i> '+esc(nm)+'</div>'+
+        (thread.length?thread.map(function(m){return bubble(m, m.senderRole==='instructor'?'out':'in');}).join(''):'<div class="sd-thread-empty">No messages yet with '+esc(nm)+'. Say hello below.</div>');
+      replyEl.innerHTML=composerHTML('Reply to '+nm+'…','Send');
+      if(stu) wireComposer(c, function(text){ return sendMessage(c, {type:'1to1', studentId:stu.uid, studentName:nm, text:text}); });
+      scrollThread();
+    } else {
+      threadEl.innerHTML='<div class="sd-thread-empty"><i class="ti ti-messages"></i>Select a student to open your conversation, or use “Announce to whole class.”</div>';
+      replyEl.innerHTML='';
+    }
+  }
+
+  function bubble(m,dir){
+    var who=dir==='out'?(m.type==='announcement'?'Announcement · you':'You'):esc(m.senderName||'Student');
+    return '<div class="sd-b '+dir+(m.type==='announcement'?' ann':'')+'"><div class="sd-b-meta">'+who+' · '+msgTime(m.createdAt)+'</div><div class="sd-b-txt">'+esc(m.text).replace(/\n/g,'<br>')+'</div></div>';
+  }
+
+  function composerHTML(ph,label){
+    return '<textarea class="sd-reply-ta" id="sd-reply-ta" rows="2" placeholder="'+esc(ph)+'"></textarea><button class="sd-reply-send" id="sd-reply-send"><i class="ti ti-send"></i> '+esc(label)+'</button>';
+  }
+
+  function wireComposer(c, sendFn){
+    var ta=document.getElementById('sd-reply-ta'), btn=document.getElementById('sd-reply-send'); if(!ta||!btn) return;
+    var key=selThread||'__x__';
+    ta.value=msgDrafts[key]||'';
+    ta.oninput=function(){ msgDrafts[key]=ta.value; };
+    function go(){ var t=ta.value.trim(); if(!t) return; btn.disabled=true; msgDrafts[key]=''; ta.value=''; sendFn(t).then(function(){ btn.disabled=false; }).catch(function(){ msgDrafts[key]=t; ta.value=t; toast('Could not send — check Firestore rules'); btn.disabled=false; }); }
+    btn.onclick=go;
+    ta.addEventListener('keydown',function(e){ if((e.metaKey||e.ctrlKey)&&e.key==='Enter'){ e.preventDefault(); go(); } });
+  }
+
+  function sendMessage(c, m){
+    return db.collection('messages').add({
+      classId:c.id, type:m.type, studentId:m.studentId, studentName:m.studentName||'',
+      senderRole:'instructor', senderId:CURRENT_UID, senderName:CURRENT_NAME, text:m.text,
+      readByInstructor:true, readByStudent:false,
+      createdAt:firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }
+
+  function markThreadRead(uid){
+    msgDocs.forEach(function(m){ if(m.type==='1to1'&&m.studentId===uid&&m.senderRole==='student'&&!m.readByInstructor){ db.collection('messages').doc(m.id).update({readByInstructor:true}).catch(function(){}); } });
+  }
+
+  function scrollThread(){ var t=document.getElementById('sd-thread'); if(t) t.scrollTop=t.scrollHeight; }
 </script>
 </body>
 </html>

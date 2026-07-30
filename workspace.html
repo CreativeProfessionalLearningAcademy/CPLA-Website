@@ -98,6 +98,22 @@
   .msg-av{width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:600;flex-shrink:0}
   .msg-txt{font-size:12px;line-height:1.5;color:var(--mid)}
   .msg-txt b{color:var(--ink);font-weight:600;display:block;font-size:12px;margin-bottom:2px}
+  /* Instructor messaging */
+  #msg-card .card-b{display:flex;flex-direction:column}
+  .ws-thread{display:flex;flex-direction:column;gap:9px;max-height:300px;overflow:auto}
+  .ws-b{max-width:88%;padding:8px 11px;border-radius:12px;font-size:12.5px;line-height:1.5;word-wrap:break-word}
+  .ws-b-meta{font-size:10px;color:var(--mid);margin-bottom:3px}
+  .ws-b.out{align-self:flex-end;background:var(--blue);color:#fff;border-bottom-right-radius:3px}
+  .ws-b.out .ws-b-meta{color:rgba(255,255,255,.72)}
+  .ws-b.in{align-self:flex-start;background:#fff;border:1px solid var(--rule);border-bottom-left-radius:3px}
+  .ws-b.ann{align-self:stretch;max-width:100%;background:#fff7e8;border:1px solid #eddcae}
+  .ws-compose{display:flex;gap:7px;margin-top:12px;padding-top:12px;border-top:1px solid #f2ede3}
+  .ws-compose textarea{flex:1;resize:vertical;min-height:38px;border:1px solid var(--rule);border-radius:9px;padding:8px 10px;font:inherit;font-size:12.5px;outline:none}
+  .ws-compose textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(218,158,43,.12)}
+  .ws-send{flex-shrink:0;width:42px;border:0;border-radius:9px;background:var(--blue);color:#fff;font-size:16px;display:grid;place-items:center;cursor:pointer}
+  .ws-send:hover{filter:brightness(1.12)}
+  .ws-send:disabled{opacity:.5;cursor:default}
+  .ws-compose.disabled{opacity:.6;pointer-events:none}
 
   /* DRAWER */
   .scrim{position:fixed;inset:0;background:rgba(10,14,28,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}
@@ -208,9 +224,15 @@
           <div class="card" id="msg-card">
             <div class="card-h"><i class="ti ti-mail"></i><span class="t">Instructor</span></div>
             <div class="card-b">
-              <div class="msg-empty" id="msg-empty">
-                <i class="ti ti-message-2"></i>
-                No messages yet. Feedback from your instructor will appear here.
+              <div class="ws-thread" id="ws-thread">
+                <div class="msg-empty" id="msg-empty">
+                  <i class="ti ti-message-2"></i>
+                  No messages yet. Send your instructor a question below — replies and announcements appear here.
+                </div>
+              </div>
+              <div class="ws-compose" id="ws-compose">
+                <textarea id="ws-msg-input" rows="2" placeholder="Message your instructor…"></textarea>
+                <button id="ws-msg-send" class="ws-send" title="Send"><i class="ti ti-send"></i></button>
               </div>
             </div>
           </div>
@@ -276,6 +298,7 @@
       document.getElementById('greet-date').textContent=days[now.getDay()]+', '+months[now.getMonth()]+' '+now.getDate();
       var hr=now.getHours(), g=hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';
       document.getElementById('greet-h').innerHTML=g+', <em>'+first+'</em>. Here’s your studio.';
+      initStudentMessages(user.uid, d.classId||'', user.displayName||first||'Student');
     }catch(e){console.warn(e);}
     document.getElementById('loading').style.display='none';
     document.getElementById('wsmain').style.display='grid';
@@ -283,6 +306,48 @@
     if(_tl){ _tl.style.display='inline-flex'; _tl.onclick=function(){ startWorkspaceTour(first); }; }
     try{ if(!localStorage.getItem('cpla_tour_ws_v1_seen')) setTimeout(function(){ startWorkspaceTour(first); }, 750); }catch(e){}
   });
+
+  // ---- Instructor messaging (student side): 1:1 thread + class announcements ----
+  var WS_MA=[], WS_MB=[], wsUnsubA=null, wsUnsubB=null;
+  function wsEsc(s){ return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function wsMsgTime(ts){ try{ var d=ts&&ts.toDate?ts.toDate():new Date(); var h=d.getHours(),m=d.getMinutes(),ap=h<12?'AM':'PM'; h=h%12||12; return (d.getMonth()+1)+'/'+d.getDate()+' '+h+':'+(m<10?'0':'')+m+' '+ap; }catch(e){ return ''; } }
+
+  function initStudentMessages(uid, classId, name){
+    var input=document.getElementById('ws-msg-input'), send=document.getElementById('ws-msg-send'), compose=document.getElementById('ws-compose');
+    if(!classId){ if(compose) compose.classList.add('disabled'); if(input) input.placeholder='Join a class to message your instructor.'; }
+    if(wsUnsubA){ try{wsUnsubA();}catch(e){} }
+    wsUnsubA=db.collection('messages').where('studentId','==',uid).onSnapshot(function(snap){
+      WS_MA=snap.docs.map(function(d){var o=d.data();o.id=d.id;return o;}); renderStudentThread();
+    }, function(e){ console.warn('messages(thread):',e&&e.code); });
+    if(classId){
+      if(wsUnsubB){ try{wsUnsubB();}catch(e){} }
+      wsUnsubB=db.collection('messages').where('classId','==',classId).where('type','==','announcement').onSnapshot(function(snap){
+        WS_MB=snap.docs.map(function(d){var o=d.data();o.id=d.id;return o;}); renderStudentThread();
+      }, function(e){ console.warn('messages(announce):',e&&e.code); });
+    }
+    if(send && input){
+      var go=function(){ var t=input.value.trim(); if(!t||!classId) return; send.disabled=true; var val=t; input.value='';
+        db.collection('messages').add({classId:classId,type:'1to1',studentId:uid,studentName:name,senderRole:'student',senderId:uid,senderName:name,text:val,readByInstructor:false,readByStudent:true,createdAt:firebase.firestore.FieldValue.serverTimestamp()})
+          .then(function(){ send.disabled=false; })
+          .catch(function(){ input.value=val; send.disabled=false; toast('Could not send — try again'); }); };
+      send.onclick=go;
+      input.addEventListener('keydown',function(e){ if((e.metaKey||e.ctrlKey)&&e.key==='Enter'){ e.preventDefault(); go(); } });
+    }
+  }
+
+  function renderStudentThread(){
+    var el=document.getElementById('ws-thread'); if(!el) return;
+    var all={}; WS_MA.concat(WS_MB).forEach(function(m){ all[m.id]=m; });
+    var arr=Object.keys(all).map(function(k){return all[k];}).sort(function(a,b){ var ta=a.createdAt&&a.createdAt.toMillis?a.createdAt.toMillis():0, tb=b.createdAt&&b.createdAt.toMillis?b.createdAt.toMillis():0; return ta-tb; });
+    if(!arr.length){ el.innerHTML='<div class="msg-empty" id="msg-empty"><i class="ti ti-message-2"></i>No messages yet. Send your instructor a question below — replies and announcements appear here.</div>'; return; }
+    el.innerHTML=arr.map(function(m){
+      var cls=m.type==='announcement'?'ann':(m.senderRole==='student'?'out':'in');
+      var who=m.type==='announcement'?('Announcement · '+wsEsc(m.senderName||'Instructor')):(m.senderRole==='student'?'You':wsEsc(m.senderName||'Instructor'));
+      return '<div class="ws-b '+cls+'"><div class="ws-b-meta">'+who+' · '+wsMsgTime(m.createdAt)+'</div><div>'+wsEsc(m.text).replace(/\n/g,'<br>')+'</div></div>';
+    }).join('');
+    el.scrollTop=el.scrollHeight;
+    WS_MA.forEach(function(m){ if(m.type==='1to1'&&m.senderRole==='instructor'&&!m.readByStudent){ db.collection('messages').doc(m.id).update({readByStudent:true}).catch(function(){}); } });
+  }
 </script>
 
 <!-- Workspace onboarding tour -->

@@ -1,0 +1,82 @@
+CPLA — Firestore security rules for the "messages" collection
+==============================================================
+
+The instructor↔student messaging in studio-director.html and workspace.html
+reads/writes a new Firestore collection called `messages`. Firestore denies all
+access by default, so you MUST add the rule block below or every send/read fails
+with a "Missing or insufficient permissions" (permission-denied) error.
+
+HOW TO ADD IT
+-------------
+1. Firebase console → your project → Build → Firestore Database → Rules tab.
+2. Inside the existing  `match /databases/{database}/documents { ... }`  block,
+   paste the MESSAGES block below (alongside your existing match rules for
+   users / classes / progress / instructor_notes — do not delete those).
+3. Click Publish.
+
+No composite indexes are required — all queries use equality filters only and
+sort in the browser.
+
+------------------------------------------------------------------
+// ===== messages: 1:1 instructor<->student threads + announcements =====
+match /messages/{msgId} {
+
+  function isInstructorOfClass(cid) {
+    return request.auth != null
+        && exists(/databases/$(database)/documents/classes/$(cid))
+        && get(/databases/$(database)/documents/classes/$(cid)).data.instructorId == request.auth.uid;
+  }
+
+  // READ
+  allow read: if request.auth != null && (
+       resource.data.studentId == request.auth.uid        // student reads their own 1:1 thread
+    || resource.data.type == 'announcement'               // signed-in students read class announcements
+    || isInstructorOfClass(resource.data.classId)         // instructor reads all messages in their class
+  );
+
+  // CREATE
+  allow create: if request.auth != null && (
+       (  request.resource.data.senderRole == 'student'
+       && request.resource.data.senderId == request.auth.uid
+       && request.resource.data.studentId == request.auth.uid
+       && request.resource.data.type == '1to1' )
+    || (  request.resource.data.senderRole == 'instructor'
+       && request.resource.data.senderId == request.auth.uid
+       && isInstructorOfClass(request.resource.data.classId) )
+  );
+
+  // UPDATE  (only the read-flags get updated by the app)
+  allow update: if request.auth != null && (
+       resource.data.studentId == request.auth.uid        // student marks instructor messages read
+    || isInstructorOfClass(resource.data.classId)         // instructor marks student messages read
+  );
+
+  // DELETE  (instructor only; optional)
+  allow delete: if isInstructorOfClass(resource.data.classId);
+}
+// ===== end messages =====
+------------------------------------------------------------------
+
+DOCUMENT SHAPE (for reference)
+------------------------------
+messages/{autoId} = {
+  classId,           // class the message belongs to
+  type,              // '1to1'  or  'announcement'
+  studentId,         // student uid for 1:1 threads; '*' for announcements
+  studentName,       // display name of the thread's student
+  senderRole,        // 'student' | 'instructor'
+  senderId,          // uid of sender
+  senderName,        // display name of sender
+  text,              // message body
+  readByInstructor,  // bool
+  readByStudent,     // bool
+  createdAt          // serverTimestamp
+}
+
+NOTE ON ANNOUNCEMENTS
+---------------------
+The read rule lets any signed-in user read documents with type == 'announcement'.
+In practice students only query announcements for their own classId, so they only
+see their class's announcements. If you later want announcements strictly walled
+per class, tighten the rule to also check the reader's classId (that requires a
+get() on the reader's user doc).
