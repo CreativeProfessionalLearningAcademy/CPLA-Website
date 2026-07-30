@@ -1,0 +1,7 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Python (QA doc generators)
+__pycache__/
+*.pyc
