@@ -1,0 +1,64 @@
+/* ============================================================================
+   CPLA THEME — canonical color + type tokens (single source of truth)
+   Drop into any CPLA site page:  <link rel="stylesheet" href="cpla-theme.css">
+   Then reference var(--cpla-*) — never hard-code hex. See CPLA_Design_System.md.
+   Retired and forbidden: #000 black, #0f0d0b near-black, #c8401a terracotta.
+   ============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+:root{
+  /* ---- Canonical brand ---- */
+  --cpla-navy:      #01123a;   /* dark chrome */
+  --cpla-navy-2:    #0a1c44;   /* navy hover / secondary dark */
+  --cpla-blue:      #1a56c4;   /* primary action / module accent */
+  --cpla-blue-tint: #e8f0fe;
+  --cpla-gold:      #da9e2b;   /* secondary accent / student CTA / brand mark */
+  --cpla-gold-tint: #fbf3e0;
+
+  /* ---- Neutrals ---- */
+  --cpla-ink:   #1a1410;   /* text */
+  --cpla-paper: #faf7f2;   /* app background */
+  --cpla-cream: #f0ead8;   /* inset fills */
+  --cpla-rule:  #d4c9b8;   /* borders */
+  --cpla-mid:   #6b5e52;   /* secondary text */
+
+  /* ---- Semantic (status only) ---- */
+  --cpla-green:      #2d7a1a;
+  --cpla-green-tint: #f0fae8;
+  --cpla-red:        #dc2626;   /* staff surfaces only */
+  --cpla-red-tint:   #fee2e2;
+  /* (warning/watch = gold tokens above) */
+
+  /* ---- Skill-category palette (data-viz only) ---- */
+  --cpla-skill-typography: #334e8f;
+  --cpla-skill-color:      #b8860b;
+  --cpla-skill-layout:     #2d7a1a;
+  --cpla-skill-comp:       #1a56c4;
+  --cpla-skill-hierarchy:  #6b21a8;
+  --cpla-skill-branding:   #0e7490;
+  --cpla-skill-technical:  #be185d;
+  --cpla-skill-creative:   #b45309;
+  --cpla-skill-data:       #4338ca;
+  --cpla-skill-prof:       #475569;
+
+  /* ---- Type ---- */
+  --cpla-font-display: 'Playfair Display', Georgia, serif;
+  --cpla-font-ui:      'DM Sans', system-ui, sans-serif;
+  --cpla-font-mono:    'DM Mono', ui-monospace, monospace;
+  --cpla-font-num:     Georgia, 'Playfair Display', serif;
+
+  /* ============================================================
+     Compatibility aliases — match existing page/prototype names
+     so this file is a true drop-in. Prefer --cpla-* in new work.
+     ============================================================ */
+  --ink:#1a1410; --paper:#faf7f2; --cream:#f0ead8; --rule:#d4c9b8; --mid:#6b5e52;
+  --blue:#01123a;        /* Student Workspace: --blue == navy */
+  --nav2:#0a1c44;
+  --navy:#01123a;        /* dashboards: navy chrome */
+  --mod:#1a56c4;  --ml:#e8f0fe;          /* Workspace blue accent */
+  --accent:#1a56c4; --accentLight:#e8f0fe;/* dashboards blue accent */
+  --gold:#da9e2b; --goldLight:#fbf3e0;
+  --green:#2d7a1a; --gnl:#f0fae8; --greenLight:#f0fae8;
+  --red:#dc2626; --redLight:#fee2e2;
+}

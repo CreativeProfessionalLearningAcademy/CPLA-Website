@@ -115,6 +115,27 @@
   .ws-send:disabled{opacity:.5;cursor:default}
   .ws-compose.disabled{opacity:.6;pointer-events:none}
 
+  /* YOUR FOCUS (student-facing attention panel) */
+  .focus{max-width:1060px;margin:0 0 22px;background:#fff;border:1px solid var(--rule);border-left:4px solid var(--gold);border-radius:16px;padding:18px 22px;display:none}
+  .focus.show{display:block;animation:focusIn .3s ease}
+  @keyframes focusIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+  .focus.clear{border-left-color:var(--green)}
+  .focus-h{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+  .focus-h i{font-size:20px;color:var(--gold)}
+  .focus.clear .focus-h i{color:var(--green)}
+  .focus-h h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--ink)}
+  .focus-sub{font-size:12.5px;color:var(--mid);margin:2px 0 15px;line-height:1.55;max-width:640px}
+  .focus-list{display:flex;flex-direction:column;gap:10px}
+  .focus-item{display:flex;align-items:center;gap:13px;padding:12px 14px;background:var(--paper);border:1px solid #efeae0;border-radius:12px}
+  .focus-item .fi-ic{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--ml);color:var(--mod);font-size:17px;flex-shrink:0}
+  .focus-item.beh .fi-ic{background:#fdf3df;color:#a8760f}
+  .focus-item .fi-tx{flex:1;font-size:13.5px;font-weight:500;color:var(--ink);line-height:1.4}
+  .focus-item .fi-tx small{display:block;font-size:11.5px;color:var(--mid);margin-top:3px;font-weight:300}
+  .focus-item a.fi-go{flex-shrink:0;background:var(--blue);color:#fff;text-decoration:none;font-size:12px;font-weight:600;padding:9px 14px;border-radius:10px;display:inline-flex;align-items:center;gap:6px;transition:filter .15s}
+  .focus-item a.fi-go:hover{filter:brightness(1.3)}
+  .focus-clear-row{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--mid);line-height:1.5}
+  .focus-clear-row i{color:var(--gold);font-size:16px}
+
   /* DRAWER */
   .scrim{position:fixed;inset:0;background:rgba(10,14,28,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}
   .scrim.open{opacity:1;pointer-events:auto}
@@ -190,6 +211,9 @@
       <div class="greet-date" id="greet-date"></div>
       <div class="greet-h" id="greet-h">Welcome to your studio.</div>
       <button id="tour-launch" style="display:none"><i class="ti ti-route"></i> Take a quick tour</button>
+
+      <!-- YOUR FOCUS — student-facing attention panel (shared engine) -->
+      <div class="focus" id="focus"></div>
 
       <div class="layout">
         <!-- MISSION -->
@@ -299,6 +323,7 @@
       var hr=now.getHours(), g=hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';
       document.getElementById('greet-h').innerHTML=g+', <em>'+first+'</em>. Here’s your studio.';
       initStudentMessages(user.uid, d.classId||'', user.displayName||first||'Student');
+      renderFocus(computeStudentAttention(d, isGuest));
     }catch(e){console.warn(e);}
     document.getElementById('loading').style.display='none';
     document.getElementById('wsmain').style.display='grid';
@@ -347,6 +372,55 @@
     }).join('');
     el.scrollTop=el.scrollHeight;
     WS_MA.forEach(function(m){ if(m.type==='1to1'&&m.senderRole==='instructor'&&!m.readByStudent){ db.collection('messages').doc(m.id).update({readByStudent:true}).catch(function(){}); } });
+  }
+
+  // ---- Shared Attention Engine — student-facing view ----
+  // The SAME signals the instructor (Studio Director) and admin (Control Center)
+  // see, scoped to THIS student and framed supportively — never alarming.
+  // Populate these fields on the student's users/{uid} record (the attention
+  // engine writes them): lessonsBehind (number), missingItems [{title,lessonUrl}],
+  // nextDue {title,due,lessonUrl}. Absent fields simply produce no items.
+  function computeStudentAttention(d, isGuest){
+    d = d || {}; var items = [];
+    if(Array.isArray(d.missingItems)){
+      d.missingItems.forEach(function(m){
+        items.push({kind:'missing', title:(m&&m.title)||'Unsubmitted work', sub:'Not submitted yet', url:(m&&m.lessonUrl)||'volume1.html'});
+      });
+    }
+    if(typeof d.lessonsBehind==='number' && d.lessonsBehind>=2){
+      items.push({kind:'behind', title:"You're "+d.lessonsBehind+" lessons behind the class pace", sub:'A short catch-up this week gets you back on track', url:'volume1.html'});
+    }
+    if(d.nextDue && d.nextDue.title){
+      items.push({kind:'due', title:d.nextDue.title, sub:'Due '+(d.nextDue.due||'soon'), url:d.nextDue.lessonUrl||'volume1.html'});
+    }
+    // Reviewer/guest account sees a representative example so the panel is reviewable.
+    if(isGuest && !items.length){
+      items = [
+        {kind:'missing', title:'Lesson 1.2 — Line & Shape exercise', sub:'Not submitted yet', url:'volume1.html'},
+        {kind:'behind', title:"You're 2 lessons behind the class pace", sub:'A short catch-up this week gets you back on track', url:'volume1.html'}
+      ];
+    }
+    return items;
+  }
+  function renderFocus(items){
+    var el=document.getElementById('focus'); if(!el) return;
+    if(!items || !items.length){
+      el.className='focus show clear';
+      el.innerHTML='<div class="focus-h"><i class="ti ti-circle-check"></i><h3>You’re all caught up</h3></div>'+
+        '<div class="focus-clear-row"><i class="ti ti-star"></i> Nice work — nothing needs your attention right now. Keep the momentum going.</div>';
+      return;
+    }
+    var icon={missing:'ti ti-alert-triangle', behind:'ti ti-clock', due:'ti ti-calendar-event'};
+    el.className='focus show';
+    el.innerHTML='<div class="focus-h"><i class="ti ti-target"></i><h3>A couple of things to catch up on</h3></div>'+
+      '<div class="focus-sub">You’ve got this — here’s the fastest way back on track. Tackle one at a time.</div>'+
+      '<div class="focus-list">'+items.map(function(it){
+        return '<div class="focus-item '+(it.kind==='behind'?'beh':'')+'">'+
+          '<div class="fi-ic"><i class="'+(icon[it.kind]||'ti ti-point')+'"></i></div>'+
+          '<div class="fi-tx">'+wsEsc(it.title)+'<small>'+wsEsc(it.sub||'')+'</small></div>'+
+          '<a class="fi-go" href="'+wsEsc(it.url||'volume1.html')+'"><i class="ti ti-arrow-right"></i> Open</a>'+
+        '</div>';
+      }).join('')+'</div>';
   }
 </script>
 
