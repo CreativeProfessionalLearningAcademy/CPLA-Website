@@ -59,6 +59,8 @@ and the panels light up.
 
 ### 3.1 `submissions` — student turns in a deliverable
 
+The submission area offers the student **two methods**, sharing one record, distinguished by `method`:
+
 ```jsonc
 // submissions/{autoId}
 {
@@ -66,17 +68,71 @@ and the panels light up.
   "classId":   "classId",
   "lessonId":  "1.2",
   "deliverableTitle": "Line & Shape exercise",
-  "status":    "submitted",          // submitted | returned | graded
-  "url":       "https://…",          // link, or Firebase Storage path, or Milanote board ref
+  "method":    "upload",             // "upload" (Firebase Storage) | "milanote" (board link)
+  "status":    "submitted",          // submitted | ai_reviewed | returned | graded
+
+  // --- method: "upload" ---
+  "storagePath": "submissions/{classId}/{uid}/{lessonId}/file.png",
+  "downloadUrl": "https://…",
+  "ai": {                            // automatic AI review (see 3.1a)
+    "status":   "complete",          // pending | complete | error
+    "score":    0,                   // 0–100 rubric score (ADVISORY only)
+    "feedback": "",                  // structured, encouraging critique
+    "rubric":   [ { "criterion": "…", "level": "…", "note": "…" } ],
+    "model":    "…",
+    "reviewedAt": Timestamp
+  },
+
+  // --- method: "milanote" ---
+  "milanoteUrl":      "https://app.milanote.com/…",   // student's board share link (captured once)
+  "milanoteUsername": "student@school.edu",           // = school email, auto from auth
+
   "submittedAt": Timestamp,
-  "grade":     null,                 // e.g. "B+"  (nullable until graded)
-  "score":     null,                 // 0–100     (nullable)
-  "feedback":  "",
-  "gradedBy":  null,
-  "gradedAt":  null
+  "grade":  null, "score": null, "feedback": "",       // instructor grading — FINAL say
+  "gradedBy": null, "gradedAt": null
 }
 ```
-Queryable by `studentId` (student's own) and by `classId` (instructor roster view).
+Queryable by `studentId` (own) and `classId` (instructor roster). The instructor's grade always
+overrides the advisory AI score.
+
+#### 3.1a Method — File upload + automatic AI review (Blaze)
+The client stores the file in Firebase Storage, then a **Cloud Function** reads it, sends the image
+plus the lesson's deliverable criteria/rubric to a vision-capable model, and writes an encouraging,
+rubric-aligned critique (+ advisory score) back onto the submission's `ai` object. Reuses the
+existing AI-review prototypes (`AI_Design_Review_System`, `Rubric_Grader`).
+**Requires:** Blaze plan (Storage + Functions), an AI-provider key in Function config, and a small
+**per-review API cost** (a few cents/image at pilot scale). Cost controls: run on submit only, and
+cap per-student/day. The AI score is advisory; the instructor grade is authoritative.
+
+#### 3.1b Method — Milanote (what the platform actually allows)
+Milanote has **no public API and no SSO**, so accounts and board links **cannot be auto-created or
+derived from a school email.** Feasible design:
+- **Email = username convention** — shown and stored automatically from auth; no typing.
+- **One-time board-link capture** — first Milanote submission, the student pastes their board share
+  link; saved to `users/{uid}.milanoteBoardUrl`; every later submission auto-references it.
+- Account creation stays manual in Milanote's UI (or via Milanote's Team plan invites). No file
+  hosting or AI review on this path (the work lives in Milanote).
+**Cost:** none beyond Firestore — this path works even on the free Spark plan.
+
+#### 3.1c Portability guardrail — submission method is **configuration, not curriculum**
+The available submission methods are an **organization setting**, never part of a lesson. Lessons
+define only the deliverable (`curriculum.deliverable`); the platform decides *how* it is submitted
+from the org's config:
+
+```jsonc
+// organizations/{orgId}  (or classes/{classId} to override)
+{
+  "submissionMethods": ["milanote", "upload"]   // MACC: both (students have paid Milanote seats)
+  // A school without a Milanote license: ["upload"]  — and NOT ONE LESSON CHANGES.
+}
+```
+
+**Never write a tool name (Milanote, etc.) into `lessons-v1.js` or a lesson page.** Rationale:
+- Curriculum stays portable and tool-agnostic — its core value when licensing to other institutions.
+- Each institution enables only the tools it actually licenses.
+- Dropping or swapping a vendor is a config flag, not a lesson revision (no "baked in forever" debt).
+- Keeps any future Milanote partnership as upside without lock-in; the moment a vendor name creeps
+  into lesson content is the warning line.
 
 ### 3.2 `lesson_progress` — per-student per-lesson state (drives the roster live-status chips)
 
