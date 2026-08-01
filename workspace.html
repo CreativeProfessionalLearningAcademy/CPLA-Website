@@ -76,6 +76,9 @@
   .card-h{padding:14px 18px 11px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #efeae0}
   .card-h i{font-size:16px;color:var(--mod)}
   .card-h .t{font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--ink);flex:1}
+  .see-full{font-size:11px;font-weight:600;color:var(--mod);text-decoration:none;display:inline-flex;align-items:center;gap:3px}
+  .see-full:hover{color:var(--blue)}
+  .see-full i{font-size:14px}
   .card-b{padding:16px 18px}
 
   .prog-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:8px}
@@ -184,7 +187,7 @@
     <div class="brand">C</div>
     <button class="rail-btn active" title="Workspace"><i class="ti ti-home-2"></i><span class="tip">Workspace</span></button>
     <a class="rail-btn" href="volume1.html" style="text-decoration:none"><i class="ti ti-books"></i><span class="tip">Lessons</span></a>
-    <button class="rail-btn" onclick="document.getElementById('prog-card').scrollIntoView({behavior:'smooth'})"><i class="ti ti-chart-arcs"></i><span class="tip">Progress</span></button>
+    <a class="rail-btn" href="progress.html?view=student" style="text-decoration:none"><i class="ti ti-chart-arcs"></i><span class="tip">Progress</span></a>
     <button class="rail-btn" onclick="document.getElementById('msg-card').scrollIntoView({behavior:'smooth'})"><i class="ti ti-mail"></i><span class="tip">Messages</span></button>
     <button class="rail-btn" id="res-btn"><i class="ti ti-folders"></i><span class="tip">Resources</span></button>
     <div class="rail-spacer"></div>
@@ -234,7 +237,7 @@
         <!-- SIDE -->
         <div class="side">
           <div class="card" id="prog-card">
-            <div class="card-h"><i class="ti ti-chart-arcs"></i><span class="t">Progress &amp; Journey</span></div>
+            <div class="card-h"><i class="ti ti-chart-arcs"></i><span class="t">Progress &amp; Journey</span><a class="see-full" href="progress.html?view=student">Full <i class="ti ti-arrow-right"></i></a></div>
             <div class="card-b">
               <div class="prog-top"><div class="prog-pct" id="prog-pct">0%</div><div class="prog-tag">On track</div></div>
               <div class="bar"><span id="prog-bar" style="width:0%"></span></div>

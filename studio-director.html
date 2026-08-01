@@ -97,6 +97,8 @@
   .stu-nm{font-size:15px;font-weight:600;color:var(--ink)}
   .stu-em{font-size:12px;color:var(--mid)}
   .stu-ind{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .stu-detail{font-size:11px;font-weight:600;color:var(--mod);text-decoration:none;display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--rule);border-radius:8px;white-space:nowrap}
+  .stu-detail:hover{background:var(--paper);border-color:var(--gold);color:var(--blue)}
   .ind{font-size:11px;display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:100px;border:1px solid var(--rule);color:var(--mid);background:#fff}
   .ind.mod{color:var(--mod);border-color:#c4d3ea;background:var(--ml)}
   .ind .dot{width:7px;height:7px;border-radius:50%;background:var(--rule)}
@@ -360,7 +362,7 @@
       roster=c.students.map(function(x){
         var ini=((x.firstName?x.firstName[0]:'')+(x.lastName?x.lastName[0]:'')||'?').toUpperCase();
         var nm=esc(((x.firstName||'')+' '+(x.lastName||'')).trim()||'Student');
-        return '<div class="stu"><div class="stu-av">'+ini+'</div><div class="stu-main"><div class="stu-nm">'+nm+'</div><div class="stu-em">'+esc(x.email||'')+'</div></div><div class="stu-ind"><span class="ind mod">Lesson '+L.id+'</span><span class="ind"><span class="dot"></span> Not started</span></div></div>';
+        return '<div class="stu"><div class="stu-av">'+ini+'</div><div class="stu-main"><div class="stu-nm">'+nm+'</div><div class="stu-em">'+esc(x.email||'')+'</div></div><div class="stu-ind"><span class="ind mod">Lesson '+L.id+'</span><span class="ind"><span class="dot"></span> Not started</span><a class="stu-detail" href="progress.html?student='+encodeURIComponent(x.uid||'')+'&view=instructor&class='+encodeURIComponent(c.id)+'">Detail <i class="ti ti-arrow-right"></i></a></div></div>';
       }).join('');
       roster+='<div class="roster-cap">Live status (Learning · Practicing · Creating · Reviewing · Awaiting Feedback · Certified) activates once progress tracking is turned on.</div>';
     }
