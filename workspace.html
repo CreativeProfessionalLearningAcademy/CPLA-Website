@@ -118,6 +118,16 @@
   .ws-send:disabled{opacity:.5;cursor:default}
   .ws-compose.disabled{opacity:.6;pointer-events:none}
 
+  /* TODAY'S PROFESSIONAL INSIGHT (The Professional Minute) */
+  .insight{max-width:1060px;margin:0 0 20px;background:#fff;border:1px solid var(--rule);border-left:4px solid var(--gold);border-radius:16px;padding:18px 22px}
+  .insight-k{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+  .insight-q{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;line-height:1.35;color:var(--blue);margin-bottom:8px}
+  .insight-by{font-size:12.5px;color:var(--ink);font-weight:600}
+  .insight-by span{color:var(--mid);font-weight:400}
+  .insight-foot{display:flex;align-items:center;gap:12px;margin-top:12px;padding-top:12px;border-top:1px solid #f2ede3;flex-wrap:wrap}
+  .insight-theme{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mod);background:var(--ml);border:1px solid #cddcf7;padding:3px 10px;border-radius:100px}
+  .insight-refl{font-size:12.5px;color:var(--mid);font-style:italic;flex:1;min-width:180px}
+
   /* YOUR FOCUS (student-facing attention panel) */
   .focus{max-width:1060px;margin:0 0 22px;background:#fff;border:1px solid var(--rule);border-left:4px solid var(--gold);border-radius:16px;padding:18px 22px;display:none}
   .focus.show{display:block;animation:focusIn .3s ease}
@@ -215,6 +225,9 @@
       <div class="greet-h" id="greet-h">Welcome to your studio.</div>
       <button id="tour-launch" style="display:none"><i class="ti ti-route"></i> Take a quick tour</button>
 
+      <!-- TODAY'S PROFESSIONAL INSIGHT (The Professional Minute) -->
+      <div class="insight" id="insight"></div>
+
       <!-- YOUR FOCUS — student-facing attention panel (shared engine) -->
       <div class="focus" id="focus"></div>
 
@@ -290,8 +303,20 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 <script src="firebase-config.js"></script>
+<script src="data/insights-v1.js"></script>
 <script>
   function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},1600);}
+
+  // Today's Professional Insight — same insight for everyone each day (deterministic by date)
+  function renderInsight(){
+    var el=document.getElementById('insight');
+    if(!el||!window.CPLA_INSIGHTS||!CPLA_INSIGHTS.length){ if(el) el.style.display='none'; return; }
+    var day=Math.floor(Date.now()/86400000), n=CPLA_INSIGHTS.length, q=CPLA_INSIGHTS[((day%n)+n)%n];
+    el.innerHTML='<div class="insight-k">Today’s Professional Insight</div>'+
+      '<div class="insight-q">“'+wsEsc(q.quote)+'”</div>'+
+      '<div class="insight-by">— '+wsEsc(q.author)+' <span>· '+wsEsc(q.profession)+'</span></div>'+
+      '<div class="insight-foot"><span class="insight-theme">'+wsEsc(q.theme)+'</span><span class="insight-refl">'+wsEsc(q.reflection)+'</span></div>';
+  }
 
   // Drawer
   var scrim=document.getElementById('scrim'), drawer=document.getElementById('drawer');
@@ -330,6 +355,7 @@
     }catch(e){console.warn(e);}
     document.getElementById('loading').style.display='none';
     document.getElementById('wsmain').style.display='grid';
+    renderInsight();
     var _tl=document.getElementById('tour-launch');
     if(_tl){ _tl.style.display='inline-flex'; _tl.onclick=function(){ startWorkspaceTour(first); }; }
     try{ if(!localStorage.getItem('cpla_tour_ws_v1_seen')) setTimeout(function(){ startWorkspaceTour(first); }, 750); }catch(e){}
