@@ -169,14 +169,24 @@
     } else {
       view='student'; targetUid=user.uid; backHref='workspace.html'; backLabel='Workspace';
     }
-    var t={}; if(targetUid===user.uid){ t=me; } else { try{ t=(await db.collection('users').doc(targetUid).get()).data()||{}; }catch(e){} }
-    var name=((t.firstName||'')+' '+(t.lastName||'')).trim()|| t.displayName || (t.email?t.email.split('@')[0]:'Student');
-    var prog = DEMO ? demoProgress(name) : await realProgress(targetUid);
+    var demoKey=null;
+    if((targetUid||'').indexOf('DEMO-')===0) demoKey=targetUid;
+    else if(DEMO) demoKey='DEMO-4';
+    var isDemo=!!demoKey, name, level, prog;
+    if(demoKey){
+      var prof=DEMO_PROFILES[demoKey]||DEMO_PROFILES['DEMO-4'];
+      name=prof.name; level=prof.level||'Student'; prog=prof;
+    } else {
+      var t={}; if(targetUid===user.uid){ t=me; } else { try{ t=(await db.collection('users').doc(targetUid).get()).data()||{}; }catch(e){} }
+      name=((t.firstName||'')+' '+(t.lastName||'')).trim()|| t.displayName || (t.email?t.email.split('@')[0]:'Student');
+      level=t.role||'Student';
+      prog=await realProgress(targetUid);
+    }
 
     document.getElementById('back').href=backHref;
     document.getElementById('back-label').textContent=backLabel;
-    document.getElementById('tb-right').innerHTML = DEMO?'<span class="demo-tag">Preview data</span>':'';
-    STATE={view:view, isInstructor:isInstructor, prog:prog, meta:{name:name, initials:initialsOf(name), color:colorOf(targetUid), level:t.role||'Student', current:prog.current||'—'}};
+    document.getElementById('tb-right').innerHTML = isDemo?'<span class="demo-tag">Preview data</span>':'';
+    STATE={view:view, isInstructor:isInstructor, prog:prog, meta:{name:name, initials:initialsOf(name), color:colorOf(targetUid), level:level, current:prog.current||'—'}};
     render();
     document.getElementById('loading').style.display='none';
     document.getElementById('app').style.display='block';
@@ -218,9 +228,37 @@
         '<h4>Progress tracking isn’t active yet</h4>'+
         '<p>Once activities are recorded for '+esc(name)+' (assessment scores, time on task, completion), this page fills with the full breakdown — both this instructor view and the student’s encouraging view. Preview the populated layout by adding <code>?demo=1</code> to the URL.</p></div>';
     }
-    return '<div class="empty"><div class="ic"><i class="ti ti-seeding"></i></div>'+
-      '<h4>Your progress will grow here</h4>'+
-      '<p>As you complete lessons and activities, you’ll see your momentum, wins, and what’s next — all in one place. You’re just getting started. Open Volume 1 and dive in!</p></div>';
+    return dayOneView(name);
+  }
+
+  /* ---------- DAY-ONE STUDENT STATE (new student, no work yet) ---------- */
+  function dayOneView(name){
+    var first=esc((name||'there').split(' ')[0]);
+    var mantras=[
+      'Great designers aren’t born — they’re built, one deliberate choice at a time.',
+      'Curiosity first, craft follows. Ask “why does this work?” about everything you see.',
+      'Done beats perfect. Make the work, then make it better.',
+      'You’re not just learning software — you’re learning to think like a designer.'
+    ];
+    var m=mantras[Math.floor(Math.random()*mantras.length)];
+    return '<div class="viewnote stu"><span class="dot"></span> Welcome — this is your progress home. It’s empty today, and that’s exactly where every designer starts.</div>'+
+      '<div class="stu-hero">'+
+        '<div style="text-align:center"><div style="width:132px;height:132px;border-radius:50%;background:rgba(218,158,43,.14);border:3px solid var(--gold);display:grid;place-items:center;color:var(--gold);font-size:46px"><i class="ti ti-seeding"></i></div><div class="ring-cap">Day one</div></div>'+
+        '<div class="msg"><div class="hl">Welcome to the studio, <em>'+first+'</em>.</div>'+
+        '<p>Every professional designer started exactly where you are right now — a blank canvas and a little curiosity. This page is where your journey shows up: your progress, your wins, how far you’ve come. Right now it’s empty. Let’s fill it, together.</p></div>'+
+      '</div>'+
+      '<div class="next-up"><div class="k">Your first step</div><div class="l">Open Lesson 1.1 — Design Is Everywhere</div><p>Start with one lesson. Show up, do the work, and push yourself a little past comfortable — that’s exactly how designers are made.</p></div>'+
+      '<div class="stu-grid">'+
+        '<div class="card"><h3 style="color:#2d7a1a">What you’re here to become</h3>'+
+          '<div class="win"><span class="ic">✎</span><div>A designer who <b>solves problems</b>, not just decorates.</div></div>'+
+          '<div class="win"><span class="ic">↑</span><div>Someone who grows through <b>effort and challenge</b> — not luck or talent.</div></div>'+
+          '<div class="win"><span class="ic">★</span><div>A <b>creative professional</b>, built right here in this classroom.</div></div>'+
+        '</div>'+
+        '<div class="card"><h3 style="color:#a8760f">Studio mantra</h3>'+
+          '<div class="nudge"><span class="ic">“</span><div style="font-style:italic">'+m+'</div></div>'+
+          '<p style="font-size:11.5px;color:#6b5e52;margin-top:8px;line-height:1.5">As you complete activities, this space fills with real progress — your scores, your time in the studio, your growth. And your instructor is cheering you on the whole way.</p>'+
+        '</div>'+
+      '</div>';
   }
 
   /* ---------- SVG ---------- */
@@ -299,16 +337,32 @@
         '<div class="card"><h3 style="color:#a8760f">Quick catch-ups</h3>'+nudges+'<p style="font-size:11.5px;color:#6b5e52;margin-top:6px;line-height:1.5">Small steps, not a scoreboard — gentle nudges, and your instructor sees your full picture too.</p></div></div>';
   }
 
-  /* ---------- DEMO PROFILE (for ?demo=1 preview) ---------- */
-  function demoProgress(name){
+  /* ---------- DEMO PROFILES (for ?demo=1 preview and the sample class) ---------- */
+  var DEMO_PROFILES=(function(){
     function mk(spec){return LESSONS.map(function(L,i){var s=spec[i]||[0,0,0,null,false];return {id:L.id,title:L.t,status:STATUS_KEYS[s[0]],completion:s[1],time:s[2],score:s[3],submitted:s[4]};});}
-    return { hasData:true, current:'2.4 Hierarchy', pace:'behind', gradeAvg:83, completion:66, timeMins:910, missing:1, activeDays:20, lastActive:'today', streak:6,
-      lessons:mk([[6,100,110,85,true],[6,100,95,82,true],[6,100,100,80,true],[5,100,90,84,true],[5,100,120,88,true],[4,85,80,82,true],[3,60,60,null,false],[2,30,35,null,false],[0,0,0,null,false],[0,0,0,null,false]]),
-      assessments:[[74,'Apr 22'],[78,'May 3'],[80,'May 17'],[82,'May 24'],[85,'Jun 1']],
-      strengths:['Color mastery','Expressive composition','Strong design voice'],
-      focus:['Readability','Following brief constraints','Pace (2 lessons behind)'],
-      flags:[['warn','WATCH','Pacing 2 lessons behind the class pointer — strong work, just needs to catch up.']] };
-  }
+    return {
+      'DEMO-1':{name:'Sofia Ramirez',level:'Intermediate',hasData:true,current:'3.2 Composition',pace:'ontrack',gradeAvg:89,completion:92,timeMins:1180,missing:0,activeDays:24,lastActive:'today',streak:9,
+        lessons:mk([[6,100,120,91,true],[6,100,95,88,true],[6,100,110,90,true],[6,100,105,92,true],[6,100,130,86,true],[5,100,120,85,true],[5,100,115,88,true],[4,90,100,84,true],[3,70,80,null,false],[1,25,30,null,false]]),
+        assessments:[[74,'Apr 22'],[80,'May 4'],[84,'May 14'],[86,'May 18'],[88,'May 28'],[91,'Jun 1']],
+        strengths:['Technical precision','Grid & layout mastery','Consistent craft'],focus:['Creative risk-taking','Expressive type'],
+        flags:[['good','THRIVING','Top-quartile scores with strong consistency — ready for a stretch challenge.']]},
+      'DEMO-2':{name:'Maya Chen',level:'Beginner',hasData:true,current:'2.3 Type Basics',pace:'ontrack',gradeAvg:81,completion:74,timeMins:820,missing:1,activeDays:19,lastActive:'today',streak:4,
+        lessons:mk([[6,100,90,84,true],[6,100,85,81,true],[5,100,95,80,true],[5,100,100,83,true],[4,80,70,78,true],[3,60,55,null,false],[2,35,40,null,false],[0,0,0,null,false],[0,0,0,null,false],[0,0,0,null,false]]),
+        assessments:[[68,'Apr 30'],[74,'May 14'],[79,'May 22'],[81,'May 28'],[84,'Jun 1']],
+        strengths:['Color intuition','Creative concepts'],focus:['Typographic hierarchy','Consistent spacing'],
+        flags:[['warn','WATCH','Typography scores flat across 3 activities — a type-scale exercise would help.']]},
+      'DEMO-3':{name:'Liam Parker',level:'Beginner',hasData:true,current:'1.4 Line & Shape',pace:'risk',gradeAvg:58,completion:41,timeMins:240,missing:3,activeDays:7,lastActive:'6 days ago',streak:0,
+        lessons:mk([[6,100,70,60,true],[4,80,55,58,true],[2,45,35,54,true],[1,25,25,null,false],[0,0,0,null,false],[0,0,0,null,false],[0,0,0,null,false],[0,0,0,null,false],[0,0,0,null,false],[0,0,0,null,false]]),
+        assessments:[[58,'Apr 22'],[54,'May 6'],[60,'May 20']],
+        strengths:['Strong image instincts','Responds to 1:1 feedback'],focus:['Submitting work','Process documentation','Staying active'],
+        flags:[['risk','INTERVENE','3 missing activities and inactive 6 days — schedule a check-in this week.'],['warn','WATCH','Skipping ideation/process steps.']]},
+      'DEMO-4':{name:'Aaliyah Brooks',level:'Advanced Beginner',hasData:true,current:'2.4 Hierarchy',pace:'behind',gradeAvg:83,completion:66,timeMins:910,missing:1,activeDays:20,lastActive:'today',streak:6,
+        lessons:mk([[6,100,110,85,true],[6,100,95,82,true],[6,100,100,80,true],[5,100,90,84,true],[5,100,120,88,true],[4,85,80,82,true],[3,60,60,null,false],[2,30,35,null,false],[0,0,0,null,false],[0,0,0,null,false]]),
+        assessments:[[74,'Apr 22'],[78,'May 3'],[80,'May 17'],[82,'May 24'],[85,'Jun 1']],
+        strengths:['Color mastery','Expressive composition','Strong design voice'],focus:['Readability','Following brief constraints','Pace (2 lessons behind)'],
+        flags:[['warn','WATCH','Pacing 2 lessons behind the class pointer — strong work, just needs to catch up.']]}
+    };
+  })();
 </script>
 </body>
 </html>

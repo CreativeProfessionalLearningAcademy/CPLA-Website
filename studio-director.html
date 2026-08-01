@@ -262,6 +262,15 @@
   document.getElementById('signout').onclick=function(){auth.signOut().then(function(){window.location.href='login';});};
 
   var CURRENT_UID=null, CURRENT_NAME='Instructor', classesData=[], activeTab=0;
+  var DEMO=/[?&]demo=1/.test(location.search); // ?demo=1 injects a sample class for testing — no Firestore writes
+  function demoClass(){
+    return {id:'DEMO-CLASS', name:'Sample Class · Demo', inviteCode:'DEMO01', active:true, currentLesson:'1.4', students:[
+      {uid:'DEMO-1',firstName:'Sofia',lastName:'Ramirez',email:'sofia@demo.cpla'},
+      {uid:'DEMO-2',firstName:'Maya',lastName:'Chen',email:'maya@demo.cpla'},
+      {uid:'DEMO-3',firstName:'Liam',lastName:'Parker',email:'liam@demo.cpla'},
+      {uid:'DEMO-4',firstName:'Aaliyah',lastName:'Brooks',email:'aaliyah@demo.cpla'}
+    ]};
+  }
   // Messaging state (per-class conversations + announcements)
   var msgUnsub=null, msgDocs=[], selThread=null, msgDrafts={};
 
@@ -319,6 +328,7 @@
         classesData.push(c);
       }
     }catch(e){}
+    if(DEMO){ classesData.push(demoClass()); }
     var total=classesData.reduce(function(a,c){return a+(c.students?c.students.length:0);},0);
     document.getElementById('summary').textContent=total+' student'+(total===1?'':'s')+' across '+classesData.length+' class'+(classesData.length===1?'':'es')+'.';
     renderTabs();
