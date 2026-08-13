@@ -403,6 +403,15 @@
   <script>
     var verifiedClass = null; // { id, name, inviteCode, ... }
 
+    // Ensure at least an anonymous session exists so security rules allow the
+    // pre-account invite-code lookup. Silent — the visitor sees no prompt.
+    async function ensureAuth() {
+      if (auth.currentUser) return;
+      try { await auth.signInAnonymously(); }
+      catch (e) { console.error('Anonymous sign-in failed', e); }
+    }
+    ensureAuth(); // warm up on page load
+
     // Auto-uppercase invite code as typed
     document.getElementById('invite-code').addEventListener('input', function() {
       var pos = this.selectionStart;
@@ -430,6 +439,7 @@
       btn.innerHTML = '<div class="spinner"></div>';
 
       try {
+        await ensureAuth(); // make sure the rules see a signed-in session
         var snap = await db.collection('classes')
           .where('inviteCode', '==', code)
           .where('active', '==', true)

@@ -1,0 +1,97 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- Helpers ----------
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+    function isAdmin() {
+      return isSignedIn()
+          && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+          && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.accountType == 'admin';
+    }
+    function teachesClass(cid) {
+      return isSignedIn()
+          && exists(/databases/$(database)/documents/classes/$(cid))
+          && get(/databases/$(database)/documents/classes/$(cid)).data.instructorId == request.auth.uid;
+    }
+
+    // ---------- users ----------
+    // Own profile; admins read/write all; an instructor may read the
+    // students enrolled in a class they teach (studio-director roster query).
+    match /users/{userId} {
+      allow read:   if isOwner(userId) || isAdmin() || teachesClass(resource.data.classId);
+      allow create: if isOwner(userId) || isAdmin();
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ---------- classes ----------
+    // Any signed-in session may read (needed for invite-code verification on the
+    // registration page — visitors are signed in anonymously before verifying).
+    match /classes/{classId} {
+      allow read:          if isSignedIn();
+      allow create:        if isAdmin() || (isSignedIn() && request.resource.data.instructorId == request.auth.uid);
+      allow update, delete: if isAdmin() || (isSignedIn() && resource.data.instructorId == request.auth.uid);
+    }
+
+    // ---------- progress ----------
+    // Each doc carries a userId field; only the owner (or an admin) may touch it.
+    match /progress/{progressId} {
+      allow read:   if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
+      allow create: if isAdmin() || (isSignedIn() && request.resource.data.userId == request.auth.uid);
+      allow update: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
+      allow delete: if isAdmin();
+    }
+
+    // ---------- instructor_notes ----------
+    // Doc IDs are "{instructorUid}_{classId}_{lessonId}", so the owning
+    // instructor is the uid prefix. Notes stay private to that instructor.
+    match /instructor_notes/{noteId} {
+      allow read, write: if isAdmin() || (isSignedIn() && noteId.split('_')[0] == request.auth.uid);
+    }
+
+    // ===== messages: 1:1 instructor<->student threads + announcements =====
+    match /messages/{msgId} {
+
+      function isInstructorOfClass(cid) {
+        return request.auth != null
+            && exists(/databases/$(database)/documents/classes/$(cid))
+            && get(/databases/$(database)/documents/classes/$(cid)).data.instructorId == request.auth.uid;
+      }
+
+      // READ
+      allow read: if request.auth != null && (
+           resource.data.studentId == request.auth.uid        // student reads their own 1:1 thread
+        || resource.data.type == 'announcement'               // signed-in students read class announcements
+        || isInstructorOfClass(resource.data.classId)         // instructor reads all messages in their class
+      );
+
+      // CREATE
+      allow create: if request.auth != null && (
+           (  request.resource.data.senderRole == 'student'
+           && request.resource.data.senderId == request.auth.uid
+           && request.resource.data.studentId == request.auth.uid
+           && request.resource.data.type == '1to1' )
+        || (  request.resource.data.senderRole == 'instructor'
+           && request.resource.data.senderId == request.auth.uid
+           && isInstructorOfClass(request.resource.data.classId) )
+      );
+
+      // UPDATE  (only the read-flags get updated by the app)
+      allow update: if request.auth != null && (
+           resource.data.studentId == request.auth.uid        // student marks instructor messages read
+        || isInstructorOfClass(resource.data.classId)         // instructor marks student messages read
+      );
+
+      // DELETE  (instructor only; optional)
+      allow delete: if isInstructorOfClass(resource.data.classId);
+    }
+    // ===== end messages =====
+
+  }
+}

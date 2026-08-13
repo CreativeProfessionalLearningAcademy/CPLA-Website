@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPLA × Milanote — Idea Tree</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#01123a; --navy2:#0a1c44; --gold:#da9e2b; --gold-tint:#fbf3e0;
+    --blue:#1a56c4; --blue-tint:#e8f0fe; --ink:#1a1410; --paper:#faf7f2;
+    --cream:#f0ead8; --rule:#d4c9b8; --mid:#6b5e52; --green:#2d7a1a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--cream);font-family:'DM Sans',sans-serif;color:var(--ink);padding:26px 18px}
+  .sheet{max-width:1060px;margin:0 auto;background:#fff;border:1px solid var(--rule);border-radius:16px;
+         box-shadow:0 10px 40px rgba(1,18,58,.10);padding:30px 38px 34px}
+
+  /* Header */
+  .eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+  h1{font-family:'Playfair Display',serif;font-size:27px;font-weight:900;color:var(--navy);line-height:1.1}
+  h1 em{font-style:italic;color:var(--gold)}
+  .lede{font-size:13px;color:var(--mid);margin-top:7px;max-width:620px;line-height:1.5}
+  .hr{height:1px;background:var(--rule);margin:20px 0 4px}
+
+  /* Root node */
+  .root{background:linear-gradient(150deg,var(--navy),var(--navy2));color:#fff;border-radius:14px;
+        padding:16px 22px;max-width:440px;margin:14px auto 0;text-align:center;position:relative;z-index:3;
+        box-shadow:0 8px 22px rgba(1,18,58,.22)}
+  .root .k{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+  .root .n{font-family:'Playfair Display',serif;font-size:20px;font-weight:700}
+  .root .n b{color:var(--gold);font-weight:900}
+  .root .s{font-size:11.5px;color:rgba(255,255,255,.7);margin-top:4px}
+
+  /* Tree */
+  .tree{position:relative;margin-top:6px;padding-top:20px}
+  .tree::before{content:"";position:absolute;left:50%;top:0;bottom:14px;width:3px;background:var(--gold);transform:translateX(-50%);border-radius:3px}
+  .branch{position:relative;display:grid;grid-template-columns:1fr 1fr;margin-bottom:13px}
+  .node{position:absolute;top:20px;left:50%;transform:translate(-50%,-50%);width:15px;height:15px;border-radius:50%;
+        background:var(--gold);border:3px solid #fff;box-shadow:0 0 0 2px var(--gold);z-index:2}
+  .card{background:#fff;border:1px solid var(--rule);border-radius:12px;padding:12px 15px;position:relative;box-shadow:0 2px 8px rgba(1,18,58,.05)}
+  .branch.left .card{grid-column:1;margin-right:40px;border-left:4px solid var(--navy)}
+  .branch.right .card{grid-column:2;margin-left:40px;border-left:4px solid var(--gold)}
+  .branch.left .card::after,.branch.right .card::after{content:"";position:absolute;top:20px;height:2px;width:40px;background:var(--gold)}
+  .branch.left .card::after{right:-40px}
+  .branch.right .card::after{left:-40px}
+  .b-head{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+  .b-num{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;
+         font-family:'DM Mono',monospace;font-size:11px;font-weight:600;display:grid;place-items:center}
+  .branch.right .b-num{background:var(--gold);color:var(--navy)}
+  .b-title{font-size:13.5px;font-weight:700;color:var(--navy);line-height:1.15}
+  ul{list-style:none}
+  li{font-size:12px;line-height:1.45;color:#33302b;padding-left:14px;position:relative;margin-bottom:4px}
+  li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+  li:last-child{margin-bottom:0}
+
+  /* Guardrail footer */
+  .guard{margin-top:8px;background:var(--gold-tint);border:1px solid #eddcae;border-radius:12px;padding:13px 18px;display:flex;gap:12px;align-items:flex-start}
+  .guard .lock{flex-shrink:0;width:30px;height:30px;border-radius:8px;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-weight:900;font-family:'Playfair Display',serif}
+  .guard .gt{font-size:12.5px;line-height:1.5;color:#5a4a1e}
+  .guard .gt b{color:var(--navy)}
+
+  .foot{margin-top:14px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--mid);text-align:center}
+
+  @media(max-width:720px){
+    .branch{grid-template-columns:1fr}
+    .tree::before{left:14px}
+    .node{left:14px}
+    .branch.left .card,.branch.right .card{grid-column:1;margin:0 0 0 34px}
+    .branch.left .card::after,.branch.right .card::after{left:-34px;right:auto;width:34px}
+  }
+  @media print{
+    body{background:#fff;padding:0}
+    .sheet{box-shadow:none;border:none;border-radius:0;max-width:100%;padding:16px 22px}
+    @page{size:A4 portrait;margin:12mm}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="eyebrow">CPLA · Strategy · Partner Exploration</div>
+  <h1>Milanote Partnership — <em>Idea Tree</em></h1>
+  <p class="lede">A structured look at a possible tool partnership, seeded by the MACC pilot (where students already hold paid seats) — deliberately kept <strong>decoupled from the curriculum</strong> so it stays optional for everyone else.</p>
+  <div class="hr"></div>
+
+  <!-- ROOT -->
+  <div class="root">
+    <div class="k">Root Idea</div>
+    <div class="n">CPLA <b>×</b> Milanote</div>
+    <div class="s">A creative-workspace partnership — showcase for them, polished submission home for us.</div>
+  </div>
+
+  <!-- TREE -->
+  <div class="tree">
+
+    <div class="branch left">
+      <span class="node"></span>
+      <div class="card">
+        <div class="b-head"><span class="b-num">1</span><span class="b-title">Why It Fits</span></div>
+        <ul>
+          <li>Same audience — creative students doing exactly the visual-thinking work Milanote is built for.</li>
+          <li>MACC students already have paid seats, so there's real classroom usage from day one.</li>
+          <li>Natural co-marketing: a genuine case study and joint content.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="branch right">
+      <span class="node"></span>
+      <div class="card">
+        <div class="b-head"><span class="b-num">2</span><span class="b-title">What CPLA Would Ask For</span></div>
+        <ul>
+          <li>Education <b>SSO</b> via school email (absent today).</li>
+          <li>Account + board-link <b>provisioning API</b> (no public API today).</li>
+          <li>Discounted or sponsored education seats for partner schools.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="branch left">
+      <span class="node"></span>
+      <div class="card">
+        <div class="b-head"><span class="b-num">3</span><span class="b-title">What Milanote Would Gain</span></div>
+        <ul>
+          <li>A growing CTE curriculum as a showcase and user pipeline.</li>
+          <li>Creative users onboarded young, with habits formed early.</li>
+          <li>Proof: a real classroom pilot testimonial and case study.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="branch right">
+      <span class="node"></span>
+      <div class="card">
+        <div class="b-head"><span class="b-num">4</span><span class="b-title">Partnership Models — light → deep</span></div>
+        <ul>
+          <li>Recommended tool + co-marketing (lightest).</li>
+          <li>Education licensing: discounted / sponsored seats.</li>
+          <li>Technical integration: SSO + provisioning API.</li>
+          <li>Referral or revenue share (most formal).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="branch left">
+      <span class="node"></span>
+      <div class="card">
+        <div class="b-head"><span class="b-num">5</span><span class="b-title">Risks &amp; Guardrails</span></div>
+        <ul>
+          <li>Vendor dependence → submission method stays a config option, never in a lesson.</li>
+          <li>Neutrality — some schools use other tools, so Milanote stays optional.</li>
+          <li>Pricing / policy shifts → never bake the tool into curriculum.</li>
+          <li>No API / SSO today → integration depth is limited until they build it.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="branch right">
+      <span class="node"></span>
+      <div class="card">
+        <div class="b-head"><span class="b-num">6</span><span class="b-title">Low-Regret Next Steps</span></div>
+        <ul>
+          <li>Run the MACC pilot on Milanote; gather real usage evidence.</li>
+          <li>Write a one-page case study from the pilot.</li>
+          <li>Approach Milanote's education / partnerships team with the proof.</li>
+          <li>Lead the ask with SSO + provisioning API.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- GUARDRAIL -->
+  <div class="guard">
+    <div class="lock">⚿</div>
+    <div class="gt"><b>Guardrail.</b> Submission method is an <b>organization configuration setting — never curriculum.</b> The lesson says "submit your deliverable"; the platform decides how. Milanote stays swappable, so this partnership is pure upside with no lock-in — and the day a vendor name creeps into lesson content is the warning line.</div>
+  </div>
+
+  <div class="foot">CPLA — Creative Professional Learning Academy · Internal strategy exploration · Not a commitment</div>
+</div>
+</body>
+</html>

@@ -290,9 +290,26 @@
     const errTxt  = document.getElementById('error-text');
     const guestBtn = document.getElementById('guest-btn');
 
-    // If already signed in, go straight to dashboard
+    // Role-aware routing: read users/{uid}, send each account to its home.
+    // Falls back to the student workspace if the role can't be determined.
+    async function routeByRole(user) {
+      var dest = 'workspace.html';
+      try {
+        var snap = await db.collection('users').doc(user.uid).get();
+        var d = snap.exists ? snap.data() : {};
+        if (d.accountType === 'admin')            dest = 'admin-console.html';
+        else if (d.accountType === 'instructor')  dest = 'studio-director.html';
+        else                                      dest = 'workspace.html';
+      } catch (e) {
+        dest = 'workspace.html';
+      }
+      window.location.href = dest;
+    }
+
+    // If already signed in with a real account, route to the correct home.
+    // Anonymous sessions (used only for pre-registration invite lookups) are ignored.
     auth.onAuthStateChanged(function(user) {
-      if (user) window.location.href = 'workspace.html';
+      if (user && !user.isAnonymous) routeByRole(user);
     });
 
     function showError(msg) {
@@ -321,8 +338,8 @@
       if (!email || !pass) { showError('Please enter your email and password.'); return; }
       setLoading(signBtn, true);
       try {
-        await auth.signInWithEmailAndPassword(email, pass);
-        window.location.href = 'workspace.html';
+        var cred = await auth.signInWithEmailAndPassword(email, pass);
+        await routeByRole(cred.user);
       } catch (err) {
         setLoading(signBtn, false);
         signBtn.innerHTML = '<i class="ti ti-arrow-right"></i> Sign in';
@@ -342,8 +359,8 @@
       guestBtn.disabled = true;
       guestBtn.innerHTML = '<div class="spinner spinner-gold"></div>';
       try {
-        await auth.signInWithEmailAndPassword(GUEST_EMAIL, GUEST_PASSWORD);
-        window.location.href = 'workspace.html';
+        var gcred = await auth.signInWithEmailAndPassword(GUEST_EMAIL, GUEST_PASSWORD);
+        await routeByRole(gcred.user);
       } catch (err) {
         guestBtn.disabled = false;
         guestBtn.innerHTML = '<i class="ti ti-eye"></i> Review as Guest';

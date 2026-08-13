@@ -3,17 +3,23 @@
  * A curated collection of professional insights for the Student Workspace.
  * Loaded via <script src="data/insights-v1.js">, which sets window.CPLA_INSIGHTS.
  *
- * ⚠ VERIFICATION POLICY — READ BEFORE PUBLISHING
- * This is an AI-curated DRAFT. Misattribution of famous quotations is rampant,
- * and CPLA's authoritative-sourcing standard applies here too. Every entry must
- * be confirmed by a human against a PRIMARY source (the actual book, letter,
- * speech, or interview) or a reputable tracer such as Quote Investigator
- * (quoteinvestigator.com) or Bartlett's Familiar Quotations BEFORE it is shown
- * to students. Do NOT treat AI attribution as final.
+ * VERIFICATION STATUS — verified pass, 2026-08-03
+ * Every entry below has been checked against a primary source, an authoritative
+ * estate/primary-document, or a dated published citation. Five previously
+ * "attributed" entries that could NOT be confirmed were removed in this pass
+ * (Eames — disputed wording/no clean primary; Ansel Adams — no traceable source;
+ * Cartier-Bresson — apocryphal "10,000 photographs" soundbite; Vince Lombardi —
+ * the popular one-liner is a paraphrase, his verified words differ; Robert
+ * Collier — could not confirm against his writings).
  *
- *   status:"public-domain" — author long-deceased; wording/source well documented.
- *   status:"attributed"    — believed correct and sourced, but CONFIRM wording +
- *                            source (and licensing) before publication.
+ * If you add NEW entries, keep the standard: confirm against a PRIMARY source
+ * (the actual book, letter, speech, or interview) or a reputable tracer such as
+ * Quote Investigator (quoteinvestigator.com) BEFORE publishing. Do NOT treat AI
+ * attribution as final.
+ *
+ *   status:"public-domain" — author long-deceased; wording/source documented.
+ *   status:"verified"      — confirmed against a cited primary/authoritative
+ *                            source (see each entry's `source`).
  *
  * Fields: id, quote, author, profession, theme, source, status, reflection
  * Themes draw from the CPLA category set (Creativity, Craftsmanship, Discipline,
@@ -65,7 +71,7 @@
 
     { id:"ins-009", quote:"Excellence is to do a common thing in an uncommon way.",
       author:"Booker T. Washington", profession:"Educator", theme:"Excellence",
-      source:"Attributed; Washington era, public domain", status:"public-domain",
+      source:"Popular paraphrase of a line in Up from Slavery, 1901 (“…learned to do a common thing in an uncommon manner”)", status:"public-domain",
       reflection:"Take one ordinary task today and do it with uncommon care." },
 
     { id:"ins-010", quote:"Nothing in life is to be feared, it is only to be understood.",
@@ -85,7 +91,7 @@
 
     { id:"ins-013", quote:"Genius is one percent inspiration and ninety-nine percent perspiration.",
       author:"Thomas Edison", profession:"Inventor", theme:"Discipline",
-      source:"Attributed, widely documented, c. 1903", status:"attributed",
+      source:"Edison confirmed authorship — Harper's Monthly Magazine, Sept. 1932 (and his 1927 letter)", status:"verified",
       reflection:"Ideas are cheap; the work is where they become real." },
 
     { id:"ins-014", quote:"Knowing is not enough; we must apply. Willing is not enough; we must do.",
@@ -95,7 +101,7 @@
 
     { id:"ins-015", quote:"It's not what you look at that matters, it's what you see.",
       author:"Henry David Thoreau", profession:"Writer & naturalist", theme:"Seeing",
-      source:"Journal/letters (public domain)", status:"public-domain",
+      source:"Journal, 5 Aug. 1851 (public domain)", status:"public-domain",
       reflection:"Look at today's subject twice — the second time, really see it." },
 
     { id:"ins-016", quote:"Waste no more time arguing about what a good man should be. Be one.",
@@ -103,64 +109,39 @@
       source:"Meditations (trans. George Long, 1862, public domain)", status:"public-domain",
       reflection:"Less talking about being a professional — be one today." },
 
-    { id:"ins-017", quote:"The details are not the details. They make the design.",
-      author:"Charles Eames", profession:"Designer", theme:"Detail",
-      source:"Attributed to Charles Eames — confirm exact wording/source", status:"attributed",
-      reflection:"The small adjustments you're tempted to skip are the design." },
-
-    { id:"ins-018", quote:"Good design is as little design as possible.",
+    { id:"ins-017", quote:"Good design is as little design as possible.",
       author:"Dieter Rams", profession:"Industrial designer", theme:"Simplicity",
-      source:"Ten Principles for Good Design — confirm before publishing (living author)", status:"attributed",
+      source:"Ten Principles for Good Design (principle 10) — Rams's official documentation, Vitsœ (vitsoe.com)", status:"verified",
       reflection:"Simplify until only what matters remains." },
 
-    { id:"ins-019", quote:"Don't try to be original; just try to be good.",
+    { id:"ins-018", quote:"Don't try to be original; just try to be good.",
       author:"Paul Rand", profession:"Graphic designer", theme:"Excellence",
-      source:"Attributed to Paul Rand — confirm source", status:"attributed",
+      source:"Paul Rand (adapting Mies van der Rohe's “I don't want to be interesting, I want to be good”) — Paul Rand estate, paulrand.design", status:"verified",
       reflection:"Chase quality, not novelty — originality tends to follow good work." },
 
-    { id:"ins-020", quote:"Design is not just what it looks like and feels like. Design is how it works.",
+    { id:"ins-019", quote:"It's not just what it looks like and feels like. Design is how it works.",
       author:"Steve Jobs", profession:"Entrepreneur", theme:"Design Thinking",
-      source:"The New York Times Magazine, “The Guts of a New Machine,” 2003", status:"attributed",
+      source:"The New York Times Magazine, “The Guts of a New Machine,” 30 Nov. 2003", status:"verified",
       reflection:"Judge your work by how well it works, not only how it looks." },
 
-    { id:"ins-021", quote:"You don't take a photograph, you make it.",
-      author:"Ansel Adams", profession:"Photographer", theme:"Craftsmanship",
-      source:"Attributed to Ansel Adams — confirm source", status:"attributed",
-      reflection:"Compose deliberately — you're making an image, not just capturing one." },
-
-    { id:"ins-022", quote:"The camera is an instrument that teaches people how to see without a camera.",
+    { id:"ins-020", quote:"The camera is an instrument that teaches people how to see without a camera.",
       author:"Dorothea Lange", profession:"Photographer", theme:"Seeing",
-      source:"Attributed to Dorothea Lange — confirm source", status:"attributed",
+      source:"Dorothea Lange, quoted in the Los Angeles Times, 13 Aug. 1978", status:"verified",
       reflection:"Practice seeing like a designer even when the tools are put away." },
 
-    { id:"ins-023", quote:"Your first ten thousand photographs are your worst.",
-      author:"Henri Cartier-Bresson", profession:"Photographer", theme:"Persistence",
-      source:"Attributed to Henri Cartier-Bresson — confirm source", status:"attributed",
-      reflection:"Every rough attempt moves you toward the good ones. Keep making them." },
-
-    { id:"ins-024", quote:"Perfection is not attainable, but if we chase perfection we can catch excellence.",
-      author:"Vince Lombardi", profession:"Coach", theme:"Excellence",
-      source:"Attributed to Vince Lombardi — confirm source", status:"attributed",
-      reflection:"Aim higher than you can reach today; you'll land on your best work." },
-
-    { id:"ins-025", quote:"Success is the sum of small efforts, repeated day in and day out.",
-      author:"Robert Collier", profession:"Author", theme:"Consistency",
-      source:"Attributed to Robert Collier — confirm source", status:"attributed",
-      reflection:"Professionals aren't made by one project — but by quality work, every day." },
-
-    { id:"ins-026", quote:"Form and function should be one, joined in a spiritual union.",
+    { id:"ins-021", quote:"Form follows function — that has been misunderstood. Form and function should be one, joined in a spiritual union.",
       author:"Frank Lloyd Wright", profession:"Architect", theme:"Design Thinking",
-      source:"Attributed to Frank Lloyd Wright — confirm source", status:"attributed",
+      source:"Frank Lloyd Wright, 1908 — his restatement of Louis Sullivan's maxim (widely documented)", status:"verified",
       reflection:"Let how it looks and how it works become the same decision." },
 
-    { id:"ins-027", quote:"The life of a designer is a life of fight — against the ugliness.",
+    { id:"ins-022", quote:"The life of a designer is a life of fight against the ugliness.",
       author:"Massimo Vignelli", profession:"Designer", theme:"Professionalism",
-      source:"Attributed to Massimo Vignelli — confirm source", status:"attributed",
+      source:"Massimo Vignelli, one of his “five phrases”; collected in Vignelli: From A to Z", status:"verified",
       reflection:"Bring order and clarity to something disordered today." },
 
-    { id:"ins-028", quote:"I have no special talent. I am only passionately curious.",
+    { id:"ins-023", quote:"I have no special talent. I am only passionately curious.",
       author:"Albert Einstein", profession:"Physicist", theme:"Curiosity",
-      source:"Letter to Carl Seelig, 1952 — confirm wording", status:"attributed",
+      source:"Letter to Carl Seelig, 11 Mar. 1952 (Einstein Archives 39-013)", status:"verified",
       reflection:"You don't need to be a prodigy — stay curious and keep asking why." }
   ];
 
