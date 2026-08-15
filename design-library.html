@@ -141,8 +141,8 @@
 <div class="app">
   <!-- RAIL -->
   <aside class="rail">
-    <a class="brand" href="workspace.html">C</a>
-    <a class="rail-btn" href="workspace.html"><i class="ti ti-home-2"></i><span class="tip">Workspace</span></a>
+    <a class="brand" id="homeBrand" href="workspace.html">C</a>
+    <a class="rail-btn" id="homeRail" href="workspace.html"><i class="ti ti-home-2"></i><span class="tip">Workspace</span></a>
     <a class="rail-btn" href="volume1.html"><i class="ti ti-books"></i><span class="tip">Lessons</span></a>
     <a class="rail-btn" href="progress.html?view=student"><i class="ti ti-chart-arcs"></i><span class="tip">Progress</span></a>
     <a class="rail-btn active" href="design-library.html"><i class="ti ti-cards"></i><span class="tip">Design Library</span></a>
@@ -156,7 +156,7 @@
         <div class="val">Design Library — Visual Field Guide</div>
       </div>
       <div class="sb-r">
-        <a class="sb-back" href="workspace.html"><i class="ti ti-arrow-left"></i> Back to workspace</a>
+        <a class="sb-back" id="backLink" href="workspace.html"><i class="ti ti-arrow-left"></i> Back to workspace</a>
       </div>
     </div>
 
@@ -494,6 +494,22 @@
   document.getElementById('v-lesson').onclick=function(){state.view='lesson';this.classList.add('on');document.getElementById('v-topic').classList.remove('on');renderChips();render();};
 
   renderChips(); render();
+
+  /* ---------- role-aware home/back targets ----------
+     Instructor links open this page with ?from=director; students use the
+     default. Points the back link, the rail home button, and the brand at
+     the right dashboard so nobody bounces through a redirect. */
+  (function(){
+    var director = new URLSearchParams(location.search).get('from') === 'director';
+    var homeUrl = director ? 'studio-director.html' : 'workspace.html';
+    var backLbl = director ? ' Back to dashboard' : ' Back to workspace';
+    var homeLbl = director ? 'Dashboard' : 'Workspace';
+    var b = document.getElementById('backLink');
+    if(b){ b.setAttribute('href', homeUrl); b.lastChild.textContent = backLbl; }
+    var br = document.getElementById('homeBrand'); if(br) br.setAttribute('href', homeUrl);
+    var hr = document.getElementById('homeRail');
+    if(hr){ hr.setAttribute('href', homeUrl); var t = hr.querySelector('.tip'); if(t) t.textContent = homeLbl; }
+  })();
 </script>
 </body>
 </html>
