@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPLA — Admin Control Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ink:#1a1410;--paper:#faf7f2;--cream:#f0ead8;--rule:#d4c9b8;
+    --mid:#6b5e52;--mod:#1a56c4;--ml:#e8f0fe;--green:#2d7a1a;--gnl:#f0fae8;
+    --blue:#01123a;--nav2:#0a1c44;--gold:#da9e2b;--red:#c8401a;--purple:#6d3bce;--pl:#efe8fb;
+  }
+  html,body{height:100%;font-family:'DM Sans',sans-serif;font-weight:300;background:var(--cream);color:var(--ink)}
+  button,select,input{cursor:pointer;font:inherit}
+  .app{height:100vh;display:grid;grid-template-columns:70px 1fr;overflow:hidden}
+
+  .rail{background:var(--blue);display:flex;flex-direction:column;align-items:center;padding:14px 8px;gap:6px}
+  .brand{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--gold);color:var(--blue);font-weight:900;font-size:18px;margin-bottom:10px}
+  .rail-btn{width:44px;height:44px;border:0;border-radius:11px;color:rgba(250,247,242,.55);background:transparent;font-size:21px;display:grid;place-items:center;position:relative;transition:background .15s,color .15s}
+  .rail-btn:hover{background:var(--nav2);color:#fff}
+  .rail-btn.active{background:var(--nav2);color:var(--gold)}
+  .rail-btn .tip{position:absolute;left:56px;top:50%;transform:translateY(-50%) scale(.9);background:var(--ink);color:#fff;font-size:11px;font-weight:500;padding:5px 9px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;z-index:40}
+  .rail-btn:hover .tip{opacity:1;transform:translateY(-50%) scale(1)}
+  .rail-spacer{flex:1}
+
+  .main{display:grid;grid-template-rows:auto 1fr;min-width:0;overflow:hidden}
+  .statusbar{background:var(--blue);color:#fff;padding:12px 24px;display:flex;align-items:center;gap:14px}
+  .sb-logo img{height:24px;display:block}
+  .sb-sep{color:rgba(255,255,255,.2)}
+  .sb-status .lbl{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(218,158,43,.85);font-family:'DM Mono',monospace}
+  .sb-status .val{font-size:13px;font-weight:500}
+  .sb-r{margin-left:auto;display:flex;align-items:center;gap:12px}
+  .sb-role{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:rgba(218,158,43,.12);border:1px solid rgba(218,158,43,.3);padding:3px 10px;border-radius:100px}
+  .sb-name{font-size:13px;color:rgba(255,255,255,.85)}
+  .sb-av{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:600}
+  .sb-signout{background:none;border:0;color:rgba(255,255,255,.55);font-size:18px;display:grid;place-items:center;padding:6px;border-radius:8px;transition:color .15s,background .15s}
+  .sb-signout:hover{color:#fff;background:rgba(255,255,255,.1)}
+
+  .canvas{overflow:auto;padding:26px 32px 48px}
+  .wrap{max-width:1140px}
+  .greet-date{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-family:'DM Mono',monospace;margin-bottom:5px}
+  .greet-h{font-family:'Playfair Display',serif;font-size:23px;font-weight:700;margin-bottom:4px;line-height:1.3}
+  .greet-h em{font-style:italic;color:var(--mod)}
+  .summary{font-size:13px;color:var(--mid);margin-bottom:22px}
+
+  /* STAT CARDS */
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:30px}
+  @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stat{background:#fff;border:1px solid var(--rule);border-radius:14px;padding:18px 18px 16px}
+  .stat .ic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-size:18px;margin-bottom:12px}
+  .stat.users .ic{background:var(--ml);color:var(--mod)}
+  .stat.learners .ic{background:var(--gnl);color:var(--green)}
+  .stat.instructors .ic{background:rgba(218,158,43,.14);color:#a9761a}
+  .stat.admins .ic{background:var(--pl);color:var(--purple)}
+  .stat.classes .ic{background:#fdeee9;color:var(--red)}
+  .stat .num{font-family:'Playfair Display',serif;font-size:30px;font-weight:900;line-height:1;color:var(--ink)}
+  .stat .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);font-family:'DM Mono',monospace;margin-top:6px}
+
+  /* SECTION */
+  .section{margin-bottom:34px;scroll-margin-top:16px}
+  .sec-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .sec-title{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--ink)}
+  .sec-count{font-size:11px;color:var(--mid);background:var(--cream);border:1px solid var(--rule);border-radius:100px;padding:2px 10px;font-weight:600;font-family:'DM Mono',monospace}
+  .sec-tools{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .search{display:flex;align-items:center;gap:7px;border:1px solid var(--rule);border-radius:8px;padding:7px 11px;background:#fff}
+  .search i{color:var(--mid);font-size:16px}
+  .search input{border:0;outline:0;font-size:13px;background:transparent;width:190px;color:var(--ink);cursor:text}
+  .fbtn{font-size:12px;font-weight:600;color:var(--mid);background:#fff;border:1px solid var(--rule);border-radius:100px;padding:6px 13px;transition:.13s}
+  .fbtn:hover{color:var(--ink)}
+  .fbtn.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+  /* TABLE */
+  .tbl-wrap{background:#fff;border:1px solid var(--rule);border-radius:14px;overflow:hidden}
+  table{width:100%;border-collapse:collapse}
+  thead th{text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);font-family:'DM Mono',monospace;font-weight:500;padding:13px 16px;border-bottom:1px solid var(--rule);background:var(--paper)}
+  tbody td{padding:12px 16px;font-size:13px;color:var(--ink);border-bottom:1px solid #efeae0;vertical-align:middle}
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr:hover{background:var(--paper)}
+  .u-cell{display:flex;align-items:center;gap:10px}
+  .u-av{width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:600;flex-shrink:0}
+  .u-nm{font-weight:600;font-size:13px}
+  .u-em{font-size:11px;color:var(--mid)}
+  .mono{font-family:'DM Mono',monospace;font-size:12px;color:var(--mid)}
+  .code-chip{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--blue);background:#f0f4fa;padding:2px 8px;border-radius:5px;border:1px solid #d0daea}
+
+  .badge{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:100px;display:inline-flex;align-items:center;gap:4px;border:1px solid transparent}
+  .badge.admin{color:var(--purple);background:var(--pl);border-color:#d8c9f2}
+  .badge.instructor{color:#a9761a;background:rgba(218,158,43,.13);border-color:rgba(218,158,43,.35)}
+  .badge.learner{color:var(--green);background:var(--gnl);border-color:#c3e2b2}
+  .badge.guest{color:var(--mid);background:var(--cream);border-color:var(--rule)}
+  .badge.on{color:var(--green);background:var(--gnl);border-color:#c3e2b2}
+  .badge.off{color:var(--mid);background:var(--cream);border-color:var(--rule)}
+
+  .empty{padding:26px 16px;font-size:13px;color:var(--mid);font-style:italic;text-align:center}
+
+  #loading{padding:40px 32px;color:var(--mid);font-size:13px}
+  #denied{display:none;padding:60px 32px;text-align:center}
+  #denied .di{font-size:40px;color:var(--red);margin-bottom:14px}
+  #denied h2{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:8px}
+  #denied p{font-size:13px;color:var(--mid);max-width:420px;margin:0 auto 18px}
+  #denied a{display:inline-flex;align-items:center;gap:7px;background:var(--blue);color:#fff;text-decoration:none;border-radius:8px;padding:10px 18px;font-size:13px;font-weight:600}
+  #adminmain{display:none}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(16px);opacity:0;background:var(--ink);color:#fff;padding:10px 16px;border-radius:100px;font-size:12px;z-index:60;transition:.2s;pointer-events:none}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div id="loading">Verifying administrator access…</div>
+
+<div id="denied">
+  <div class="di"><i class="ti ti-lock-exclamation"></i></div>
+  <h2>Access restricted</h2>
+  <p>This area is limited to CPLA administrators. Your account doesn't have administrator permissions.</p>
+  <a href="workspace.html"><i class="ti ti-arrow-left"></i> Return to workspace</a>
+</div>
+
+<div class="app" id="adminmain">
+  <aside class="rail">
+    <div class="brand">C</div>
+    <button class="rail-btn active" title="Overview" onclick="scrollTo2('sec-overview')"><i class="ti ti-layout-dashboard"></i><span class="tip">Overview</span></button>
+    <button class="rail-btn" onclick="scrollTo2('sec-users')"><i class="ti ti-users"></i><span class="tip">Users</span></button>
+    <button class="rail-btn" onclick="scrollTo2('sec-classes')"><i class="ti ti-school"></i><span class="tip">Classes</span></button>
+    <div class="rail-spacer"></div>
+  </aside>
+
+  <div class="main">
+    <div class="statusbar">
+      <a class="sb-logo" href="admin-console.html"><img src="CPLA-logo-mark-rev.svg" alt="CPLA"></a>
+      <div class="sb-sep">·</div>
+      <div class="sb-status"><div class="lbl">Control Center</div><div class="val">Platform Administration</div></div>
+      <div class="sb-r">
+        <div class="sb-role">Super Administrator</div>
+        <div class="sb-name" id="sb-name">—</div>
+        <div class="sb-av" id="sb-av">—</div>
+        <button class="sb-signout" id="signout" title="Sign out"><i class="ti ti-logout"></i></button>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="wrap">
+        <div class="greet-date" id="greet-date"></div>
+        <div class="greet-h" id="greet-h">Control Center</div>
+        <div class="summary" id="summary">Loading platform data…</div>
+
+        <div class="section" id="sec-overview">
+          <div class="stats" id="stats"></div>
+        </div>
+
+        <div class="section" id="sec-users">
+          <div class="sec-head">
+            <span class="sec-title">Users</span>
+            <span class="sec-count" id="users-count">0</span>
+            <div class="sec-tools">
+              <div class="search"><i class="ti ti-search"></i><input type="text" id="user-search" placeholder="Search name or email…"></div>
+              <button class="fbtn active" data-role="all">All</button>
+              <button class="fbtn" data-role="admin">Admins</button>
+              <button class="fbtn" data-role="instructor">Instructors</button>
+              <button class="fbtn" data-role="learner">Learners</button>
+            </div>
+          </div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>Name</th><th>Role</th><th>Class</th><th>CPLA ID</th><th>Joined</th></tr></thead>
+              <tbody id="users-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="section" id="sec-classes">
+          <div class="sec-head">
+            <span class="sec-title">Classes</span>
+            <span class="sec-count" id="classes-count">0</span>
+          </div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>Class</th><th>Instructor</th><th>Invite Code</th><th>Students</th><th>Current Lesson</th><th>Status</th></tr></thead>
+              <tbody id="classes-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script>
+  function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},1600);}
+  function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function scrollTo2(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
+  document.getElementById('signout').onclick=function(){auth.signOut().then(function(){window.location.href='login.html';});};
+
+  var USERS=[], CLASSES=[], roleFilter='all', searchTerm='';
+
+  // Buckets any accountType into one of: admin | instructor | learner.
+  function roleBucket(t){ if(t==='admin')return 'admin'; if(t==='instructor')return 'instructor'; return 'learner'; }
+  function roleLabel(u){
+    var b=roleBucket(u.accountType);
+    if(u.isGuest) return {cls:'guest',txt:'Guest'};
+    if(b==='admin') return {cls:'admin',txt:'Administrator'};
+    if(b==='instructor') return {cls:'instructor',txt:'Instructor'};
+    return {cls:'learner',txt:u.role||'Learner'};
+  }
+  function initialsOf(u){
+    var f=u.firstName?u.firstName[0]:'', l=u.lastName?u.lastName[0]:'';
+    var i=(f+l).toUpperCase();
+    if(!i && u.displayName) i=u.displayName.split(' ').map(function(n){return n[0];}).join('').slice(0,2).toUpperCase();
+    if(!i && u.email) i=u.email.slice(0,2).toUpperCase();
+    return i||'?';
+  }
+  function nameOf(u){ return u.displayName || ((u.firstName||'')+' '+(u.lastName||'')).trim() || u.email || 'Unknown'; }
+  function dateOf(ts){ if(!ts||!ts.toDate)return '—'; var d=ts.toDate(); var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; return m[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear(); }
+
+  // ── AUTH GUARD: administrators only ──
+  auth.onAuthStateChanged(async function(user){
+    if(!user){ window.location.href='login.html'; return; }
+    var d={};
+    try{ var s=await db.collection('users').doc(user.uid).get(); d=s.exists?s.data():{}; }catch(e){}
+    if(d.accountType!=='admin'){
+      document.getElementById('loading').style.display='none';
+      document.getElementById('denied').style.display='block';
+      return;
+    }
+    var first=d.firstName||(user.displayName?user.displayName.split(' ')[0]:'Administrator');
+    document.getElementById('sb-name').textContent=user.displayName||nameOf(d)||first;
+    document.getElementById('sb-av').textContent=initialsOf(d.firstName?d:{email:user.email,displayName:user.displayName});
+    var now=new Date(), days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    document.getElementById('greet-date').textContent=days[now.getDay()]+', '+months[now.getMonth()]+' '+now.getDate();
+    var hr=now.getHours(), g=hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';
+    document.getElementById('greet-h').innerHTML=g+', <em>'+esc(first)+'</em>. Here’s the platform.';
+
+    document.getElementById('loading').style.display='none';
+    document.getElementById('adminmain').style.display='grid';
+    await loadData();
+    wireControls();
+  });
+
+  async function loadData(){
+    // Users
+    try{
+      var us=await db.collection('users').get();
+      USERS=us.docs.map(function(doc){var x=doc.data();x.uid=doc.id;return x;});
+    }catch(e){ USERS=[]; document.getElementById('summary').textContent='Could not load users — check that Firestore rules grant administrators read access to the users collection.'; }
+    // Classes
+    try{
+      var cs=await db.collection('classes').get();
+      CLASSES=cs.docs.map(function(doc){var x=doc.data();x.id=doc.id;return x;});
+    }catch(e){ CLASSES=[]; }
+
+    renderStats();
+    renderUsers();
+    renderClasses();
+  }
+
+  function renderStats(){
+    var learners=0,instructors=0,admins=0;
+    USERS.forEach(function(u){var b=roleBucket(u.accountType); if(b==='admin')admins++; else if(b==='instructor')instructors++; else learners++;});
+    var cards=[
+      {cls:'users',ic:'ti-users',num:USERS.length,lbl:'Total Users'},
+      {cls:'learners',ic:'ti-school',num:learners,lbl:'Learners'},
+      {cls:'instructors',ic:'ti-chalkboard',num:instructors,lbl:'Instructors'},
+      {cls:'admins',ic:'ti-shield-lock',num:admins,lbl:'Administrators'},
+      {cls:'classes',ic:'ti-books',num:CLASSES.length,lbl:'Classes'}
+    ];
+    document.getElementById('stats').innerHTML=cards.map(function(c){
+      return '<div class="stat '+c.cls+'"><div class="ic"><i class="ti '+c.ic+'"></i></div><div class="num">'+c.num+'</div><div class="lbl">'+c.lbl+'</div></div>';
+    }).join('');
+    document.getElementById('summary').textContent=USERS.length+' user'+(USERS.length===1?'':'s')+' · '+instructors+' instructor'+(instructors===1?'':'s')+' · '+CLASSES.length+' class'+(CLASSES.length===1?'':'es')+' on the platform.';
+  }
+
+  function renderUsers(){
+    var body=document.getElementById('users-body');
+    var list=USERS.filter(function(u){
+      if(roleFilter!=='all' && roleBucket(u.accountType)!==roleFilter) return false;
+      if(searchTerm){ var hay=(nameOf(u)+' '+(u.email||'')).toLowerCase(); if(hay.indexOf(searchTerm)===-1) return false; }
+      return true;
+    });
+    // Sort: admins first, then instructors, then learners; alpha within.
+    var rank={admin:0,instructor:1,learner:2};
+    list.sort(function(a,b){var ra=rank[roleBucket(a.accountType)],rb=rank[roleBucket(b.accountType)]; if(ra!==rb)return ra-rb; return nameOf(a).localeCompare(nameOf(b));});
+    document.getElementById('users-count').textContent=list.length;
+    if(!list.length){ body.innerHTML='<tr><td colspan="5"><div class="empty">No users match this view.</div></td></tr>'; return; }
+    body.innerHTML=list.map(function(u){
+      var rl=roleLabel(u);
+      return '<tr>'+
+        '<td><div class="u-cell"><div class="u-av">'+esc(initialsOf(u))+'</div><div><div class="u-nm">'+esc(nameOf(u))+'</div><div class="u-em">'+esc(u.email||'')+'</div></div></div></td>'+
+        '<td><span class="badge '+rl.cls+'">'+esc(rl.txt)+'</span></td>'+
+        '<td>'+esc(u.className||'—')+'</td>'+
+        '<td class="mono">'+esc(u.cpla_id||'—')+'</td>'+
+        '<td class="mono">'+dateOf(u.createdAt)+'</td>'+
+      '</tr>';
+    }).join('');
+  }
+
+  function renderClasses(){
+    var body=document.getElementById('classes-body');
+    document.getElementById('classes-count').textContent=CLASSES.length;
+    // Build lookup maps from USERS.
+    var instrById={}, studCount={};
+    USERS.forEach(function(u){
+      if(roleBucket(u.accountType)==='instructor') instrById[u.uid]=nameOf(u);
+      if(u.classId){ studCount[u.classId]=(studCount[u.classId]||0); if(roleBucket(u.accountType)==='learner') studCount[u.classId]++; }
+    });
+    var list=CLASSES.slice().sort(function(a,b){var ta=a.createdAt&&a.createdAt.toMillis?a.createdAt.toMillis():0,tb=b.createdAt&&b.createdAt.toMillis?b.createdAt.toMillis():0;return ta-tb;});
+    if(!list.length){ body.innerHTML='<tr><td colspan="6"><div class="empty">No classes have been created yet.</div></td></tr>'; return; }
+    body.innerHTML=list.map(function(c){
+      var instr=instrById[c.instructorId]||'—';
+      var n=studCount[c.id]||0;
+      var active=c.active!==false;
+      return '<tr>'+
+        '<td><span class="u-nm">'+esc(c.name||'Untitled')+'</span></td>'+
+        '<td>'+esc(instr)+'</td>'+
+        '<td><span class="code-chip">'+esc(c.inviteCode||'—')+'</span></td>'+
+        '<td class="mono">'+n+'</td>'+
+        '<td class="mono">'+(c.currentLesson?('Lesson '+esc(c.currentLesson)):'—')+'</td>'+
+        '<td><span class="badge '+(active?'on':'off')+'">'+(active?'Active':'Inactive')+'</span></td>'+
+      '</tr>';
+    }).join('');
+  }
+
+  function wireControls(){
+    document.querySelectorAll('.fbtn').forEach(function(b){
+      b.onclick=function(){
+        document.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('active');});
+        b.classList.add('active'); roleFilter=b.getAttribute('data-role'); renderUsers();
+      };
+    });
+    var si=document.getElementById('user-search');
+    si.oninput=function(){ searchTerm=si.value.trim().toLowerCase(); renderUsers(); };
+  }
+</script>
+</body>
+</html>
