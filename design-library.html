@@ -332,62 +332,260 @@
   {
     "id": "visual-hierarchy",
     "title": "Visual Hierarchy",
+    "sub": "Guiding the eye through a design in order",
     "category": "Perception",
     "icon": "ti-sort-descending",
+    "kind": "",
+    "keywords": "hierarchy order emphasis scale weight reading path focal point dominance",
     "lesson": "V1 · Composition",
     "lessonGroup": "Volume 1 — Design Thinking",
-    "status": "soon",
-    "keywords": "hierarchy order emphasis scale"
+    "status": "ready",
+    "line": "Good design tells the eye where to look first, second, and third — <span class='q'>hierarchy is you making that decision instead of leaving it to chance.</span>",
+    "hero": {
+      "cap": "Student layout with a clear 1-2-3 reading path — dominant headline, supporting subhead, then body.",
+      "alt": "Alt text required: describe the order the eye moves through the piece and what creates it."
+    },
+    "notice": "Cover the design, then reveal it for one second. What did you read first? If it wasn't the most important thing, the hierarchy needs work.",
+    "mistake": "Making everything big and bold so it all competes — when everything shouts, nothing is heard. Hierarchy needs quiet as much as loud.",
+    "related": [
+      "Value Contrast",
+      "Type Anatomy",
+      "Proximity & Grouping",
+      "Figure / Ground"
+    ],
+    "understand": "<p>Hierarchy is the deliberate ranking of elements so the eye moves through them in a chosen order. It's built from contrast in <b>size, weight, colour, value, spacing, and position</b> — the bigger, bolder, or more isolated an element, the earlier it's read. Most designs need only three levels: what you see first, next, and last.</p><p><b>Diagram (CPLA original):</b> the same three text elements shown flat, then ranked, with arrows tracing the 1-2-3 path.</p>",
+    "compare": {
+      "strong": "Three clear levels",
+      "strongLbl": "Distinct size and weight steps — the eye moves in order.",
+      "weak": "One flat level",
+      "weakLbl": "Everything the same size — the eye wanders with no entry point."
+    },
+    "prod": "<p>Hierarchy built only from colour can collapse in one-colour printing, on a photocopy, or on merch. Anchor it in <b>size, weight, and spacing</b> so the ranking survives when colour is stripped away. On small formats — cards, labels — remember print needs real size steps; a one-point difference the screen shows can vanish on paper.</p>",
+    "a11y": "<p>Screen readers follow the <b>document order</b>, not the visual size — a line that only looks like a heading isn't one. Use real heading tags and a logical order so the spoken sequence matches the visual hierarchy, and don't rely on size or colour alone to signal importance.</p>",
+    "exercise": "Take a flyer with everything the same size. Using only size, weight, and spacing — no new colours — rebuild it into three clear levels so a stranger reads it in the right order.",
+    "rights": {
+      "public": "Example © [student name], [year] · diagram: CPLA original.",
+      "creator": "[student name]",
+      "source": "[student submission — original file]",
+      "license": "signed student release",
+      "reviewDate": "[YYYY-MM-DD]",
+      "status": "placeholder"
+    }
   },
   {
     "id": "proximity-grouping",
     "title": "Proximity & Grouping",
+    "sub": "Things placed close together read as related",
     "category": "Perception",
     "icon": "ti-layout-grid",
+    "kind": "",
+    "keywords": "gestalt grouping proximity whitespace spacing relationship",
     "lesson": "V1 · Composition",
     "lessonGroup": "Volume 1 — Design Thinking",
-    "status": "soon",
-    "keywords": "gestalt grouping proximity"
+    "status": "ready",
+    "line": "Space is a message — <span class='q'>things placed close together read as belonging together, whether you meant it or not.</span>",
+    "hero": {
+      "cap": "Student layout where spacing alone groups related items — a label with its field, a caption with its image.",
+      "alt": "Alt text required: describe which items are grouped and the spacing that groups them."
+    },
+    "notice": "Squint until the text blurs. Do the clusters you see match the things that actually belong together? Gaps should fall between groups, not inside them.",
+    "mistake": "Even spacing everywhere, so a heading sits equally close to the paragraph above and below it — the reader can't tell which text it belongs to.",
+    "related": [
+      "Visual Hierarchy",
+      "Figure / Ground",
+      "Type Anatomy",
+      "Pairing Typefaces"
+    ],
+    "understand": "<p>One of the Gestalt grouping tendencies: the eye reads elements near each other as a set, and elements with space between them as separate. It's how a reader knows a caption belongs to <i>this</i> photo, or a price to <i>that</i> product — often before reading a word. Managed space groups; accidental space confuses.</p><p><b>Diagram (CPLA original):</b> a field of dots re-spaced into rows, then columns, showing how proximity alone flips what we perceive as grouped.</p>",
+    "compare": {
+      "strong": "Purposeful spacing",
+      "strongLbl": "Tighter within groups, looser between — relationships are obvious.",
+      "weak": "Uniform spacing",
+      "weakLbl": "Equal gaps everywhere — nothing groups, everything floats."
+    },
+    "prod": "<p>Proximity is a spacing system, so it depends on consistent measurement — set space with real values (a baseline grid, repeatable gutters) rather than eyeballing. In print, trimming and folds can eat margins; keep grouped content clear of the trim and fold zones so a related pair doesn't get split across a panel.</p>",
+    "a11y": "<p>Grouping by space alone isn't conveyed to screen-reader users — pair it with real structure (lists, labelled groups, associated caption and field markup) so the relationship lives in the code, not just the layout. Generous space between groups also eases low vision and cognitive load.</p>",
+    "exercise": "Take a cluttered form or list and improve it using <i>only</i> spacing — no colour, boxes, or lines. Tighten what belongs together, open space between groups, and see how much clearer it reads.",
+    "rights": {
+      "public": "Example © [student name], [year] · diagram: CPLA original.",
+      "creator": "[student name]",
+      "source": "[student submission — original file]",
+      "license": "signed student release",
+      "reviewDate": "[YYYY-MM-DD]",
+      "status": "placeholder"
+    }
   },
   {
     "id": "colour-in-context",
     "title": "Colour in Context",
+    "sub": "What a colour means depends on where it sits",
     "category": "Color",
     "icon": "ti-palette",
+    "kind": "",
+    "keywords": "meaning culture association context industry audience saturation",
     "lesson": "V1 · Color Foundations",
     "lessonGroup": "Volume 1 — Design Thinking",
-    "status": "soon",
-    "keywords": "meaning culture association"
+    "status": "ready",
+    "line": "Colour doesn't carry a fixed meaning — <span class='q'>the real question is what a colour is doing, for this audience, in this context.</span>",
+    "hero": {
+      "cap": "The same hue (say red) across a clearance sign, a luxury package, and a warning label — one colour, three jobs.",
+      "alt": "Alt text required: describe how the same colour reads differently across the examples."
+    },
+    "notice": "Before deciding what a colour 'means,' ask three things: who's the audience, what industry, and what's around it? The same red sells discounts, signals danger, and says luxury depending on the answers.",
+    "mistake": "Treating colour associations as universal rules — 'blue means trust,' 'green means eco.' They're tendencies that shift with culture, industry, saturation, and neighbouring colours, not laws.",
+    "related": [
+      "Value Contrast",
+      "Visual Hierarchy",
+      "Rich Black vs. 100% K",
+      "Figure / Ground"
+    ],
+    "understand": "<p>Colour associations are real but <b>contextual</b>. Meaning shifts with culture, historical period, industry convention, audience, saturation and value, and the colours and imagery nearby. Red can mean sale, stop, love, or luxury; white can mean purity or mourning depending on culture. Teach the question, not a lookup table: <i>what is this colour doing here?</i></p><p><b>Diagram (CPLA original):</b> one hue swatch dropped into several contexts, each caption naming the job it's doing.</p>",
+    "compare": {
+      "strong": "Colour fits the context",
+      "strongLbl": "Hue, saturation, and pairing match the audience and message.",
+      "weak": "Colour by cliché",
+      "weakLbl": "A 'meaning' borrowed from a rule that ignores audience and context."
+    },
+    "prod": "<p>The colour on screen is not the colour that prints. Brand and 'meaning' colours drift between RGB and CMYK, and again across papers and finishes — a confident red can turn muddy or orange in process printing. For a colour that must stay consistent (a brand red), specify a <b>spot colour</b> and check it against a physical swatch book, not the monitor.</p>",
+    "a11y": "<p>Never let colour be the <i>only</i> carrier of meaning — 'click the green button,' 'red items are sold out' fail for colour-blind users. Back colour with text, icon, or pattern. And remember colour meanings vary across cultures; an audience may not read a hue the way you do.</p>",
+    "exercise": "Pick one colour and design the same three-word message three ways — for a discount store, a funeral home, and a tech startup. Change saturation, pairing, and type; keep the hue. Watch the 'meaning' change.",
+    "rights": {
+      "public": "Examples © [student name], [year] · diagram: CPLA original.",
+      "creator": "[student name]",
+      "source": "[student submission — original file]",
+      "license": "signed student release",
+      "reviewDate": "[YYYY-MM-DD]",
+      "status": "placeholder"
+    }
   },
   {
     "id": "type-anatomy",
     "title": "Type Anatomy",
+    "sub": "The parts of a letter, and why they matter",
     "category": "Typography",
     "icon": "ti-typography",
+    "kind": "",
+    "keywords": "anatomy ascender descender x-height counter serif baseline cap height legibility",
     "lesson": "V1 · Typography",
     "lessonGroup": "Volume 1 — Design Thinking",
-    "status": "soon",
-    "keywords": "anatomy ascender x-height serif"
+    "status": "ready",
+    "line": "Letters have parts with names — <span class='q'>learn them and you can finally say why one typeface works and another doesn't.</span>",
+    "hero": {
+      "cap": "A large single letterform with parts labelled — ascender, x-height, baseline, counter, serif.",
+      "alt": "Alt text required: name the letter parts labelled and what each one is."
+    },
+    "notice": "Compare two fonts at the same point size. If one looks bigger, check the x-height — the height of the lowercase body is what your eye reads as 'size,' not the point number.",
+    "mistake": "Judging type size by the point number. Two 12-point fonts can look like different sizes because point size measures the body, not the letter — x-height and set width do the real work.",
+    "related": [
+      "Pairing Typefaces",
+      "Visual Hierarchy",
+      "Value Contrast",
+      "Proximity & Grouping"
+    ],
+    "understand": "<p>Type has a shared vocabulary: the <b>baseline</b> letters sit on, the <b>x-height</b> (height of the lowercase body), <b>cap height</b>, <b>ascenders</b> (rising above the x-height, as in b, d, h) and <b>descenders</b> (dropping below, as in p, g, y), the enclosed <b>counter</b> (the hole in an o or a), and <b>serifs</b> (the small finishing strokes). Knowing the parts lets you describe, compare, and choose type precisely.</p><p><b>Diagram (CPLA original):</b> one word with guide lines and callouts for each part — students point and name.</p>",
+    "compare": {
+      "strong": "Generous x-height",
+      "strongLbl": "Large lowercase body — reads well small and at a distance.",
+      "weak": "Small x-height",
+      "weakLbl": "Tall ascenders, tiny body — looks smaller and struggles at small sizes."
+    },
+    "prod": "<p>Anatomy predicts how type survives production. Small counters and fine serifs can <b>fill in</b> at small sizes, in reversed type, or on absorbent stock. Sturdy, low-contrast letterforms hold up on newsprint, signage, and screen printing; delicate high-contrast faces need quality paper and larger sizes. Choose anatomy to match the output, not just the mood.</p>",
+    "a11y": "<p>For readers with low vision or dyslexia, a <b>large x-height, open counters, and clearly distinct letters</b> (lowercase l vs. capital I vs. digit 1) improve legibility. Test a typeface for characters that collapse into each other, especially at small sizes and on screens.</p>",
+    "exercise": "Print the same paragraph in three fonts at the same point size. Mark the x-height on each and rank them by how big they <i>look</i>. Notice how little the point number told you.",
+    "rights": {
+      "public": "Diagram: CPLA original · type specimens credited per typeface.",
+      "creator": "CPLA",
+      "source": "[CPLA original diagram]",
+      "license": "CPLA original",
+      "reviewDate": "[YYYY-MM-DD]",
+      "status": "placeholder"
+    }
   },
   {
     "id": "pairing-typefaces",
     "title": "Pairing Typefaces",
+    "sub": "Combining fonts without conflict",
     "category": "Typography",
     "icon": "ti-text-plus",
+    "kind": "",
+    "keywords": "font pairing combination contrast superfamily role licensing glyphs",
     "lesson": "V1 · Typography",
     "lessonGroup": "Volume 1 — Design Thinking",
-    "status": "soon",
-    "keywords": "font pairing combination"
+    "status": "ready",
+    "line": "Two typefaces should feel like a duet, not an argument — <span class='q'>pair for contrast with a reason, not variety for its own sake.</span>",
+    "hero": {
+      "cap": "Student layout pairing a display face with a readable text face — clear roles, one voice.",
+      "alt": "Alt text required: name the two typefaces and the role each one plays."
+    },
+    "notice": "Ask what job each font is doing. If both try to be the star — two decorative display faces — they fight. Usually one leads (headlines) and one serves (body).",
+    "mistake": "Pairing two faces that are too similar — two humanist sans that almost match — so it looks like a mistake, not a choice. Contrast should be clear, or the roles clearly different.",
+    "related": [
+      "Type Anatomy",
+      "Visual Hierarchy",
+      "Value Contrast",
+      "Proximity & Grouping"
+    ],
+    "understand": "<p>Good pairings usually combine a <b>clear difference with a shared quality</b>. Contrast the roles — a characterful display face for headlines, a quiet readable face for text — while keeping something in common (era, proportion, mood) so they belong together. The safest start is <b>one family with many weights</b> (a superfamily), then add a second face only when it earns its place.</p><p><b>Diagram (CPLA original):</b> a 'works / fights' pair side by side, with what makes each succeed or clash.</p>",
+    "compare": {
+      "strong": "Contrast with harmony",
+      "strongLbl": "Distinct roles, shared mood — reads as one voice.",
+      "weak": "Too-similar pair",
+      "weakLbl": "Two near-identical faces — looks like an error, not intent."
+    },
+    "prod": "<p>Before committing, check the <b>licence</b>: does it cover print, web embedding, and the number of users you need? Confirm the family has the <b>weights, italics, small caps, and language and glyph coverage</b> the project needs — a pairing that works in the mockup fails if the font lacks a bold or the accented characters. Test both faces at real production sizes and on the actual output.</p>",
+    "a11y": "<p>Keep the <b>text</b> face highly legible no matter how expressive the display face is — body copy is where readability matters most. Ensure adequate size, spacing, and value contrast, and avoid setting long passages in a decorative face that's tiring to read.</p>",
+    "exercise": "Pick one project and pair it two ways: first using a single superfamily (weights only), then adding a contrasting display face. Compare — did the second font add meaning, or just noise?",
+    "rights": {
+      "public": "Example © [student name], [year] · diagram: CPLA original · typefaces credited per specimen.",
+      "creator": "[student name]",
+      "source": "[student submission — original file]",
+      "license": "signed student release",
+      "reviewDate": "[YYYY-MM-DD]",
+      "status": "placeholder"
+    }
   },
   {
     "id": "total-ink-coverage",
     "title": "Total Ink Coverage",
+    "sub": "How much ink a sheet can actually hold",
     "category": "Production",
     "icon": "ti-droplet",
+    "kind": "prod",
+    "keywords": "ink limit TAC TIL total area coverage prepress cmyk drying offset gcr ucr setoff",
     "lesson": "V4 · Print Production",
     "lessonGroup": "Volume 4 — Photoshop & Output",
-    "status": "soon",
-    "keywords": "ink limit tac prepress"
+    "status": "ready",
+    "line": "Paper can only hold so much ink — <span class='q'>pile on too much and it won't dry, it offsets, and your rich shadows turn to mud.</span>",
+    "hero": {
+      "cap": "A proof showing a shadow area at safe vs. excessive coverage — clean detail vs. filled-in, wet, muddy black.",
+      "alt": "Alt text required: describe the difference between the correctly-limited and over-inked areas."
+    },
+    "notice": "Check the total of your darkest area's CMYK values. If C+M+Y+K climbs toward 300%+, you're in the danger zone for that stock — the shadows will plug up and stay wet.",
+    "mistake": "Building a 'blacker black' or deep shadow by stacking near-100% of all four inks (e.g. 90/90/90/100 = 370%). It exceeds what most stocks can hold — set-off, slow drying, and lost shadow detail follow.",
+    "related": [
+      "Rich Black vs. 100% K",
+      "Colour in Context",
+      "Value Contrast",
+      "Visual Hierarchy"
+    ],
+    "understand": "<p><b>Total Ink Coverage</b> (also Total Area Coverage / Total Ink Limit) is the sum of the four process inks in the heaviest part of an image — C + M + Y + K — so the theoretical maximum is 400%. Real presses and papers can't hold that. Push past the limit and ink can't dry fast enough: sheets <b>set off</b> (wet ink transfers to the back of the next sheet), shadows <b>plug</b> and lose detail, and the whole job slows down.</p><p><b>Diagram (CPLA original):</b> a shadow ramp labelled with rising coverage values, marking where detail collapses.</p>",
+    "compare": {
+      "strong": "Within the ink limit",
+      "strongLbl": "Shadows built to the stock's limit — detail holds and dries clean.",
+      "weak": "Over the limit",
+      "weakLbl": "All four inks near max — plugged, muddy shadows that set off."
+    },
+    "prod": "<ul><li>Typical limits: roughly <b>240–300% for coated stock, lower (~240% or less) for uncoated and newsprint</b> — but always <b>ask the printer</b> for the exact number and output condition.</li><li>Manage it at conversion: a proper <b>CMYK profile with GCR/UCR</b> replaces overlapping CMY in neutrals with black, lowering total ink automatically.</li><li>Don't hand-build shadows near 400% — let the profile or the printer's settings hold the limit.</li><li>Check it in Acrobat's <b>Output Preview → Total Area Coverage</b>, which highlights over-limit areas.</li></ul>",
+    "a11y": "<p><b>Screen vs. proof:</b> an over-inked shadow looks perfect in RGB — the monitor won't warn you. Soft-proof with the correct profile and, for anything critical, get a physical proof on the actual stock before the run.</p>",
+    "exercise": "Open a dark photo, convert it to a CMYK profile, export a PDF, and use Acrobat's Output Preview → Total Area Coverage to find the highest value. Is it under your printer's limit? If not, reconvert with more GCR and compare the shadow detail.",
+    "rights": {
+      "public": "Press sample © CPLA / [student] · diagram: CPLA original · confirm the ink limit with your print vendor.",
+      "creator": "CPLA / [student]",
+      "source": "[CPLA production sample]",
+      "license": "CPLA original / signed student release",
+      "reviewDate": "[YYYY-MM-DD]",
+      "status": "placeholder"
+    }
   }
 ];
 
