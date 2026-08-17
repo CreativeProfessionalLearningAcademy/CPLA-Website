@@ -87,6 +87,9 @@
   .flip.flipped .flip-in{transform:rotateY(180deg)}
   .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;border:1.5px solid var(--rule);background:#fff;padding:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
   .face .cic{width:60px;height:60px;border-radius:16px;background:var(--paper);display:grid;place-items:center;font-size:30px;color:var(--mod);margin-bottom:16px}
+  .face .cviz{width:100%;max-width:340px;margin-bottom:14px}
+  .face.hasviz .term{font-size:24px}
+  .back .backviz{width:100%;max-width:300px;margin-top:14px;opacity:.95}
   .face .term{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;line-height:1.15}
   .face .tag{margin-top:12px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600;font-family:'DM Mono',monospace}
   .face .fh{position:absolute;bottom:14px;font-size:10.5px;color:var(--mid);opacity:.7}
@@ -213,6 +216,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 <script src="firebase-config.js"></script>
 <script src="data/vocab-v1.js"></script>
+<script src="data/vocab-visuals.js"></script>
 <script>
 /* ============================================================
    CPLA — Vocabulary Studio
@@ -232,6 +236,14 @@ var VOCAB=window.CPLA_VOCAB||{categories:[],terms:[]};
 var TERMS=VOCAB.terms, CATS=VOCAB.categories;
 var CATMAP={}; CATS.forEach(function(c){CATMAP[c.id]=c;});
 var TMAP={}; TERMS.forEach(function(t){TMAP[t.id]=t;});
+var VIS=window.CPLA_VISUALS||{};
+function visualFor(term){
+  if(!term)return null;
+  var k=term.toLowerCase().trim();
+  if(VIS[k])return VIS[k];
+  var noParen=k.replace(/\s*\(.*\)\s*/,'').trim();
+  return VIS[noParen]||null;
+}
 
 /* Leitner boxes: 0=new, 1-2=learning, 3-4=familiar, 5=mastered */
 var INTERVAL={0:0,1:1,2:2,3:4,4:7,5:14}; // days until next review
@@ -406,13 +418,18 @@ function flipCard(){
   if(SESS.idx>=SESS.deck.length){ sessionDone(); return; }
   var t=SESS.deck[SESS.idx]; setProg(SESS.idx,SESS.size);
   var cat=CATMAP[t.cat];
-  document.getElementById('s-inner').innerHTML=
-    '<div class="flip" id="flip"><div class="flip-in">'+
-      '<div class="face"><div class="cic"><i class="ti '+(cat?cat.icon:'ti-vocabulary')+'"></i></div>'+
+  var viz=visualFor(t.term);
+  var front = viz
+    ? '<div class="face hasviz"><div class="cviz">'+viz+'</div>'+
         '<div class="term">'+esc(t.term)+'</div><div class="tag">'+(cat?esc(cat.name):'')+' · '+t.level+'</div>'+
-        '<div class="fh">tap to flip ↻</div></div>'+
-      '<div class="face back"><div class="dl">Definition</div><div class="def">'+esc(t.def)+'</div></div>'+
-    '</div></div>'+
+        '<div class="fh">tap to flip ↻</div></div>'
+    : '<div class="face"><div class="cic"><i class="ti '+(cat?cat.icon:'ti-vocabulary')+'"></i></div>'+
+        '<div class="term">'+esc(t.term)+'</div><div class="tag">'+(cat?esc(cat.name):'')+' · '+t.level+'</div>'+
+        '<div class="fh">tap to flip ↻</div></div>';
+  var back = '<div class="face back"><div class="dl">Definition</div><div class="def">'+esc(t.def)+'</div>'+
+        (viz?'<div class="backviz">'+viz+'</div>':'')+'</div>';
+  document.getElementById('s-inner').innerHTML=
+    '<div class="flip" id="flip"><div class="flip-in">'+front+back+'</div></div>'+
     '<div class="rate"><button class="still" id="still"><i class="ti ti-rotate"></i> Still learning</button>'+
     '<button class="know" id="know"><i class="ti ti-check"></i> I know this</button></div>';
   var flip=document.getElementById('flip');
