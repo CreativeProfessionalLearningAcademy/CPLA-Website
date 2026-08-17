@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPLA Studio — Design Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ink:#1a1410; --paper:#faf7f2; --cream:#f0ead8; --rule:#d4c9b8;
+    --mid:#6b5e52; --mod:#1a56c4; --ml:#e8f0fe;
+    --green:#2d7a1a; --gnl:#f0fae8;
+    --blue:#01123a; --nav2:#0a1c44; --gold:#da9e2b;
+    --bad:#b23a32;
+  }
+  html,body{height:100%;font-family:'DM Sans',sans-serif;font-weight:300;background:var(--cream);color:var(--ink)}
+  button{cursor:pointer;font:inherit}
+  a{color:inherit}
+  .app{height:100vh;display:grid;grid-template-columns:70px 1fr;overflow:hidden}
+
+  /* LEFT RAIL (matches workspace) */
+  .rail{background:var(--blue);display:flex;flex-direction:column;align-items:center;padding:14px 8px;gap:6px;z-index:5}
+  .brand{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--gold);color:var(--blue);font-weight:900;font-size:18px;margin-bottom:10px;text-decoration:none}
+  .rail-btn{width:44px;height:44px;border:0;border-radius:11px;color:rgba(250,247,242,.55);background:transparent;font-size:21px;display:grid;place-items:center;position:relative;transition:background .15s,color .15s;text-decoration:none}
+  .rail-btn:hover{background:var(--nav2);color:#fff}
+  .rail-btn.active{background:var(--nav2);color:var(--gold)}
+  .rail-btn .tip{position:absolute;left:56px;top:50%;transform:translateY(-50%) scale(.9);background:var(--ink);color:#fff;font-size:11px;font-weight:500;padding:5px 9px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;z-index:40;letter-spacing:.02em}
+  .rail-btn:hover .tip{opacity:1;transform:translateY(-50%) scale(1)}
+  .rail-spacer{flex:1}
+
+  .main{display:grid;grid-template-rows:auto 1fr;min-width:0;overflow:hidden}
+  .statusbar{background:var(--blue);color:#fff;padding:12px 24px;display:flex;align-items:center;gap:14px}
+  .sb-sep{color:rgba(255,255,255,.2)}
+  .sb-status{display:flex;flex-direction:column;line-height:1.25}
+  .sb-status .lbl{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(218,158,43,.85);font-family:'DM Mono',monospace}
+  .sb-status .val{font-size:13px;font-weight:500;color:#fff}
+  .sb-r{margin-left:auto;display:flex;align-items:center;gap:12px}
+  .sb-back{font-size:12px;color:rgba(255,255,255,.75);text-decoration:none;display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.2);padding:6px 12px;border-radius:100px}
+  .sb-back:hover{background:rgba(255,255,255,.08);color:#fff}
+
+  .canvas{overflow:auto;padding:28px 32px 60px}
+  .head-k{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+  .head-h{font-family:'Playfair Display',serif;font-size:30px;font-weight:900;color:var(--ink);line-height:1.1;margin-bottom:6px}
+  .head-h em{font-style:italic;color:var(--mod)}
+  .head-sub{font-size:14px;color:var(--mid);max-width:640px;line-height:1.6;margin-bottom:22px}
+
+  /* CONTROLS */
+  .controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:8px;max-width:1120px}
+  .search{position:relative;flex:1;min-width:240px}
+  .search i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--mid);font-size:18px}
+  .search input{width:100%;padding:12px 14px 12px 42px;border:1px solid var(--rule);border-radius:12px;background:#fff;font:inherit;font-size:14px;outline:none;color:var(--ink)}
+  .search input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(218,158,43,.12)}
+  .toggle{display:flex;background:#fff;border:1px solid var(--rule);border-radius:11px;overflow:hidden}
+  .toggle button{border:0;background:transparent;padding:10px 15px;font-size:12.5px;font-weight:500;color:var(--mid);display:flex;align-items:center;gap:6px}
+  .toggle button.on{background:var(--blue);color:#fff}
+  .toggle button i{font-size:15px}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 22px;max-width:1120px}
+  .chip{border:1px solid var(--rule);background:#fff;color:var(--mid);border-radius:100px;padding:7px 14px;font-size:12.5px;font-weight:500;transition:all .12s}
+  .chip:hover{border-color:var(--gold)}
+  .chip.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .chip .n{opacity:.6;font-size:11px;margin-left:4px}
+
+  /* GROUP HEADERS (by-lesson view) */
+  .group-h{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);margin:26px 0 12px;display:flex;align-items:center;gap:10px;max-width:1120px}
+  .group-h::after{content:"";flex:1;height:1px;background:var(--rule)}
+
+  /* TILES */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:14px;max-width:1120px}
+  .tile{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:18px 15px 15px;text-align:left;display:flex;flex-direction:column;gap:10px;transition:transform .13s,box-shadow .13s,border-color .13s;position:relative;min-height:150px}
+  .tile:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(20,27,38,.1);border-color:var(--gold)}
+  .tile .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:23px;background:var(--ml);color:var(--mod)}
+  .tile.prod .ic{background:#fdf3df;color:#a8760f}
+  .tile .tt{font-size:14px;font-weight:600;color:var(--ink);line-height:1.25}
+  .tile .cat{font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mid);font-family:'DM Mono',monospace}
+  .tile .les{margin-top:auto;font-size:10.5px;color:var(--mod);background:var(--ml);border:1px solid #cddcf7;padding:3px 8px;border-radius:100px;align-self:flex-start}
+  .tile.soon{opacity:.62;cursor:default}
+  .tile.soon:hover{transform:none;box-shadow:none;border-color:var(--rule)}
+  .tile .soon-tag{position:absolute;top:12px;right:12px;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);background:var(--cream);border:1px solid var(--rule);padding:2px 7px;border-radius:100px}
+  .empty{color:var(--mid);font-size:14px;padding:40px 0;max-width:1120px;text-align:center}
+
+  /* MODAL / POP-OUT CARD */
+  .scrim{position:fixed;inset:0;background:rgba(6,10,24,.55);opacity:0;pointer-events:none;transition:opacity .2s;z-index:50;display:flex;align-items:flex-start;justify-content:center;padding:40px 20px;overflow:auto}
+  .scrim.open{opacity:1;pointer-events:auto}
+  .modal{background:#fff;border-radius:18px;max-width:720px;width:100%;box-shadow:0 24px 70px rgba(0,0,0,.4);transform:translateY(14px);transition:transform .22s;overflow:hidden;margin:auto}
+  .scrim.open .modal{transform:translateY(0)}
+  .m-head{background:var(--blue);color:#fff;padding:20px 24px;display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+  .m-head h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;line-height:1.15}
+  .m-head .m-sub{font-size:12.5px;color:rgba(255,255,255,.6);margin-top:4px}
+  .m-tag{background:var(--gold);color:var(--blue);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding:5px 10px;border-radius:100px;white-space:nowrap}
+  .m-close{background:none;border:0;color:rgba(255,255,255,.7);font-size:22px;line-height:1}
+  .m-close:hover{color:#fff}
+  .m-body{padding:20px 24px 26px;max-height:calc(100vh - 200px);overflow:auto}
+
+  .lead{font-size:16px;font-weight:500;margin-bottom:14px;line-height:1.45}
+  .lead .q{color:var(--mod);font-style:italic}
+  .hero{border:2px dashed #c9c0b0;border-radius:12px;background:var(--paper);min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px;color:#8a8172;font-size:12.5px;margin-bottom:6px}
+  .hero .ic{font-size:24px;opacity:.6;margin-bottom:6px}
+  .hero .cap{font-style:italic;color:#9a9184;max-width:82%;margin-top:6px}
+  .hero .alt{font-size:11px;color:#b0a896;margin-top:8px}
+  .glance{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 6px}
+  @media(max-width:540px){.glance{grid-template-columns:1fr}}
+  .qf{background:var(--paper);border:1px solid #efeae0;border-radius:12px;padding:13px 15px}
+  .qf h4{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+  .qf.notice h4{color:var(--green)} .qf.mistake h4{color:var(--bad)}
+  .qf p{font-size:13px;color:var(--ink);line-height:1.5}
+  .relbar{margin:14px 0 4px}
+  .relbar h4{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--mod);margin-bottom:7px}
+  .pills{display:flex;flex-wrap:wrap;gap:7px}
+  .pill{background:var(--cream);border:1px solid var(--rule);border-radius:100px;padding:4px 11px;font-size:11.5px}
+
+  details{border:1px solid var(--rule);border-radius:11px;margin-top:10px;overflow:hidden}
+  summary{cursor:pointer;list-style:none;padding:12px 15px;font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:9px;background:#fff;color:var(--ink)}
+  summary::-webkit-details-marker{display:none}
+  summary .k{font-family:'DM Mono',monospace;font-size:9.5px;font-weight:500;text-transform:uppercase;letter-spacing:.09em;color:var(--mid)}
+  summary .chev{margin-left:auto;color:var(--mid);font-size:12px;transition:transform .18s}
+  details[open] summary .chev{transform:rotate(90deg)}
+  .dc{padding:2px 16px 15px;font-size:13.5px;line-height:1.6;color:var(--ink)}
+  .dc p{margin:8px 0}
+  .dc ul{margin:8px 0 0;padding-left:18px} .dc li{margin:4px 0}
+  details.prod summary{background:#fdf7ea} details.prod{border-color:#eddcae}
+  details.prod summary .k{color:#a8760f}
+  details.a11y summary{background:var(--ml)} details.a11y{border-color:#cddcf7}
+  details.a11y summary .k{color:var(--mod)}
+  .twoup{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:540px){.twoup{grid-template-columns:1fr}}
+  .cmp .z{border:2px dashed #c9c0b0;border-radius:10px;background:var(--paper);min-height:120px;display:grid;place-items:center;color:#8a8172;font-size:12px;text-align:center;padding:12px;position:relative}
+  .cmp .badge{position:absolute;top:8px;left:8px;font-size:10.5px;font-weight:700;color:#fff;padding:3px 8px;border-radius:12px}
+  .cmp.g .badge{background:var(--green)} .cmp.b .badge{background:var(--bad)}
+  .cmp .lbl{font-size:12px;color:var(--mid);margin-top:6px}
+  .chip-min{background:var(--gold);color:var(--blue);font-size:9.5px;font-weight:700;padding:3px 8px;border-radius:100px;letter-spacing:.4px}
+  .src{font-size:12px;color:var(--mid)} .src b{color:var(--ink);font-weight:600}
+
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(16px);opacity:0;background:var(--ink);color:#fff;padding:10px 16px;border-radius:100px;font-size:12px;z-index:60;transition:.2s;pointer-events:none}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- RAIL -->
+  <aside class="rail">
+    <a class="brand" id="homeBrand" href="workspace.html">C</a>
+    <a class="rail-btn" id="homeRail" href="workspace.html"><i class="ti ti-home-2"></i><span class="tip">Workspace</span></a>
+    <a class="rail-btn" href="volume1.html"><i class="ti ti-books"></i><span class="tip">Lessons</span></a>
+    <a class="rail-btn" href="progress.html?view=student"><i class="ti ti-chart-arcs"></i><span class="tip">Progress</span></a>
+    <a class="rail-btn active" href="design-library.html"><i class="ti ti-cards"></i><span class="tip">Design Library</span></a>
+    <div class="rail-spacer"></div>
+  </aside>
+
+  <div class="main">
+    <div class="statusbar">
+      <div class="sb-status">
+        <div class="lbl">Reference</div>
+        <div class="val">Design Library — Visual Field Guide</div>
+      </div>
+      <div class="sb-r">
+        <a class="sb-back" id="backLink" href="workspace.html"><i class="ti ti-arrow-left"></i> Back to workspace</a>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="head-k">Studio Reference</div>
+      <h1 class="head-h">Design <em>Library</em></h1>
+      <p class="head-sub">Quick-reference cards for the concepts behind good design. Search a term,
+        browse by topic, or find the card for the lesson you're on. Each card opens with the essentials
+        up top and deeper detail — including production and accessibility notes — on demand.</p>
+
+      <div class="controls">
+        <div class="search"><i class="ti ti-search"></i>
+          <input id="q" type="text" placeholder="Search concepts, e.g. contrast, black, figure…" autocomplete="off">
+        </div>
+        <div class="toggle">
+          <button id="v-topic" class="on"><i class="ti ti-category-2"></i> By topic</button>
+          <button id="v-lesson"><i class="ti ti-books"></i> By lesson</button>
+        </div>
+      </div>
+      <div class="chips" id="chips"></div>
+
+      <div id="results"></div>
+    </div>
+  </div>
+</div>
+
+<!-- POP-OUT CARD -->
+<div class="scrim" id="scrim"><div class="modal" id="modal"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+  function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},1600);}
+
+  /* =====================================================================
+     CARD DATA — one record per concept (this is the canonical store).
+     The tile view and the pop-out card are two VIEWS of the same object.
+     To add a card: append an object here (or generate this array from a
+     spreadsheet/JSON export). status:'soon' shows a placeholder tile.
+     'lesson' maps a card to where it's introduced — EDIT these to match
+     your real module/lesson names.
+     ===================================================================== */
+  var CARDS = [
+  {
+    "id": "figure-ground",
+    "title": "Figure / Ground",
+    "sub": "How the eye separates subject from background",
+    "category": "Perception",
+    "icon": "ti-contrast-2",
+    "kind": "",
+    "keywords": "negative space reversed knockout subject background silhouette",
+    "lesson": "V1 · Composition",
+    "lessonGroup": "Volume 1 — Design Thinking",
+    "status": "ready",
+    "line": "Your visual system rapidly organizes a scene into a subject and everything else — <span class='q'>and a designer decides which is which.</span>",
+    "hero": {
+      "cap": "Student poster or logo where figure/ground clearly does work (e.g. a knockout headline out of a solid shape).",
+      "alt": "Alt text required: describe subject, background, and what makes the figure read."
+    },
+    "notice": "At first glance, where does your eye settle — and what pulls it there? If it's unclear, the figure/ground isn't resolved yet.",
+    "mistake": "White text on a photo with light patches behind it, so parts of letters vanish. Add a scrim, crop, or reposition — don't just recolour and hope.",
+    "related": [
+      "Value Contrast",
+      "Negative Space",
+      "Reversed Type",
+      "Closure"
+    ],
+    "understand": "<p>To make sense of a scene quickly, perception organizes it into a subject (figure) and a background (ground). Designers steer that split with contrast, position, size, and enclosure. When the cues compete, the eye has no clear subject to settle on and the message slows.</p><p><b>Diagram (CPLA original):</b> one silhouette that flips — reads as a vase or two facing profiles depending on which side is darkened.</p>",
+    "compare": {
+      "strong": "Clear figure/ground",
+      "strongLbl": "Headline on a dimmed area — reads clearly at first glance.",
+      "weak": "Collapsed figure/ground",
+      "weakLbl": "Same headline over the busy photo — half the word disappears."
+    },
+    "prod": "<p>Reversed (knockout) type out of a dark ground has to survive output. Too thin or small on a multi-ink ground and it fills in, or fringes where plates mis-register. Keep reversed type bold and reasonably large; the minimum safe size is process-, typeface-, substrate-, and printer-dependent — <b>confirm with your vendor</b>.</p>",
+    "a11y": "<p>If the figure/ground split depends on hue alone, it may not be distinct enough for colour-blind or low-vision viewers. Make sure it also holds in <b>value</b> (light vs. dark) — squint or desaturate to check. Provide alt text describing the subject.</p>",
+    "exercise": "Take a busy photo, add a headline, and make it legible using <i>only</i> figure/ground moves — a scrim, a crop, or repositioning. No changing the typeface or the colour.",
+    "rights": {
+      "public": "Hero example © [student name], [year] · diagram: CPLA original.",
+      "creator": "[student name]",
+      "source": "[student submission — original file]",
+      "license": "signed student release",
+      "reviewDate": "[YYYY-MM-DD]",
+      "status": "placeholder"
+    }
+  },
+  {
+    "id": "value-contrast",
+    "title": "Value Contrast",
+    "sub": "The cue for legibility and hierarchy",
+    "category": "Color",
+    "icon": "ti-circle-half-2",
+    "kind": "",
+    "keywords": "grayscale luminance lightness darkness tone hierarchy legibility wcag",
+    "lesson": "V1 · Color Foundations",
+    "lessonGroup": "Volume 1 — Design Thinking",
+    "status": "ready",
+    "line": "Value — how light or dark a tone is — <span class='q'>is one of the strongest cues your eye uses for legibility, hierarchy, and figure/ground.</span>",
+    "hero": {
+      "cap": "Student piece with strong value structure — clear darkest-dark and lightest-light driving the focal point.",
+      "alt": "Alt text required: describe the light/dark structure and the focal point."
+    },
+    "notice": "Squint, or desaturate to grayscale. Where's the lightest light and the darkest dark? That's where attention goes. If it's all one gray, there's no hierarchy.",
+    "mistake": "Choosing colours by hue because they look vivid on screen — while every value sits mid-range. It dies in grayscale, on a photocopy, or on one-colour merch.",
+    "related": [
+      "Figure / Ground",
+      "Types of Contrast",
+      "Colour & Vision",
+      "Visual Hierarchy"
+    ],
+    "understand": "<p>Value is lightness or darkness independent of hue. Because the eye resolves light-and-dark detail more sharply than colour detail, value contrast does much of the work of legibility, depth, and focal point. Two colours can look very different in hue yet share nearly the same value — and when they do, a design goes flat and text stops reading.</p><p><b>Diagram (CPLA original):</b> a colour strip shown in full colour, then in grayscale — revealing which pairs really contrast and which collapse into the same gray.</p>",
+    "compare": {
+      "strong": "Wide value range",
+      "strongLbl": "Clear light/dark structure — holds up even in grayscale.",
+      "weak": "All mid-values",
+      "weakLbl": "Different hues, same value — it vibrates and hierarchy vanishes."
+    },
+    "prod": "<p>Black-and-white printing, photocopies, faxed forms, and one-colour apparel read mostly as <b>value</b>. Limited-colour and non-ink processes — foil, emboss, letterpress — may depend more on <b>value, texture, relief, and material</b> than on hue. Design the value structure first and the piece survives almost any reproduction; then layer colour on top for mood.</p>",
+    "a11y": "<p>Colour-blind and low-vision viewers often depend heavily on value differences, so don't carry meaning with hue alone. WCAG's common <b>4.5:1</b> ratio applies to normal-size text under specified conditions; large text and non-text elements differ. (Perceived “value” and calculated relative luminance are related teaching ideas, not identical technical terms.)</p>",
+    "exercise": "Take one of your own designs and desaturate it to grayscale. Does the hierarchy still hold? Fix it in grayscale first — then bring the colour back.",
+    "rights": {
+      "public": "Examples © [student name], [year] · diagram: CPLA original.",
+      "creator": "[student name]",
+      "source": "[student submission — original file]",
+      "license": "signed student release",
+      "reviewDate": "[YYYY-MM-DD]",
+      "status": "placeholder"
+    }
+  },
+  {
+    "id": "rich-black",
+    "title": "Rich Black vs. 100% K",
+    "sub": "“Black” isn't one thing",
+    "category": "Production",
+    "icon": "ti-droplet-half-2",
+    "kind": "prod",
+    "keywords": "process black registration ink coverage cmyk prepress reversed offset digital proof",
+    "lesson": "V4 · Print Production",
+    "lessonGroup": "Volume 4 — Photoshop & Output",
+    "status": "ready",
+    "line": "There's more than one black — <span class='q'>how you build it decides whether it looks flat, looks deep, or wrecks your small text.</span>",
+    "hero": {
+      "cap": "A printed piece: large rich-black field behind crisp 100%-K body text.",
+      "alt": "Alt text required: note which areas are rich black vs. 100% K and the effect."
+    },
+    "notice": "Ask one question: is this black a <b>large area</b> or <b>small text / thin line</b>? Large → rich black is fine and looks better. Small/thin → 100% K only.",
+    "mistake": "Body copy or fine lines in rich black — or in “registration” colour (all inks 100%), which is meant only for production marks. Mis-registration then shows colour halos.",
+    "related": [
+      "Text Colour",
+      "Reversed Type",
+      "CMYK & Colour Spaces",
+      "Total Ink Coverage"
+    ],
+    "understand": "<p><b>100% K (process black)</b> uses a single ink — the K plate only. <b>Rich black</b> adds cyan, magenta, and/or yellow under the K to make a deeper, denser black for large areas. It looks luxurious on big shapes, but because it stacks several inks that must align, it causes trouble on small text and thin lines.</p><p><b>Diagram (CPLA original):</b> 100% K beside an <i>example</i> rich-black build — first as a large fill (rich black deeper), then at ~8 pt text (rich black fills in and fringes).</p>",
+    "compare": {
+      "strong": "100% K small text",
+      "strongLbl": "6–9 pt copy in 100% K — crisp, single ink, avoids multi-plate registration errors.",
+      "weak": "Rich-black small text",
+      "weakLbl": "Same copy in rich black — muddy, with a colour fringe on press."
+    },
+    "prod": "<ul><li>An <b>example</b> rich-black build is ~C60 M40 Y40 K100 — but the right recipe depends on press, paper, and output condition, so <b>ask your printer</b>. Never treat a formula as a default.</li><li>Registration colour (all inks 100%) is for production marks that must print on every plate — not for design text, lines, or fills.</li><li>Watch <b>total ink coverage</b> — often a ~240–300% ceiling depending on stock; keep rich black under it.</li><li>Reversed type out of rich black must be bold/large enough to survive mis-registration.</li><li>Offset, toner/digital, inkjet, screen print, and wide-format each behave differently. Separation preview reveals the ink construction, but it can't reproduce press gain, mis-registration, drying, or substrate behaviour — only a printed proof shows those.</li></ul>",
+    "a11y": "<p><b>Screen vs. proof:</b> your monitor previews rich-black body text as perfect — it isn't. Use <b>overprint / separation preview</b> in Acrobat, and for anything important get a <b>physical proof</b> before the run.</p>",
+    "exercise": "Build two swatches — 100% K and an example rich black — and apply each to a large rectangle and to 8 pt text. Export a press-ready PDF and open Separations / Overprint Preview in Acrobat to see where the extra inks land. (Acrobat shows the ink construction but doesn't simulate real mis-registration or ink gain — a printed proof does.)",
+    "rights": {
+      "public": "Printed sample © CPLA / [student] · diagram: CPLA original.",
+      "creator": "CPLA / [student]",
+      "source": "[CPLA production sample]",
+      "license": "CPLA original / signed student release",
+      "reviewDate": "[YYYY-MM-DD]",
+      "status": "placeholder"
+    }
+  },
+  {
+    "id": "visual-hierarchy",
+    "title": "Visual Hierarchy",
+    "sub": "Guiding the eye through a design in order",
+    "category": "Perception",
+    "icon": "ti-sort-descending",
+    "kind": "",
+    "keywords": "hierarchy order emphasis scale weight reading path focal point dominance",
+    "lesson": "V1 · Composition",
+    "lessonGroup": "Volume 1 — Design Thinking",
+    "status": "ready",
+    "line": "Good design tells the eye where to look first, second, and third — <span class='q'>hierarchy is you making that decision instead of leaving it to chance.</span>",
+    "hero": {
+      "cap": "Student layout with a clear 1-2-3 reading path — dominant headline, supporting subhead, then body.",
+      "alt": "Alt text required: describe the order the eye moves through the piece and what creates it."
+    },
+    "notice": "Cover the design, then reveal it for one second. What did you read first? If it wasn't the most important thing, the hierarchy needs work.",
+    "mistake": "Making everything big and bold so it all competes — when everything shouts, nothing is heard. Hierarchy needs quiet as much as loud.",
+    "related": [
+      "Value Contrast",
+      "Type Anatomy",
+      "Proximity & Grouping",
+      "Figure / Ground"
+    ],
+    "understand": "<p>Hierarchy is the deliberate ranking of elements so the eye moves through them in a chosen order. It's built from contrast in <b>size, weight, colour, value, spacing, and position</b> — the bigger, bolder, or more isolated an element, the earlier it's read. Most designs need only three levels: what you see first, next, and last.</p><p><b>Diagram (CPLA original):</b> the same three text elements shown flat, then ranked, with arrows tracing the 1-2-3 path.</p>",
+    "compare": {
+      "strong": "Three clear levels",
+      "strongLbl": "Distinct size and weight steps — the eye moves in order.",
+      "weak": "One flat level",
+      "weakLbl": "Everything the same size — the eye wanders with no entry point."
+    },
+    "prod": "<p>Hierarchy built only from colour can collapse in one-colour printing, on a photocopy, or on merch. Anchor it in <b>size, weight, and spacing</b> so the ranking survives when colour is stripped away. On small formats — cards, labels — remember print needs real size steps; a one-point difference the screen shows can vanish on paper.</p>",
+    "a11y": "<p>Screen readers follow the <b>document order</b>, not the visual size — a line that only looks like a heading isn't one. Use real heading tags and a logical order so the spoken sequence matches the visual hierarchy, and don't rely on size or colour alone to signal importance.</p>",
+    "exercise": "Take a flyer with everything the same size. Using only size, weight, and spacing — no new colours — rebuild it into three clear levels so a stranger reads it in the right order.",
+    "rights": {
+      "public": "Example © [student name], [year] · diagram: CPLA original.",
+      "creator": "[student name]",
+      "source": "[student submission — original file]",
+      "license": "signed student release",
+      "reviewDate": "[YYYY-MM-DD]",
+      "status": "placeholder"
+    }
+  },
+  {
+    "id": "proximity-grouping",
+    "title": "Proximity & Grouping",
+    "sub": "Things placed close together read as related",
+    "category": "Perception",
+    "icon": "ti-layout-grid",
+    "kind": "",
+    "keywords": "gestalt grouping proximity whitespace spacing relationship",
+    "lesson": "V1 · Composition",
+    "lessonGroup": "Volume 1 — Design Thinking",
+    "status": "ready",
+    "line": "Space is a message — <span class='q'>things placed close together read as belonging together, whether you meant it or not.</span>",
+    "hero": {
+      "cap": "Student layout where spacing alone groups related items — a label with its field, a caption with its image.",
+      "alt": "Alt text required: describe which items are grouped and the spacing that groups them."
+    },
+    "notice": "Squint until the text blurs. Do the clusters you see match the things that actually belong together? Gaps should fall between groups, not inside them.",
+    "mistake": "Even spacing everywhere, so a heading sits equally close to the paragraph above and below it — the reader can't tell which text it belongs to.",
+    "related": [
+      "Visual Hierarchy",
+      "Figure / Ground",
+      "Type Anatomy",
+      "Pairing Typefaces"
+    ],
+    "understand": "<p>One of the Gestalt grouping tendencies: the eye reads elements near each other as a set, and elements with space between them as separate. It's how a reader knows a caption belongs to <i>this</i> photo, or a price to <i>that</i> product — often before reading a word. Managed space groups; accidental space confuses.</p><p><b>Diagram (CPLA original):</b> a field of dots re-spaced into rows, then columns, showing how proximity alone flips what we perceive as grouped.</p>",
+    "compare": {
+      "strong": "Purposeful spacing",
+      "strongLbl": "Tighter within groups, looser between — relationships are obvious.",
+      "weak": "Uniform spacing",
+      "weakLbl": "Equal gaps everywhere — nothing groups, everything floats."
+    },
+    "prod": "<p>Proximity is a spacing system, so it depends on consistent measurement — set space with real values (a baseline grid, repeatable gutters) rather than eyeballing. In print, trimming and folds can eat margins; keep grouped content clear of the trim and fold zones so a related pair doesn't get split across a panel.</p>",
+    "a11y": "<p>Grouping by space alone isn't conveyed to screen-reader users — pair it with real structure (lists, labelled groups, associated caption and field markup) so the relationship lives in the code, not just the layout. Generous space between groups also eases low vision and cognitive load.</p>",
+    "exercise": "Take a cluttered form or list and improve it using <i>only</i> spacing — no colour, boxes, or lines. Tighten what belongs together, open space between groups, and see how much clearer it reads.",
+    "rights": {
+      "public": "Example © [student name], [year] · diagram: CPLA original.",
+      "creator": "[student name]",
+      "source": "[student submission — original file]",
+      "license": "signed student release",
+      "reviewDate": "[YYYY-MM-DD]",
+      "status": "placeholder"
+    }
+  },
+  {
+    "id": "colour-in-context",
+    "title": "Colour in Context",
+    "sub": "What a colour means depends on where it sits",
+    "category": "Color",
+    "icon": "ti-palette",
+    "kind": "",
+    "keywords": "meaning culture association context industry audience saturation",
+    "lesson": "V1 · Color Foundations",
+    "lessonGroup": "Volume 1 — Design Thinking",
+    "status": "ready",
+    "line": "Colour doesn't carry a fixed meaning — <span class='q'>the real question is what a colour is doing, for this audience, in this context.</span>",
+    "hero": {
+      "cap": "The same hue (say red) across a clearance sign, a luxury package, and a warning label — one colour, three jobs.",
+      "alt": "Alt text required: describe how the same colour reads differently across the examples."
+    },
+    "notice": "Before deciding what a colour 'means,' ask three things: who's the audience, what industry, and what's around it? The same red sells discounts, signals danger, and says luxury depending on the answers.",
+    "mistake": "Treating colour associations as universal rules — 'blue means trust,' 'green means eco.' They're tendencies that shift with culture, industry, saturation, and neighbouring colours, not laws.",
+    "related": [
+      "Value Contrast",
+      "Visual Hierarchy",
+      "Rich Black vs. 100% K",
+      "Figure / Ground"
+    ],
+    "understand": "<p>Colour associations are real but <b>contextual</b>. Meaning shifts with culture, historical period, industry convention, audience, saturation and value, and the colours and imagery nearby. Red can mean sale, stop, love, or luxury; white can mean purity or mourning depending on culture. Teach the question, not a lookup table: <i>what is this colour doing here?</i></p><p><b>Diagram (CPLA original):</b> one hue swatch dropped into several contexts, each caption naming the job it's doing.</p>",
+    "compare": {
+      "strong": "Colour fits the context",
+      "strongLbl": "Hue, saturation, and pairing match the audience and message.",
+      "weak": "Colour by cliché",
+      "weakLbl": "A 'meaning' borrowed from a rule that ignores audience and context."
+    },
+    "prod": "<p>The colour on screen is not the colour that prints. Brand and 'meaning' colours drift between RGB and CMYK, and again across papers and finishes — a confident red can turn muddy or orange in process printing. For a colour that must stay consistent (a brand red), specify a <b>spot colour</b> and check it against a physical swatch book, not the monitor.</p>",
+    "a11y": "<p>Never let colour be the <i>only</i> carrier of meaning — 'click the green button,' 'red items are sold out' fail for colour-blind users. Back colour with text, icon, or pattern. And remember colour meanings vary across cultures; an audience may not read a hue the way you do.</p>",
+    "exercise": "Pick one colour and design the same three-word message three ways — for a discount store, a funeral home, and a tech startup. Change saturation, pairing, and type; keep the hue. Watch the 'meaning' change.",
+    "rights": {
+      "public": "Examples © [student name], [year] · diagram: CPLA original.",
+      "creator": "[student name]",
+      "source": "[student submission — original file]",
+      "license": "signed student release",
+      "reviewDate": "[YYYY-MM-DD]",
+      "status": "placeholder"
+    }
+  },
+  {
+    "id": "type-anatomy",
+    "title": "Type Anatomy",
+    "sub": "The parts of a letter, and why they matter",
+    "category": "Typography",
+    "icon": "ti-typography",
+    "kind": "",
+    "keywords": "anatomy ascender descender x-height counter serif baseline cap height legibility",
+    "lesson": "V1 · Typography",
+    "lessonGroup": "Volume 1 — Design Thinking",
+    "status": "ready",
+    "line": "Letters have parts with names — <span class='q'>learn them and you can finally say why one typeface works and another doesn't.</span>",
+    "hero": {
+      "cap": "A large single letterform with parts labelled — ascender, x-height, baseline, counter, serif.",
+      "alt": "Alt text required: name the letter parts labelled and what each one is."
+    },
+    "notice": "Compare two fonts at the same point size. If one looks bigger, check the x-height — the height of the lowercase body is what your eye reads as 'size,' not the point number.",
+    "mistake": "Judging type size by the point number. Two 12-point fonts can look like different sizes because point size measures the body, not the letter — x-height and set width do the real work.",
+    "related": [
+      "Pairing Typefaces",
+      "Visual Hierarchy",
+      "Value Contrast",
+      "Proximity & Grouping"
+    ],
+    "understand": "<p>Type has a shared vocabulary: the <b>baseline</b> letters sit on, the <b>x-height</b> (height of the lowercase body), <b>cap height</b>, <b>ascenders</b> (rising above the x-height, as in b, d, h) and <b>descenders</b> (dropping below, as in p, g, y), the enclosed <b>counter</b> (the hole in an o or a), and <b>serifs</b> (the small finishing strokes). Knowing the parts lets you describe, compare, and choose type precisely.</p><p><b>Diagram (CPLA original):</b> one word with guide lines and callouts for each part — students point and name.</p>",
+    "compare": {
+      "strong": "Generous x-height",
+      "strongLbl": "Large lowercase body — reads well small and at a distance.",
+      "weak": "Small x-height",
+      "weakLbl": "Tall ascenders, tiny body — looks smaller and struggles at small sizes."
+    },
+    "prod": "<p>Anatomy predicts how type survives production. Small counters and fine serifs can <b>fill in</b> at small sizes, in reversed type, or on absorbent stock. Sturdy, low-contrast letterforms hold up on newsprint, signage, and screen printing; delicate high-contrast faces need quality paper and larger sizes. Choose anatomy to match the output, not just the mood.</p>",
+    "a11y": "<p>For readers with low vision or dyslexia, a <b>large x-height, open counters, and clearly distinct letters</b> (lowercase l vs. capital I vs. digit 1) improve legibility. Test a typeface for characters that collapse into each other, especially at small sizes and on screens.</p>",
+    "exercise": "Print the same paragraph in three fonts at the same point size. Mark the x-height on each and rank them by how big they <i>look</i>. Notice how little the point number told you.",
+    "rights": {
+      "public": "Diagram: CPLA original · type specimens credited per typeface.",
+      "creator": "CPLA",
+      "source": "[CPLA original diagram]",
+      "license": "CPLA original",
+      "reviewDate": "[YYYY-MM-DD]",
+      "status": "placeholder"
+    }
+  },
+  {
+    "id": "pairing-typefaces",
+    "title": "Pairing Typefaces",
+    "sub": "Combining fonts without conflict",
+    "category": "Typography",
+    "icon": "ti-text-plus",
+    "kind": "",
+    "keywords": "font pairing combination contrast superfamily role licensing glyphs",
+    "lesson": "V1 · Typography",
+    "lessonGroup": "Volume 1 — Design Thinking",
+    "status": "ready",
+    "line": "Two typefaces should feel like a duet, not an argument — <span class='q'>pair for contrast with a reason, not variety for its own sake.</span>",
+    "hero": {
+      "cap": "Student layout pairing a display face with a readable text face — clear roles, one voice.",
+      "alt": "Alt text required: name the two typefaces and the role each one plays."
+    },
+    "notice": "Ask what job each font is doing. If both try to be the star — two decorative display faces — they fight. Usually one leads (headlines) and one serves (body).",
+    "mistake": "Pairing two faces that are too similar — two humanist sans that almost match — so it looks like a mistake, not a choice. Contrast should be clear, or the roles clearly different.",
+    "related": [
+      "Type Anatomy",
+      "Visual Hierarchy",
+      "Value Contrast",
+      "Proximity & Grouping"
+    ],
+    "understand": "<p>Good pairings usually combine a <b>clear difference with a shared quality</b>. Contrast the roles — a characterful display face for headlines, a quiet readable face for text — while keeping something in common (era, proportion, mood) so they belong together. The safest start is <b>one family with many weights</b> (a superfamily), then add a second face only when it earns its place.</p><p><b>Diagram (CPLA original):</b> a 'works / fights' pair side by side, with what makes each succeed or clash.</p>",
+    "compare": {
+      "strong": "Contrast with harmony",
+      "strongLbl": "Distinct roles, shared mood — reads as one voice.",
+      "weak": "Too-similar pair",
+      "weakLbl": "Two near-identical faces — looks like an error, not intent."
+    },
+    "prod": "<p>Before committing, check the <b>licence</b>: does it cover print, web embedding, and the number of users you need? Confirm the family has the <b>weights, italics, small caps, and language and glyph coverage</b> the project needs — a pairing that works in the mockup fails if the font lacks a bold or the accented characters. Test both faces at real production sizes and on the actual output.</p>",
+    "a11y": "<p>Keep the <b>text</b> face highly legible no matter how expressive the display face is — body copy is where readability matters most. Ensure adequate size, spacing, and value contrast, and avoid setting long passages in a decorative face that's tiring to read.</p>",
+    "exercise": "Pick one project and pair it two ways: first using a single superfamily (weights only), then adding a contrasting display face. Compare — did the second font add meaning, or just noise?",
+    "rights": {
+      "public": "Example © [student name], [year] · diagram: CPLA original · typefaces credited per specimen.",
+      "creator": "[student name]",
+      "source": "[student submission — original file]",
+      "license": "signed student release",
+      "reviewDate": "[YYYY-MM-DD]",
+      "status": "placeholder"
+    }
+  },
+  {
+    "id": "total-ink-coverage",
+    "title": "Total Ink Coverage",
+    "sub": "How much ink a sheet can actually hold",
+    "category": "Production",
+    "icon": "ti-droplet",
+    "kind": "prod",
+    "keywords": "ink limit TAC TIL total area coverage prepress cmyk drying offset gcr ucr setoff",
+    "lesson": "V4 · Print Production",
+    "lessonGroup": "Volume 4 — Photoshop & Output",
+    "status": "ready",
+    "line": "Paper can only hold so much ink — <span class='q'>pile on too much and it won't dry, it offsets, and your rich shadows turn to mud.</span>",
+    "hero": {
+      "cap": "A proof showing a shadow area at safe vs. excessive coverage — clean detail vs. filled-in, wet, muddy black.",
+      "alt": "Alt text required: describe the difference between the correctly-limited and over-inked areas."
+    },
+    "notice": "Check the total of your darkest area's CMYK values. If C+M+Y+K climbs toward 300%+, you're in the danger zone for that stock — the shadows will plug up and stay wet.",
+    "mistake": "Building a 'blacker black' or deep shadow by stacking near-100% of all four inks (e.g. 90/90/90/100 = 370%). It exceeds what most stocks can hold — set-off, slow drying, and lost shadow detail follow.",
+    "related": [
+      "Rich Black vs. 100% K",
+      "Colour in Context",
+      "Value Contrast",
+      "Visual Hierarchy"
+    ],
+    "understand": "<p><b>Total Ink Coverage</b> (also Total Area Coverage / Total Ink Limit) is the sum of the four process inks in the heaviest part of an image — C + M + Y + K — so the theoretical maximum is 400%. Real presses and papers can't hold that. Push past the limit and ink can't dry fast enough: sheets <b>set off</b> (wet ink transfers to the back of the next sheet), shadows <b>plug</b> and lose detail, and the whole job slows down.</p><p><b>Diagram (CPLA original):</b> a shadow ramp labelled with rising coverage values, marking where detail collapses.</p>",
+    "compare": {
+      "strong": "Within the ink limit",
+      "strongLbl": "Shadows built to the stock's limit — detail holds and dries clean.",
+      "weak": "Over the limit",
+      "weakLbl": "All four inks near max — plugged, muddy shadows that set off."
+    },
+    "prod": "<ul><li>Typical limits: roughly <b>240–300% for coated stock, lower (~240% or less) for uncoated and newsprint</b> — but always <b>ask the printer</b> for the exact number and output condition.</li><li>Manage it at conversion: a proper <b>CMYK profile with GCR/UCR</b> replaces overlapping CMY in neutrals with black, lowering total ink automatically.</li><li>Don't hand-build shadows near 400% — let the profile or the printer's settings hold the limit.</li><li>Check it in Acrobat's <b>Output Preview → Total Area Coverage</b>, which highlights over-limit areas.</li></ul>",
+    "a11y": "<p><b>Screen vs. proof:</b> an over-inked shadow looks perfect in RGB — the monitor won't warn you. Soft-proof with the correct profile and, for anything critical, get a physical proof on the actual stock before the run.</p>",
+    "exercise": "Open a dark photo, convert it to a CMYK profile, export a PDF, and use Acrobat's Output Preview → Total Area Coverage to find the highest value. Is it under your printer's limit? If not, reconvert with more GCR and compare the shadow detail.",
+    "rights": {
+      "public": "Press sample © CPLA / [student] · diagram: CPLA original · confirm the ink limit with your print vendor.",
+      "creator": "CPLA / [student]",
+      "source": "[CPLA production sample]",
+      "license": "CPLA original / signed student release",
+      "reviewDate": "[YYYY-MM-DD]",
+      "status": "placeholder"
+    }
+  }
+];
+
+  var CAT_ICONS={Perception:'ti-eye',Color:'ti-palette',Typography:'ti-typography',Production:'ti-printer'};
+  var byId={}; CARDS.forEach(function(c){byId[c.id]=c;});
+  var state={view:'topic', cat:'All', q:''};
+
+  /* ---------- CHIPS ---------- */
+  function cats(){var s={}; CARDS.forEach(function(c){s[c.category]=(s[c.category]||0)+1;}); return s;}
+  function renderChips(){
+    var box=document.getElementById('chips'); var c=cats();
+    var names=['All'].concat(Object.keys(c).sort());
+    box.innerHTML=names.map(function(n){
+      var count=n==='All'?CARDS.length:c[n];
+      return '<button class="chip'+(state.cat===n?' on':'')+'" data-cat="'+esc(n)+'">'+esc(n)+'<span class="n">'+count+'</span></button>';
+    }).join('');
+    box.querySelectorAll('.chip').forEach(function(b){b.onclick=function(){state.cat=b.dataset.cat;render();renderChips();};});
+    box.style.display = state.view==='topic' ? 'flex' : 'none';
+  }
+
+  /* ---------- FILTER ---------- */
+  function match(c){
+    if(state.view==='topic' && state.cat!=='All' && c.category!==state.cat) return false;
+    if(state.q){
+      var hay=(c.title+' '+c.category+' '+(c.keywords||'')+' '+(c.sub||'')).toLowerCase();
+      if(hay.indexOf(state.q.toLowerCase())===-1) return false;
+    }
+    return true;
+  }
+
+  /* ---------- TILE ---------- */
+  function tile(c){
+    var soon=c.status==='soon';
+    return '<button class="tile'+(c.kind==='prod'?' prod':'')+(soon?' soon':'')+'" data-id="'+esc(c.id)+'">'+
+      (soon?'<span class="soon-tag">Soon</span>':'')+
+      '<div class="ic"><i class="ti '+esc(c.icon||'ti-cards')+'"></i></div>'+
+      '<div class="tt">'+esc(c.title)+'</div>'+
+      '<div class="cat">'+esc(c.category)+'</div>'+
+      '<div class="les">'+esc(c.lesson||'—')+'</div>'+
+    '</button>';
+  }
+
+  /* ---------- RENDER ---------- */
+  function render(){
+    var out=document.getElementById('results');
+    var list=CARDS.filter(match);
+    if(!list.length){ out.innerHTML='<div class="empty">No concepts match “'+esc(state.q)+'.” Try another term.</div>'; return; }
+    if(state.view==='lesson'){
+      var groups={}, order=[];
+      list.forEach(function(c){var g=c.lessonGroup||'Other'; if(!groups[g]){groups[g]=[];order.push(g);} groups[g].push(c);});
+      out.innerHTML=order.map(function(g){
+        return '<div class="group-h">'+esc(g)+'</div><div class="grid">'+groups[g].map(tile).join('')+'</div>';
+      }).join('');
+    } else {
+      out.innerHTML='<div class="grid">'+list.map(tile).join('')+'</div>';
+    }
+    out.querySelectorAll('.tile').forEach(function(b){b.onclick=function(){openCard(b.dataset.id);};});
+  }
+
+  /* ---------- POP-OUT CARD ---------- */
+  function openCard(id){
+    var c=byId[id]; if(!c) return;
+    if(c.status==='soon'){ toast('“'+c.title+'” — coming soon'); return; }
+    var m=document.getElementById('modal');
+    var rel=(c.related||[]).map(function(r){return '<span class="pill">'+esc(r)+'</span>';}).join('');
+    m.innerHTML=
+      '<div class="m-head"><div><h2>'+esc(c.title)+'</h2><div class="m-sub">'+esc(c.sub||'')+'</div></div>'+
+        '<div style="display:flex;gap:10px;align-items:center"><span class="m-tag">'+esc(c.category)+'</span>'+
+        '<button class="m-close" id="mClose" aria-label="Close">&times;</button></div></div>'+
+      '<div class="m-body">'+
+        '<p class="lead">'+c.line+'</p>'+
+        '<div class="hero"><div class="ic"><i class="ti ti-photo"></i></div>DROP ZONE — HERO EXAMPLE'+
+          '<div class="cap">'+esc(c.hero.cap)+'</div><div class="alt">'+esc(c.hero.alt)+'</div></div>'+
+        '<div class="glance">'+
+          '<div class="qf notice"><h4>What to notice</h4><p>'+c.notice+'</p></div>'+
+          '<div class="qf mistake"><h4>Common mistake</h4><p>'+c.mistake+'</p></div>'+
+        '</div>'+
+        '<div class="relbar"><h4>Related</h4><div class="pills">'+rel+'</div></div>'+
+        detail('Understand','Definition & diagram','',c.understand)+
+        detail('Compare','Strong vs. weak','',
+          '<div class="twoup">'+
+            '<div class="cmp g"><div class="z"><span class="badge">✓ STRONG</span>'+esc(c.compare.strong)+'</div><div class="lbl">'+esc(c.compare.strongLbl)+'</div></div>'+
+            '<div class="cmp b"><div class="z"><span class="badge">✕ WEAK</span>'+esc(c.compare.weak)+'</div><div class="lbl">'+esc(c.compare.weakLbl)+'</div></div>'+
+          '</div>')+
+        detail('Production','On press','prod',c.prod)+
+        detail('Accessibility','','a11y',c.a11y)+
+        detail('Try it','<span class="chip-min">5 MIN</span>','',  '<p>'+c.exercise+'</p>')+
+        detail('Sources','Rights & review','','<p class="src">'+esc(c.rights.public)+'<br><span style="color:var(--mid)">Reviewed '+esc(c.rights.reviewDate)+' · '+esc(c.rights.status)+'</span></p>')+
+      '</div>';
+    document.getElementById('mClose').onclick=closeCard;
+    document.getElementById('scrim').classList.add('open');
+  }
+  function detail(k,label,cls,inner){
+    return '<details'+(cls?' class="'+cls+'"':'')+'><summary><span class="k">'+k+'</span> '+label+
+      '<span class="chev">▶</span></summary><div class="dc">'+inner+'</div></details>';
+  }
+  function closeCard(){document.getElementById('scrim').classList.remove('open');}
+  document.getElementById('scrim').onclick=function(e){if(e.target===this)closeCard();};
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeCard();});
+
+  /* ---------- CONTROLS ---------- */
+  document.getElementById('q').addEventListener('input',function(e){state.q=e.target.value;render();});
+  document.getElementById('v-topic').onclick=function(){state.view='topic';this.classList.add('on');document.getElementById('v-lesson').classList.remove('on');renderChips();render();};
+  document.getElementById('v-lesson').onclick=function(){state.view='lesson';this.classList.add('on');document.getElementById('v-topic').classList.remove('on');renderChips();render();};
+
+  renderChips(); render();
+
+  /* ---------- role-aware home/back targets ----------
+     Instructor links open this page with ?from=director; students use the
+     default. Points the back link, the rail home button, and the brand at
+     the right dashboard so nobody bounces through a redirect. */
+  (function(){
+    var director = new URLSearchParams(location.search).get('from') === 'director';
+    var homeUrl = director ? 'studio-director.html' : 'workspace.html';
+    var backLbl = director ? ' Back to dashboard' : ' Back to workspace';
+    var homeLbl = director ? 'Dashboard' : 'Workspace';
+    var b = document.getElementById('backLink');
+    if(b){ b.setAttribute('href', homeUrl); b.lastChild.textContent = backLbl; }
+    var br = document.getElementById('homeBrand'); if(br) br.setAttribute('href', homeUrl);
+    var hr = document.getElementById('homeRail');
+    if(hr){ hr.setAttribute('href', homeUrl); var t = hr.querySelector('.tip'); if(t) t.textContent = homeLbl; }
+  })();
+</script>
+</body>
+</html>
