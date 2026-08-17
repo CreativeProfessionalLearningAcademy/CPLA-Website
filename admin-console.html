@@ -105,6 +105,41 @@
   #adminmain{display:none}
   .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(16px);opacity:0;background:var(--ink);color:#fff;padding:10px 16px;border-radius:100px;font-size:12px;z-index:60;transition:.2s;pointer-events:none}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  /* ROW ACTION + TWO-STEP DELETE MODAL */
+  th.act-col,td.act-col{text-align:right;width:56px}
+  .row-act{display:flex;justify-content:flex-end;align-items:center;gap:6px}
+  .icon-btn{width:30px;height:30px;border:1px solid var(--rule);border-radius:8px;background:#fff;display:grid;place-items:center;font-size:16px;color:var(--mid);transition:.13s}
+  .icon-btn:hover{border-color:var(--red);color:var(--red);background:#fdeee9}
+  .self-tag{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);font-family:'DM Mono',monospace}
+
+  .modal-overlay{position:fixed;inset:0;background:rgba(26,20,16,.5);backdrop-filter:blur(2px);display:none;align-items:center;justify-content:center;z-index:70;padding:20px}
+  .modal-overlay.show{display:flex}
+  .modal{background:#fff;border-radius:16px;max-width:440px;width:100%;padding:26px 26px 22px;box-shadow:0 20px 60px rgba(0,0,0,.25);animation:pop .16s ease}
+  @keyframes pop{from{opacity:0;transform:scale(.96) translateY(6px)}to{opacity:1;transform:none}}
+  .modal-ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:24px;margin-bottom:14px}
+  .modal-ic.warn{background:rgba(218,158,43,.15);color:#a9761a}
+  .modal-ic.danger{background:#fdeee9;color:var(--red)}
+  .modal-h{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:12px}
+  .modal-user{display:flex;align-items:center;gap:11px;background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:11px 13px;margin-bottom:14px}
+  .modal-user .u-av{width:34px;height:34px;font-size:11px}
+  .modal-user .u-nm{font-weight:600;font-size:14px}
+  .modal-user .u-em{font-size:12px;color:var(--mid)}
+  .modal-body{font-size:13px;line-height:1.55;color:var(--mid);margin-bottom:14px}
+  .modal-body b{color:var(--ink)}
+  .modal-note{font-size:11.5px;line-height:1.5;color:var(--mid);background:var(--ml);border:1px solid #d0daea;border-radius:8px;padding:10px 12px;margin-bottom:16px}
+  .modal-note i{color:var(--mod)}
+  .confirm-email{font-family:'DM Mono',monospace;font-size:13px;color:var(--red);background:#fdeee9;border:1px dashed #e2a898;border-radius:7px;padding:8px 11px;margin-bottom:10px;user-select:all;word-break:break-all}
+  .confirm-input{width:100%;border:1.5px solid var(--rule);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--ink);background:#fff;margin-bottom:16px;cursor:text}
+  .confirm-input:focus{outline:0;border-color:var(--red)}
+  .modal-actions{display:flex;gap:10px;justify-content:flex-end}
+  .mbtn{border:0;border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;transition:.13s}
+  .mbtn.ghost{background:#fff;border:1px solid var(--rule);color:var(--mid)}
+  .mbtn.ghost:hover{color:var(--ink);border-color:var(--mid)}
+  .mbtn.warn{background:var(--gold);color:#fff}
+  .mbtn.danger{background:var(--red);color:#fff}
+  .mbtn.danger:disabled{background:#e6c4ba;cursor:not-allowed}
+  .mbtn:not(:disabled):hover{filter:brightness(.94)}
 </style>
 </head>
 <body>
@@ -163,7 +198,7 @@
           </div>
           <div class="tbl-wrap">
             <table>
-              <thead><tr><th>Name</th><th>Role</th><th>Class</th><th>CPLA ID</th><th>Joined</th></tr></thead>
+              <thead><tr><th>Name</th><th>Role</th><th>Class</th><th>CPLA ID</th><th>Joined</th><th class="act-col"></th></tr></thead>
               <tbody id="users-body"></tbody>
             </table>
           </div>
@@ -187,6 +222,42 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="del-overlay">
+  <div class="modal">
+    <!-- STEP 1: intent + warning -->
+    <div id="del-step1">
+      <div class="modal-ic warn"><i class="ti ti-alert-triangle"></i></div>
+      <h3 class="modal-h">Remove this account?</h3>
+      <div class="modal-user">
+        <div class="u-av" id="del-av">—</div>
+        <div>
+          <div class="u-nm" id="del-nm">—</div>
+          <div class="u-em" id="del-em">—</div>
+        </div>
+        <span class="badge" style="margin-left:auto" id="del-role">—</span>
+      </div>
+      <p class="modal-body">Removing <b id="del-name-inline">this user</b> deletes their profile record and takes them out of every class roster and dashboard. This is the first of two steps.</p>
+      <div class="modal-note"><i class="ti ti-info-circle"></i> This removes the person from the app. Their sign-in login is <b>not</b> deleted from here — to fully revoke access, also delete them under <b>Authentication</b> in the Firebase console.</div>
+      <div class="modal-actions">
+        <button class="mbtn ghost" onclick="closeDelModal()">Cancel</button>
+        <button class="mbtn warn" onclick="delStep2()">Continue</button>
+      </div>
+    </div>
+    <!-- STEP 2: type-to-confirm -->
+    <div id="del-step2" style="display:none">
+      <div class="modal-ic danger"><i class="ti ti-trash"></i></div>
+      <h3 class="modal-h">Confirm permanent deletion</h3>
+      <p class="modal-body">To confirm, type this account's <span id="del-confirm-label">email address</span> exactly:</p>
+      <div class="confirm-email" id="del-target">—</div>
+      <input class="confirm-input" id="del-confirm-input" type="text" autocomplete="off" spellcheck="false" placeholder="Type email to confirm">
+      <div class="modal-actions">
+        <button class="mbtn ghost" onclick="closeDelModal()">Cancel</button>
+        <button class="mbtn danger" id="del-final-btn" disabled onclick="doDelete()">Delete permanently</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -199,7 +270,7 @@
   function scrollTo2(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
   document.getElementById('signout').onclick=function(){auth.signOut().then(function(){window.location.href='login.html';});};
 
-  var USERS=[], CLASSES=[], roleFilter='all', searchTerm='';
+  var USERS=[], CLASSES=[], roleFilter='all', searchTerm='', CURRENT_UID=null;
 
   // Buckets any accountType into one of: admin | instructor | learner.
   function roleBucket(t){ if(t==='admin')return 'admin'; if(t==='instructor')return 'instructor'; return 'learner'; }
@@ -230,6 +301,7 @@
       document.getElementById('denied').style.display='block';
       return;
     }
+    CURRENT_UID=user.uid;
     var first=d.firstName||(user.displayName?user.displayName.split(' ')[0]:'Administrator');
     document.getElementById('sb-name').textContent=user.displayName||nameOf(d)||first;
     document.getElementById('sb-av').textContent=initialsOf(d.firstName?d:{email:user.email,displayName:user.displayName});
@@ -288,15 +360,19 @@
     var rank={admin:0,instructor:1,learner:2};
     list.sort(function(a,b){var ra=rank[roleBucket(a.accountType)],rb=rank[roleBucket(b.accountType)]; if(ra!==rb)return ra-rb; return nameOf(a).localeCompare(nameOf(b));});
     document.getElementById('users-count').textContent=list.length;
-    if(!list.length){ body.innerHTML='<tr><td colspan="5"><div class="empty">No users match this view.</div></td></tr>'; return; }
+    if(!list.length){ body.innerHTML='<tr><td colspan="6"><div class="empty">No users match this view.</div></td></tr>'; return; }
     body.innerHTML=list.map(function(u){
       var rl=roleLabel(u);
+      var act = (u.uid===CURRENT_UID)
+        ? '<div class="row-act"><span class="self-tag">You</span></div>'
+        : '<div class="row-act"><button class="icon-btn" title="Remove account" onclick="askDelete(\''+esc(u.uid)+'\')"><i class="ti ti-trash"></i></button></div>';
       return '<tr>'+
         '<td><div class="u-cell"><div class="u-av">'+esc(initialsOf(u))+'</div><div><div class="u-nm">'+esc(nameOf(u))+'</div><div class="u-em">'+esc(u.email||'')+'</div></div></div></td>'+
         '<td><span class="badge '+rl.cls+'">'+esc(rl.txt)+'</span></td>'+
         '<td>'+esc(u.className||'—')+'</td>'+
         '<td class="mono">'+esc(u.cpla_id||'—')+'</td>'+
         '<td class="mono">'+dateOf(u.createdAt)+'</td>'+
+        '<td class="act-col">'+act+'</td>'+
       '</tr>';
     }).join('');
   }
@@ -336,6 +412,71 @@
     });
     var si=document.getElementById('user-search');
     si.oninput=function(){ searchTerm=si.value.trim().toLowerCase(); renderUsers(); };
+
+    // Close delete modal on backdrop click or Escape.
+    var ov=document.getElementById('del-overlay');
+    ov.onclick=function(e){ if(e.target===ov) closeDelModal(); };
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape' && ov.classList.contains('show')) closeDelModal(); });
+  }
+
+  // ── TWO-STEP ACCOUNT DELETION ──
+  // Step 1: review + warn. Step 2: type the exact email (or name) to confirm.
+  // Deletes the Firestore profile doc, which removes the person from all rosters
+  // and dashboards. It does NOT delete their Auth login (client SDK can't) — that
+  // must be done in the Firebase console under Authentication.
+  var pendingDelete=null;
+
+  function askDelete(uid){
+    var u=USERS.filter(function(x){return x.uid===uid;})[0];
+    if(!u) return;
+    if(u.uid===CURRENT_UID){ toast("You can't delete your own account here."); return; }
+    pendingDelete=u;
+    document.getElementById('del-av').textContent=initialsOf(u);
+    document.getElementById('del-nm').textContent=nameOf(u);
+    document.getElementById('del-em').textContent=u.email||'—';
+    var rl=roleLabel(u);
+    var rEl=document.getElementById('del-role'); rEl.textContent=rl.txt; rEl.className='badge '+rl.cls;
+    document.getElementById('del-name-inline').textContent=nameOf(u);
+    document.getElementById('del-step1').style.display='block';
+    document.getElementById('del-step2').style.display='none';
+    document.getElementById('del-overlay').classList.add('show');
+  }
+
+  function delStep2(){
+    if(!pendingDelete) return;
+    var hasEmail = !!(pendingDelete.email && pendingDelete.email.trim());
+    var target = hasEmail ? pendingDelete.email.trim() : nameOf(pendingDelete);
+    document.getElementById('del-target').textContent=target;
+    document.getElementById('del-confirm-label').textContent=hasEmail?'email address':'full name';
+    var inp=document.getElementById('del-confirm-input');
+    inp.value=''; inp.placeholder='Type '+(hasEmail?'email':'name')+' to confirm';
+    var btn=document.getElementById('del-final-btn');
+    btn.disabled=true; btn.textContent='Delete permanently';
+    document.getElementById('del-step1').style.display='none';
+    document.getElementById('del-step2').style.display='block';
+    inp.oninput=function(){ btn.disabled = inp.value.trim().toLowerCase()!==target.toLowerCase(); };
+    setTimeout(function(){inp.focus();},60);
+  }
+
+  function closeDelModal(){
+    document.getElementById('del-overlay').classList.remove('show');
+    pendingDelete=null;
+  }
+
+  function doDelete(){
+    if(!pendingDelete) return;
+    var u=pendingDelete;
+    var btn=document.getElementById('del-final-btn');
+    btn.disabled=true; btn.textContent='Deleting…';
+    db.collection('users').doc(u.uid).delete().then(function(){
+      USERS=USERS.filter(function(x){return x.uid!==u.uid;});
+      renderStats(); renderUsers();
+      closeDelModal();
+      toast(nameOf(u)+' removed from the platform.');
+    }).catch(function(e){
+      btn.textContent='Delete permanently'; btn.disabled=false;
+      toast('Delete failed: '+((e&&e.message)?e.message:'unknown error'));
+    });
   }
 </script>
 </body>
