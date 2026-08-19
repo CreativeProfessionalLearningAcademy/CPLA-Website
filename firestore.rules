@@ -48,6 +48,28 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
+    // ---------- assessments ----------
+    // One non-scoring Learning Profile per student; doc ID == student uid.
+    // Student reads/writes their own; the instructor who teaches their class
+    // may read it (Class Profile view); admins read all. Computed profile
+    // fields are denormalized separately onto users/{uid}.profile.
+    match /assessments/{userId} {
+      allow read:          if isOwner(userId) || isAdmin() || teachesClass(resource.data.classId);
+      allow create, update: if isOwner(userId) || isAdmin();
+      allow delete:        if isAdmin();
+    }
+
+    // ---------- vocab_progress ----------
+    // One vocabulary-mastery record per student; doc ID == student uid.
+    // Holds spaced-repetition state per term. Student reads/writes their own;
+    // the instructor who teaches their class may read it; admins read all.
+    // A denormalized summary is mirrored onto users/{uid}.vocab for roster reads.
+    match /vocab_progress/{userId} {
+      allow read:          if isOwner(userId) || isAdmin() || teachesClass(resource.data.classId);
+      allow create, update: if isOwner(userId) || isAdmin();
+      allow delete:        if isAdmin();
+    }
+
     // ---------- instructor_notes ----------
     // Doc IDs are "{instructorUid}_{classId}_{lessonId}", so the owning
     // instructor is the uid prefix. Notes stay private to that instructor.
