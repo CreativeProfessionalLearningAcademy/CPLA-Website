@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPLA — Class Insights</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --navy:#01123a;--navy2:#0a1c44;--blue:#1a56c4;--blue-tint:#e8f0fe;
+  --gold:#da9e2b;--gold-tint:#fbf3e0;--ink:#1a1410;--paper:#faf7f2;--cream:#f0ead8;
+  --rule:#d4c9b8;--mid:#6b5e52;--green:#2d7a1a;--green-tint:#f0fae8;--red:#dc2626;--red-tint:#fee2e2;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{font-family:'DM Sans',system-ui,sans-serif;font-weight:300;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5;}
+h1,h2,h3{font-family:'Playfair Display',serif;}
+#loading{position:fixed;inset:0;display:grid;place-items:center;color:var(--mid);font-size:14px;background:var(--cream);z-index:50;}
+.spinner{width:34px;height:34px;border:3px solid var(--rule);border-top-color:var(--blue);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 12px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.app{display:grid;grid-template-columns:64px 1fr;height:100vh;overflow:hidden;}
+/* rail */
+.rail{background:linear-gradient(180deg,var(--navy),#000a22);display:flex;flex-direction:column;align-items:center;padding:12px 8px;gap:6px;}
+.rail .brand{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--gold),#b8791a);color:var(--navy);display:grid;place-items:center;font-family:'Playfair Display';font-weight:900;font-size:18px;margin-bottom:8px;}
+.rail-btn{width:46px;height:46px;border:0;border-radius:12px;background:transparent;color:#aeb8c4;display:grid;place-items:center;font-size:21px;position:relative;cursor:pointer;text-decoration:none;transition:.13s;}
+.rail-btn:hover{background:var(--navy2);color:#fff;}
+.rail-btn.active{background:var(--navy2);color:var(--gold);}
+.rail-btn .tip{position:absolute;left:56px;background:var(--navy);color:#fff;font-size:11px;font-weight:600;padding:5px 9px;border-radius:7px;white-space:nowrap;opacity:0;pointer-events:none;transform:translateX(-4px);transition:.12s;z-index:60;box-shadow:0 8px 20px rgba(0,0,0,.25);}
+.rail-btn:hover .tip{opacity:1;transform:translateX(0);}
+.rail-spacer{flex:1;}
+/* main */
+.main{min-width:0;display:flex;flex-direction:column;overflow:hidden;}
+.statusbar{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--rule);padding:10px 20px;flex-shrink:0;}
+.sb-logo img{height:26px;display:block;}
+.sb-sep{color:var(--rule);}
+.sb-status .lbl{font-family:'DM Mono';font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);}
+.sb-status .val{font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;}
+.sb-status select{font-family:'DM Sans';font-size:13px;font-weight:600;border:1px solid var(--rule);border-radius:8px;padding:5px 9px;background:#fff;color:var(--ink);cursor:pointer;}
+.sb-r{margin-left:auto;display:flex;align-items:center;gap:11px;}
+.sb-role{font-family:'DM Mono';font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--mid);border:1px solid var(--rule);border-radius:20px;padding:4px 10px;}
+.sb-name{font-size:12.5px;font-weight:600;}
+.sb-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#1a3a78,#02163f);color:#fff;display:grid;place-items:center;font-weight:800;font-size:11px;}
+.sb-signout{border:1px solid var(--rule);background:#fff;color:var(--mid);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:15px;display:grid;place-items:center;}
+.sb-signout:hover{color:var(--red);border-color:#e6b0b0;}
+.canvas{flex:1;overflow:auto;padding:20px 24px 60px;}
+.wrap{max-width:1080px;margin:0 auto;}
+
+.card{background:#fff;border:1px solid var(--rule);border-radius:13px;box-shadow:0 4px 16px rgba(1,18,58,.05);}
+.pad{padding:20px 24px;}
+.sec-label{font-family:'DM Mono';font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#b8791a;font-weight:500;margin:28px 0 12px;display:flex;align-items:center;gap:10px;}
+.sec-label::after{content:"";flex:1;height:1px;background:var(--rule);}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.stat{background:#fff;border:1px solid var(--rule);border-radius:12px;padding:16px 18px;}
+.stat .n{font-family:'Playfair Display';font-size:32px;font-weight:900;color:var(--navy);line-height:1;}
+.stat .n.blue{color:var(--blue);}.stat .n.gold{color:#b8791a;}.stat .n.green{color:var(--green);}
+.stat .k{font-family:'DM Mono';font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);margin-top:8px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.chartcard{background:#fff;border:1px solid var(--rule);border-radius:13px;padding:16px 18px;}
+.chartcard h3{font-family:'DM Sans';font-size:14px;font-weight:700;}
+.chartcard .sub{font-size:11.5px;color:var(--mid);margin:2px 0 12px;}
+.chartwrap{position:relative;height:230px;}
+.bars{display:flex;flex-direction:column;gap:9px;}
+.bar{display:grid;grid-template-columns:150px 1fr 40px;align-items:center;gap:10px;font-size:12px;}
+.bar .lb{color:#2a2218;text-align:right;line-height:1.2;}
+.bar .track{background:var(--cream);border-radius:6px;height:16px;overflow:hidden;}
+.bar .fill{height:100%;background:var(--blue);border-radius:6px;}
+.bar .fill.gold{background:var(--gold);}.bar .fill.green{background:var(--green);}.bar .fill.navy{background:var(--navy);}
+.bar .vl{font-family:'DM Mono';font-size:11px;color:var(--mid);}
+.dom{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:center;margin-bottom:12px;}
+.dom .dname{font-weight:700;font-size:13px;}
+.dom .dsub{font-size:10.5px;color:var(--mid);}
+.stack{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid var(--rule);}
+.stack span{display:block;height:100%;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--mid);margin-top:4px;}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:middle;}
+.insights{background:var(--gold-tint);border:1px solid #ecd9a8;border-radius:13px;padding:20px 24px;}
+.insights h3{font-size:18px;font-weight:800;margin-bottom:4px;}
+.insights .sub{font-size:12px;color:#7a5f1a;margin-bottom:14px;}
+.ins{display:flex;gap:12px;padding:11px 0;border-bottom:1px dashed #e6d3a0;}
+.ins:last-child{border-bottom:none;}
+.ins .ic{width:26px;height:26px;border-radius:7px;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-size:13px;flex-shrink:0;font-weight:700;}
+.ins .tx{font-size:13px;color:#2a2218;line-height:1.5;}
+.ins .tx b{font-weight:700;color:var(--ink);}
+.flags{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.flag{border-radius:12px;padding:15px 17px;border:1px solid var(--rule);background:#fff;}
+.flag.support{background:var(--red-tint);border-color:#f0c0c0;}
+.flag.challenge{background:var(--blue-tint);border-color:#bcd0f5;}
+.flag.mentor{background:var(--green-tint);border-color:#bfe0ad;}
+.flag .ft{font-family:'DM Mono';font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:500;margin-bottom:3px;}
+.flag.support .ft{color:#a12525;}.flag.challenge .ft{color:var(--blue);}.flag.mentor .ft{color:var(--green);}
+.flag .fd{font-size:11px;color:var(--mid);margin-bottom:9px;line-height:1.4;}
+.flag ul{list-style:none;display:flex;flex-direction:column;gap:4px;}
+.flag li{font-size:12.5px;color:#2a2218;padding-left:14px;position:relative;}
+.flag li::before{content:"›";position:absolute;left:0;color:var(--mid);font-weight:700;}
+.flag .none{font-size:12px;color:var(--mid);font-style:italic;}
+table.roster{width:100%;border-collapse:collapse;font-size:12.5px;background:#fff;border:1px solid var(--rule);border-radius:12px;overflow:hidden;}
+table.roster th{font-family:'DM Mono';font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--mid);font-weight:500;text-align:left;padding:10px 12px;background:var(--cream);border-bottom:1px solid var(--rule);cursor:pointer;white-space:nowrap;}
+table.roster td{padding:9px 12px;border-bottom:1px dashed var(--rule);}
+table.roster tr:last-child td{border-bottom:none;}
+.tagdot{font-size:11px;margin-right:3px;}
+details.qd{background:#fff;border:1px solid var(--rule);border-radius:12px;margin-top:10px;overflow:hidden;}
+details.qd summary{padding:13px 18px;cursor:pointer;font-weight:700;font-size:13.5px;list-style:none;display:flex;align-items:center;gap:10px;}
+details.qd summary::-webkit-details-marker{display:none;}
+details.qd summary .cn{margin-left:auto;font-family:'DM Mono';font-size:11px;color:var(--mid);}
+.qblock{padding:4px 18px 16px;border-top:1px solid var(--rule);}
+.qitem{padding:11px 0;border-bottom:1px dashed var(--rule);}
+.qitem:last-child{border-bottom:none;}
+.qq{font-size:12.5px;font-weight:600;margin-bottom:7px;}
+.qq .qn{font-family:'DM Mono';font-size:10px;color:var(--mid);margin-right:6px;}
+.obar{display:grid;grid-template-columns:1fr 70px;gap:8px;align-items:center;margin-bottom:2px;font-size:11.5px;}
+.obar .otext{color:#2a2218;}
+.obar.correct .otext{color:var(--green);font-weight:700;}
+.obar .otrack{background:var(--cream);border-radius:5px;height:12px;overflow:hidden;margin:2px 0 6px;}
+.obar .ofill{height:100%;background:#c9d4e8;border-radius:5px;}
+.obar.correct .ofill{background:var(--green);}.obar.unsure .ofill{background:var(--gold);}
+.obar .ov{font-family:'DM Mono';font-size:10.5px;color:var(--mid);text-align:right;}
+.ck{color:var(--green);font-weight:800;}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;}
+.btn{font-family:'DM Sans';font-weight:700;font-size:13px;border-radius:9px;padding:11px 18px;border:1px solid var(--navy);cursor:pointer;}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+.btn.ghost{background:#fff;color:var(--navy);}.btn.ghost:hover{background:var(--cream);}
+.empty{display:grid;place-items:center;min-height:40vh;text-align:center;color:var(--mid);font-size:13px;}
+.foot{margin-top:26px;font-family:'DM Mono';font-size:10px;color:var(--mid);text-align:center;line-height:1.6;}
+@media(max-width:820px){.stats,.flags{grid-template-columns:1fr;}.grid2{grid-template-columns:1fr;}.bar{grid-template-columns:110px 1fr 36px;}.dom{grid-template-columns:1fr;}}
+@media print{.rail,.actions{display:none;}.app{display:block;height:auto;}.canvas{overflow:visible;}}
+</style>
+</head>
+<body>
+<div id="loading"><div><div class="spinner"></div><div id="loadmsg">Loading your studio…</div></div></div>
+
+<div class="app" id="app" style="display:none;">
+  <aside class="rail">
+    <div class="brand">C</div>
+    <a class="rail-btn" href="studio-director.html" title="Studio Director"><i class="ti ti-home-2"></i><span class="tip">Studio Director</span></a>
+    <button class="rail-btn active" title="Class Insights"><i class="ti ti-chart-histogram"></i><span class="tip">Class Insights</span></button>
+    <a class="rail-btn" href="design-library.html?from=director" title="Design Library"><i class="ti ti-cards"></i><span class="tip">Design Library</span></a>
+    <div class="rail-spacer"></div>
+  </aside>
+  <div class="main">
+    <div class="statusbar">
+      <a class="sb-logo" href="studio-director.html"><img src="CPLA-logo-mark-rev.svg" alt="CPLA"></a>
+      <div class="sb-sep">·</div>
+      <div class="sb-status"><div class="lbl">Class Insights · Week 1 Assessment</div><div class="val"><select id="classSel"></select></div></div>
+      <div class="sb-r">
+        <div class="sb-role">Read-only</div>
+        <div class="sb-name" id="sb-name">—</div>
+        <div class="sb-av" id="sb-av">—</div>
+        <button class="sb-signout" id="signout" title="Sign out"><i class="ti ti-logout"></i></button>
+      </div>
+    </div>
+    <div class="canvas"><div class="wrap" id="dashWrap"></div></div>
+  </div>
+</div>
+
+<!-- Firebase (matches the platform: compat 9.22.0 + shared firebase-config.js) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script>
+/* auth & db come from firebase-config.js (shared session with the rest of the console) */
+
+/* ===== Instrument (mirrors assessment.html) ===== */
+const PARTS=[{t:"Your Experience & Interests"},{t:"Design Knowledge"},{t:"Illustrator & Vector Graphics"},{t:"Photoshop & Digital Images"},{t:"InDesign, Layout & Acrobat"},{t:"Photography"},{t:"Digital Workflow & Problem Solving"},{t:"How You Learn"},{t:"Your Goals"}];
+const Q=[
+ {id:1,part:1,type:'single',q:"Before this class, how much experience have you had with graphic design?",o:["None","A little — mostly for fun or school projects","Some — I have created several designs","Quite a bit — I regularly create design work","I have done paid or professional design work"]},
+ {id:2,part:1,type:'multi',q:"Which of these have you created before?",o:["Poster or flyer","Logo","Social media graphic","Photograph that I intentionally edited","Video","Website or web graphic","Yearbook or publication page","Illustration or digital artwork","Business card or other printed piece","None of these yet"]},
+ {id:3,part:1,type:'single',q:"Which area are you MOST interested in learning about?",o:["Graphic design","Photography","Illustration","Photo editing","Typography and page layout","Branding and logo design","Video / motion graphics","Printing and production","Web / digital media","I'm not sure yet"]},
+ {id:4,part:1,type:'single',q:"Have you used any Adobe Creative Cloud applications before?",o:["Never","Once or twice","Occasionally","Frequently","I use Adobe applications regularly"]},
+ {id:5,part:1,type:'multi',q:"Which applications have you used before?",o:["Adobe Photoshop","Adobe Illustrator","Adobe InDesign","Adobe Lightroom","Adobe Acrobat","Adobe Premiere Pro","Adobe After Effects","Other Adobe applications","I have never used Adobe software"]},
+ {id:6,part:2,type:'single',q:"Which statement best describes graphic design?",o:["Making something look attractive","Communicating an idea or message visually for a particular purpose and audience","Drawing pictures on a computer","Creating advertisements","I'm not sure yet"]},
+ {id:7,part:2,type:'single',q:"What does \"contrast\" generally mean in design?",o:["Making everything look similar","Creating noticeable differences between visual elements","Making everything darker","Adding more colors","I'm not sure yet"]},
+ {id:8,part:2,type:'single',q:"Why is alignment important in a design?",o:["It helps organize elements and creates visual relationships","It makes everything larger","It adds more colors","It determines image resolution","I'm not sure yet"]},
+ {id:9,part:2,type:'single',q:"\"Negative space\" refers to:",o:["A mistake in a design","Black areas in an image","Empty or unoccupied space around and between elements","An image with poor exposure","I'm not sure yet"]},
+ {id:10,part:2,type:'single',q:"Visual hierarchy helps a viewer:",o:["Know what information to notice first, second, and so on","Determine the file size","Print an image correctly","Select a font","I'm not sure yet"]},
+ {id:11,part:2,type:'single',q:"TRUE or FALSE: A successful design must always be visually complicated to attract attention.",o:["True","False","I'm not sure"]},
+ {id:12,part:2,type:'single',q:"When designing a poster for an event, which should you consider FIRST?",o:["Which effects you can create in Photoshop","Who needs to see the poster and what they need to know","How many fonts you can use","Whether you can make everything fit","I'm not sure yet"]},
+ {id:13,part:3,type:'single',q:"Adobe Illustrator is primarily used to create and edit:",o:["Vector graphics","Video","Spreadsheets","Audio","I'm not sure yet"]},
+ {id:14,part:3,type:'single',q:"Which would usually be the BEST reason to create a logo as a vector graphic?",o:["It can be resized without losing quality","It automatically adds photographs","It always uses fewer colors","It can only be printed","I'm not sure yet"]},
+ {id:15,part:3,type:'single',q:"In Illustrator, an anchor point is associated with:",o:["A vector path","A photograph's exposure","A paragraph of text","A video timeline","I'm not sure yet"]},
+ {id:16,part:3,type:'single',q:"TRUE or FALSE: A vector graphic can normally be enlarged significantly without becoming pixelated.",o:["True","False","I'm not sure"]},
+ {id:17,part:3,type:'single',q:"Which Illustrator tool would you expect to use to create or edit precise vector paths?",o:["Pen Tool","Crop Tool","Hand Tool","Type Tool","I'm not sure yet"]},
+ {id:18,part:4,type:'single',q:"Adobe Photoshop is primarily designed for working with:",o:["Raster / pixel-based images","Multi-page document layouts","Spreadsheets","Audio recordings","I'm not sure yet"]},
+ {id:19,part:4,type:'single',q:"What is a pixel?",o:["A tiny individual unit of a digital raster image","A type of camera lens","A printing machine","A vector anchor point","I'm not sure yet"]},
+ {id:20,part:4,type:'single',q:"What is the primary purpose of layers in Photoshop?",o:["To keep different parts of an image independently editable","To increase monitor brightness","To automatically improve every photograph","To print multiple copies","I'm not sure yet"]},
+ {id:21,part:4,type:'single',q:"TRUE or FALSE: Editing a photograph always permanently changes the original image file.",o:["True","False","I'm not sure"]},
+ {id:22,part:4,type:'single',q:"To remove a photo's background while keeping the subject editable, which concept is most useful?",o:["Masking","Spell check","Page numbering","Vector tracing","I'm not sure yet"]},
+ {id:23,part:4,type:'single',q:"If a small raster image is enlarged far beyond its original size, what will most likely happen?",o:["It may become blurry or pixelated","It automatically becomes sharper","It becomes a vector","Nothing changes","I'm not sure yet"]},
+ {id:24,part:5,type:'single',q:"Adobe InDesign is primarily used for:",o:["Page layout and publication design","Editing photographs","Creating video effects","Recording audio","I'm not sure yet"]},
+ {id:25,part:5,type:'single',q:"Which project would most naturally be created in InDesign?",o:["A 24-page magazine","Retouching a portrait","Drawing a vector logo","Editing a video","I'm not sure yet"]},
+ {id:26,part:5,type:'single',q:"Why would a designer use margins and guides when creating a page layout?",o:["To help organize and consistently position content","To make photographs sharper","To add special effects","To change the computer's screen resolution","I'm not sure yet"]},
+ {id:27,part:5,type:'single',q:"TRUE or FALSE: Using many different fonts usually makes a design more professional.",o:["True","False","I'm not sure"]},
+ {id:28,part:5,type:'single',q:"Adobe Acrobat is commonly used to work with:",o:["PDF documents","RAW camera files","Vector illustrations","Video projects","I'm not sure yet"]},
+ {id:29,part:5,type:'single',q:"Why might a designer create a PDF before sending a project to a printer or client?",o:["To package the document into a widely viewable and shareable format","To convert every image into a photograph","To automatically redesign the document","To remove all fonts","I'm not sure yet"]},
+ {id:30,part:6,type:'single',q:"How much experience do you have taking photographs intentionally?",o:["None","Very little","Some","Quite a bit","Photography is already a serious interest of mine"]},
+ {id:31,part:6,type:'single',q:"Have you ever used a DSLR or mirrorless camera?",o:["Never","I have held / used one a few times","I understand some controls","I can operate one in manual or semi-manual modes","I use one confidently"]},
+ {id:32,part:6,type:'single',q:"Which three settings are commonly associated with controlling photographic exposure?",o:["Aperture, shutter speed, and ISO","Focus, crop, and zoom","Brightness, contrast, and saturation","Red, green, and blue","I'm not sure yet"]},
+ {id:33,part:6,type:'single',q:"Changing shutter speed can affect:",o:["How motion is recorded in a photograph","Which font is used","Page margins","Vector anchor points","I'm not sure yet"]},
+ {id:34,part:6,type:'single',q:"Aperture can affect which of the following?",o:["Exposure and depth of field","File naming","Page size","Typography","I'm not sure yet"]},
+ {id:35,part:6,type:'single',q:"TRUE or FALSE: A good photograph depends only on having an expensive camera.",o:["True","False","I'm not sure"]},
+ {id:36,part:6,type:'single',q:"When composing a photograph, what does \"composition\" refer to?",o:["How visual elements are arranged within the frame","The camera's brand","The size of the memory card","The filename","I'm not sure yet"]},
+ {id:37,part:7,type:'single',q:"You realize you may have made a serious mistake after 45 min in Photoshop. BEST working habit?",o:["Keep working and hope it fixes itself","Close the program without saving","Use edit history / layers and keep saved versions so you can recover earlier work","Delete the entire project immediately","Ask someone else to finish it","I'm not sure what I would do"]},
+ {id:38,part:7,type:'single',q:"A client asks to make a logo \"bigger,\" but only a tiny blurry JPEG exists. FIRST step?",o:["Enlarge it until it fits","Ask whether a higher-quality or vector version is available","Add sharpening until it looks correct","Create a completely different logo without asking","I'm not sure what I would do"]},
+ {id:39,part:7,type:'single',q:"You're given an assignment but aren't sure how to begin. MOST like you?",o:["Start experimenting immediately","Research examples and gather ideas first","Ask the teacher what the first step should be","Make a written plan before starting","Talk through ideas with another student","I usually struggle to get started"]},
+ {id:40,part:7,type:'single',q:"You try something and it doesn't work. MOST likely to do?",o:["Try another approach","Undo and try again","Ask another student","Ask the instructor","Search for instructions or a tutorial","Become frustrated and stop","I'm not sure"]},
+ {id:41,part:8,type:'single',q:"When learning a new software skill, what helps MOST?",o:["Watching the instructor demonstrate it","Watching a video","Reading step-by-step instructions","Trying it myself","Having someone work through it with me","A combination of several of these"]},
+ {id:42,part:8,type:'single',q:"After a demonstration, what would you prefer to do next?",o:["Try the same thing immediately","Watch the demonstration again","Read written instructions","Ask questions before starting","Work through it with a classmate"]},
+ {id:43,part:8,type:'single',q:"How comfortable are you asking the instructor for help?",o:["Very comfortable","Usually comfortable","It depends on the situation","Somewhat uncomfortable","Very uncomfortable"]},
+ {id:44,part:8,type:'single',q:"Which working situation do you generally prefer?",o:["Working independently","Working with one partner","Working in a small group","Working with a larger team","It depends on the project"]},
+ {id:45,part:8,type:'single',q:"How comfortable showing your work and receiving constructive feedback?",o:["Very comfortable","Mostly comfortable","Neutral","Somewhat uncomfortable","Very uncomfortable","I haven't done this before"]},
+ {id:46,part:8,type:'single',q:"If feedback suggests several changes to work you worked hard on, MOST likely to think?",o:["The work failed","The instructor doesn't like my work","The feedback may help me improve the work","I would rather start something completely different","I'm not sure how I would react"]},
+ {id:47,part:8,type:'single',q:"When you finish early, what would you MOST prefer to do?",o:["Improve or refine my work","Try a more advanced challenge","Help another student","Work on another creative project","Take a break until everyone catches up","It depends"]},
+ {id:48,part:9,type:'single',q:"What would you MOST like to be able to do by the end of this course?",o:["Create professional-looking graphic designs","Become confident using Adobe software","Become a better photographer","Build a strong portfolio","Prepare for Adobe certification","Learn skills I could use in a career","Discover which creative field interests me","All or most of these"]},
+ {id:49,part:9,type:'single',q:"How interested are you in eventually doing creative work professionally?",o:["Very interested — I already think this could be a career","Interested — I want to explore it","Maybe — I don't know enough about it yet","Probably not as a career, but I want the skills","Not interested professionally","I'm not sure yet"]},
+ {id:50,part:9,type:'single',q:"What do you hope this class will be like?",o:["Clear instructions and expectations","Freedom to experiment and be creative","Challenging projects that push my abilities","Practical skills I can use outside school","Projects that feel like real professional work","Discover what I'm good at","A combination of these"]}
+];
+const KEY={6:[2,5],7:[2,5],8:[1,5],9:[3,5],10:[1,5],11:[2,3],12:[2,5],13:[1,5],14:[1,5],15:[1,5],16:[1,3],17:[1,5],18:[1,5],19:[1,5],20:[1,5],21:[2,3],22:[1,5],23:[1,5],24:[1,5],25:[1,5],26:[1,5],27:[2,3],28:[1,5],29:[1,5],32:[1,5],33:[1,5],34:[1,5],35:[2,3],36:[1,5]};
+const DOMAINS={design:[6,7,8,9,10,11,12],illustrator:[13,14,15,16,17],photoshop:[18,19,20,21,22,23],layout:[24,25,26,27,28,29],photography:[32,33,34,35,36]};
+const DOMAIN_LABEL={design:"Design principles",illustrator:"Illustrator / vector",photoshop:"Photoshop / images",layout:"Layout & Acrobat",photography:"Photography"};
+const LABELS={3:{1:"Graphic design",2:"Photography",3:"Illustration",4:"Photo editing",5:"Typography & layout",6:"Branding & logo",7:"Video / motion",8:"Printing / production",9:"Web / digital",10:"Still exploring"},39:{1:"Experimenter",2:"Researcher",3:"Needs a first step",4:"Planner",5:"Collaborator",6:"Slow to start"},40:{1:"Tries another way",2:"Undo & retry",3:"Asks a peer",4:"Asks instructor",5:"Finds a tutorial",6:"Gets stuck",7:"Unsure"},41:{1:"Instructor demo",2:"Video",3:"Written steps",4:"Hands-on",5:"Co-working",6:"A mix"},44:{1:"Independently",2:"With a partner",3:"Small group",4:"Larger team",5:"Depends"}};
+const QBYID={}; Q.forEach(q=>QBYID[q.id]=q);
+const optText=(qid,idx)=>{const q=QBYID[qid];return q&&idx?q.o[idx-1]:'';};
+function band(pct){if(pct==null)return null;if(pct>=0.8)return 'advanced';if(pct>=0.6)return 'ready';if(pct>=0.3)return 'developing';return 'emerging';}
+function domainReadiness(ans){var out={},allC=0,allN=0;Object.keys(DOMAINS).forEach(function(d){var qs=DOMAINS[d],c=0,n=0;qs.forEach(function(qid){var a=ans[qid];if(a==null)return;n++;if(a===KEY[qid][0])c++;});allC+=c;allN+=n;out[d]=n?c/n:null;});out._overall=allN?allC/allN:null;return out;}
+function expIndex(ans){var v=[1,4,30,31].map(function(id){return ans[id];}).filter(function(x){return x!=null;});if(!v.length)return null;return v.reduce(function(a,b){return a+b;},0)/v.length;}
+function computeProfile(ans){
+  var r=domainReadiness(ans),ex=expIndex(ans),overall=r._overall,q=function(id){return ans[id];};
+  var interests=[];if(q(3)&&LABELS[3][q(3)]&&q(3)!==10)interests.push(LABELS[3][q(3)]);
+  var support=(q(43)>=4)||(q(45)>=4)||(q(46)===1||q(46)===2||q(46)===4)||(q(39)===6)||(q(40)===6);
+  var challenge=(ex!=null&&ex>=3.5)||(overall!=null&&overall>=0.75)||(q(47)===2);
+  var mentor=(ex!=null&&ex>=3)&&(q(47)===3)&&(q(45)!=null&&q(45)<=2);
+  return {readiness:{design:band(r.design),illustrator:band(r.illustrator),photoshop:band(r.photoshop),layout:band(r.layout),photography:band(r.photography)},
+    readinessPct:r,overall:overall,experienceLevel:ex==null?null:(ex>=4?'experienced':(ex>=2.5?'some':'novice')),experienceIndex:ex,
+    interest:interests[0]||null,startStyle:q(39)?LABELS[39][q(39)]:null,failureResponse:q(40)?LABELS[40][q(40)]:null,
+    learningModality:q(41)?LABELS[41][q(41)]:null,groupingPref:q(44)?LABELS[44][q(44)]:null,
+    mindset:q(46)===3?'growth':(q(46)?'developing':null),supportFlag:!!support,challengeReady:!!challenge,mentorCandidate:!!mentor};
+}
+
+/* ===== state ===== */
+var ME=null, MYDATA={}, CLASSES=[], CURCLASS=null, STUDENTS=[], CHARTS={};
+const $=id=>document.getElementById(id);
+function loadmsg(t){var e=$('loadmsg');if(e)e.textContent=t;}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function initials(nm,em){nm=(nm||'').trim();if(nm){var p=nm.split(/\s+/);return ((p[0]||'')[0]||'')+((p[1]||'')[0]||'')||nm.slice(0,2);}return (em||'?').slice(0,2).toUpperCase();}
+function qp(k){return new URLSearchParams(location.search).get(k);}
+
+$('signout').onclick=function(){auth.signOut().then(function(){window.location.href='login.html';});};
+
+auth.onAuthStateChanged(async function(user){
+  if(!user){ window.location.href='login.html'; return; }
+  ME=user; loadmsg('Checking your account…');
+  try{var s=await db.collection('users').doc(user.uid).get();MYDATA=s.exists?s.data():{};}catch(e){MYDATA={};}
+  if(MYDATA.accountType!=='instructor'&&MYDATA.accountType!=='admin'){ window.location.href='workspace.html'; return; }
+  var nm=MYDATA.displayName||((MYDATA.firstName||'')+' '+(MYDATA.lastName||'')).trim()||user.email;
+  $('sb-name').textContent=nm; $('sb-av').textContent=initials(nm,user.email);
+  loadmsg('Finding your classes…');
+  try{
+    var snap = (MYDATA.accountType==='admin') ? await db.collection('classes').get()
+             : await db.collection('classes').where('instructorId','==',user.uid).get();
+    CLASSES=snap.docs.map(d=>Object.assign({id:d.id},d.data()));
+  }catch(e){ CLASSES=[]; }
+  $('loading').style.display='none'; $('app').style.display='grid';
+  if(!CLASSES.length){ $('dashWrap').innerHTML='<div class="empty">No classes are linked to your account yet.</div>'; $('classSel').style.display='none'; return; }
+  // class selector
+  var pre=qp('class'); var startIdx=Math.max(0,CLASSES.findIndex(c=>c.id===pre));
+  $('classSel').innerHTML=CLASSES.map((c,i)=>'<option value="'+i+'">'+esc(c.name||c.id)+'</option>').join('');
+  $('classSel').value=String(startIdx);
+  $('classSel').onchange=function(){ openClass(CLASSES[+this.value]); };
+  openClass(CLASSES[startIdx]);
+});
+
+async function openClass(c){
+  CURCLASS=c; $('dashWrap').innerHTML='<div class="empty"><div><div class="spinner"></div>Loading '+esc(c.name||'class')+'…</div></div>';
+  var usersMap={}, roster=[];
+  try{
+    var us=await db.collection('users').where('classId','==',c.id).get();
+    us.forEach(d=>{var u=d.data();var nm=u.displayName||((u.firstName||'')+' '+(u.lastName||'')).trim()||u.email||d.id;usersMap[d.id]={name:nm,accountType:u.accountType};if(u.accountType!=='instructor'&&u.accountType!=='admin')roster.push(d.id);});
+  }catch(e){}
+  var completed=[];
+  try{
+    var as=await db.collection('assessments').where('classId','==',c.id).get();
+    as.forEach(d=>{var a=d.data();if(a.status==='complete'&&a.answers)completed.push({uid:a.studentId||d.id,answers:a.answers});});
+  }catch(e){ $('dashWrap').innerHTML='<div class="empty">Couldn\'t read assessments for this class (permission or connection).</div>'; return; }
+  STUDENTS=completed.map(s=>({uid:s.uid,name:(usersMap[s.uid]&&usersMap[s.uid].name)||s.uid,answers:s.answers,profile:computeProfile(s.answers)}));
+  STUDENTS.sort((a,b)=>a.name.localeCompare(b.name));
+  CURCLASS._rosterCount = roster.length || STUDENTS.length;
+  renderDash();
+}
+
+/* ===== aggregation ===== */
+function tallySingle(qid){var t={},n=0;STUDENTS.forEach(s=>{var a=s.answers[qid];if(a==null)return;n++;t[a]=(t[a]||0)+1;});return {t,n};}
+function tallyMulti(qid){var t={},n=0;STUDENTS.forEach(s=>{var a=s.answers[qid];if(!Array.isArray(a))return;n++;a.forEach(i=>t[i]=(t[i]||0)+1);});return {t,n};}
+function pct(x,d){return d?Math.round(x/d*100):0;}
+
+function renderDash(){
+  var N=STUDENTS.length, rosterN=CURCLASS._rosterCount||N;
+  var shell=''
+   +'<div class="sec-label">Class at a glance</div><div class="stats" id="stats"></div>'
+   +'<div class="sec-label">Teaching recommendations</div><div class="insights"><h3>What this class needs from you</h3><div class="sub">Auto-generated from the aggregate — starting points, not verdicts.</div><div id="insBody"></div></div>'
+   +'<div class="sec-label">Knowledge readiness by area</div><div class="card pad"><div style="font-size:12px;color:var(--mid);margin-bottom:14px;">Share of the class in each readiness band per area (from scored questions). "Emerging/Developing" is expected in Week 1 — it shows where to start.</div><div id="domains"></div><div class="legend"><span><i style="background:#e05c5c"></i>Emerging</span><span><i style="background:var(--gold)"></i>Developing</span><span><i style="background:var(--blue)"></i>Ready</span><span><i style="background:var(--green)"></i>Advanced</span><span style="margin-left:auto">Number = class avg correct</span></div></div>'
+   +'<div class="sec-label">Interests &amp; goals</div><div class="grid2"><div class="chartcard"><h3>Most curious about</h3><div class="sub">Q3</div><div class="chartwrap"><canvas id="cInterest"></canvas></div></div><div class="chartcard"><h3>Goal for the year</h3><div class="sub">Q48</div><div class="chartwrap"><canvas id="cGoal"></canvas></div></div></div><div class="grid2" style="margin-top:16px;"><div class="chartcard"><h3>Professional interest</h3><div class="sub">Q49</div><div class="chartwrap"><canvas id="cPro"></canvas></div></div><div class="chartcard"><h3>Prior experience</h3><div class="sub">Computed level</div><div class="chartwrap"><canvas id="cExp"></canvas></div></div></div>'
+   +'<div class="sec-label">How they\'ve created before</div><div class="grid2"><div class="card pad"><h3 style="font-size:14px;font-weight:700;">Things they\'ve made</h3><div class="sub" style="font-size:11.5px;color:var(--mid);margin-bottom:12px;">Q2 — % who created each</div><div class="bars" id="madeBars"></div></div><div class="card pad"><h3 style="font-size:14px;font-weight:700;">Adobe apps used</h3><div class="sub" style="font-size:11.5px;color:var(--mid);margin-bottom:12px;">Q5 — % who used each</div><div class="bars" id="adobeBars"></div></div></div>'
+   +'<div class="sec-label">How they learn &amp; work</div><div class="grid2"><div class="card pad"><h3 style="font-size:14px;font-weight:700;">Learns best by</h3><div class="sub" style="font-size:11.5px;color:var(--mid);margin-bottom:12px;">Q41</div><div class="bars" id="learnBars"></div></div><div class="card pad"><h3 style="font-size:14px;font-weight:700;">When stuck, they…</h3><div class="sub" style="font-size:11.5px;color:var(--mid);margin-bottom:12px;">Q40</div><div class="bars" id="stuckBars"></div></div></div><div class="grid2" style="margin-top:16px;"><div class="card pad"><h3 style="font-size:14px;font-weight:700;">Comfort asking for help</h3><div class="sub" style="font-size:11.5px;color:var(--mid);margin-bottom:12px;">Q43</div><div class="bars" id="helpBars"></div></div><div class="card pad"><h3 style="font-size:14px;font-weight:700;">Prefers to work</h3><div class="sub" style="font-size:11.5px;color:var(--mid);margin-bottom:12px;">Q44</div><div class="bars" id="groupBars"></div></div></div>'
+   +'<div class="sec-label">Students to notice</div><div class="flags"><div class="flag support"><div class="ft">May need support</div><div class="fd">Hesitant to ask for help or share work, hard-on-self about feedback, or trouble starting.</div><ul id="fSupport"></ul></div><div class="flag challenge"><div class="ft">Ready for a challenge</div><div class="fd">Prior experience, strong knowledge, or wants harder work early.</div><ul id="fChallenge"></ul></div><div class="flag mentor"><div class="ft">Potential peer mentors</div><div class="fd">Experienced, comfortable sharing, likes helping.</div><ul id="fMentor"></ul></div></div>'
+   +'<div class="sec-label">Student roster</div><div style="overflow-x:auto;"><table class="roster" id="rosterTbl"><thead><tr><th data-sort="name">Student</th><th data-sort="overall">Knowledge</th><th data-sort="exp">Experience</th><th data-sort="interest">Most curious</th><th data-sort="learn">Learns by</th><th data-sort="flags">Flags</th></tr></thead><tbody id="rosterBody"></tbody></table></div>'
+   +'<div class="sec-label">Every question, by the numbers</div><div id="qdrill"></div>'
+   +'<div class="actions"><button class="btn gold" id="csvBtn">Export student profiles (CSV)</button><button class="btn ghost" id="printBtn">Print / Save as PDF</button></div>'
+   +'<div class="foot" id="foot"></div>';
+  $('dashWrap').innerHTML=shell;
+
+  var overalls=STUDENTS.map(s=>s.profile.overall).filter(x=>x!=null);
+  var avgKnow=overalls.length?Math.round(overalls.reduce((a,b)=>a+b,0)/overalls.length*100):0;
+  var priorExp=STUDENTS.filter(s=>s.profile.experienceLevel==='some'||s.profile.experienceLevel==='experienced').length;
+  $('stats').innerHTML=[
+    ['<span class="n">'+N+'</span>','Completed assessments'],
+    ['<span class="n blue">'+pct(N,rosterN)+'%</span>','Of roster ('+N+'/'+rosterN+')'],
+    ['<span class="n gold">'+avgKnow+'%</span>','Avg knowledge readiness'],
+    ['<span class="n green">'+priorExp+'</span>','Have prior experience']
+  ].map(x=>'<div class="stat">'+x[0]+'<div class="k">'+x[1]+'</div></div>').join('');
+
+  if(!N){ $('insBody').innerHTML='<div class="ins"><div class="ic">!</div><div class="tx">No completed assessments for this class yet. As students finish, they\'ll appear here automatically.</div></div>';
+    $('foot').textContent=''; wireExports(); return; }
+
+  renderInsights(); renderDomains(); renderInterestCharts(); renderMade(); renderLearn(); renderFlags(); renderRoster(); renderDrill(); wireExports();
+  $('foot').innerHTML='Computed in your browser from '+N+' completed assessment'+(N>1?'s':'')+' · read-only · '+new Date().toLocaleString();
+}
+
+function renderDomains(){var html='';Object.keys(DOMAINS).forEach(function(d){var counts={emerging:0,developing:0,ready:0,advanced:0},nn=0,sum=0,sc=0;STUDENTS.forEach(s=>{var b=s.profile.readiness[d];if(b){counts[b]++;nn++;}var p=s.profile.readinessPct[d];if(p!=null){sum+=p;sc++;}});var avg=sc?Math.round(sum/sc*100):0;var seg=(k,col)=>{var w=nn?counts[k]/nn*100:0;return w?('<span style="width:'+w+'%;background:'+col+'" title="'+k+': '+counts[k]+'"></span>'):'';};html+='<div class="dom"><div><div class="dname">'+DOMAIN_LABEL[d]+'</div><div class="dsub">'+nn+' answered · avg '+avg+'%</div></div><div class="stack">'+seg('emerging','#e05c5c')+seg('developing','var(--gold)')+seg('ready','var(--blue)')+seg('advanced','var(--green)')+'</div></div>';});$('domains').innerHTML=html;}
+function doughnut(id,labels,data){if(CHARTS[id])CHARTS[id].destroy();if(typeof Chart==='undefined')return;var pal=['#1a56c4','#da9e2b','#2d7a1a','#01123a','#6b21a8','#0e7490','#be185d','#b45309','#475569','#8a2c12'];CHARTS[id]=new Chart($(id),{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:labels.map((_,i)=>pal[i%pal.length]),borderColor:'#fff',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:10,family:'DM Sans'},boxWidth:12}}}}});}
+function renderInterestCharts(){var i3=tallySingle(3),l3=[],d3=[];Object.keys(i3.t).sort((a,b)=>i3.t[b]-i3.t[a]).forEach(k=>{l3.push(LABELS[3][k]||optText(3,+k));d3.push(i3.t[k]);});doughnut('cInterest',l3,d3);var i48=tallySingle(48),l48=[],d48=[];Object.keys(i48.t).sort((a,b)=>i48.t[b]-i48.t[a]).forEach(k=>{l48.push(optText(48,+k));d48.push(i48.t[k]);});doughnut('cGoal',l48,d48);var i49=tallySingle(49),l49=[],d49=[];Object.keys(i49.t).sort((a,b)=>+a-+b).forEach(k=>{l49.push(optText(49,+k));d49.push(i49.t[k]);});doughnut('cPro',l49,d49);var ex={novice:0,some:0,experienced:0};STUDENTS.forEach(s=>{if(s.profile.experienceLevel)ex[s.profile.experienceLevel]++;});doughnut('cExp',['Novice','Some','Experienced'],[ex.novice,ex.some,ex.experienced]);}
+function barList(elId,pairs,total,cls){pairs.sort((a,b)=>b[1]-a[1]);$(elId).innerHTML=pairs.map(function(p){var pc=pct(p[1],total);return '<div class="bar"><div class="lb">'+esc(p[0])+'</div><div class="track"><div class="fill '+(cls||'')+'" style="width:'+pc+'%"></div></div><div class="vl">'+pc+'%</div></div>';}).join('')||'<div style="font-size:12px;color:var(--mid)">No responses</div>';}
+function renderMade(){var m2=tallyMulti(2),pairs=[];QBYID[2].o.forEach((o,i)=>{if(i===9)return;pairs.push([o,m2.t[i+1]||0]);});barList('madeBars',pairs,STUDENTS.length,'gold');var m5=tallyMulti(5),p5=[];QBYID[5].o.forEach((o,i)=>{if(i===8)return;p5.push([o.replace('Adobe ',''),m5.t[i+1]||0]);});barList('adobeBars',p5,STUDENTS.length,'');}
+function renderLearn(){var l41=tallySingle(41);barList('learnBars',Object.keys(l41.t).map(k=>[LABELS[41][k]||optText(41,+k),l41.t[k]]),l41.n,'navy');var l40=tallySingle(40);barList('stuckBars',Object.keys(l40.t).map(k=>[LABELS[40][k]||optText(40,+k),l40.t[k]]),l40.n,'gold');var l43=tallySingle(43);barList('helpBars',Object.keys(l43.t).map(k=>[optText(43,+k),l43.t[k]]),l43.n,'');var l44=tallySingle(44);barList('groupBars',Object.keys(l44.t).map(k=>[LABELS[44][k]||optText(44,+k),l44.t[k]]),l44.n,'navy');}
+function renderFlags(){var f=(fn)=>STUDENTS.filter(fn).map(s=>s.name);var put=(id,names)=>{$(id).innerHTML=names.length?names.map(n=>'<li>'+esc(n)+'</li>').join(''):'<span class="none">None flagged</span>';};put('fSupport',f(s=>s.profile.supportFlag));put('fChallenge',f(s=>s.profile.challengeReady));put('fMentor',f(s=>s.profile.mentorCandidate));}
+var rosterSort={key:'name',dir:1};
+function renderRoster(){var rows=STUDENTS.map(s=>{var p=s.profile,flags=[];if(p.supportFlag)flags.push('<span class="tagdot" title="May need support" style="color:var(--red)">●</span>');if(p.challengeReady)flags.push('<span class="tagdot" title="Challenge-ready" style="color:var(--blue)">●</span>');if(p.mentorCandidate)flags.push('<span class="tagdot" title="Mentor" style="color:var(--green)">●</span>');return {name:s.name,overall:p.overall==null?-1:p.overall,exp:p.experienceLevel||'—',interest:p.interest||'—',learn:p.learningModality||'—',flags:flags.join('')||'—',expOrder:{novice:0,some:1,experienced:2}[p.experienceLevel]??-1};});var k=rosterSort.key,dir=rosterSort.dir;rows.sort((a,b)=>{var x=a[k==='exp'?'expOrder':k],y=b[k==='exp'?'expOrder':k];if(typeof x==='string')return dir*x.localeCompare(y);return dir*((x||0)-(y||0));});$('rosterBody').innerHTML=rows.map(r=>'<tr><td><b>'+esc(r.name)+'</b></td><td>'+(r.overall<0?'—':Math.round(r.overall*100)+'%')+'</td><td style="text-transform:capitalize">'+esc(r.exp)+'</td><td>'+esc(r.interest)+'</td><td>'+esc(r.learn)+'</td><td>'+r.flags+'</td></tr>').join('');document.querySelectorAll('#rosterTbl th').forEach(th=>th.onclick=()=>{var kk=th.dataset.sort;rosterSort.dir=(rosterSort.key===kk)?-rosterSort.dir:1;rosterSort.key=kk;renderRoster();});}
+function renderDrill(){var html='';for(var part=1;part<=9;part++){var qs=Q.filter(q=>q.part===part),inner='';qs.forEach(function(q){var isMulti=q.type==='multi',res=isMulti?tallyMulti(q.id):tallySingle(q.id),denom=res.n||STUDENTS.length,key=KEY[q.id];inner+='<div class="qitem"><div class="qq"><span class="qn">Q'+q.id+'</span>'+esc(q.q)+'</div>';q.o.forEach(function(opt,i){var idx=i+1,cnt=res.t[idx]||0,pc=pct(cnt,denom),cls='';if(key&&key[0]===idx)cls=' correct';else if(key&&key[1]===idx)cls=' unsure';inner+='<div class="obar'+cls+'"><div class="otext">'+(key&&key[0]===idx?'<span class="ck">✓ </span>':'')+esc(opt)+'</div><div class="ov">'+cnt+' · '+pc+'%</div></div><div class="obar'+cls+'" style="grid-template-columns:1fr"><div class="otrack"><div class="ofill" style="width:'+pc+'%"></div></div></div>';});inner+='</div>';});html+='<details class="qd"><summary>Part '+part+' — '+esc(PARTS[part-1].t)+'<span class="cn">'+qs.length+' questions</span></summary><div class="qblock">'+inner+'</div></details>';}$('qdrill').innerHTML=html;}
+function renderInsights(){var N=STUDENTS.length,out=[];var domAvg={};Object.keys(DOMAINS).forEach(d=>{var sum=0,c=0;STUDENTS.forEach(s=>{var p=s.profile.readinessPct[d];if(p!=null){sum+=p;c++;}});domAvg[d]=c?sum/c:null;});var weakest=Object.keys(domAvg).filter(d=>domAvg[d]!=null).sort((a,b)=>domAvg[a]-domAvg[b]);if(weakest.length){var d=weakest[0];out.push(['◱','<b>Start '+DOMAIN_LABEL[d].toLowerCase()+' from the ground up.</b> Lowest readiness area (avg '+Math.round(domAvg[d]*100)+'% correct). Assume little prior knowledge.']);}var strongest=weakest[weakest.length-1];if(strongest&&domAvg[strongest]>=0.6){out.push(['◲','<b>'+DOMAIN_LABEL[strongest]+' is a relative strength</b> (avg '+Math.round(domAvg[strongest]*100)+'%). Move faster or use it for early confidence.']);}var exp={novice:0,some:0,experienced:0};STUDENTS.forEach(s=>{if(s.profile.experienceLevel)exp[s.profile.experienceLevel]++;});if(exp.experienced>=1){out.push(['★','<b>'+exp.experienced+' student'+(exp.experienced>1?'s have':' has')+' real prior experience.</b> Prepare stretch briefs or peer-mentor roles.']);}if(exp.novice/N>=0.5){out.push(['○','<b>Largely a beginner class</b> ('+exp.novice+'/'+N+' novices). Demos + immediate practice, celebrate early wins.']);}var lm={};STUDENTS.forEach(s=>{if(s.profile.learningModality)lm[s.profile.learningModality]=(lm[s.profile.learningModality]||0)+1;});var topLm=Object.keys(lm).sort((a,b)=>lm[b]-lm[a])[0];if(topLm){out.push(['▷','<b>They learn best by "'+topLm.toLowerCase()+'".</b> Pair each concept with that mode.']);}var support=STUDENTS.filter(s=>s.profile.supportFlag).length;if(support){out.push(['♥','<b>'+support+' may need extra support.</b> Build in private check-ins and low-stakes, structured critique early.']);}var uncomfHelp=STUDENTS.filter(s=>s.answers[43]>=4).length;if(uncomfHelp/N>=0.3){out.push(['?','<b>Many are hesitant to ask for help</b> ('+uncomfHelp+'/'+N+'). Normalize questions with routines like a "stuck board".']);}var growth=STUDENTS.filter(s=>s.profile.mindset==='growth').length;if(N&&growth/N<0.5){out.push(['↻','<b>Feedback mindset is still forming</b> ('+growth+'/'+N+' clearly see critique as improvement). Frame feedback as "next steps".']);}var it={};STUDENTS.forEach(s=>{if(s.profile.interest)it[s.profile.interest]=(it[s.profile.interest]||0)+1;});var topI=Object.keys(it).sort((a,b)=>it[b]-it[a]).slice(0,2);if(topI.length){out.push(['♡','<b>Strongest interests: '+topI.join(' and ')+'.</b> Anchor an early project here to hook motivation.']);}var proHi=STUDENTS.filter(s=>s.answers[49]===1||s.answers[49]===2).length;if(proHi/N>=0.4){out.push(['↗','<b>'+proHi+'/'+N+' already eye this as a career.</b> "This is how pros work" framing + portfolio building will land.']);}var ch=STUDENTS.filter(s=>s.profile.challengeReady).length,me=STUDENTS.filter(s=>s.profile.mentorCandidate).length;if(ch){out.push(['▲','<b>'+ch+' ready for a challenge.</b> Keep extension tasks ready.']);}if(me){out.push(['⚑','<b>'+me+' potential peer mentor'+(me>1?'s':'')+'.</b> Lean on them for peer help and demos.']);}$('insBody').innerHTML=out.map(o=>'<div class="ins"><div class="ic">'+o[0]+'</div><div class="tx">'+o[1]+'</div></div>').join('');}
+function wireExports(){var cb=$('csvBtn');if(cb)cb.onclick=exportCSV;var pb=$('printBtn');if(pb)pb.onclick=()=>window.print();}
+function exportCSV(){var head=['Name','KnowledgeOverall%','Experience','Interest','LearningStyle','StartStyle','WhenStuck','GroupPref','Mindset','Support','ChallengeReady','Mentor','Design','Illustrator','Photoshop','Layout','Photography'];var rows=STUDENTS.map(s=>{var p=s.profile;return [s.name,p.overall==null?'':Math.round(p.overall*100),p.experienceLevel||'',p.interest||'',p.learningModality||'',p.startStyle||'',p.failureResponse||'',p.groupingPref||'',p.mindset||'',p.supportFlag?'yes':'',p.challengeReady?'yes':'',p.mentorCandidate?'yes':'',p.readiness.design||'',p.readiness.illustrator||'',p.readiness.photoshop||'',p.readiness.layout||'',p.readiness.photography||''];});var csv=[head].concat(rows).map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n');var blob=new Blob([csv],{type:'text/csv'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='CPLA_'+((CURCLASS.name||'class').replace(/[^a-z0-9]+/gi,'_'))+'_insights.csv';a.click();}
+</script>
+</body>
+</html>
