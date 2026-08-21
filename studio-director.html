@@ -99,6 +99,9 @@
   .stu-ind{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .stu-detail{font-size:11px;font-weight:600;color:var(--mod);text-decoration:none;display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--rule);border-radius:8px;white-space:nowrap}
   .stu-detail:hover{background:var(--paper);border-color:var(--gold);color:var(--blue)}
+  .stu-reset{font-size:11px;font-weight:600;color:var(--mid);background:#fff;display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--rule);border-radius:8px;white-space:nowrap;cursor:pointer;font-family:inherit}
+  .stu-reset:hover{border-color:var(--gold);color:var(--blue)}
+  .stu-reset:disabled{opacity:.6;cursor:default}
   .ind{font-size:11px;display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:100px;border:1px solid var(--rule);color:var(--mid);background:#fff}
   .ind.mod{color:var(--mod);border-color:#c4d3ea;background:var(--ml)}
   .ind .dot{width:7px;height:7px;border-radius:50%;background:var(--rule)}
@@ -374,7 +377,8 @@
       roster=c.students.map(function(x){
         var ini=((x.firstName?x.firstName[0]:'')+(x.lastName?x.lastName[0]:'')||'?').toUpperCase();
         var nm=esc(((x.firstName||'')+' '+(x.lastName||'')).trim()||'Student');
-        return '<div class="stu"><div class="stu-av">'+ini+'</div><div class="stu-main"><div class="stu-nm">'+nm+'</div><div class="stu-em">'+esc(x.email||'')+'</div></div><div class="stu-ind"><span class="ind mod">Lesson '+L.id+'</span><span class="ind"><span class="dot"></span> Not started</span><a class="stu-detail" href="progress.html?student='+encodeURIComponent(x.uid||'')+'&view=instructor&class='+encodeURIComponent(c.id)+'">Detail <i class="ti ti-arrow-right"></i></a></div></div>';
+        var rawnm=((x.firstName||'')+' '+(x.lastName||'')).trim()||'Student';
+        return '<div class="stu"><div class="stu-av">'+ini+'</div><div class="stu-main"><div class="stu-nm">'+nm+'</div><div class="stu-em">'+esc(x.email||'')+'</div></div><div class="stu-ind"><span class="ind mod">Lesson '+L.id+'</span><span class="ind"><span class="dot"></span> Not started</span><button class="stu-reset" data-email="'+esc(x.email||'')+'" data-name="'+esc(rawnm)+'" title="Email this student a password-reset link"><i class="ti ti-key"></i> Reset password</button><a class="stu-detail" href="progress.html?student='+encodeURIComponent(x.uid||'')+'&view=instructor&class='+encodeURIComponent(c.id)+'">Detail <i class="ti ti-arrow-right"></i></a></div></div>';
       }).join('');
       roster+='<div class="roster-cap">Live status (Learning · Practicing · Creating · Reviewing · Awaiting Feedback · Certified) activates once progress tracking is turned on.</div>';
     }
@@ -625,6 +629,37 @@
     function shut(){ if(scrim)scrim.classList.remove('open'); if(drawer)drawer.classList.remove('open'); }
     if(btn) btn.onclick=open; if(close) close.onclick=shut; if(scrim) scrim.onclick=shut;
   })();
+</script>
+<script>
+/* Instructor-triggered password reset (client-only, no backend).
+   Sends the student a Firebase password-reset email — no password is exposed
+   to the instructor, and nothing is written to Firestore. */
+(function(){
+  function notify(m){var t=document.getElementById('toast');if(!t)return;t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2800);}
+  document.addEventListener('click',function(e){
+    var b=e.target.closest?e.target.closest('.stu-reset'):null; if(!b)return;
+    e.preventDefault();
+    var email=(b.getAttribute('data-email')||'').trim();
+    var name=b.getAttribute('data-name')||'this student';
+    if(!email){ notify('No email on file for '+name+' — can’t send a reset link.'); return; }
+    if(!window.confirm('Send a password-reset link to '+name+' ('+email+')?\n\nThey’ll get an email with a secure link to set a new password. Nothing changes until they use it.')) return;
+    var old=b.innerHTML; b.disabled=true; b.innerHTML='<i class="ti ti-loader-2"></i> Sending…';
+    firebase.auth().sendPasswordResetEmail(email).then(function(){
+      notify('Reset link sent to '+email);
+      b.innerHTML='<i class="ti ti-check"></i> Sent';
+      setTimeout(function(){b.disabled=false;b.innerHTML=old;},4000);
+    }).catch(function(err){
+      b.disabled=false; b.innerHTML=old;
+      var c=err&&err.code;
+      var msg = c==='auth/user-not-found' ? 'No account found for '+email+'.'
+              : c==='auth/invalid-email' ? 'That email address looks invalid.'
+              : c==='auth/too-many-requests' ? 'Too many requests just now — wait a moment and try again.'
+              : c==='auth/missing-android-pkg-name'||c==='auth/unauthorized-continue-uri' ? 'Reset email blocked by an auth setting — check Authorized domains in Firebase.'
+              : ('Could not send the reset email'+(err&&err.message?': '+err.message:'.'));
+      notify(msg);
+    });
+  });
+})();
 </script>
 </body>
 </html>
