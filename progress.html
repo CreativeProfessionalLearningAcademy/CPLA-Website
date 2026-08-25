@@ -417,7 +417,9 @@
         +'<div class="cw-stat"><div class="n">'+journals+'</div><div class="k">Journals written</div></div>'
         +'</div>';
       docs.forEach(function(x){
-        var st=x.status==='submitted'?'<span class="cw-badge sub">Submitted</span>':'<span class="cw-badge ip">In progress</span>';
+        var secs=x.sections||{};
+        var sb=['assessment','worksheet','journal'].filter(function(k){return secs[k];}).map(function(k){return '<span class="cw-badge sub" style="text-transform:capitalize">'+k+' ✓</span>';}).join(' ');
+        var st=sb||(x.status==='submitted'?'<span class="cw-badge sub">Submitted</span>':'<span class="cw-badge ip">In progress</span>');
         var score=(typeof x.mcPct==='number')?('<span class="cw-score">'+x.mcScore+'/'+x.mcTotal+' · '+x.mcPct+'%</span>'):'';
         var mc=x.mc?('MC answers &nbsp; '+Object.keys(x.mc).sort().map(function(k){return k.replace(/^Q0?/,'Q')+':'+x.mc[k];}).join('&nbsp; ')):'';
         var texts=(x.texts||[]).filter(function(t){return (t.value||'').trim();}).map(function(t){return '<div class="cw-t"><div class="p">'+esc(t.prompt)+'</div><div class="v">'+esc(t.value)+'</div></div>';}).join('')||'<div class="cw-empty">No written responses.</div>';
