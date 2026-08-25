@@ -364,5 +364,70 @@
     };
   })();
 </script>
+<script id="CPLA-WORK-PANEL">
+/* Instructor view of a student's saved lesson work (scores + journals + observations + short answers). Read-only. */
+(function(){
+  if(typeof db==='undefined'||typeof auth==='undefined')return;
+  var Q=new URLSearchParams(location.search);
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  auth.onAuthStateChanged(function(u){
+    if(!u)return;
+    var target=Q.get('student')||u.uid;
+    db.collection('lesson_responses').where('studentId','==',target).get().then(function(snap){
+      var docs=[];snap.forEach(function(d){docs.push(d.data());});
+      docs.sort(function(a,b){return String(a.lessonId).localeCompare(String(b.lessonId),undefined,{numeric:true});});
+      render(docs,null);
+    }).catch(function(e){render(null,e);});
+  });
+  function render(docs,err){
+    var app=document.getElementById('app')||document.body;
+    if(document.getElementById('cpla-work'))document.getElementById('cpla-work').remove();
+    var wrap=document.createElement('div');wrap.id='cpla-work';
+    var css='<style>'
+      +'#cpla-work{margin-top:30px}'
+      +'#cpla-work h2{font-family:"Playfair Display",serif;font-size:22px;margin:0 0 4px}'
+      +'#cpla-work .sub{font-size:12px;color:var(--mid,#6b5e52);margin-bottom:14px}'
+      +'#cpla-work .cw-sum{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px}'
+      +'#cpla-work .cw-stat{border:1px solid var(--rule,#d4c9b8);border-radius:10px;padding:10px 16px;background:#fff}'
+      +'#cpla-work .cw-stat .n{font-family:"Playfair Display",serif;font-weight:900;font-size:22px;color:var(--navy,#01123a)}'
+      +'#cpla-work .cw-stat .k{font-family:"DM Mono",monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mid,#6b5e52)}'
+      +'.cw-card{border:1px solid var(--rule,#d4c9b8);border-radius:12px;background:#fff;margin-bottom:14px;overflow:hidden}'
+      +'.cw-h{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--paper,#faf7f2);border-bottom:1px solid var(--rule,#d4c9b8)}'
+      +'.cw-h .les{font-weight:700}'
+      +'.cw-badge{font-family:"DM Mono",monospace;font-size:10px;padding:3px 9px;border-radius:20px}'
+      +'.cw-badge.sub{background:#e1efe8;color:#26623f}.cw-badge.ip{background:#fbf3e0;color:#7f611d}'
+      +'.cw-score{margin-left:auto;font-family:"DM Mono",monospace;font-weight:700;font-size:14px;color:var(--blue,#1a56c4)}'
+      +'.cw-b{padding:12px 16px}'
+      +'.cw-mc{font-family:"DM Mono",monospace;font-size:12px;color:var(--mid,#6b5e52);margin-bottom:6px}'
+      +'.cw-t{margin-top:8px;padding-top:8px;border-top:1px dashed var(--rule,#d4c9b8)}'
+      +'.cw-t .p{font-size:11px;color:var(--mid,#6b5e52);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}'
+      +'.cw-t .v{font-size:13.5px;white-space:pre-wrap;line-height:1.5}'
+      +'.cw-empty{color:var(--mid,#6b5e52);font-size:13px}'
+      +'</style>';
+    var html=css+'<h2>Lesson Work</h2><div class="sub">Saved in this console — no need to check Milanote or anywhere else.</div>';
+    if(err){html+='<div class="cw-empty">Couldn’t load lesson work — check the Firestore rules were deployed, or the connection.</div>';}
+    else if(!docs||!docs.length){html+='<div class="cw-empty">No lesson work saved yet for this student.</div>';}
+    else{
+      var scored=docs.filter(function(x){return typeof x.mcPct==='number';});
+      var avg=scored.length?Math.round(scored.reduce(function(a,b){return a+b.mcPct;},0)/scored.length):null;
+      var journals=docs.filter(function(x){return (x.texts||[]).some(function(t){return /journal/i.test(t.prompt)&&(t.value||'').trim();});}).length;
+      html+='<div class="cw-sum">'
+        +'<div class="cw-stat"><div class="n">'+docs.length+'</div><div class="k">Lessons with work</div></div>'
+        +'<div class="cw-stat"><div class="n">'+(avg==null?'—':avg+'%')+'</div><div class="k">Avg assessment</div></div>'
+        +'<div class="cw-stat"><div class="n">'+journals+'</div><div class="k">Journals written</div></div>'
+        +'</div>';
+      docs.forEach(function(x){
+        var st=x.status==='submitted'?'<span class="cw-badge sub">Submitted</span>':'<span class="cw-badge ip">In progress</span>';
+        var score=(typeof x.mcPct==='number')?('<span class="cw-score">'+x.mcScore+'/'+x.mcTotal+' · '+x.mcPct+'%</span>'):'';
+        var mc=x.mc?('MC answers &nbsp; '+Object.keys(x.mc).sort().map(function(k){return k.replace(/^Q0?/,'Q')+':'+x.mc[k];}).join('&nbsp; ')):'';
+        var texts=(x.texts||[]).filter(function(t){return (t.value||'').trim();}).map(function(t){return '<div class="cw-t"><div class="p">'+esc(t.prompt)+'</div><div class="v">'+esc(t.value)+'</div></div>';}).join('')||'<div class="cw-empty">No written responses.</div>';
+        html+='<div class="cw-card"><div class="cw-h"><span class="les">Lesson '+esc(x.lessonId)+'</span>'+st+score+'</div><div class="cw-b">'+(mc?'<div class="cw-mc">'+mc+'</div>':'')+texts+'</div></div>';
+      });
+    }
+    wrap.innerHTML=html;app.appendChild(wrap);
+  }
+})();
+</script>
+
 </body>
 </html>

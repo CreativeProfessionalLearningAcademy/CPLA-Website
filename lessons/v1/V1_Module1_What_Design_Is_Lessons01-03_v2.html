@@ -1262,5 +1262,94 @@ textarea.wa:focus{border-color:#1a56c4;box-shadow:0 0 0 3px #e8f0fe}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
+<!-- ===== CPLA lesson save/grade wiring (Firebase, client-side) ===== -->
+<style id="cpla-lesson-save-css">
+.cpla-submitbox{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:22px;padding-top:16px;border-top:2px solid var(--ink,#1a1410)}
+.cpla-submit{font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;border:1px solid var(--mod,#1a56c4);background:var(--mod,#1a56c4);color:#fff;border-radius:9px;padding:11px 22px;cursor:pointer}
+.cpla-submit:hover{background:#1648a8}
+.cpla-submit:disabled{opacity:.6;cursor:default}
+.cpla-score{font-family:'DM Mono',monospace;font-size:14px;font-weight:600;color:var(--green,#2d7a1a)}
+.cpla-savebadge{font-family:'DM Mono',monospace;font-size:11px;color:var(--mid,#6b5e52);opacity:0;transition:opacity .3s}
+.cpla-banner{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#1a1410;color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;padding:10px 18px;border-radius:9px;box-shadow:0 8px 26px rgba(0,0,0,.28);z-index:9999;max-width:92vw}
+.cpla-banner b{color:#e8b84b}
+</style>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="../../firebase-config.js"></script>
+<script id="CPLA-LESSON-SAVE">
+(function(){
+  if(typeof firebase==='undefined'||typeof db==='undefined'||typeof auth==='undefined'){ console.warn('[CPLA] Firebase not available on this page'); return; }
+  var KEYS={"1.1":"CADBC","1.2":"BDCAC","1.3":"DBACD"};   // instructor-only; used to grade, never displayed
+  var USER=null, CLASSID=null, timers={};
+  function pad(n){return (n<10?'0':'')+n;}
+  function lessons(){return [].slice.call(document.querySelectorAll('.ls'));}
+  function lidOf(ls){var h=ls.querySelector('[data-n]');return h?h.getAttribute('data-n'):ls.id;}
+  function assOf(ls){return ls.querySelector('[id$="-ass"]');}
+  function mcGroups(ls){var a=assOf(ls);return a?[].slice.call(a.querySelectorAll('.qo')):[];}
+  function selLetter(g){var o=g.querySelectorAll('.qop');for(var i=0;i<o.length;i++){if(o[i].classList.contains('sel'))return 'ABCD'.charAt(i);}return '';}
+  function setLetter(g,L){var i='ABCD'.indexOf(L),o=g.querySelectorAll('.qop');if(i>=0&&o[i]){[].forEach.call(o,function(x){x.classList.remove('sel');x.setAttribute('aria-pressed','false');});o[i].classList.add('sel');o[i].setAttribute('aria-pressed','true');}}
+  function tareas(ls){return [].slice.call(ls.querySelectorAll('textarea.wa'));}
+  function promptFor(ta){var el=ta,hop=0;while(el&&hop<7){var p=el.previousElementSibling;while(p){var t=(p.textContent||'').replace(/\s+/g,' ').trim();if(t&&t.length<=180)return t;p=p.previousElementSibling;}el=el.parentElement;hop++;}return 'Response';}
+  function collect(ls){
+    var mc={};mcGroups(ls).forEach(function(g,i){var L=selLetter(g);if(L)mc['Q'+pad(i+1)]=L;});
+    var tx=tareas(ls).map(function(ta,i){return {id:'t'+i,prompt:promptFor(ta),value:ta.value||''};});
+    return {lid:lidOf(ls),mc:mc,texts:tx};
+  }
+  function grade(lid,mc){var k=KEYS[lid]||'',c=0;for(var i=0;i<k.length;i++){if(mc['Q'+pad(i+1)]===k.charAt(i))c++;}return {score:c,total:k.length,pct:k.length?Math.round(c/k.length*100):0};}
+  function did(lid){return USER.uid+'_'+lid;}
+  function save(ls,submit){
+    if(!USER)return Promise.resolve();
+    var d=collect(ls),p={studentId:USER.uid,classId:CLASSID||null,lessonId:d.lid,mc:d.mc,texts:d.texts,updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
+    if(submit){var g=grade(d.lid,d.mc);p.mcScore=g.score;p.mcTotal=g.total;p.mcPct=g.pct;p.status='submitted';p.submittedAt=firebase.firestore.FieldValue.serverTimestamp();}
+    else p.status='in_progress';
+    return db.collection('lesson_responses').doc(did(d.lid)).set(p,{merge:true}).then(function(){if(submit)denorm();});
+  }
+  function denorm(){
+    return db.collection('lesson_responses').where('studentId','==',USER.uid).get().then(function(s){
+      var pcts=[],last=null,jrn=0;
+      s.forEach(function(doc){var x=doc.data();if(typeof x.mcPct==='number')pcts.push(x.mcPct);if(x.status==='submitted')last=x.lessonId;});
+      var avg=pcts.length?Math.round(pcts.reduce(function(a,b){return a+b;},0)/pcts.length):null;
+      return db.collection('users').doc(USER.uid).set({work:{lastLesson:last,avgScorePct:avg,lessonsWithWork:s.size,lastWorkAt:firebase.firestore.FieldValue.serverTimestamp()}},{merge:true});
+    }).catch(function(){});
+  }
+  function flash(ls,m){var b=ls.querySelector('.cpla-savebadge');if(b){b.textContent=m;b.style.opacity='1';setTimeout(function(){b.style.opacity='0';},1400);}}
+  function sched(ls){if(!USER)return;var l=lidOf(ls);clearTimeout(timers[l]);timers[l]=setTimeout(function(){save(ls,false).then(function(){flash(ls,'Saved');});},900);}
+  function injectUI(ls){
+    var a=assOf(ls);if(!a)return;var w=a.querySelector('.wrap')||a;if(w.querySelector('.cpla-submitbox'))return;
+    var box=document.createElement('div');box.className='cpla-submitbox';
+    box.innerHTML='<button class="cpla-submit" type="button">Submit assessment</button><span class="cpla-score"></span><span class="cpla-savebadge"></span>';
+    w.appendChild(box);
+    box.querySelector('.cpla-submit').addEventListener('click',function(){
+      if(!USER){alert('Please sign in to submit your work.');return;}
+      var lid=lidOf(ls),need=(KEYS[lid]||'').length,have=Object.keys(collect(ls).mc).length;
+      if(have<need&&!confirm('You answered '+have+' of '+need+' questions. Submit anyway?'))return;
+      var btn=this;btn.disabled=true;btn.textContent='Submitting…';
+      save(ls,true).then(function(){var g=grade(lid,collect(ls).mc);box.querySelector('.cpla-score').textContent='Your score: '+g.score+'/'+g.total+' · '+g.pct+'%';btn.textContent='Submitted ✓';})
+        .catch(function(e){btn.disabled=false;btn.textContent='Submit assessment';alert('Could not submit: '+((e&&e.message)||e));});
+    });
+  }
+  function wire(){lessons().forEach(function(ls){injectUI(ls);
+    ls.querySelectorAll('textarea.wa').forEach(function(t){t.addEventListener('input',function(){sched(ls);});});
+    ls.querySelectorAll('.qop').forEach(function(o){o.addEventListener('click',function(){sched(ls);});});
+  });}
+  function restore(){lessons().forEach(function(ls){var lid=lidOf(ls);
+    db.collection('lesson_responses').doc(did(lid)).get().then(function(doc){
+      if(!doc.exists)return;var x=doc.data();
+      if(x.mc)mcGroups(ls).forEach(function(g,i){var L=x.mc['Q'+pad(i+1)];if(L)setLetter(g,L);});
+      if(x.texts){var ts=tareas(ls);x.texts.forEach(function(t){var idx=parseInt((t.id||'t0').slice(1),10);if(ts[idx]!=null)ts[idx].value=t.value||'';});}
+      if(x.status==='submitted'&&typeof x.mcPct==='number'){var sc=ls.querySelector('.cpla-score');if(sc)sc.textContent='Your score: '+x.mcScore+'/'+x.mcTotal+' · '+x.mcPct+'%';var b=ls.querySelector('.cpla-submit');if(b)b.textContent='Submitted ✓';}
+    }).catch(function(){});
+  });}
+  function banner(html){var b=document.createElement('div');b.className='cpla-banner';b.innerHTML=html;document.body.appendChild(b);}
+  auth.onAuthStateChanged(function(u){
+    wire();
+    if(!u){banner('<b>Not signed in</b> — your answers won’t be saved. Sign in to record your work.');return;}
+    USER=u;
+    db.collection('users').doc(u.uid).get().then(function(s){CLASSID=(s.exists?s.data():{}).classId||null;restore();}).catch(function(){restore();});
+  });
+})();
+</script>
+
 </body>
 </html>
