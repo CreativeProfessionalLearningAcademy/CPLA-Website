@@ -215,6 +215,29 @@ p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
   .grid-canvas.cols12{grid-template-columns:repeat(6,1fr);}
   .hero::before{display:none;}
 }
+
+/* ===== INTERACTIVE ASSESSMENT (added) ===== */
+.qopt-i{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;border:1px solid var(--rule);border-radius:8px;margin-top:8px;cursor:pointer;background:#fff;transition:all .15s;font-size:13px;line-height:1.5;}
+.qopt-i:hover{border-color:var(--mod);background:var(--ml);}
+.qopt-i input{margin-top:3px;flex-shrink:0;accent-color:var(--mod);}
+.qopt-i.correct{border-color:var(--green);background:var(--gnl);}
+.qopt-i.incorrect{border-color:var(--accent);background:var(--al);}
+.qopt-i.correct span::after{content:" \2713";color:var(--green);font-weight:600;}
+.qtextarea{width:100%;margin-top:10px;min-height:96px;border:1px solid var(--rule);border-radius:8px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.6;color:var(--ink);background:#fff;resize:vertical;}
+.qtextarea:focus{outline:none;border-color:var(--mod);box-shadow:0 0 0 3px var(--ml);}
+.assess-actions{display:flex;align-items:center;gap:10px;margin-top:22px;padding-top:18px;border-top:1px solid var(--rule);flex-wrap:wrap;}
+.assess-submit{background:var(--ink);color:#faf7f2;border:none;border-radius:8px;padding:12px 24px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-family:'DM Sans',sans-serif;transition:opacity .2s;}
+.assess-submit:hover{opacity:.9;}
+.assess-submit:disabled{opacity:.5;cursor:default;}
+.assess-retry{background:none;border:1px solid var(--rule);color:var(--mid);border-radius:8px;padding:11px 18px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:none;}
+.assess-note{font-size:12px;color:var(--mid);}
+.assess-result{display:none;border-radius:8px;padding:15px 17px;margin-top:16px;font-size:13px;line-height:1.6;}
+.assess-result.pass{background:var(--gnl);border:1px solid #b6d9a8;}
+.assess-result.fail{background:var(--al);border:1px solid #f0c4b8;}
+.assess-result .ar-score{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:4px;}
+.assess-result.pass .ar-score{color:var(--green);}
+.assess-result.fail .ar-score{color:var(--accent);}
+.ak{transition:all .2s;}
 </style>
 </head>
 <body>
@@ -396,48 +419,48 @@ p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
   </div>
 </div></div>
 
-<div id="l28-ass" class="tc"><div class="wrap">
-  <div class="sl">Lesson 1.28 Assessment</div>
-  <h2>Critiquing Design — Knowledge Check</h2>
-  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
-    <div class="qi"><div class="qn">Q01</div><div class="qt">The key difference between a subjective opinion and a design critique is:</div><div class="qo">
-      <div class="qop">Subjective opinions are shorter and easier to give</div>
-      <div class="qop">A critique is grounded in objective criteria — principles, standards, and communication goals — making it specific and actionable rather than just a preference statement</div>
-      <div class="qop">Critiques must be delivered formally in a studio setting</div>
-      <div class="qop">Subjective opinions are more honest than structured critiques</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q02</div><div class="qt">Which of the following is a properly constructed critique rather than a verdict?</div><div class="qo">
-      <div class="qop">"The hierarchy doesn't work."</div>
-      <div class="qop">"The headline and subheadline are only 4 points apart — too small a difference to register as a level change, so the reader has no clear entry point"</div>
-      <div class="qop">"I don't really like the typography."</div>
-      <div class="qop">"This design feels off to me."</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q03</div><div class="qt">When receiving critique professionally, a designer should:</div><div class="qo">
-      <div class="qop">Defend every decision to demonstrate the thinking behind the work</div>
-      <div class="qop">Separate their identity from the work, thank the critic, ask clarifying questions, and evaluate each point against objective criteria — accepting principle-grounded feedback and politely setting aside pure preference</div>
-      <div class="qop">Accept all feedback without question to appear professional</div>
-      <div class="qop">Reject any feedback that feels uncomfortable to hear</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q04</div><div class="qt">In the six-dimension framework, checking whether color is the only means of conveying information falls under:</div><div class="qo">
-      <div class="qop">Communication Effectiveness</div>
-      <div class="qop">Color — specifically the accessibility requirement that information not depend on color alone</div>
-      <div class="qop">Technical Quality</div>
-      <div class="qop">Visual Hierarchy</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q05</div><div class="qt">"Separate the work from the person" means:</div><div class="qo">
-      <div class="qop">Designers should never take credit for their own work</div>
-      <div class="qop">Critique should address the design ("this design has a hierarchy problem"), not the designer's character or ability ("you don't understand hierarchy")</div>
-      <div class="qop">The designer should leave the room during critique</div>
-      <div class="qop">Personal style should be removed from all professional work</div>
-    </div></div>
-    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
-  </div>
-  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
-    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.28: what was the single most critical problem in the design you critiqued? Write the actionable version of that feedback — naming the element, the principle, and a direction for correction.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q07</div><div class="qt">Pick any one of the six critique dimensions and explain how a principle from an earlier module (1–7) gives you the standard to evaluate it against. Be specific about the principle and the standard.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q08</div><div class="qt">A client responds to your principle-grounded critique with "but I just like it the way it is." How do you respond professionally — distinguishing where their preference is legitimate and where an objective standard should govern?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-  </div>
+<div class="tc" data-correct="1,1,1,1,1" data-lesson="1.28" data-title="Lesson 1.28 Assessment" id="l28-ass"><div class="wrap">
+<div class="sl">Lesson 1.28 Assessment</div>
+<h2>Critiquing Design — Knowledge Check</h2>
+<div class="ab"><h4>Part 1 — Multiple Choice</h4>
+<div class="qi"><div class="qn">Q01</div><div class="qt">The key difference between a subjective opinion and a design critique is:</div><div class="qo">
+<label class="qopt-i"><input name="l28-ass-q0" type="radio" value="0"/><span>Subjective opinions are shorter and easier to give</span></label>
+<label class="qopt-i"><input name="l28-ass-q0" type="radio" value="1"/><span>A critique is grounded in objective criteria — principles, standards, and communication goals — making it specific and actionable rather than just a preference statement</span></label>
+<label class="qopt-i"><input name="l28-ass-q0" type="radio" value="2"/><span>Critiques must be delivered formally in a studio setting</span></label>
+<label class="qopt-i"><input name="l28-ass-q0" type="radio" value="3"/><span>Subjective opinions are more honest than structured critiques</span></label>
 </div></div>
+<div class="qi"><div class="qn">Q02</div><div class="qt">Which of the following is a properly constructed critique rather than a verdict?</div><div class="qo">
+<label class="qopt-i"><input name="l28-ass-q1" type="radio" value="0"/><span>"The hierarchy doesn't work."</span></label>
+<label class="qopt-i"><input name="l28-ass-q1" type="radio" value="1"/><span>"The headline and subheadline are only 4 points apart — too small a difference to register as a level change, so the reader has no clear entry point"</span></label>
+<label class="qopt-i"><input name="l28-ass-q1" type="radio" value="2"/><span>"I don't really like the typography."</span></label>
+<label class="qopt-i"><input name="l28-ass-q1" type="radio" value="3"/><span>"This design feels off to me."</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q03</div><div class="qt">When receiving critique professionally, a designer should:</div><div class="qo">
+<label class="qopt-i"><input name="l28-ass-q2" type="radio" value="0"/><span>Defend every decision to demonstrate the thinking behind the work</span></label>
+<label class="qopt-i"><input name="l28-ass-q2" type="radio" value="1"/><span>Separate their identity from the work, thank the critic, ask clarifying questions, and evaluate each point against objective criteria — accepting principle-grounded feedback and politely setting aside pure preference</span></label>
+<label class="qopt-i"><input name="l28-ass-q2" type="radio" value="2"/><span>Accept all feedback without question to appear professional</span></label>
+<label class="qopt-i"><input name="l28-ass-q2" type="radio" value="3"/><span>Reject any feedback that feels uncomfortable to hear</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q04</div><div class="qt">In the six-dimension framework, checking whether color is the only means of conveying information falls under:</div><div class="qo">
+<label class="qopt-i"><input name="l28-ass-q3" type="radio" value="0"/><span>Communication Effectiveness</span></label>
+<label class="qopt-i"><input name="l28-ass-q3" type="radio" value="1"/><span>Color — specifically the accessibility requirement that information not depend on color alone</span></label>
+<label class="qopt-i"><input name="l28-ass-q3" type="radio" value="2"/><span>Technical Quality</span></label>
+<label class="qopt-i"><input name="l28-ass-q3" type="radio" value="3"/><span>Visual Hierarchy</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q05</div><div class="qt">"Separate the work from the person" means:</div><div class="qo">
+<label class="qopt-i"><input name="l28-ass-q4" type="radio" value="0"/><span>Designers should never take credit for their own work</span></label>
+<label class="qopt-i"><input name="l28-ass-q4" type="radio" value="1"/><span>Critique should address the design ("this design has a hierarchy problem"), not the designer's character or ability ("you don't understand hierarchy")</span></label>
+<label class="qopt-i"><input name="l28-ass-q4" type="radio" value="2"/><span>The designer should leave the room during critique</span></label>
+<label class="qopt-i"><input name="l28-ass-q4" type="radio" value="3"/><span>Personal style should be removed from all professional work</span></label>
+</div></div>
+<div class="ak" style="display:none;"><p><strong>Answers:</strong> 1-B  ·  2-B  ·  3-B  ·  4-B  ·  5-B</p></div>
+</div>
+<div class="ab"><h4>Part 2 — Applied Understanding</h4>
+<div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.28: what was the single most critical problem in the design you critiqued? Write the actionable version of that feedback — naming the element, the principle, and a direction for correction.</div><textarea class="qtextarea" data-prompt="From Exercise 1.28: what was the single most critical problem in the design you critiqued? Write the actionable version of that feedback — naming the element, the principle, and a direction for correction." data-qn="Q06" name="l28-ass-sa0" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q07</div><div class="qt">Pick any one of the six critique dimensions and explain how a principle from an earlier module (1–7) gives you the standard to evaluate it against. Be specific about the principle and the standard.</div><textarea class="qtextarea" data-prompt="Pick any one of the six critique dimensions and explain how a principle from an earlier module (1–7) gives you the standard to evaluate it against. Be specific about the principle and the standard." data-qn="Q07" name="l28-ass-sa1" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q08</div><div class="qt">A client responds to your principle-grounded critique with "but I just like it the way it is." How do you respond professionally — distinguishing where their preference is legitimate and where an objective standard should govern?</div><textarea class="qtextarea" data-prompt='A client responds to your principle-grounded critique with "but I just like it the way it is." How do you respond professionally — distinguishing where their preference is legitimate and where an objective standard should govern?' data-qn="Q08" name="l28-ass-sa2" placeholder="Type your answer here..." rows="4"></textarea></div>
+</div>
+<div class="assess-actions"><button class="assess-submit" onclick="submitAssessment('l28-ass')">Submit assessment</button><button class="assess-retry" onclick="retryAssessment('l28-ass')">Try again</button><span class="assess-note" data-auth=""></span></div><div class="assess-result"></div></div></div>
 </div><!-- end l28 -->
 
 <!-- ═══════════════════════ LESSON 1.29 ═══════════════════════ -->
@@ -597,48 +620,48 @@ p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
   </div>
 </div></div>
 
-<div id="l29-ass" class="tc"><div class="wrap">
-  <div class="sl">Lesson 1.29 Assessment</div>
-  <h2>Design Ethics &amp; Responsibility — Knowledge Check</h2>
-  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
-    <div class="qi"><div class="qn">Q01</div><div class="qt">The distinction between legitimate persuasion and manipulation lies in:</div><div class="qo">
-      <div class="qop">Whether the design is visually attractive</div>
-      <div class="qop">Honesty and consent — legitimate persuasion presents accurate information compellingly; manipulation distorts, withholds, or misrepresents to produce a response the audience wouldn't make with full information</div>
-      <div class="qop">Whether the client is a for-profit or nonprofit organization</div>
-      <div class="qop">The size of the audience the design reaches</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q02</div><div class="qt">A pre-checked subscription box and a deliberately buried cancellation flow are examples of:</div><div class="qo">
-      <div class="qop">Standard UX optimization practices</div>
-      <div class="qop">Dark patterns — interface designs that manipulate users into unintended or uninformed actions, prioritizing extraction over user wellbeing</div>
-      <div class="qop">Accessibility accommodations</div>
-      <div class="qop">Legitimate persuasion techniques</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q03</div><div class="qt">A bar chart with technically accurate numbers but a y-axis starting at 90 to exaggerate a 2% difference is:</div><div class="qo">
-      <div class="qop">Ethically fine because the underlying numbers are accurate</div>
-      <div class="qop">A data visualization ethics violation — the designer knows the visual presentation will produce an inaccurate conclusion in the viewer's mind, even though the numbers are accurate</div>
-      <div class="qop">Acceptable only in advertising contexts</div>
-      <div class="qop">A technical error rather than an ethical issue</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q04</div><div class="qt">Inclusive representation is best described as:</div><div class="qo">
-      <div class="qop">A legal requirement that a fixed percentage of imagery feature specific groups</div>
-      <div class="qop">A habit of thinking that asks who is included and who is absent — ensuring imagery reflects the diversity of the audience being served rather than the design team</div>
-      <div class="qop">A trend that applies only to large consumer brands</div>
-      <div class="qop">A box to check at the end of a project</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q05</div><div class="qt">The statement "every design decision is a value statement" means:</div><div class="qo">
-      <div class="qop">Designers should add their personal values as visible elements in every design</div>
-      <div class="qop">Choices about what to make prominent, who to represent, and how to present data all reflect values and have real-world consequences — so designers should make those choices consciously and responsibly</div>
-      <div class="qop">All design decisions are equally important</div>
-      <div class="qop">Designers should charge based on the values their work expresses</div>
-    </div></div>
-    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
-  </div>
-  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
-    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.29: describe the clearly unethical example you analyzed. What specific design decision was the violation, and was it likely intentional or unintentional? Explain your reasoning.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q07</div><div class="qt">Connect design ethics to UX (Lesson 1.27). The same tools that reduce friction for the user can be used to create friction that traps them. Give a specific example of a UX technique used ethically and the same technique weaponized as a dark pattern.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q08</div><div class="qt">Summarize your personal ethical framework from the exercise. What is one thing you will refuse to do regardless of the brief, and why does that line matter to you?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-  </div>
+<div class="tc" data-correct="1,1,1,1,1" data-lesson="1.29" data-title="Lesson 1.29 Assessment" id="l29-ass"><div class="wrap">
+<div class="sl">Lesson 1.29 Assessment</div>
+<h2>Design Ethics &amp; Responsibility — Knowledge Check</h2>
+<div class="ab"><h4>Part 1 — Multiple Choice</h4>
+<div class="qi"><div class="qn">Q01</div><div class="qt">The distinction between legitimate persuasion and manipulation lies in:</div><div class="qo">
+<label class="qopt-i"><input name="l29-ass-q0" type="radio" value="0"/><span>Whether the design is visually attractive</span></label>
+<label class="qopt-i"><input name="l29-ass-q0" type="radio" value="1"/><span>Honesty and consent — legitimate persuasion presents accurate information compellingly; manipulation distorts, withholds, or misrepresents to produce a response the audience wouldn't make with full information</span></label>
+<label class="qopt-i"><input name="l29-ass-q0" type="radio" value="2"/><span>Whether the client is a for-profit or nonprofit organization</span></label>
+<label class="qopt-i"><input name="l29-ass-q0" type="radio" value="3"/><span>The size of the audience the design reaches</span></label>
 </div></div>
+<div class="qi"><div class="qn">Q02</div><div class="qt">A pre-checked subscription box and a deliberately buried cancellation flow are examples of:</div><div class="qo">
+<label class="qopt-i"><input name="l29-ass-q1" type="radio" value="0"/><span>Standard UX optimization practices</span></label>
+<label class="qopt-i"><input name="l29-ass-q1" type="radio" value="1"/><span>Dark patterns — interface designs that manipulate users into unintended or uninformed actions, prioritizing extraction over user wellbeing</span></label>
+<label class="qopt-i"><input name="l29-ass-q1" type="radio" value="2"/><span>Accessibility accommodations</span></label>
+<label class="qopt-i"><input name="l29-ass-q1" type="radio" value="3"/><span>Legitimate persuasion techniques</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q03</div><div class="qt">A bar chart with technically accurate numbers but a y-axis starting at 90 to exaggerate a 2% difference is:</div><div class="qo">
+<label class="qopt-i"><input name="l29-ass-q2" type="radio" value="0"/><span>Ethically fine because the underlying numbers are accurate</span></label>
+<label class="qopt-i"><input name="l29-ass-q2" type="radio" value="1"/><span>A data visualization ethics violation — the designer knows the visual presentation will produce an inaccurate conclusion in the viewer's mind, even though the numbers are accurate</span></label>
+<label class="qopt-i"><input name="l29-ass-q2" type="radio" value="2"/><span>Acceptable only in advertising contexts</span></label>
+<label class="qopt-i"><input name="l29-ass-q2" type="radio" value="3"/><span>A technical error rather than an ethical issue</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q04</div><div class="qt">Inclusive representation is best described as:</div><div class="qo">
+<label class="qopt-i"><input name="l29-ass-q3" type="radio" value="0"/><span>A legal requirement that a fixed percentage of imagery feature specific groups</span></label>
+<label class="qopt-i"><input name="l29-ass-q3" type="radio" value="1"/><span>A habit of thinking that asks who is included and who is absent — ensuring imagery reflects the diversity of the audience being served rather than the design team</span></label>
+<label class="qopt-i"><input name="l29-ass-q3" type="radio" value="2"/><span>A trend that applies only to large consumer brands</span></label>
+<label class="qopt-i"><input name="l29-ass-q3" type="radio" value="3"/><span>A box to check at the end of a project</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q05</div><div class="qt">The statement "every design decision is a value statement" means:</div><div class="qo">
+<label class="qopt-i"><input name="l29-ass-q4" type="radio" value="0"/><span>Designers should add their personal values as visible elements in every design</span></label>
+<label class="qopt-i"><input name="l29-ass-q4" type="radio" value="1"/><span>Choices about what to make prominent, who to represent, and how to present data all reflect values and have real-world consequences — so designers should make those choices consciously and responsibly</span></label>
+<label class="qopt-i"><input name="l29-ass-q4" type="radio" value="2"/><span>All design decisions are equally important</span></label>
+<label class="qopt-i"><input name="l29-ass-q4" type="radio" value="3"/><span>Designers should charge based on the values their work expresses</span></label>
+</div></div>
+<div class="ak" style="display:none;"><p><strong>Answers:</strong> 1-B  ·  2-B  ·  3-B  ·  4-B  ·  5-B</p></div>
+</div>
+<div class="ab"><h4>Part 2 — Applied Understanding</h4>
+<div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.29: describe the clearly unethical example you analyzed. What specific design decision was the violation, and was it likely intentional or unintentional? Explain your reasoning.</div><textarea class="qtextarea" data-prompt="From Exercise 1.29: describe the clearly unethical example you analyzed. What specific design decision was the violation, and was it likely intentional or unintentional? Explain your reasoning." data-qn="Q06" name="l29-ass-sa0" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q07</div><div class="qt">Connect design ethics to UX (Lesson 1.27). The same tools that reduce friction for the user can be used to create friction that traps them. Give a specific example of a UX technique used ethically and the same technique weaponized as a dark pattern.</div><textarea class="qtextarea" data-prompt="Connect design ethics to UX (Lesson 1.27). The same tools that reduce friction for the user can be used to create friction that traps them. Give a specific example of a UX technique used ethically and the same technique weaponized as a dark pattern." data-qn="Q07" name="l29-ass-sa1" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q08</div><div class="qt">Summarize your personal ethical framework from the exercise. What is one thing you will refuse to do regardless of the brief, and why does that line matter to you?</div><textarea class="qtextarea" data-prompt="Summarize your personal ethical framework from the exercise. What is one thing you will refuse to do regardless of the brief, and why does that line matter to you?" data-qn="Q08" name="l29-ass-sa2" placeholder="Type your answer here..." rows="4"></textarea></div>
+</div>
+<div class="assess-actions"><button class="assess-submit" onclick="submitAssessment('l29-ass')">Submit assessment</button><button class="assess-retry" onclick="retryAssessment('l29-ass')">Try again</button><span class="assess-note" data-auth=""></span></div><div class="assess-result"></div></div></div>
 </div><!-- end l29 -->
 
 <!-- ═══════════════════════ LESSON 1.30 ═══════════════════════ -->
@@ -866,48 +889,48 @@ p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
   </div>
 </div></div>
 
-<div id="l30-ass" class="tc"><div class="wrap">
-  <div class="sl">Lesson 1.30 Assessment</div>
-  <h2>What Makes Great Design? — Knowledge Check</h2>
-  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
-    <div class="qi"><div class="qn">Q01</div><div class="qt">According to this lesson, what distinguishes great design from merely competent design?</div><div class="qo">
-      <div class="qop">Great design uses a secret principle that competent designers don't know</div>
-      <div class="qop">Great design is the disciplined integration of every principle in service of a clearly understood purpose — executed so well the principles become invisible</div>
-      <div class="qop">Great design always breaks the established rules</div>
-      <div class="qop">Great design requires more expensive tools and software</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q02</div><div class="qt">The five pillars of great design are:</div><div class="qo">
-      <div class="qop">Balance, contrast, alignment, repetition, and proximity</div>
-      <div class="qop">Purpose, clarity, integration, restraint, and resonance</div>
-      <div class="qop">Hierarchy, typography, color, image, and layout</div>
-      <div class="qop">Serif, sans-serif, slab, script, and display</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q03</div><div class="qt">"Restraint" as a pillar of great design means:</div><div class="qo">
-      <div class="qop">Limiting the project budget and timeline</div>
-      <div class="qop">Knowing what to leave out — removing everything that doesn't serve the purpose so the essential message can breathe</div>
-      <div class="qop">Using only muted, restrained colors</div>
-      <div class="qop">Holding back the most creative ideas for later projects</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q04</div><div class="qt">Why can great designers break the principles successfully when beginners cannot?</div><div class="qo">
-      <div class="qop">Great designers are exempt from the rules of perception</div>
-      <div class="qop">A rule broken intentionally — with full command of the rule and rigorous control everywhere else — reads as a statement, while a rule broken out of ignorance reads as an accident</div>
-      <div class="qop">Beginners are not allowed to break rules until they are certified</div>
-      <div class="qop">The principles do not actually apply to experienced designers</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q05</div><div class="qt">The "paradox of great design" described in the lesson is that:</div><div class="qo">
-      <div class="qop">Great design is always more expensive than it appears</div>
-      <div class="qop">Its highest achievement is to disappear — to serve the viewer so completely and frictionlessly that they never notice the design at all</div>
-      <div class="qop">Great design can only be recognized by other designers</div>
-      <div class="qop">Great design must look effortless but actually be impossible to reproduce</div>
-    </div></div>
-    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
-  </div>
-  <div class="ab"><h4>Part 2 — Volume 1 Synthesis</h4>
-    <div class="qi"><div class="qn">Q06</div><div class="qt">From the capstone: name the piece of great design you analyzed and explain how two of the five pillars specifically operate within it.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q07</div><div class="qt">Trace one principle from each of three different Volume 1 modules and show how they integrate in a single design. Be specific about each principle and how they reinforce one another.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q08</div><div class="qt">You began Volume 1 with the definition "design is intentional visual problem-solving." Write your own revised definition of design after completing all thirty lessons — and explain what changed in your understanding.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-  </div>
+<div class="tc" data-correct="1,1,1,1,1" data-lesson="1.30" data-title="Lesson 1.30 Assessment" id="l30-ass"><div class="wrap">
+<div class="sl">Lesson 1.30 Assessment</div>
+<h2>What Makes Great Design? — Knowledge Check</h2>
+<div class="ab"><h4>Part 1 — Multiple Choice</h4>
+<div class="qi"><div class="qn">Q01</div><div class="qt">According to this lesson, what distinguishes great design from merely competent design?</div><div class="qo">
+<label class="qopt-i"><input name="l30-ass-q0" type="radio" value="0"/><span>Great design uses a secret principle that competent designers don't know</span></label>
+<label class="qopt-i"><input name="l30-ass-q0" type="radio" value="1"/><span>Great design is the disciplined integration of every principle in service of a clearly understood purpose — executed so well the principles become invisible</span></label>
+<label class="qopt-i"><input name="l30-ass-q0" type="radio" value="2"/><span>Great design always breaks the established rules</span></label>
+<label class="qopt-i"><input name="l30-ass-q0" type="radio" value="3"/><span>Great design requires more expensive tools and software</span></label>
 </div></div>
+<div class="qi"><div class="qn">Q02</div><div class="qt">The five pillars of great design are:</div><div class="qo">
+<label class="qopt-i"><input name="l30-ass-q1" type="radio" value="0"/><span>Balance, contrast, alignment, repetition, and proximity</span></label>
+<label class="qopt-i"><input name="l30-ass-q1" type="radio" value="1"/><span>Purpose, clarity, integration, restraint, and resonance</span></label>
+<label class="qopt-i"><input name="l30-ass-q1" type="radio" value="2"/><span>Hierarchy, typography, color, image, and layout</span></label>
+<label class="qopt-i"><input name="l30-ass-q1" type="radio" value="3"/><span>Serif, sans-serif, slab, script, and display</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q03</div><div class="qt">"Restraint" as a pillar of great design means:</div><div class="qo">
+<label class="qopt-i"><input name="l30-ass-q2" type="radio" value="0"/><span>Limiting the project budget and timeline</span></label>
+<label class="qopt-i"><input name="l30-ass-q2" type="radio" value="1"/><span>Knowing what to leave out — removing everything that doesn't serve the purpose so the essential message can breathe</span></label>
+<label class="qopt-i"><input name="l30-ass-q2" type="radio" value="2"/><span>Using only muted, restrained colors</span></label>
+<label class="qopt-i"><input name="l30-ass-q2" type="radio" value="3"/><span>Holding back the most creative ideas for later projects</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q04</div><div class="qt">Why can great designers break the principles successfully when beginners cannot?</div><div class="qo">
+<label class="qopt-i"><input name="l30-ass-q3" type="radio" value="0"/><span>Great designers are exempt from the rules of perception</span></label>
+<label class="qopt-i"><input name="l30-ass-q3" type="radio" value="1"/><span>A rule broken intentionally — with full command of the rule and rigorous control everywhere else — reads as a statement, while a rule broken out of ignorance reads as an accident</span></label>
+<label class="qopt-i"><input name="l30-ass-q3" type="radio" value="2"/><span>Beginners are not allowed to break rules until they are certified</span></label>
+<label class="qopt-i"><input name="l30-ass-q3" type="radio" value="3"/><span>The principles do not actually apply to experienced designers</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q05</div><div class="qt">The "paradox of great design" described in the lesson is that:</div><div class="qo">
+<label class="qopt-i"><input name="l30-ass-q4" type="radio" value="0"/><span>Great design is always more expensive than it appears</span></label>
+<label class="qopt-i"><input name="l30-ass-q4" type="radio" value="1"/><span>Its highest achievement is to disappear — to serve the viewer so completely and frictionlessly that they never notice the design at all</span></label>
+<label class="qopt-i"><input name="l30-ass-q4" type="radio" value="2"/><span>Great design can only be recognized by other designers</span></label>
+<label class="qopt-i"><input name="l30-ass-q4" type="radio" value="3"/><span>Great design must look effortless but actually be impossible to reproduce</span></label>
+</div></div>
+<div class="ak" style="display:none;"><p><strong>Answers:</strong> 1-B  ·  2-B  ·  3-B  ·  4-B  ·  5-B</p></div>
+</div>
+<div class="ab"><h4>Part 2 — Volume 1 Synthesis</h4>
+<div class="qi"><div class="qn">Q06</div><div class="qt">From the capstone: name the piece of great design you analyzed and explain how two of the five pillars specifically operate within it.</div><textarea class="qtextarea" data-prompt="From the capstone: name the piece of great design you analyzed and explain how two of the five pillars specifically operate within it." data-qn="Q06" name="l30-ass-sa0" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q07</div><div class="qt">Trace one principle from each of three different Volume 1 modules and show how they integrate in a single design. Be specific about each principle and how they reinforce one another.</div><textarea class="qtextarea" data-prompt="Trace one principle from each of three different Volume 1 modules and show how they integrate in a single design. Be specific about each principle and how they reinforce one another." data-qn="Q07" name="l30-ass-sa1" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q08</div><div class="qt">You began Volume 1 with the definition "design is intentional visual problem-solving." Write your own revised definition of design after completing all thirty lessons — and explain what changed in your understanding.</div><textarea class="qtextarea" data-prompt='You began Volume 1 with the definition "design is intentional visual problem-solving." Write your own revised definition of design after completing all thirty lessons — and explain what changed in your understanding.' data-qn="Q08" name="l30-ass-sa2" placeholder="Type your answer here..." rows="4"></textarea></div>
+</div>
+<div class="assess-actions"><button class="assess-submit" onclick="submitAssessment('l30-ass')">Submit assessment</button><button class="assess-retry" onclick="retryAssessment('l30-ass')">Try again</button><span class="assess-note" data-auth=""></span></div><div class="assess-result"></div></div></div>
 </div><!-- end l30 -->
 
 
@@ -928,5 +951,135 @@ function showI(id,btn,lid){
   window.scrollTo({top:l.querySelector('.itabs').offsetTop-10,behavior:'smooth'});
 }
 </script>
+
+<!-- Firebase SDK (added for interactive assessments) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="/firebase-config.js"></script>
+<script>
+/* ===== CPLA INTERACTIVE ASSESSMENT ENGINE =====
+   Auto-grades multiple choice (80% to pass) and records the submission for
+   instructor grading of the short-answer portion. Writes:
+     - progress/{uid}_{lessonId}  (student's own quizScore + status)
+     - submissions/{autoId}       (instructor-gradeable record)
+   Short-answer questions are captured verbatim; the instructor grade is final. */
+(function(){
+  var PASS = 80;                 // percent required to pass the MC portion
+  window.CPLA_USER = null;       // firebase user, when signed in
+  window.CPLA_CLASSID = null;    // student's classId, loaded from users doc
+
+  // Capture auth state without forcing a redirect (content stays viewable;
+  // submitting for a grade requires sign-in).
+  if (typeof auth !== 'undefined' && auth && auth.onAuthStateChanged) {
+    auth.onAuthStateChanged(async function(user){
+      window.CPLA_USER = user || null;
+      if (user) {
+        try {
+          var snap = await db.collection('users').doc(user.uid).get();
+          if (snap.exists) window.CPLA_CLASSID = snap.data().classId || null;
+        } catch(e){ /* offline: classId stays null */ }
+      }
+      document.querySelectorAll('.assess-note[data-auth]').forEach(function(n){
+        n.textContent = user ? '' : 'Sign in to submit this assessment for grading.';
+      });
+    });
+  }
+
+  window.submitAssessment = async function(blockId){
+    var block = document.getElementById(blockId);
+    if (!block) return;
+    var lessonId = block.getAttribute('data-lesson') || '';
+    var title    = block.getAttribute('data-title') || ('Lesson ' + lessonId + ' Assessment');
+    var correct  = (block.getAttribute('data-correct')||'').split(',').filter(function(s){return s!=='';}).map(Number);
+
+    // --- grade multiple choice ---
+    var score = 0, answered = 0;
+    for (var i=0;i<correct.length;i++){
+      var opts = block.querySelectorAll('input[name="'+blockId+'-q'+i+'"]');
+      opts.forEach(function(o){ o.closest('.qopt-i').classList.remove('correct','incorrect'); });
+      var sel = block.querySelector('input[name="'+blockId+'-q'+i+'"]:checked');
+      if (sel){
+        answered++;
+        var v = parseInt(sel.value,10);
+        if (v === correct[i]){ score++; sel.closest('.qopt-i').classList.add('correct'); }
+        else {
+          sel.closest('.qopt-i').classList.add('incorrect');
+          var right = block.querySelector('input[name="'+blockId+'-q'+i+'"][value="'+correct[i]+'"]');
+          if (right) right.closest('.qopt-i').classList.add('correct');
+        }
+      }
+    }
+    var total = correct.length || 1;
+    var pct = Math.round((score/total)*100);
+    var pass = pct >= PASS;
+
+    // --- collect short answers ---
+    var shortAnswers = [];
+    block.querySelectorAll('textarea.qtextarea').forEach(function(t){
+      shortAnswers.push({ q: t.getAttribute('data-qn')||'', prompt: t.getAttribute('data-prompt')||'', text: t.value.trim() });
+    });
+
+    // reveal printed answer key for review
+    var ak = block.querySelector('.ak'); if (ak) ak.style.display = '';
+
+    var res = block.querySelector('.assess-result');
+    var user = window.CPLA_USER;
+    var saveMsg = '';
+
+    if (user){
+      try {
+        await db.collection('progress').doc(user.uid + '_' + lessonId).set({
+          userId: user.uid, lessonId: lessonId,
+          quizScore: pct, assessmentStatus: 'submitted',
+          assessmentSubmittedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+        await db.collection('submissions').add({
+          studentId: user.uid, classId: window.CPLA_CLASSID || null,
+          lessonId: lessonId, deliverableTitle: title, method: 'assessment',
+          mcScore: pct, mcCorrect: score, mcTotal: total, mcPassed: pass,
+          shortAnswers: shortAnswers,
+          status: 'submitted',
+          grade: null, score: null, feedback: '', gradedBy: null, gradedAt: null,
+          submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        saveMsg = 'Submitted to your instructor for grading.';
+      } catch(e){
+        console.error('Assessment submit failed:', e);
+        saveMsg = 'Your answers were graded, but saving to your record failed. Please try again.';
+      }
+    } else {
+      saveMsg = '<a href="/login.html" style="color:inherit;text-decoration:underline;">Sign in</a> to save this submission to your record for grading.';
+    }
+
+    res.style.display = 'block';
+    res.className = 'assess-result ' + (pass ? 'pass' : 'fail');
+    res.innerHTML =
+      '<div class="ar-score">' + pct + '% \u2014 ' + (pass ? 'Passed' : 'Not yet') + '</div>' +
+      '<div>' + (pass
+        ? 'You passed the knowledge check (' + score + '/' + total + ' correct). '
+        : 'You need ' + PASS + '% to pass the multiple-choice section (' + score + '/' + total + ' correct). Review the lesson and try again. ') +
+      (shortAnswers.length ? 'Your written answers were recorded for instructor review. ' : '') +
+      saveMsg + '</div>';
+
+    var sub = block.querySelector('.assess-submit');
+    var rty = block.querySelector('.assess-retry');
+    if (sub) sub.style.display = 'none';
+    if (rty) rty.style.display = 'inline-flex';
+    if (res.scrollIntoView) res.scrollIntoView({behavior:'smooth', block:'nearest'});
+  };
+
+  window.retryAssessment = function(blockId){
+    var block = document.getElementById(blockId); if (!block) return;
+    block.querySelectorAll('.qopt-i').forEach(function(o){ o.classList.remove('correct','incorrect'); });
+    block.querySelectorAll('input[type=radio]').forEach(function(r){ r.checked = false; });
+    var ak = block.querySelector('.ak'); if (ak) ak.style.display = 'none';
+    var res = block.querySelector('.assess-result'); if (res) res.style.display = 'none';
+    var sub = block.querySelector('.assess-submit'); if (sub) sub.style.display = 'inline-flex';
+    var rty = block.querySelector('.assess-retry'); if (rty) rty.style.display = 'none';
+  };
+})();
+</script>
+
 </body>
 </html>

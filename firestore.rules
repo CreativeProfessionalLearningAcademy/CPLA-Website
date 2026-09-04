@@ -48,6 +48,23 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
+    // ---------- submissions ----------
+    // A student turns in a graded deliverable — including the interactive
+    // lesson-assessment (method:"assessment"): auto-graded multiple choice
+    // plus short-answer responses awaiting instructor grading.
+    // Student creates/reads their own; the instructor who teaches the class
+    // reads and grades (updates); admin reads/writes all. Mirrors
+    // PROGRESS_TRACKING_DATA_MODEL.md §3.1 / §6.
+    match /submissions/{subId} {
+      allow create: if isAdmin()
+                    || (isSignedIn() && request.resource.data.studentId == request.auth.uid);
+      allow read:   if isAdmin()
+                    || (isSignedIn() && resource.data.studentId == request.auth.uid)
+                    || teachesClass(resource.data.classId);
+      allow update: if isAdmin() || teachesClass(resource.data.classId);
+      allow delete: if isAdmin();
+    }
+
     // ---------- assessments ----------
     // One non-scoring Learning Profile per student; doc ID == student uid.
     // Student reads/writes their own; the instructor who teaches their class

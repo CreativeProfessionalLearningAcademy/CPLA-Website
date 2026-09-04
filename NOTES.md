@@ -2,6 +2,20 @@
 
 ---
 
+## Interactive lesson assessments — the standard
+
+All lesson-module assessments are interactive and gradable: multiple choice is
+auto-graded (80% to pass) and short answers are captured for instructor grading.
+Applied to every Volume 1 module (Lessons 1.1–1.30). To author new lessons,
+follow **[`lessons/ASSESSMENT_STANDARD.md`](lessons/ASSESSMENT_STANDARD.md)** and
+copy from **`lessons/_assessment-template.html`**. Requires the `submissions`
+collection rule in `firestore.rules` (deploy it) and a signed-in student.
+
+**Open content follow-up:** the migrated V1 answer keys skew heavily to option B
+— have an SME verify each key and redistribute correct answers across A–D.
+
+---
+
 ## Filename Validation — Upgrade to Option B when registration is built
 
 **Current behavior (Option A):**

@@ -173,6 +173,29 @@ p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
   .tg,.sh,.balance-row,.align-types,.prox-demo{grid-template-columns:1fr;}
   .hero::before{display:none;}
 }
+
+/* ===== INTERACTIVE ASSESSMENT (added) ===== */
+.qopt-i{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;border:1px solid var(--rule);border-radius:8px;margin-top:8px;cursor:pointer;background:#fff;transition:all .15s;font-size:13px;line-height:1.5;}
+.qopt-i:hover{border-color:var(--mod);background:var(--ml);}
+.qopt-i input{margin-top:3px;flex-shrink:0;accent-color:var(--mod);}
+.qopt-i.correct{border-color:var(--green);background:var(--gnl);}
+.qopt-i.incorrect{border-color:var(--accent);background:var(--al);}
+.qopt-i.correct span::after{content:" \2713";color:var(--green);font-weight:600;}
+.qtextarea{width:100%;margin-top:10px;min-height:96px;border:1px solid var(--rule);border-radius:8px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.6;color:var(--ink);background:#fff;resize:vertical;}
+.qtextarea:focus{outline:none;border-color:var(--mod);box-shadow:0 0 0 3px var(--ml);}
+.assess-actions{display:flex;align-items:center;gap:10px;margin-top:22px;padding-top:18px;border-top:1px solid var(--rule);flex-wrap:wrap;}
+.assess-submit{background:var(--ink);color:#faf7f2;border:none;border-radius:8px;padding:12px 24px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-family:'DM Sans',sans-serif;transition:opacity .2s;}
+.assess-submit:hover{opacity:.9;}
+.assess-submit:disabled{opacity:.5;cursor:default;}
+.assess-retry{background:none;border:1px solid var(--rule);color:var(--mid);border-radius:8px;padding:11px 18px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:none;}
+.assess-note{font-size:12px;color:var(--mid);}
+.assess-result{display:none;border-radius:8px;padding:15px 17px;margin-top:16px;font-size:13px;line-height:1.6;}
+.assess-result.pass{background:var(--gnl);border:1px solid #b6d9a8;}
+.assess-result.fail{background:var(--al);border:1px solid #f0c4b8;}
+.assess-result .ar-score{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:4px;}
+.assess-result.pass .ar-score{color:var(--green);}
+.assess-result.fail .ar-score{color:var(--accent);}
+.ak{transition:all .2s;}
 </style>
 </head>
 <body>
@@ -362,48 +385,48 @@ p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
   </div>
 </div></div>
 
-<div id="l12-ass" class="tc"><div class="wrap">
-  <div class="sl">Lesson 1.12 Assessment</div>
-  <h2>Typeface Classification — Knowledge Check</h2>
-  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
-    <div class="qi"><div class="qn">Q01</div><div class="qt">A typeface with small strokes at the ends of its letterforms, communicating tradition and authority, belongs to which classification?</div><div class="qo">
-      <div class="qop">Sans-serif</div>
-      <div class="qop">Serif</div>
-      <div class="qop">Geometric</div>
-      <div class="qop">Display</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q02</div><div class="qt">Why should display and script typefaces never be used for body text?</div><div class="qo">
-      <div class="qop">They are more expensive to license than serif and sans-serif typefaces</div>
-      <div class="qop">They are designed for large-size impact and become illegible and exhausting at body-text sizes and lengths</div>
-      <div class="qop">They are only available in a limited range of weights</div>
-      <div class="qop">They cannot be reproduced accurately in print</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q03</div><div class="qt">Luxury fashion brands overwhelmingly use modern serifs (like Didot) because:</div><div class="qo">
-      <div class="qop">Modern serifs are the easiest typefaces to read at small sizes</div>
-      <div class="qop">The extreme contrast between hairline-thin and thick strokes communicates refinement, exclusivity, and high cost</div>
-      <div class="qop">Modern serifs are the oldest typefaces and signal heritage</div>
-      <div class="qop">Modern serifs are required by fashion industry standards</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q04</div><div class="qt">A geometric sans-serif (like Futura) is built from pure geometric forms and communicates:</div><div class="qo">
-      <div class="qop">Warmth, tradition, and humanist craft</div>
-      <div class="qop">Modernity, rationality, and architectural precision</div>
-      <div class="qop">Elegance, formality, and personal expression</div>
-      <div class="qop">Boldness, impact, and sturdy presence</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q05</div><div class="qt">A daycare flyer set in a high-contrast modern serif represents:</div><div class="qo">
-      <div class="qop">An appropriate choice — modern serifs are versatile across all contexts</div>
-      <div class="qop">A classification mismatch — the cold, formal sophistication of a modern serif contradicts the warmth and playfulness a daycare audience needs</div>
-      <div class="qop">A technically correct choice limited only by color selection</div>
-      <div class="qop">An acceptable choice as long as the typeface is legible</div>
-    </div></div>
-    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
-  </div>
-  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
-    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.12: which two typefaces had the most distinctive voices? Describe the specific letterform features that create each one's distinctiveness.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q07</div><div class="qt">A new financial-technology startup wants to feel both trustworthy (like an established bank) and modern (like a tech company). Which classification(s) would you recommend, and how would you balance the two communication goals?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q08</div><div class="qt">Connect typeface classification to channel theory (Lesson 1.4). How is the typeface one of the five communication channels, and what happens when its classification contradicts the other channels?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-  </div>
+<div class="tc" data-correct="1,1,1,1,1" data-lesson="1.12" data-title="Lesson 1.12 Assessment" id="l12-ass"><div class="wrap">
+<div class="sl">Lesson 1.12 Assessment</div>
+<h2>Typeface Classification — Knowledge Check</h2>
+<div class="ab"><h4>Part 1 — Multiple Choice</h4>
+<div class="qi"><div class="qn">Q01</div><div class="qt">A typeface with small strokes at the ends of its letterforms, communicating tradition and authority, belongs to which classification?</div><div class="qo">
+<label class="qopt-i"><input name="l12-ass-q0" type="radio" value="0"/><span>Sans-serif</span></label>
+<label class="qopt-i"><input name="l12-ass-q0" type="radio" value="1"/><span>Serif</span></label>
+<label class="qopt-i"><input name="l12-ass-q0" type="radio" value="2"/><span>Geometric</span></label>
+<label class="qopt-i"><input name="l12-ass-q0" type="radio" value="3"/><span>Display</span></label>
 </div></div>
+<div class="qi"><div class="qn">Q02</div><div class="qt">Why should display and script typefaces never be used for body text?</div><div class="qo">
+<label class="qopt-i"><input name="l12-ass-q1" type="radio" value="0"/><span>They are more expensive to license than serif and sans-serif typefaces</span></label>
+<label class="qopt-i"><input name="l12-ass-q1" type="radio" value="1"/><span>They are designed for large-size impact and become illegible and exhausting at body-text sizes and lengths</span></label>
+<label class="qopt-i"><input name="l12-ass-q1" type="radio" value="2"/><span>They are only available in a limited range of weights</span></label>
+<label class="qopt-i"><input name="l12-ass-q1" type="radio" value="3"/><span>They cannot be reproduced accurately in print</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q03</div><div class="qt">Luxury fashion brands overwhelmingly use modern serifs (like Didot) because:</div><div class="qo">
+<label class="qopt-i"><input name="l12-ass-q2" type="radio" value="0"/><span>Modern serifs are the easiest typefaces to read at small sizes</span></label>
+<label class="qopt-i"><input name="l12-ass-q2" type="radio" value="1"/><span>The extreme contrast between hairline-thin and thick strokes communicates refinement, exclusivity, and high cost</span></label>
+<label class="qopt-i"><input name="l12-ass-q2" type="radio" value="2"/><span>Modern serifs are the oldest typefaces and signal heritage</span></label>
+<label class="qopt-i"><input name="l12-ass-q2" type="radio" value="3"/><span>Modern serifs are required by fashion industry standards</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q04</div><div class="qt">A geometric sans-serif (like Futura) is built from pure geometric forms and communicates:</div><div class="qo">
+<label class="qopt-i"><input name="l12-ass-q3" type="radio" value="0"/><span>Warmth, tradition, and humanist craft</span></label>
+<label class="qopt-i"><input name="l12-ass-q3" type="radio" value="1"/><span>Modernity, rationality, and architectural precision</span></label>
+<label class="qopt-i"><input name="l12-ass-q3" type="radio" value="2"/><span>Elegance, formality, and personal expression</span></label>
+<label class="qopt-i"><input name="l12-ass-q3" type="radio" value="3"/><span>Boldness, impact, and sturdy presence</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q05</div><div class="qt">A daycare flyer set in a high-contrast modern serif represents:</div><div class="qo">
+<label class="qopt-i"><input name="l12-ass-q4" type="radio" value="0"/><span>An appropriate choice — modern serifs are versatile across all contexts</span></label>
+<label class="qopt-i"><input name="l12-ass-q4" type="radio" value="1"/><span>A classification mismatch — the cold, formal sophistication of a modern serif contradicts the warmth and playfulness a daycare audience needs</span></label>
+<label class="qopt-i"><input name="l12-ass-q4" type="radio" value="2"/><span>A technically correct choice limited only by color selection</span></label>
+<label class="qopt-i"><input name="l12-ass-q4" type="radio" value="3"/><span>An acceptable choice as long as the typeface is legible</span></label>
+</div></div>
+<div class="ak" style="display:none;"><p><strong>Answers:</strong> 1-B  ·  2-B  ·  3-B  ·  4-B  ·  5-B</p></div>
+</div>
+<div class="ab"><h4>Part 2 — Applied Understanding</h4>
+<div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.12: which two typefaces had the most distinctive voices? Describe the specific letterform features that create each one's distinctiveness.</div><textarea class="qtextarea" data-prompt="From Exercise 1.12: which two typefaces had the most distinctive voices? Describe the specific letterform features that create each one's distinctiveness." data-qn="Q06" name="l12-ass-sa0" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q07</div><div class="qt">A new financial-technology startup wants to feel both trustworthy (like an established bank) and modern (like a tech company). Which classification(s) would you recommend, and how would you balance the two communication goals?</div><textarea class="qtextarea" data-prompt="A new financial-technology startup wants to feel both trustworthy (like an established bank) and modern (like a tech company). Which classification(s) would you recommend, and how would you balance the two communication goals?" data-qn="Q07" name="l12-ass-sa1" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q08</div><div class="qt">Connect typeface classification to channel theory (Lesson 1.4). How is the typeface one of the five communication channels, and what happens when its classification contradicts the other channels?</div><textarea class="qtextarea" data-prompt="Connect typeface classification to channel theory (Lesson 1.4). How is the typeface one of the five communication channels, and what happens when its classification contradicts the other channels?" data-qn="Q08" name="l12-ass-sa2" placeholder="Type your answer here..." rows="4"></textarea></div>
+</div>
+<div class="assess-actions"><button class="assess-submit" onclick="submitAssessment('l12-ass')">Submit assessment</button><button class="assess-retry" onclick="retryAssessment('l12-ass')">Try again</button><span class="assess-note" data-auth=""></span></div><div class="assess-result"></div></div></div>
 </div><!-- end l12 -->
 
 <!-- ═══════════════════════ LESSON 1.13 ═══════════════════════ -->
@@ -583,48 +606,48 @@ p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
   </div>
 </div></div>
 
-<div id="l13-ass" class="tc"><div class="wrap">
-  <div class="sl">Lesson 1.13 Assessment</div>
-  <h2>Type Anatomy — Knowledge Check</h2>
-  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
-    <div class="qi"><div class="qn">Q01</div><div class="qt">Two typefaces set at the same point size appear different in size primarily because of differences in:</div><div class="qo">
-      <div class="qop">Their cap height — the height of capital letters</div>
-      <div class="qop">Their x-height — the height of lowercase letters, which determines perceived size and small-size legibility</div>
-      <div class="qop">Their leading — the space between lines</div>
-      <div class="qop">Their tracking — the spacing between letters</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q02</div><div class="qt">The baseline is:</div><div class="qo">
-      <div class="qop">The bottom edge of the lowest descender in a line of text</div>
-      <div class="qop">The invisible line on which letters sit — the reference for all vertical text alignment</div>
-      <div class="qop">The horizontal center line of a capital letter</div>
-      <div class="qop">The top edge of the x-height</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q03</div><div class="qt">Kerning differs from tracking in that:</div><div class="qo">
-      <div class="qop">Kerning adjusts vertical spacing while tracking adjusts horizontal spacing</div>
-      <div class="qop">Kerning adjusts the space between two specific adjacent letters, while tracking applies uniform spacing across a range of text</div>
-      <div class="qop">Kerning is used only for body text while tracking is used only for headlines</div>
-      <div class="qop">Kerning and tracking are two names for the same adjustment</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q04</div><div class="qt">Leading is set at 1.4–1.6× the font size for body text because:</div><div class="qo">
-      <div class="qop">This is the maximum spacing browsers and print software will allow</div>
-      <div class="qop">This range provides comfortable reading space — tighter crowds the lines, looser destroys paragraph cohesion</div>
-      <div class="qop">This ratio matches the golden ratio used throughout design</div>
-      <div class="qop">Leading has no measurable effect on readability and the value is arbitrary</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q05</div><div class="qt">A typeface whose counters "close up" at small sizes — the 'e' filling into a blob — has a legibility problem related to its:</div><div class="qo">
-      <div class="qop">Excessive leading</div>
-      <div class="qop">Counters and apertures being too small or closed — reducing legibility at small sizes</div>
-      <div class="qop">Cap height being taller than its ascenders</div>
-      <div class="qop">Negative tracking applied to the body text</div>
-    </div></div>
-    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
-  </div>
-  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
-    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.13: describe how changing leading from 100% to 150% changed the reading experience of your paragraph. Use the correct terminology.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q07</div><div class="qt">A client is choosing between two typefaces for a mobile app interface. Using anatomical vocabulary, explain which features you would evaluate to predict which will be more legible at small screen sizes.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q08</div><div class="qt">Why is having the precise anatomical vocabulary described as "the prerequisite for deliberate control" rather than just academic knowledge? Give a specific example of a decision the vocabulary enables.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-  </div>
+<div class="tc" data-correct="1,1,1,1,1" data-lesson="1.13" data-title="Lesson 1.13 Assessment" id="l13-ass"><div class="wrap">
+<div class="sl">Lesson 1.13 Assessment</div>
+<h2>Type Anatomy — Knowledge Check</h2>
+<div class="ab"><h4>Part 1 — Multiple Choice</h4>
+<div class="qi"><div class="qn">Q01</div><div class="qt">Two typefaces set at the same point size appear different in size primarily because of differences in:</div><div class="qo">
+<label class="qopt-i"><input name="l13-ass-q0" type="radio" value="0"/><span>Their cap height — the height of capital letters</span></label>
+<label class="qopt-i"><input name="l13-ass-q0" type="radio" value="1"/><span>Their x-height — the height of lowercase letters, which determines perceived size and small-size legibility</span></label>
+<label class="qopt-i"><input name="l13-ass-q0" type="radio" value="2"/><span>Their leading — the space between lines</span></label>
+<label class="qopt-i"><input name="l13-ass-q0" type="radio" value="3"/><span>Their tracking — the spacing between letters</span></label>
 </div></div>
+<div class="qi"><div class="qn">Q02</div><div class="qt">The baseline is:</div><div class="qo">
+<label class="qopt-i"><input name="l13-ass-q1" type="radio" value="0"/><span>The bottom edge of the lowest descender in a line of text</span></label>
+<label class="qopt-i"><input name="l13-ass-q1" type="radio" value="1"/><span>The invisible line on which letters sit — the reference for all vertical text alignment</span></label>
+<label class="qopt-i"><input name="l13-ass-q1" type="radio" value="2"/><span>The horizontal center line of a capital letter</span></label>
+<label class="qopt-i"><input name="l13-ass-q1" type="radio" value="3"/><span>The top edge of the x-height</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q03</div><div class="qt">Kerning differs from tracking in that:</div><div class="qo">
+<label class="qopt-i"><input name="l13-ass-q2" type="radio" value="0"/><span>Kerning adjusts vertical spacing while tracking adjusts horizontal spacing</span></label>
+<label class="qopt-i"><input name="l13-ass-q2" type="radio" value="1"/><span>Kerning adjusts the space between two specific adjacent letters, while tracking applies uniform spacing across a range of text</span></label>
+<label class="qopt-i"><input name="l13-ass-q2" type="radio" value="2"/><span>Kerning is used only for body text while tracking is used only for headlines</span></label>
+<label class="qopt-i"><input name="l13-ass-q2" type="radio" value="3"/><span>Kerning and tracking are two names for the same adjustment</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q04</div><div class="qt">Leading is set at 1.4–1.6× the font size for body text because:</div><div class="qo">
+<label class="qopt-i"><input name="l13-ass-q3" type="radio" value="0"/><span>This is the maximum spacing browsers and print software will allow</span></label>
+<label class="qopt-i"><input name="l13-ass-q3" type="radio" value="1"/><span>This range provides comfortable reading space — tighter crowds the lines, looser destroys paragraph cohesion</span></label>
+<label class="qopt-i"><input name="l13-ass-q3" type="radio" value="2"/><span>This ratio matches the golden ratio used throughout design</span></label>
+<label class="qopt-i"><input name="l13-ass-q3" type="radio" value="3"/><span>Leading has no measurable effect on readability and the value is arbitrary</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q05</div><div class="qt">A typeface whose counters "close up" at small sizes — the 'e' filling into a blob — has a legibility problem related to its:</div><div class="qo">
+<label class="qopt-i"><input name="l13-ass-q4" type="radio" value="0"/><span>Excessive leading</span></label>
+<label class="qopt-i"><input name="l13-ass-q4" type="radio" value="1"/><span>Counters and apertures being too small or closed — reducing legibility at small sizes</span></label>
+<label class="qopt-i"><input name="l13-ass-q4" type="radio" value="2"/><span>Cap height being taller than its ascenders</span></label>
+<label class="qopt-i"><input name="l13-ass-q4" type="radio" value="3"/><span>Negative tracking applied to the body text</span></label>
+</div></div>
+<div class="ak" style="display:none;"><p><strong>Answers:</strong> 1-B  ·  2-B  ·  3-B  ·  4-B  ·  5-B</p></div>
+</div>
+<div class="ab"><h4>Part 2 — Applied Understanding</h4>
+<div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.13: describe how changing leading from 100% to 150% changed the reading experience of your paragraph. Use the correct terminology.</div><textarea class="qtextarea" data-prompt="From Exercise 1.13: describe how changing leading from 100% to 150% changed the reading experience of your paragraph. Use the correct terminology." data-qn="Q06" name="l13-ass-sa0" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q07</div><div class="qt">A client is choosing between two typefaces for a mobile app interface. Using anatomical vocabulary, explain which features you would evaluate to predict which will be more legible at small screen sizes.</div><textarea class="qtextarea" data-prompt="A client is choosing between two typefaces for a mobile app interface. Using anatomical vocabulary, explain which features you would evaluate to predict which will be more legible at small screen sizes." data-qn="Q07" name="l13-ass-sa1" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q08</div><div class="qt">Why is having the precise anatomical vocabulary described as "the prerequisite for deliberate control" rather than just academic knowledge? Give a specific example of a decision the vocabulary enables.</div><textarea class="qtextarea" data-prompt='Why is having the precise anatomical vocabulary described as "the prerequisite for deliberate control" rather than just academic knowledge? Give a specific example of a decision the vocabulary enables.' data-qn="Q08" name="l13-ass-sa2" placeholder="Type your answer here..." rows="4"></textarea></div>
+</div>
+<div class="assess-actions"><button class="assess-submit" onclick="submitAssessment('l13-ass')">Submit assessment</button><button class="assess-retry" onclick="retryAssessment('l13-ass')">Try again</button><span class="assess-note" data-auth=""></span></div><div class="assess-result"></div></div></div>
 </div><!-- end l13 -->
 
 <!-- ═══════════════════════ LESSON 1.14 ═══════════════════════ -->
@@ -805,48 +828,48 @@ p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
   </div>
 </div></div>
 
-<div id="l14-ass" class="tc"><div class="wrap">
-  <div class="sl">Lesson 1.14 Assessment</div>
-  <h2>Choosing &amp; Pairing Type — Knowledge Check</h2>
-  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
-    <div class="qi"><div class="qn">Q01</div><div class="qt">The principle "contrast with compatibility" means a type pairing should be:</div><div class="qo">
-      <div class="qop">As similar as possible so the two typefaces blend seamlessly</div>
-      <div class="qop">Clearly different in role and feel, but sharing underlying qualities that make them belong together</div>
-      <div class="qop">As different as possible to maximize visual interest</div>
-      <div class="qop">Limited to typefaces from the same foundry regardless of style</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q02</div><div class="qt">A "superfamily" pairing is reliable because:</div><div class="qo">
-      <div class="qop">It uses only typefaces that are free to license</div>
-      <div class="qop">The serif and sans-serif were designed by the same designer as companions — sharing proportions and design logic that guarantee harmony</div>
-      <div class="qop">It limits the design to a single typeface, eliminating conflict</div>
-      <div class="qop">Superfamilies are the only typefaces with sufficient weights for hierarchy</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q03</div><div class="qt">Two sans-serifs that are "almost but not quite alike" create a pairing problem because:</div><div class="qo">
-      <div class="qop">Sans-serifs can never be paired with each other</div>
-      <div class="qop">The eye registers a difference it cannot justify — the pairing reads as a mistake rather than a deliberate decision</div>
-      <div class="qop">Two sans-serifs always compete for attention</div>
-      <div class="qop">Sans-serifs from different eras cannot share a page</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q04</div><div class="qt">The professional guideline for the number of typefaces in most designs is:</div><div class="qo">
-      <div class="qop">One typeface only — multiple typefaces always create conflict</div>
-      <div class="qop">Two typefaces (three at most), each with a clear, distinct role</div>
-      <div class="qop">Four to five typefaces to create rich visual variety</div>
-      <div class="qop">As many as needed to give each content type its own typeface</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q05</div><div class="qt">When you feel the urge to add a fourth typeface to a design, the recommended solution is usually to:</div><div class="qo">
-      <div class="qop">Add the fourth typeface — four is acceptable for complex designs</div>
-      <div class="qop">Use a different weight or style of a typeface you already have, rather than introducing a new one</div>
-      <div class="qop">Remove all existing typefaces and start with a fresh set of four</div>
-      <div class="qop">Replace the body typeface with the new one to keep the count at three</div>
-    </div></div>
-    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
-  </div>
-  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
-    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.14: which of your three pairings was strongest, and why did it beat the others? Reference the contrast and compatibility of the winning pairing specifically.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q07</div><div class="qt">A design uses two ornate display typefaces — one for the headline and one for the subheadline. Diagnose the conflict type and prescribe a specific fix.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q08</div><div class="qt">Connect type pairing to the repetition principle (Lesson 1.11). How does limiting the number of typefaces support repetition — and how does adding too many typefaces undermine the unity repetition creates?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-  </div>
+<div class="tc" data-correct="1,1,1,1,1" data-lesson="1.14" data-title="Lesson 1.14 Assessment" id="l14-ass"><div class="wrap">
+<div class="sl">Lesson 1.14 Assessment</div>
+<h2>Choosing &amp; Pairing Type — Knowledge Check</h2>
+<div class="ab"><h4>Part 1 — Multiple Choice</h4>
+<div class="qi"><div class="qn">Q01</div><div class="qt">The principle "contrast with compatibility" means a type pairing should be:</div><div class="qo">
+<label class="qopt-i"><input name="l14-ass-q0" type="radio" value="0"/><span>As similar as possible so the two typefaces blend seamlessly</span></label>
+<label class="qopt-i"><input name="l14-ass-q0" type="radio" value="1"/><span>Clearly different in role and feel, but sharing underlying qualities that make them belong together</span></label>
+<label class="qopt-i"><input name="l14-ass-q0" type="radio" value="2"/><span>As different as possible to maximize visual interest</span></label>
+<label class="qopt-i"><input name="l14-ass-q0" type="radio" value="3"/><span>Limited to typefaces from the same foundry regardless of style</span></label>
 </div></div>
+<div class="qi"><div class="qn">Q02</div><div class="qt">A "superfamily" pairing is reliable because:</div><div class="qo">
+<label class="qopt-i"><input name="l14-ass-q1" type="radio" value="0"/><span>It uses only typefaces that are free to license</span></label>
+<label class="qopt-i"><input name="l14-ass-q1" type="radio" value="1"/><span>The serif and sans-serif were designed by the same designer as companions — sharing proportions and design logic that guarantee harmony</span></label>
+<label class="qopt-i"><input name="l14-ass-q1" type="radio" value="2"/><span>It limits the design to a single typeface, eliminating conflict</span></label>
+<label class="qopt-i"><input name="l14-ass-q1" type="radio" value="3"/><span>Superfamilies are the only typefaces with sufficient weights for hierarchy</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q03</div><div class="qt">Two sans-serifs that are "almost but not quite alike" create a pairing problem because:</div><div class="qo">
+<label class="qopt-i"><input name="l14-ass-q2" type="radio" value="0"/><span>Sans-serifs can never be paired with each other</span></label>
+<label class="qopt-i"><input name="l14-ass-q2" type="radio" value="1"/><span>The eye registers a difference it cannot justify — the pairing reads as a mistake rather than a deliberate decision</span></label>
+<label class="qopt-i"><input name="l14-ass-q2" type="radio" value="2"/><span>Two sans-serifs always compete for attention</span></label>
+<label class="qopt-i"><input name="l14-ass-q2" type="radio" value="3"/><span>Sans-serifs from different eras cannot share a page</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q04</div><div class="qt">The professional guideline for the number of typefaces in most designs is:</div><div class="qo">
+<label class="qopt-i"><input name="l14-ass-q3" type="radio" value="0"/><span>One typeface only — multiple typefaces always create conflict</span></label>
+<label class="qopt-i"><input name="l14-ass-q3" type="radio" value="1"/><span>Two typefaces (three at most), each with a clear, distinct role</span></label>
+<label class="qopt-i"><input name="l14-ass-q3" type="radio" value="2"/><span>Four to five typefaces to create rich visual variety</span></label>
+<label class="qopt-i"><input name="l14-ass-q3" type="radio" value="3"/><span>As many as needed to give each content type its own typeface</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q05</div><div class="qt">When you feel the urge to add a fourth typeface to a design, the recommended solution is usually to:</div><div class="qo">
+<label class="qopt-i"><input name="l14-ass-q4" type="radio" value="0"/><span>Add the fourth typeface — four is acceptable for complex designs</span></label>
+<label class="qopt-i"><input name="l14-ass-q4" type="radio" value="1"/><span>Use a different weight or style of a typeface you already have, rather than introducing a new one</span></label>
+<label class="qopt-i"><input name="l14-ass-q4" type="radio" value="2"/><span>Remove all existing typefaces and start with a fresh set of four</span></label>
+<label class="qopt-i"><input name="l14-ass-q4" type="radio" value="3"/><span>Replace the body typeface with the new one to keep the count at three</span></label>
+</div></div>
+<div class="ak" style="display:none;"><p><strong>Answers:</strong> 1-B  ·  2-B  ·  3-B  ·  4-B  ·  5-B</p></div>
+</div>
+<div class="ab"><h4>Part 2 — Applied Understanding</h4>
+<div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.14: which of your three pairings was strongest, and why did it beat the others? Reference the contrast and compatibility of the winning pairing specifically.</div><textarea class="qtextarea" data-prompt="From Exercise 1.14: which of your three pairings was strongest, and why did it beat the others? Reference the contrast and compatibility of the winning pairing specifically." data-qn="Q06" name="l14-ass-sa0" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q07</div><div class="qt">A design uses two ornate display typefaces — one for the headline and one for the subheadline. Diagnose the conflict type and prescribe a specific fix.</div><textarea class="qtextarea" data-prompt="A design uses two ornate display typefaces — one for the headline and one for the subheadline. Diagnose the conflict type and prescribe a specific fix." data-qn="Q07" name="l14-ass-sa1" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q08</div><div class="qt">Connect type pairing to the repetition principle (Lesson 1.11). How does limiting the number of typefaces support repetition — and how does adding too many typefaces undermine the unity repetition creates?</div><textarea class="qtextarea" data-prompt="Connect type pairing to the repetition principle (Lesson 1.11). How does limiting the number of typefaces support repetition — and how does adding too many typefaces undermine the unity repetition creates?" data-qn="Q08" name="l14-ass-sa2" placeholder="Type your answer here..." rows="4"></textarea></div>
+</div>
+<div class="assess-actions"><button class="assess-submit" onclick="submitAssessment('l14-ass')">Submit assessment</button><button class="assess-retry" onclick="retryAssessment('l14-ass')">Try again</button><span class="assess-note" data-auth=""></span></div><div class="assess-result"></div></div></div>
 </div><!-- end l14 -->
 
 <!-- ═══════════════════════ LESSON 1.15 ═══════════════════════ -->
@@ -1064,48 +1087,48 @@ p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
   </div>
 </div></div>
 
-<div id="l15-ass" class="tc"><div class="wrap">
-  <div class="sl">Lesson 1.15 Assessment</div>
-  <h2>Typographic Hierarchy — Knowledge Check</h2>
-  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
-    <div class="qi"><div class="qn">Q01</div><div class="qt">The most common cause of typographic hierarchy failure is:</div><div class="qo">
-      <div class="qop">Using too many different typefaces in one layout</div>
-      <div class="qop">Timid differentiation — the size gaps, weight contrast, and spacing differences between levels are too small to be visible at a glance</div>
-      <div class="qop">Using a serif typeface for the body text</div>
-      <div class="qop">Choosing colors that do not meet accessibility standards</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q02</div><div class="qt">A type scale is:</div><div class="qo">
-      <div class="qop">A tool for measuring the physical size of printed type</div>
-      <div class="qop">A consistent set of sizes derived from a base size and a ratio — guaranteeing visible, harmonious differences between hierarchy levels</div>
-      <div class="qop">The maximum number of typefaces allowed in a single design</div>
-      <div class="qop">The range of weights available within a single typeface family</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q03</div><div class="qt">The four typographic hierarchy tools are:</div><div class="qo">
-      <div class="qop">Color, texture, position, and alignment</div>
-      <div class="qop">Size, weight, style, and space</div>
-      <div class="qop">Kerning, tracking, leading, and baseline</div>
-      <div class="qop">Serif, sans-serif, slab, and script</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q04</div><div class="qt">Style variation (italic, small caps, different family) is best used to:</div><div class="qo">
-      <div class="qop">Make all hierarchy levels appear the same importance</div>
-      <div class="qop">Signal a distinct role — such as italics for quotes or small caps for labels — rather than just signaling importance</div>
-      <div class="qop">Replace the need for size and weight differences entirely</div>
-      <div class="qop">Add visual decoration to text that lacks personality</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q05</div><div class="qt">The squint test verifies typographic hierarchy by:</div><div class="qo">
-      <div class="qop">Measuring the exact contrast ratio between text and background</div>
-      <div class="qop">Blurring the layout to confirm the most important element still dominates and levels remain distinguishable even when words are unreadable</div>
-      <div class="qop">Reducing the layout to grayscale to check value contrast</div>
-      <div class="qop">Counting the number of typefaces used in the composition</div>
-    </div></div>
-    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
-  </div>
-  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
-    <div class="qi"><div class="qn">Q06</div><div class="qt">From the Module 4 capstone: describe your type scale (base size and ratio) and how it ensured visible differentiation between your four hierarchy levels.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q07</div><div class="qt">A layout's headline is only 4pt larger than its body text, set in the same weight. Diagnose the hierarchy problem and prescribe a specific fix using the type scale concept.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q08</div><div class="qt">Explain how this lesson integrated the previous three lessons of Module 4 (classification, anatomy, pairing). Give one specific decision in a typographic hierarchy that requires knowledge from all three.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-  </div>
+<div class="tc" data-correct="1,1,1,1,1" data-lesson="1.15" data-title="Lesson 1.15 Assessment" id="l15-ass"><div class="wrap">
+<div class="sl">Lesson 1.15 Assessment</div>
+<h2>Typographic Hierarchy — Knowledge Check</h2>
+<div class="ab"><h4>Part 1 — Multiple Choice</h4>
+<div class="qi"><div class="qn">Q01</div><div class="qt">The most common cause of typographic hierarchy failure is:</div><div class="qo">
+<label class="qopt-i"><input name="l15-ass-q0" type="radio" value="0"/><span>Using too many different typefaces in one layout</span></label>
+<label class="qopt-i"><input name="l15-ass-q0" type="radio" value="1"/><span>Timid differentiation — the size gaps, weight contrast, and spacing differences between levels are too small to be visible at a glance</span></label>
+<label class="qopt-i"><input name="l15-ass-q0" type="radio" value="2"/><span>Using a serif typeface for the body text</span></label>
+<label class="qopt-i"><input name="l15-ass-q0" type="radio" value="3"/><span>Choosing colors that do not meet accessibility standards</span></label>
 </div></div>
+<div class="qi"><div class="qn">Q02</div><div class="qt">A type scale is:</div><div class="qo">
+<label class="qopt-i"><input name="l15-ass-q1" type="radio" value="0"/><span>A tool for measuring the physical size of printed type</span></label>
+<label class="qopt-i"><input name="l15-ass-q1" type="radio" value="1"/><span>A consistent set of sizes derived from a base size and a ratio — guaranteeing visible, harmonious differences between hierarchy levels</span></label>
+<label class="qopt-i"><input name="l15-ass-q1" type="radio" value="2"/><span>The maximum number of typefaces allowed in a single design</span></label>
+<label class="qopt-i"><input name="l15-ass-q1" type="radio" value="3"/><span>The range of weights available within a single typeface family</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q03</div><div class="qt">The four typographic hierarchy tools are:</div><div class="qo">
+<label class="qopt-i"><input name="l15-ass-q2" type="radio" value="0"/><span>Color, texture, position, and alignment</span></label>
+<label class="qopt-i"><input name="l15-ass-q2" type="radio" value="1"/><span>Size, weight, style, and space</span></label>
+<label class="qopt-i"><input name="l15-ass-q2" type="radio" value="2"/><span>Kerning, tracking, leading, and baseline</span></label>
+<label class="qopt-i"><input name="l15-ass-q2" type="radio" value="3"/><span>Serif, sans-serif, slab, and script</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q04</div><div class="qt">Style variation (italic, small caps, different family) is best used to:</div><div class="qo">
+<label class="qopt-i"><input name="l15-ass-q3" type="radio" value="0"/><span>Make all hierarchy levels appear the same importance</span></label>
+<label class="qopt-i"><input name="l15-ass-q3" type="radio" value="1"/><span>Signal a distinct role — such as italics for quotes or small caps for labels — rather than just signaling importance</span></label>
+<label class="qopt-i"><input name="l15-ass-q3" type="radio" value="2"/><span>Replace the need for size and weight differences entirely</span></label>
+<label class="qopt-i"><input name="l15-ass-q3" type="radio" value="3"/><span>Add visual decoration to text that lacks personality</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q05</div><div class="qt">The squint test verifies typographic hierarchy by:</div><div class="qo">
+<label class="qopt-i"><input name="l15-ass-q4" type="radio" value="0"/><span>Measuring the exact contrast ratio between text and background</span></label>
+<label class="qopt-i"><input name="l15-ass-q4" type="radio" value="1"/><span>Blurring the layout to confirm the most important element still dominates and levels remain distinguishable even when words are unreadable</span></label>
+<label class="qopt-i"><input name="l15-ass-q4" type="radio" value="2"/><span>Reducing the layout to grayscale to check value contrast</span></label>
+<label class="qopt-i"><input name="l15-ass-q4" type="radio" value="3"/><span>Counting the number of typefaces used in the composition</span></label>
+</div></div>
+<div class="ak" style="display:none;"><p><strong>Answers:</strong> 1-B  ·  2-B  ·  3-B  ·  4-B  ·  5-B</p></div>
+</div>
+<div class="ab"><h4>Part 2 — Applied Understanding</h4>
+<div class="qi"><div class="qn">Q06</div><div class="qt">From the Module 4 capstone: describe your type scale (base size and ratio) and how it ensured visible differentiation between your four hierarchy levels.</div><textarea class="qtextarea" data-prompt="From the Module 4 capstone: describe your type scale (base size and ratio) and how it ensured visible differentiation between your four hierarchy levels." data-qn="Q06" name="l15-ass-sa0" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q07</div><div class="qt">A layout's headline is only 4pt larger than its body text, set in the same weight. Diagnose the hierarchy problem and prescribe a specific fix using the type scale concept.</div><textarea class="qtextarea" data-prompt="A layout's headline is only 4pt larger than its body text, set in the same weight. Diagnose the hierarchy problem and prescribe a specific fix using the type scale concept." data-qn="Q07" name="l15-ass-sa1" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q08</div><div class="qt">Explain how this lesson integrated the previous three lessons of Module 4 (classification, anatomy, pairing). Give one specific decision in a typographic hierarchy that requires knowledge from all three.</div><textarea class="qtextarea" data-prompt="Explain how this lesson integrated the previous three lessons of Module 4 (classification, anatomy, pairing). Give one specific decision in a typographic hierarchy that requires knowledge from all three." data-qn="Q08" name="l15-ass-sa2" placeholder="Type your answer here..." rows="4"></textarea></div>
+</div>
+<div class="assess-actions"><button class="assess-submit" onclick="submitAssessment('l15-ass')">Submit assessment</button><button class="assess-retry" onclick="retryAssessment('l15-ass')">Try again</button><span class="assess-note" data-auth=""></span></div><div class="assess-result"></div></div></div>
 </div><!-- end l15 -->
 
 
@@ -1126,5 +1149,135 @@ function showI(id,btn,lid){
   window.scrollTo({top:l.querySelector('.itabs').offsetTop-10,behavior:'smooth'});
 }
 </script>
+
+<!-- Firebase SDK (added for interactive assessments) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="/firebase-config.js"></script>
+<script>
+/* ===== CPLA INTERACTIVE ASSESSMENT ENGINE =====
+   Auto-grades multiple choice (80% to pass) and records the submission for
+   instructor grading of the short-answer portion. Writes:
+     - progress/{uid}_{lessonId}  (student's own quizScore + status)
+     - submissions/{autoId}       (instructor-gradeable record)
+   Short-answer questions are captured verbatim; the instructor grade is final. */
+(function(){
+  var PASS = 80;                 // percent required to pass the MC portion
+  window.CPLA_USER = null;       // firebase user, when signed in
+  window.CPLA_CLASSID = null;    // student's classId, loaded from users doc
+
+  // Capture auth state without forcing a redirect (content stays viewable;
+  // submitting for a grade requires sign-in).
+  if (typeof auth !== 'undefined' && auth && auth.onAuthStateChanged) {
+    auth.onAuthStateChanged(async function(user){
+      window.CPLA_USER = user || null;
+      if (user) {
+        try {
+          var snap = await db.collection('users').doc(user.uid).get();
+          if (snap.exists) window.CPLA_CLASSID = snap.data().classId || null;
+        } catch(e){ /* offline: classId stays null */ }
+      }
+      document.querySelectorAll('.assess-note[data-auth]').forEach(function(n){
+        n.textContent = user ? '' : 'Sign in to submit this assessment for grading.';
+      });
+    });
+  }
+
+  window.submitAssessment = async function(blockId){
+    var block = document.getElementById(blockId);
+    if (!block) return;
+    var lessonId = block.getAttribute('data-lesson') || '';
+    var title    = block.getAttribute('data-title') || ('Lesson ' + lessonId + ' Assessment');
+    var correct  = (block.getAttribute('data-correct')||'').split(',').filter(function(s){return s!=='';}).map(Number);
+
+    // --- grade multiple choice ---
+    var score = 0, answered = 0;
+    for (var i=0;i<correct.length;i++){
+      var opts = block.querySelectorAll('input[name="'+blockId+'-q'+i+'"]');
+      opts.forEach(function(o){ o.closest('.qopt-i').classList.remove('correct','incorrect'); });
+      var sel = block.querySelector('input[name="'+blockId+'-q'+i+'"]:checked');
+      if (sel){
+        answered++;
+        var v = parseInt(sel.value,10);
+        if (v === correct[i]){ score++; sel.closest('.qopt-i').classList.add('correct'); }
+        else {
+          sel.closest('.qopt-i').classList.add('incorrect');
+          var right = block.querySelector('input[name="'+blockId+'-q'+i+'"][value="'+correct[i]+'"]');
+          if (right) right.closest('.qopt-i').classList.add('correct');
+        }
+      }
+    }
+    var total = correct.length || 1;
+    var pct = Math.round((score/total)*100);
+    var pass = pct >= PASS;
+
+    // --- collect short answers ---
+    var shortAnswers = [];
+    block.querySelectorAll('textarea.qtextarea').forEach(function(t){
+      shortAnswers.push({ q: t.getAttribute('data-qn')||'', prompt: t.getAttribute('data-prompt')||'', text: t.value.trim() });
+    });
+
+    // reveal printed answer key for review
+    var ak = block.querySelector('.ak'); if (ak) ak.style.display = '';
+
+    var res = block.querySelector('.assess-result');
+    var user = window.CPLA_USER;
+    var saveMsg = '';
+
+    if (user){
+      try {
+        await db.collection('progress').doc(user.uid + '_' + lessonId).set({
+          userId: user.uid, lessonId: lessonId,
+          quizScore: pct, assessmentStatus: 'submitted',
+          assessmentSubmittedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+        await db.collection('submissions').add({
+          studentId: user.uid, classId: window.CPLA_CLASSID || null,
+          lessonId: lessonId, deliverableTitle: title, method: 'assessment',
+          mcScore: pct, mcCorrect: score, mcTotal: total, mcPassed: pass,
+          shortAnswers: shortAnswers,
+          status: 'submitted',
+          grade: null, score: null, feedback: '', gradedBy: null, gradedAt: null,
+          submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        saveMsg = 'Submitted to your instructor for grading.';
+      } catch(e){
+        console.error('Assessment submit failed:', e);
+        saveMsg = 'Your answers were graded, but saving to your record failed. Please try again.';
+      }
+    } else {
+      saveMsg = '<a href="/login.html" style="color:inherit;text-decoration:underline;">Sign in</a> to save this submission to your record for grading.';
+    }
+
+    res.style.display = 'block';
+    res.className = 'assess-result ' + (pass ? 'pass' : 'fail');
+    res.innerHTML =
+      '<div class="ar-score">' + pct + '% \u2014 ' + (pass ? 'Passed' : 'Not yet') + '</div>' +
+      '<div>' + (pass
+        ? 'You passed the knowledge check (' + score + '/' + total + ' correct). '
+        : 'You need ' + PASS + '% to pass the multiple-choice section (' + score + '/' + total + ' correct). Review the lesson and try again. ') +
+      (shortAnswers.length ? 'Your written answers were recorded for instructor review. ' : '') +
+      saveMsg + '</div>';
+
+    var sub = block.querySelector('.assess-submit');
+    var rty = block.querySelector('.assess-retry');
+    if (sub) sub.style.display = 'none';
+    if (rty) rty.style.display = 'inline-flex';
+    if (res.scrollIntoView) res.scrollIntoView({behavior:'smooth', block:'nearest'});
+  };
+
+  window.retryAssessment = function(blockId){
+    var block = document.getElementById(blockId); if (!block) return;
+    block.querySelectorAll('.qopt-i').forEach(function(o){ o.classList.remove('correct','incorrect'); });
+    block.querySelectorAll('input[type=radio]').forEach(function(r){ r.checked = false; });
+    var ak = block.querySelector('.ak'); if (ak) ak.style.display = 'none';
+    var res = block.querySelector('.assess-result'); if (res) res.style.display = 'none';
+    var sub = block.querySelector('.assess-submit'); if (sub) sub.style.display = 'inline-flex';
+    var rty = block.querySelector('.assess-retry'); if (rty) rty.style.display = 'none';
+  };
+})();
+</script>
+
 </body>
 </html>

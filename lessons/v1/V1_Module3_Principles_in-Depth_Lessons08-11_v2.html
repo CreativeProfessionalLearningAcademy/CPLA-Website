@@ -173,6 +173,29 @@ p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
   .tg,.sh,.balance-row,.align-types,.prox-demo{grid-template-columns:1fr;}
   .hero::before{display:none;}
 }
+
+/* ===== INTERACTIVE ASSESSMENT (added) ===== */
+.qopt-i{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;border:1px solid var(--rule);border-radius:8px;margin-top:8px;cursor:pointer;background:#fff;transition:all .15s;font-size:13px;line-height:1.5;}
+.qopt-i:hover{border-color:var(--mod);background:var(--ml);}
+.qopt-i input{margin-top:3px;flex-shrink:0;accent-color:var(--mod);}
+.qopt-i.correct{border-color:var(--green);background:var(--gnl);}
+.qopt-i.incorrect{border-color:var(--accent);background:var(--al);}
+.qopt-i.correct span::after{content:" \2713";color:var(--green);font-weight:600;}
+.qtextarea{width:100%;margin-top:10px;min-height:96px;border:1px solid var(--rule);border-radius:8px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.6;color:var(--ink);background:#fff;resize:vertical;}
+.qtextarea:focus{outline:none;border-color:var(--mod);box-shadow:0 0 0 3px var(--ml);}
+.assess-actions{display:flex;align-items:center;gap:10px;margin-top:22px;padding-top:18px;border-top:1px solid var(--rule);flex-wrap:wrap;}
+.assess-submit{background:var(--ink);color:#faf7f2;border:none;border-radius:8px;padding:12px 24px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-family:'DM Sans',sans-serif;transition:opacity .2s;}
+.assess-submit:hover{opacity:.9;}
+.assess-submit:disabled{opacity:.5;cursor:default;}
+.assess-retry{background:none;border:1px solid var(--rule);color:var(--mid);border-radius:8px;padding:11px 18px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:none;}
+.assess-note{font-size:12px;color:var(--mid);}
+.assess-result{display:none;border-radius:8px;padding:15px 17px;margin-top:16px;font-size:13px;line-height:1.6;}
+.assess-result.pass{background:var(--gnl);border:1px solid #b6d9a8;}
+.assess-result.fail{background:var(--al);border:1px solid #f0c4b8;}
+.assess-result .ar-score{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:4px;}
+.assess-result.pass .ar-score{color:var(--green);}
+.assess-result.fail .ar-score{color:var(--accent);}
+.ak{transition:all .2s;}
 </style>
 </head>
 <body>
@@ -388,48 +411,48 @@ p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
   </div>
 </div></div>
 
-<div id="l08-ass" class="tc"><div class="wrap">
-  <div class="sl">Lesson 1.8 Assessment</div>
-  <h2>Balance — Knowledge Check</h2>
-  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
-    <div class="qi"><div class="qn">Q01</div><div class="qt">A large, light-value photograph on the left balanced by a small, dark, highly saturated text block on the right demonstrates:</div><div class="qo">
-      <div class="qop">Symmetrical balance — equal visual weight on both sides</div>
-      <div class="qop">Asymmetrical balance — stability achieved through multiple weight properties, not mirror imaging</div>
-      <div class="qop">Intentional imbalance — the composition is deliberately unstable</div>
-      <div class="qop">Radial balance — elements organized around a central point</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q02</div><div class="qt">Which element would feel heaviest despite being the same physical size as its comparison?</div><div class="qo">
-      <div class="qop">A light gray rectangle on a white background</div>
-      <div class="qop">A black rectangle surrounded by white space</div>
-      <div class="qop">A gray rectangle crowded by many other elements</div>
-      <div class="qop">A white rectangle on a light background</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q03</div><div class="qt">Intentional imbalance is appropriate for:</div><div class="qo">
-      <div class="qop">A law firm's annual report — communicating authority</div>
-      <div class="qop">A hospital wayfinding system — communicating clarity</div>
-      <div class="qop">A sports brand's promotional campaign — communicating energy and urgency</div>
-      <div class="qop">A luxury hotel's brand identity — communicating calm refinement</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q04</div><div class="qt">The perceptual mechanism underlying balance is:</div><div class="qo">
-      <div class="qop">The brain's preference for geometric precision</div>
-      <div class="qop">The brain's instinct to detect instability — producing unease when visual weight is unresolved</div>
-      <div class="qop">The eye's tendency to track movement left to right</div>
-      <div class="qop">The cultural convention of centering important elements</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q05</div><div class="qt">Isolation increases an element's visual weight because:</div><div class="qo">
-      <div class="qop">Isolated elements are physically larger than surrounding elements</div>
-      <div class="qop">Surrounding white space reduces visual competition — making the element more prominent and attracting more attention</div>
-      <div class="qop">Isolated elements always have higher value contrast</div>
-      <div class="qop">The visual system interprets isolation as higher hierarchy regardless of size</div>
-    </div></div>
-    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-C &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
-  </div>
-  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
-    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.8: describe the specific balance properties you used in Composition B. Which weight contributors did you combine to achieve equilibrium between unequal elements?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q07</div><div class="qt">A poster has all content clustered in the upper-left corner with a large empty lower-right. Diagnose as accidental or intentional imbalance — and explain what evidence would tell you which.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q08</div><div class="qt">Connect balance to the audience principle (Lesson 1.5). For a conservative institutional client vs. a youth entertainment brand, how would appropriate balance differ, and why?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-  </div>
+<div class="tc" data-correct="1,1,2,1,1" data-lesson="1.8" data-title="Lesson 1.8 Assessment" id="l08-ass"><div class="wrap">
+<div class="sl">Lesson 1.8 Assessment</div>
+<h2>Balance — Knowledge Check</h2>
+<div class="ab"><h4>Part 1 — Multiple Choice</h4>
+<div class="qi"><div class="qn">Q01</div><div class="qt">A large, light-value photograph on the left balanced by a small, dark, highly saturated text block on the right demonstrates:</div><div class="qo">
+<label class="qopt-i"><input name="l08-ass-q0" type="radio" value="0"/><span>Symmetrical balance — equal visual weight on both sides</span></label>
+<label class="qopt-i"><input name="l08-ass-q0" type="radio" value="1"/><span>Asymmetrical balance — stability achieved through multiple weight properties, not mirror imaging</span></label>
+<label class="qopt-i"><input name="l08-ass-q0" type="radio" value="2"/><span>Intentional imbalance — the composition is deliberately unstable</span></label>
+<label class="qopt-i"><input name="l08-ass-q0" type="radio" value="3"/><span>Radial balance — elements organized around a central point</span></label>
 </div></div>
+<div class="qi"><div class="qn">Q02</div><div class="qt">Which element would feel heaviest despite being the same physical size as its comparison?</div><div class="qo">
+<label class="qopt-i"><input name="l08-ass-q1" type="radio" value="0"/><span>A light gray rectangle on a white background</span></label>
+<label class="qopt-i"><input name="l08-ass-q1" type="radio" value="1"/><span>A black rectangle surrounded by white space</span></label>
+<label class="qopt-i"><input name="l08-ass-q1" type="radio" value="2"/><span>A gray rectangle crowded by many other elements</span></label>
+<label class="qopt-i"><input name="l08-ass-q1" type="radio" value="3"/><span>A white rectangle on a light background</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q03</div><div class="qt">Intentional imbalance is appropriate for:</div><div class="qo">
+<label class="qopt-i"><input name="l08-ass-q2" type="radio" value="0"/><span>A law firm's annual report — communicating authority</span></label>
+<label class="qopt-i"><input name="l08-ass-q2" type="radio" value="1"/><span>A hospital wayfinding system — communicating clarity</span></label>
+<label class="qopt-i"><input name="l08-ass-q2" type="radio" value="2"/><span>A sports brand's promotional campaign — communicating energy and urgency</span></label>
+<label class="qopt-i"><input name="l08-ass-q2" type="radio" value="3"/><span>A luxury hotel's brand identity — communicating calm refinement</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q04</div><div class="qt">The perceptual mechanism underlying balance is:</div><div class="qo">
+<label class="qopt-i"><input name="l08-ass-q3" type="radio" value="0"/><span>The brain's preference for geometric precision</span></label>
+<label class="qopt-i"><input name="l08-ass-q3" type="radio" value="1"/><span>The brain's instinct to detect instability — producing unease when visual weight is unresolved</span></label>
+<label class="qopt-i"><input name="l08-ass-q3" type="radio" value="2"/><span>The eye's tendency to track movement left to right</span></label>
+<label class="qopt-i"><input name="l08-ass-q3" type="radio" value="3"/><span>The cultural convention of centering important elements</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q05</div><div class="qt">Isolation increases an element's visual weight because:</div><div class="qo">
+<label class="qopt-i"><input name="l08-ass-q4" type="radio" value="0"/><span>Isolated elements are physically larger than surrounding elements</span></label>
+<label class="qopt-i"><input name="l08-ass-q4" type="radio" value="1"/><span>Surrounding white space reduces visual competition — making the element more prominent and attracting more attention</span></label>
+<label class="qopt-i"><input name="l08-ass-q4" type="radio" value="2"/><span>Isolated elements always have higher value contrast</span></label>
+<label class="qopt-i"><input name="l08-ass-q4" type="radio" value="3"/><span>The visual system interprets isolation as higher hierarchy regardless of size</span></label>
+</div></div>
+<div class="ak" style="display:none;"><p><strong>Answers:</strong> 1-B  ·  2-B  ·  3-C  ·  4-B  ·  5-B</p></div>
+</div>
+<div class="ab"><h4>Part 2 — Applied Understanding</h4>
+<div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.8: describe the specific balance properties you used in Composition B. Which weight contributors did you combine to achieve equilibrium between unequal elements?</div><textarea class="qtextarea" data-prompt="From Exercise 1.8: describe the specific balance properties you used in Composition B. Which weight contributors did you combine to achieve equilibrium between unequal elements?" data-qn="Q06" name="l08-ass-sa0" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q07</div><div class="qt">A poster has all content clustered in the upper-left corner with a large empty lower-right. Diagnose as accidental or intentional imbalance — and explain what evidence would tell you which.</div><textarea class="qtextarea" data-prompt="A poster has all content clustered in the upper-left corner with a large empty lower-right. Diagnose as accidental or intentional imbalance — and explain what evidence would tell you which." data-qn="Q07" name="l08-ass-sa1" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q08</div><div class="qt">Connect balance to the audience principle (Lesson 1.5). For a conservative institutional client vs. a youth entertainment brand, how would appropriate balance differ, and why?</div><textarea class="qtextarea" data-prompt="Connect balance to the audience principle (Lesson 1.5). For a conservative institutional client vs. a youth entertainment brand, how would appropriate balance differ, and why?" data-qn="Q08" name="l08-ass-sa2" placeholder="Type your answer here..." rows="4"></textarea></div>
+</div>
+<div class="assess-actions"><button class="assess-submit" onclick="submitAssessment('l08-ass')">Submit assessment</button><button class="assess-retry" onclick="retryAssessment('l08-ass')">Try again</button><span class="assess-note" data-auth=""></span></div><div class="assess-result"></div></div></div>
 </div><!-- end l08 -->
 
 <!-- ═══════════════════════ LESSON 1.9 ═══════════════════════ -->
@@ -599,48 +622,48 @@ p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
   </div>
 </div></div>
 
-<div id="l09-ass" class="tc"><div class="wrap">
-  <div class="sl">Lesson 1.9 Assessment</div>
-  <h2>Contrast — Knowledge Check</h2>
-  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
-    <div class="qi"><div class="qn">Q01</div><div class="qt">A design with high overall contrast but random application of that contrast is best described as:</div><div class="qo">
-      <div class="qop">Highly effective — maximum contrast produces maximum impact</div>
-      <div class="qop">Visual noise — contrast without purposeful direction confuses the eye rather than guiding it</div>
-      <div class="qop">Appropriate for experimental or avant-garde contexts</div>
-      <div class="qop">A successful application needing only minor refinement</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q02</div><div class="qt">The "Contrast Hierarchy Rule" states that:</div><div class="qo">
-      <div class="qop">All elements should have maximum contrast for universal accessibility</div>
-      <div class="qop">The element requiring the most attention should have the highest contrast — and the contrast gradient should match the importance gradient</div>
-      <div class="qop">Contrast should be applied only to headlines and calls to action</div>
-      <div class="qop">Contrast between adjacent elements should be equal to avoid unintended hierarchy</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q03</div><div class="qt">WCAG AA requires a minimum 4.5:1 contrast ratio for normal body text because:</div><div class="qo">
-      <div class="qop">This ratio produces the most attractive text-background combination</div>
-      <div class="qop">This threshold reflects the level at which text becomes reliably legible for viewers with mild to moderate vision impairment — improving reading for all</div>
-      <div class="qop">4.5:1 is the contrast of black on white, which all designs must match</div>
-      <div class="qop">Legal requirements mandate this for all commercial publications</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q04</div><div class="qt">Why is color contrast "a supplement to value contrast, never a replacement"?</div><div class="qo">
-      <div class="qop">Color contrast is harder to perceive than value contrast for most viewers</div>
-      <div class="qop">Color contrast fails for color vision deficient viewers — elements differing only in hue and not value become indistinguishable for significant portions of the audience</div>
-      <div class="qop">Color contrast causes eye strain over reading-length passages</div>
-      <div class="qop">Color contrast cannot be reliably reproduced across screen types</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q05</div><div class="qt">Weight contrast between headline and body text creates hierarchy by:</div><div class="qo">
-      <div class="qop">Reducing the file size by using fewer typeface instances</div>
-      <div class="qop">Creating differentiation between importance levels without requiring size changes</div>
-      <div class="qop">Communicating the reading speed for each element</div>
-      <div class="qop">Making all text elements appear the same physical size</div>
-    </div></div>
-    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
-  </div>
-  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
-    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.9: what was the measured contrast ratio for your body text? If it failed WCAG AA, what specific adjustment did you make — and what was the resulting ratio?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q07</div><div class="qt">A sale flyer uses red decorative borders and red stickers throughout, but the sale price — the most important information — is set in medium gray. Diagnose the contrast problem and prescribe a specific fix.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q08</div><div class="qt">Connect contrast to channel alignment from Lesson 1.4. How does purposeful contrast serve channel alignment — and how does random contrast create channel contradiction?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-  </div>
+<div class="tc" data-correct="1,1,1,1,1" data-lesson="1.9" data-title="Lesson 1.9 Assessment" id="l09-ass"><div class="wrap">
+<div class="sl">Lesson 1.9 Assessment</div>
+<h2>Contrast — Knowledge Check</h2>
+<div class="ab"><h4>Part 1 — Multiple Choice</h4>
+<div class="qi"><div class="qn">Q01</div><div class="qt">A design with high overall contrast but random application of that contrast is best described as:</div><div class="qo">
+<label class="qopt-i"><input name="l09-ass-q0" type="radio" value="0"/><span>Highly effective — maximum contrast produces maximum impact</span></label>
+<label class="qopt-i"><input name="l09-ass-q0" type="radio" value="1"/><span>Visual noise — contrast without purposeful direction confuses the eye rather than guiding it</span></label>
+<label class="qopt-i"><input name="l09-ass-q0" type="radio" value="2"/><span>Appropriate for experimental or avant-garde contexts</span></label>
+<label class="qopt-i"><input name="l09-ass-q0" type="radio" value="3"/><span>A successful application needing only minor refinement</span></label>
 </div></div>
+<div class="qi"><div class="qn">Q02</div><div class="qt">The "Contrast Hierarchy Rule" states that:</div><div class="qo">
+<label class="qopt-i"><input name="l09-ass-q1" type="radio" value="0"/><span>All elements should have maximum contrast for universal accessibility</span></label>
+<label class="qopt-i"><input name="l09-ass-q1" type="radio" value="1"/><span>The element requiring the most attention should have the highest contrast — and the contrast gradient should match the importance gradient</span></label>
+<label class="qopt-i"><input name="l09-ass-q1" type="radio" value="2"/><span>Contrast should be applied only to headlines and calls to action</span></label>
+<label class="qopt-i"><input name="l09-ass-q1" type="radio" value="3"/><span>Contrast between adjacent elements should be equal to avoid unintended hierarchy</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q03</div><div class="qt">WCAG AA requires a minimum 4.5:1 contrast ratio for normal body text because:</div><div class="qo">
+<label class="qopt-i"><input name="l09-ass-q2" type="radio" value="0"/><span>This ratio produces the most attractive text-background combination</span></label>
+<label class="qopt-i"><input name="l09-ass-q2" type="radio" value="1"/><span>This threshold reflects the level at which text becomes reliably legible for viewers with mild to moderate vision impairment — improving reading for all</span></label>
+<label class="qopt-i"><input name="l09-ass-q2" type="radio" value="2"/><span>4.5:1 is the contrast of black on white, which all designs must match</span></label>
+<label class="qopt-i"><input name="l09-ass-q2" type="radio" value="3"/><span>Legal requirements mandate this for all commercial publications</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q04</div><div class="qt">Why is color contrast "a supplement to value contrast, never a replacement"?</div><div class="qo">
+<label class="qopt-i"><input name="l09-ass-q3" type="radio" value="0"/><span>Color contrast is harder to perceive than value contrast for most viewers</span></label>
+<label class="qopt-i"><input name="l09-ass-q3" type="radio" value="1"/><span>Color contrast fails for color vision deficient viewers — elements differing only in hue and not value become indistinguishable for significant portions of the audience</span></label>
+<label class="qopt-i"><input name="l09-ass-q3" type="radio" value="2"/><span>Color contrast causes eye strain over reading-length passages</span></label>
+<label class="qopt-i"><input name="l09-ass-q3" type="radio" value="3"/><span>Color contrast cannot be reliably reproduced across screen types</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q05</div><div class="qt">Weight contrast between headline and body text creates hierarchy by:</div><div class="qo">
+<label class="qopt-i"><input name="l09-ass-q4" type="radio" value="0"/><span>Reducing the file size by using fewer typeface instances</span></label>
+<label class="qopt-i"><input name="l09-ass-q4" type="radio" value="1"/><span>Creating differentiation between importance levels without requiring size changes</span></label>
+<label class="qopt-i"><input name="l09-ass-q4" type="radio" value="2"/><span>Communicating the reading speed for each element</span></label>
+<label class="qopt-i"><input name="l09-ass-q4" type="radio" value="3"/><span>Making all text elements appear the same physical size</span></label>
+</div></div>
+<div class="ak" style="display:none;"><p><strong>Answers:</strong> 1-B  ·  2-B  ·  3-B  ·  4-B  ·  5-B</p></div>
+</div>
+<div class="ab"><h4>Part 2 — Applied Understanding</h4>
+<div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.9: what was the measured contrast ratio for your body text? If it failed WCAG AA, what specific adjustment did you make — and what was the resulting ratio?</div><textarea class="qtextarea" data-prompt="From Exercise 1.9: what was the measured contrast ratio for your body text? If it failed WCAG AA, what specific adjustment did you make — and what was the resulting ratio?" data-qn="Q06" name="l09-ass-sa0" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q07</div><div class="qt">A sale flyer uses red decorative borders and red stickers throughout, but the sale price — the most important information — is set in medium gray. Diagnose the contrast problem and prescribe a specific fix.</div><textarea class="qtextarea" data-prompt="A sale flyer uses red decorative borders and red stickers throughout, but the sale price — the most important information — is set in medium gray. Diagnose the contrast problem and prescribe a specific fix." data-qn="Q07" name="l09-ass-sa1" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q08</div><div class="qt">Connect contrast to channel alignment from Lesson 1.4. How does purposeful contrast serve channel alignment — and how does random contrast create channel contradiction?</div><textarea class="qtextarea" data-prompt="Connect contrast to channel alignment from Lesson 1.4. How does purposeful contrast serve channel alignment — and how does random contrast create channel contradiction?" data-qn="Q08" name="l09-ass-sa2" placeholder="Type your answer here..." rows="4"></textarea></div>
+</div>
+<div class="assess-actions"><button class="assess-submit" onclick="submitAssessment('l09-ass')">Submit assessment</button><button class="assess-retry" onclick="retryAssessment('l09-ass')">Try again</button><span class="assess-note" data-auth=""></span></div><div class="assess-result"></div></div></div>
 </div><!-- end l09 -->
 
 <!-- ═══════════════════════ LESSON 1.10 ═══════════════════════ -->
@@ -844,48 +867,48 @@ p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
   </div>
 </div></div>
 
-<div id="l10-ass" class="tc"><div class="wrap">
-  <div class="sl">Lesson 1.10 Assessment</div>
-  <h2>Alignment — Knowledge Check</h2>
-  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
-    <div class="qi"><div class="qn">Q01</div><div class="qt">Why is a "near-miss" alignment perceptually worse than an obvious misalignment?</div><div class="qo">
-      <div class="qop">Near-misses are harder to correct technically</div>
-      <div class="qop">A near-miss signals that alignment was attempted but failed — communicating carelessness rather than intention</div>
-      <div class="qop">Near-misses violate accessibility standards while obvious misalignment does not</div>
-      <div class="qop">There is no perceptual difference — both are equally problematic</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q02</div><div class="qt">The problem with using center alignment for a multi-element layout is:</div><div class="qo">
-      <div class="qop">Center alignment is never appropriate in professional design</div>
-      <div class="qop">Centered elements align independently to the page center but their edges float at different positions — creating a ragged, indeterminate structure with no clear element-to-element connection</div>
-      <div class="qop">Center alignment requires more technical skill to execute precisely</div>
-      <div class="qop">Centered text is illegible for viewers with reading difficulties</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q03</div><div class="qt">The perceptual mechanism underlying the alignment principle is:</div><div class="qo">
-      <div class="qop">The eye's preference for symmetrical compositions over asymmetrical ones</div>
-      <div class="qop">The brain's automatic pattern-finding — aligned elements form a clear pattern; misaligned elements frustrate the mechanism, creating low-grade discomfort</div>
-      <div class="qop">The cultural training to read text from left to right</div>
-      <div class="qop">The tendency of the eye to fixate on the largest element first</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q04</div><div class="qt">A "floating element" is one that:</div><div class="qo">
-      <div class="qop">Uses a drop shadow to appear lifted off the page</div>
-      <div class="qop">Has no visual connection — no shared edge or centerline — to any other element in the composition</div>
-      <div class="qop">Is positioned in the optical center rather than the mathematical center</div>
-      <div class="qop">Overlaps another element in the layout</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q05</div><div class="qt">Edge alignment is valuable because it:</div><div class="qo">
-      <div class="qop">Is the only alignment type that works for both text and images</div>
-      <div class="qop">Creates visual connections between elements across the layout — even between elements that are far apart and not in proximity</div>
-      <div class="qop">Requires no use of the align panel or guides</div>
-      <div class="qop">Automatically centers all elements on a shared axis</div>
-    </div></div>
-    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
-  </div>
-  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
-    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.10: describe the alignment relationships you established in Version B. How many shared edges did you create, and what aligned to what?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q07</div><div class="qt">A business card centers the name, left-aligns the address, and right-aligns the phone number. Diagnose the alignment problem and prescribe a specific correction that would create a coherent structure.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q08</div><div class="qt">Connect alignment to grid systems (which you'll study in Module 7). How does a grid automatically enforce the alignment principle — and why does that make grids so valuable for professional layout?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-  </div>
+<div class="tc" data-correct="1,1,1,1,1" data-lesson="1.10" data-title="Lesson 1.10 Assessment" id="l10-ass"><div class="wrap">
+<div class="sl">Lesson 1.10 Assessment</div>
+<h2>Alignment — Knowledge Check</h2>
+<div class="ab"><h4>Part 1 — Multiple Choice</h4>
+<div class="qi"><div class="qn">Q01</div><div class="qt">Why is a "near-miss" alignment perceptually worse than an obvious misalignment?</div><div class="qo">
+<label class="qopt-i"><input name="l10-ass-q0" type="radio" value="0"/><span>Near-misses are harder to correct technically</span></label>
+<label class="qopt-i"><input name="l10-ass-q0" type="radio" value="1"/><span>A near-miss signals that alignment was attempted but failed — communicating carelessness rather than intention</span></label>
+<label class="qopt-i"><input name="l10-ass-q0" type="radio" value="2"/><span>Near-misses violate accessibility standards while obvious misalignment does not</span></label>
+<label class="qopt-i"><input name="l10-ass-q0" type="radio" value="3"/><span>There is no perceptual difference — both are equally problematic</span></label>
 </div></div>
+<div class="qi"><div class="qn">Q02</div><div class="qt">The problem with using center alignment for a multi-element layout is:</div><div class="qo">
+<label class="qopt-i"><input name="l10-ass-q1" type="radio" value="0"/><span>Center alignment is never appropriate in professional design</span></label>
+<label class="qopt-i"><input name="l10-ass-q1" type="radio" value="1"/><span>Centered elements align independently to the page center but their edges float at different positions — creating a ragged, indeterminate structure with no clear element-to-element connection</span></label>
+<label class="qopt-i"><input name="l10-ass-q1" type="radio" value="2"/><span>Center alignment requires more technical skill to execute precisely</span></label>
+<label class="qopt-i"><input name="l10-ass-q1" type="radio" value="3"/><span>Centered text is illegible for viewers with reading difficulties</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q03</div><div class="qt">The perceptual mechanism underlying the alignment principle is:</div><div class="qo">
+<label class="qopt-i"><input name="l10-ass-q2" type="radio" value="0"/><span>The eye's preference for symmetrical compositions over asymmetrical ones</span></label>
+<label class="qopt-i"><input name="l10-ass-q2" type="radio" value="1"/><span>The brain's automatic pattern-finding — aligned elements form a clear pattern; misaligned elements frustrate the mechanism, creating low-grade discomfort</span></label>
+<label class="qopt-i"><input name="l10-ass-q2" type="radio" value="2"/><span>The cultural training to read text from left to right</span></label>
+<label class="qopt-i"><input name="l10-ass-q2" type="radio" value="3"/><span>The tendency of the eye to fixate on the largest element first</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q04</div><div class="qt">A "floating element" is one that:</div><div class="qo">
+<label class="qopt-i"><input name="l10-ass-q3" type="radio" value="0"/><span>Uses a drop shadow to appear lifted off the page</span></label>
+<label class="qopt-i"><input name="l10-ass-q3" type="radio" value="1"/><span>Has no visual connection — no shared edge or centerline — to any other element in the composition</span></label>
+<label class="qopt-i"><input name="l10-ass-q3" type="radio" value="2"/><span>Is positioned in the optical center rather than the mathematical center</span></label>
+<label class="qopt-i"><input name="l10-ass-q3" type="radio" value="3"/><span>Overlaps another element in the layout</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q05</div><div class="qt">Edge alignment is valuable because it:</div><div class="qo">
+<label class="qopt-i"><input name="l10-ass-q4" type="radio" value="0"/><span>Is the only alignment type that works for both text and images</span></label>
+<label class="qopt-i"><input name="l10-ass-q4" type="radio" value="1"/><span>Creates visual connections between elements across the layout — even between elements that are far apart and not in proximity</span></label>
+<label class="qopt-i"><input name="l10-ass-q4" type="radio" value="2"/><span>Requires no use of the align panel or guides</span></label>
+<label class="qopt-i"><input name="l10-ass-q4" type="radio" value="3"/><span>Automatically centers all elements on a shared axis</span></label>
+</div></div>
+<div class="ak" style="display:none;"><p><strong>Answers:</strong> 1-B  ·  2-B  ·  3-B  ·  4-B  ·  5-B</p></div>
+</div>
+<div class="ab"><h4>Part 2 — Applied Understanding</h4>
+<div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.10: describe the alignment relationships you established in Version B. How many shared edges did you create, and what aligned to what?</div><textarea class="qtextarea" data-prompt="From Exercise 1.10: describe the alignment relationships you established in Version B. How many shared edges did you create, and what aligned to what?" data-qn="Q06" name="l10-ass-sa0" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q07</div><div class="qt">A business card centers the name, left-aligns the address, and right-aligns the phone number. Diagnose the alignment problem and prescribe a specific correction that would create a coherent structure.</div><textarea class="qtextarea" data-prompt="A business card centers the name, left-aligns the address, and right-aligns the phone number. Diagnose the alignment problem and prescribe a specific correction that would create a coherent structure." data-qn="Q07" name="l10-ass-sa1" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q08</div><div class="qt">Connect alignment to grid systems (which you'll study in Module 7). How does a grid automatically enforce the alignment principle — and why does that make grids so valuable for professional layout?</div><textarea class="qtextarea" data-prompt="Connect alignment to grid systems (which you'll study in Module 7). How does a grid automatically enforce the alignment principle — and why does that make grids so valuable for professional layout?" data-qn="Q08" name="l10-ass-sa2" placeholder="Type your answer here..." rows="4"></textarea></div>
+</div>
+<div class="assess-actions"><button class="assess-submit" onclick="submitAssessment('l10-ass')">Submit assessment</button><button class="assess-retry" onclick="retryAssessment('l10-ass')">Try again</button><span class="assess-note" data-auth=""></span></div><div class="assess-result"></div></div></div>
 </div><!-- end l10 -->
 
 <!-- ═══════════════════════ LESSON 1.11 ═══════════════════════ -->
@@ -1103,48 +1126,48 @@ p{font-size:16px;line-height:1.9;margin-bottom:17px;color:#2a2218;}
   </div>
 </div></div>
 
-<div id="l11-ass" class="tc"><div class="wrap">
-  <div class="sl">Lesson 1.11 Assessment</div>
-  <h2>Repetition &amp; Proximity — Knowledge Check</h2>
-  <div class="ab"><h4>Part 1 — Multiple Choice</h4>
-    <div class="qi"><div class="qn">Q01</div><div class="qt">An event listing where each session's title, time, and location are spaced exactly as far apart as separate sessions creates:</div><div class="qo">
-      <div class="qop">Effective use of even spacing for visual rhythm</div>
-      <div class="qop">A proximity failure — the viewer cannot perceive which details belong to which session because grouping is not communicated through space</div>
-      <div class="qop">A repetition failure — the sessions are not visually consistent</div>
-      <div class="qop">An alignment failure — the elements do not share a common edge</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q02</div><div class="qt">The fix for nearly every proximity failure is:</div><div class="qo">
-      <div class="qop">Adding borders or boxes around each group of related elements</div>
-      <div class="qop">Reducing the space within related groups and increasing the space between unrelated groups — making intra-group spacing clearly tighter than inter-group spacing</div>
-      <div class="qop">Using a different color for each group of related elements</div>
-      <div class="qop">Aligning all elements to a single shared left edge</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q03</div><div class="qt">Repetition contributes to brand recognition because:</div><div class="qo">
-      <div class="qop">Repeated elements take up more space and are therefore more memorable</div>
-      <div class="qop">Consistent reuse of visual elements across touchpoints trains the audience to recognize the brand instantly — before conscious reading</div>
-      <div class="qop">Repetition reduces the cost of producing multiple design pieces</div>
-      <div class="qop">Audiences prefer designs that look the same as designs they have seen before</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q04</div><div class="qt">The principle that the brain automatically groups elements that are similar or close together is known as:</div><div class="qo">
-      <div class="qop">The contrast principle</div>
-      <div class="qop">Gestalt grouping — a documented property of human perception</div>
-      <div class="qop">The hierarchy principle</div>
-      <div class="qop">Asymmetrical balance</div>
-    </div></div>
-    <div class="qi"><div class="qn">Q05</div><div class="qt">Why are repetition and proximity described as both serving "the creation of relationships"?</div><div class="qo">
-      <div class="qop">Both principles require the use of repeated geometric shapes</div>
-      <div class="qop">Repetition creates relationships through similarity (like elements belong together); proximity creates relationships through closeness (near elements belong together)</div>
-      <div class="qop">Both principles are only relevant to information-heavy layouts</div>
-      <div class="qop">Both principles are alternative names for the same underlying technique</div>
-    </div></div>
-    <div class="ak"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-B &nbsp;·&nbsp; 3-B &nbsp;·&nbsp; 4-B &nbsp;·&nbsp; 5-B</p></div>
-  </div>
-  <div class="ab"><h4>Part 2 — Applied Understanding</h4>
-    <div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.11: describe your repetition system. Which decisions did you standardize, and how did consistency change the feeling of the layout compared to varied treatments?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q07</div><div class="qt">A restaurant menu lists each dish with a name, description, and price — but the description of one dish sits closer to the next dish's name than to its own. Diagnose the proximity problem and prescribe the spacing correction.</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-    <div class="qi"><div class="qn">Q08</div><div class="qt">Explain how repetition and proximity work together in a conference program or similar complex information layout. What happens if you apply one principle but not the other?</div><div class="wl" style="margin-top:10px;gap:10px;"><div class="wln"></div><div class="wln"></div><div class="wln"></div><div class="wln"></div></div></div>
-  </div>
+<div class="tc" data-correct="1,1,1,1,1" data-lesson="1.11" data-title="Lesson 1.11 Assessment" id="l11-ass"><div class="wrap">
+<div class="sl">Lesson 1.11 Assessment</div>
+<h2>Repetition &amp; Proximity — Knowledge Check</h2>
+<div class="ab"><h4>Part 1 — Multiple Choice</h4>
+<div class="qi"><div class="qn">Q01</div><div class="qt">An event listing where each session's title, time, and location are spaced exactly as far apart as separate sessions creates:</div><div class="qo">
+<label class="qopt-i"><input name="l11-ass-q0" type="radio" value="0"/><span>Effective use of even spacing for visual rhythm</span></label>
+<label class="qopt-i"><input name="l11-ass-q0" type="radio" value="1"/><span>A proximity failure — the viewer cannot perceive which details belong to which session because grouping is not communicated through space</span></label>
+<label class="qopt-i"><input name="l11-ass-q0" type="radio" value="2"/><span>A repetition failure — the sessions are not visually consistent</span></label>
+<label class="qopt-i"><input name="l11-ass-q0" type="radio" value="3"/><span>An alignment failure — the elements do not share a common edge</span></label>
 </div></div>
+<div class="qi"><div class="qn">Q02</div><div class="qt">The fix for nearly every proximity failure is:</div><div class="qo">
+<label class="qopt-i"><input name="l11-ass-q1" type="radio" value="0"/><span>Adding borders or boxes around each group of related elements</span></label>
+<label class="qopt-i"><input name="l11-ass-q1" type="radio" value="1"/><span>Reducing the space within related groups and increasing the space between unrelated groups — making intra-group spacing clearly tighter than inter-group spacing</span></label>
+<label class="qopt-i"><input name="l11-ass-q1" type="radio" value="2"/><span>Using a different color for each group of related elements</span></label>
+<label class="qopt-i"><input name="l11-ass-q1" type="radio" value="3"/><span>Aligning all elements to a single shared left edge</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q03</div><div class="qt">Repetition contributes to brand recognition because:</div><div class="qo">
+<label class="qopt-i"><input name="l11-ass-q2" type="radio" value="0"/><span>Repeated elements take up more space and are therefore more memorable</span></label>
+<label class="qopt-i"><input name="l11-ass-q2" type="radio" value="1"/><span>Consistent reuse of visual elements across touchpoints trains the audience to recognize the brand instantly — before conscious reading</span></label>
+<label class="qopt-i"><input name="l11-ass-q2" type="radio" value="2"/><span>Repetition reduces the cost of producing multiple design pieces</span></label>
+<label class="qopt-i"><input name="l11-ass-q2" type="radio" value="3"/><span>Audiences prefer designs that look the same as designs they have seen before</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q04</div><div class="qt">The principle that the brain automatically groups elements that are similar or close together is known as:</div><div class="qo">
+<label class="qopt-i"><input name="l11-ass-q3" type="radio" value="0"/><span>The contrast principle</span></label>
+<label class="qopt-i"><input name="l11-ass-q3" type="radio" value="1"/><span>Gestalt grouping — a documented property of human perception</span></label>
+<label class="qopt-i"><input name="l11-ass-q3" type="radio" value="2"/><span>The hierarchy principle</span></label>
+<label class="qopt-i"><input name="l11-ass-q3" type="radio" value="3"/><span>Asymmetrical balance</span></label>
+</div></div>
+<div class="qi"><div class="qn">Q05</div><div class="qt">Why are repetition and proximity described as both serving "the creation of relationships"?</div><div class="qo">
+<label class="qopt-i"><input name="l11-ass-q4" type="radio" value="0"/><span>Both principles require the use of repeated geometric shapes</span></label>
+<label class="qopt-i"><input name="l11-ass-q4" type="radio" value="1"/><span>Repetition creates relationships through similarity (like elements belong together); proximity creates relationships through closeness (near elements belong together)</span></label>
+<label class="qopt-i"><input name="l11-ass-q4" type="radio" value="2"/><span>Both principles are only relevant to information-heavy layouts</span></label>
+<label class="qopt-i"><input name="l11-ass-q4" type="radio" value="3"/><span>Both principles are alternative names for the same underlying technique</span></label>
+</div></div>
+<div class="ak" style="display:none;"><p><strong>Answers:</strong> 1-B  ·  2-B  ·  3-B  ·  4-B  ·  5-B</p></div>
+</div>
+<div class="ab"><h4>Part 2 — Applied Understanding</h4>
+<div class="qi"><div class="qn">Q06</div><div class="qt">From Exercise 1.11: describe your repetition system. Which decisions did you standardize, and how did consistency change the feeling of the layout compared to varied treatments?</div><textarea class="qtextarea" data-prompt="From Exercise 1.11: describe your repetition system. Which decisions did you standardize, and how did consistency change the feeling of the layout compared to varied treatments?" data-qn="Q06" name="l11-ass-sa0" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q07</div><div class="qt">A restaurant menu lists each dish with a name, description, and price — but the description of one dish sits closer to the next dish's name than to its own. Diagnose the proximity problem and prescribe the spacing correction.</div><textarea class="qtextarea" data-prompt="A restaurant menu lists each dish with a name, description, and price — but the description of one dish sits closer to the next dish's name than to its own. Diagnose the proximity problem and prescribe the spacing correction." data-qn="Q07" name="l11-ass-sa1" placeholder="Type your answer here..." rows="4"></textarea></div>
+<div class="qi"><div class="qn">Q08</div><div class="qt">Explain how repetition and proximity work together in a conference program or similar complex information layout. What happens if you apply one principle but not the other?</div><textarea class="qtextarea" data-prompt="Explain how repetition and proximity work together in a conference program or similar complex information layout. What happens if you apply one principle but not the other?" data-qn="Q08" name="l11-ass-sa2" placeholder="Type your answer here..." rows="4"></textarea></div>
+</div>
+<div class="assess-actions"><button class="assess-submit" onclick="submitAssessment('l11-ass')">Submit assessment</button><button class="assess-retry" onclick="retryAssessment('l11-ass')">Try again</button><span class="assess-note" data-auth=""></span></div><div class="assess-result"></div></div></div>
 </div><!-- end l11 -->
 
 
@@ -1165,5 +1188,135 @@ function showI(id,btn,lid){
   window.scrollTo({top:l.querySelector('.itabs').offsetTop-10,behavior:'smooth'});
 }
 </script>
+
+<!-- Firebase SDK (added for interactive assessments) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="/firebase-config.js"></script>
+<script>
+/* ===== CPLA INTERACTIVE ASSESSMENT ENGINE =====
+   Auto-grades multiple choice (80% to pass) and records the submission for
+   instructor grading of the short-answer portion. Writes:
+     - progress/{uid}_{lessonId}  (student's own quizScore + status)
+     - submissions/{autoId}       (instructor-gradeable record)
+   Short-answer questions are captured verbatim; the instructor grade is final. */
+(function(){
+  var PASS = 80;                 // percent required to pass the MC portion
+  window.CPLA_USER = null;       // firebase user, when signed in
+  window.CPLA_CLASSID = null;    // student's classId, loaded from users doc
+
+  // Capture auth state without forcing a redirect (content stays viewable;
+  // submitting for a grade requires sign-in).
+  if (typeof auth !== 'undefined' && auth && auth.onAuthStateChanged) {
+    auth.onAuthStateChanged(async function(user){
+      window.CPLA_USER = user || null;
+      if (user) {
+        try {
+          var snap = await db.collection('users').doc(user.uid).get();
+          if (snap.exists) window.CPLA_CLASSID = snap.data().classId || null;
+        } catch(e){ /* offline: classId stays null */ }
+      }
+      document.querySelectorAll('.assess-note[data-auth]').forEach(function(n){
+        n.textContent = user ? '' : 'Sign in to submit this assessment for grading.';
+      });
+    });
+  }
+
+  window.submitAssessment = async function(blockId){
+    var block = document.getElementById(blockId);
+    if (!block) return;
+    var lessonId = block.getAttribute('data-lesson') || '';
+    var title    = block.getAttribute('data-title') || ('Lesson ' + lessonId + ' Assessment');
+    var correct  = (block.getAttribute('data-correct')||'').split(',').filter(function(s){return s!=='';}).map(Number);
+
+    // --- grade multiple choice ---
+    var score = 0, answered = 0;
+    for (var i=0;i<correct.length;i++){
+      var opts = block.querySelectorAll('input[name="'+blockId+'-q'+i+'"]');
+      opts.forEach(function(o){ o.closest('.qopt-i').classList.remove('correct','incorrect'); });
+      var sel = block.querySelector('input[name="'+blockId+'-q'+i+'"]:checked');
+      if (sel){
+        answered++;
+        var v = parseInt(sel.value,10);
+        if (v === correct[i]){ score++; sel.closest('.qopt-i').classList.add('correct'); }
+        else {
+          sel.closest('.qopt-i').classList.add('incorrect');
+          var right = block.querySelector('input[name="'+blockId+'-q'+i+'"][value="'+correct[i]+'"]');
+          if (right) right.closest('.qopt-i').classList.add('correct');
+        }
+      }
+    }
+    var total = correct.length || 1;
+    var pct = Math.round((score/total)*100);
+    var pass = pct >= PASS;
+
+    // --- collect short answers ---
+    var shortAnswers = [];
+    block.querySelectorAll('textarea.qtextarea').forEach(function(t){
+      shortAnswers.push({ q: t.getAttribute('data-qn')||'', prompt: t.getAttribute('data-prompt')||'', text: t.value.trim() });
+    });
+
+    // reveal printed answer key for review
+    var ak = block.querySelector('.ak'); if (ak) ak.style.display = '';
+
+    var res = block.querySelector('.assess-result');
+    var user = window.CPLA_USER;
+    var saveMsg = '';
+
+    if (user){
+      try {
+        await db.collection('progress').doc(user.uid + '_' + lessonId).set({
+          userId: user.uid, lessonId: lessonId,
+          quizScore: pct, assessmentStatus: 'submitted',
+          assessmentSubmittedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+        await db.collection('submissions').add({
+          studentId: user.uid, classId: window.CPLA_CLASSID || null,
+          lessonId: lessonId, deliverableTitle: title, method: 'assessment',
+          mcScore: pct, mcCorrect: score, mcTotal: total, mcPassed: pass,
+          shortAnswers: shortAnswers,
+          status: 'submitted',
+          grade: null, score: null, feedback: '', gradedBy: null, gradedAt: null,
+          submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        saveMsg = 'Submitted to your instructor for grading.';
+      } catch(e){
+        console.error('Assessment submit failed:', e);
+        saveMsg = 'Your answers were graded, but saving to your record failed. Please try again.';
+      }
+    } else {
+      saveMsg = '<a href="/login.html" style="color:inherit;text-decoration:underline;">Sign in</a> to save this submission to your record for grading.';
+    }
+
+    res.style.display = 'block';
+    res.className = 'assess-result ' + (pass ? 'pass' : 'fail');
+    res.innerHTML =
+      '<div class="ar-score">' + pct + '% \u2014 ' + (pass ? 'Passed' : 'Not yet') + '</div>' +
+      '<div>' + (pass
+        ? 'You passed the knowledge check (' + score + '/' + total + ' correct). '
+        : 'You need ' + PASS + '% to pass the multiple-choice section (' + score + '/' + total + ' correct). Review the lesson and try again. ') +
+      (shortAnswers.length ? 'Your written answers were recorded for instructor review. ' : '') +
+      saveMsg + '</div>';
+
+    var sub = block.querySelector('.assess-submit');
+    var rty = block.querySelector('.assess-retry');
+    if (sub) sub.style.display = 'none';
+    if (rty) rty.style.display = 'inline-flex';
+    if (res.scrollIntoView) res.scrollIntoView({behavior:'smooth', block:'nearest'});
+  };
+
+  window.retryAssessment = function(blockId){
+    var block = document.getElementById(blockId); if (!block) return;
+    block.querySelectorAll('.qopt-i').forEach(function(o){ o.classList.remove('correct','incorrect'); });
+    block.querySelectorAll('input[type=radio]').forEach(function(r){ r.checked = false; });
+    var ak = block.querySelector('.ak'); if (ak) ak.style.display = 'none';
+    var res = block.querySelector('.assess-result'); if (res) res.style.display = 'none';
+    var sub = block.querySelector('.assess-submit'); if (sub) sub.style.display = 'inline-flex';
+    var rty = block.querySelector('.assess-retry'); if (rty) rty.style.display = 'none';
+  };
+})();
+</script>
+
 </body>
 </html>

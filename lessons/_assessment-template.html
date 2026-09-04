@@ -1,0 +1,225 @@
+<!-- ============================================================
+     CPLA INTERACTIVE ASSESSMENT — copy-paste template
+     ============================================================
+     This file is NOT a page. It is the reference source for the
+     three pieces every lesson page needs so its assessments can be
+     submitted and graded. See lessons/ASSESSMENT_STANDARD.md.
+
+     PIECE 1 — CSS: paste inside the page's <style> … </style>.
+     PIECE 2 — BLOCK: one per lesson assessment, in the lesson body.
+     PIECE 3 — ENGINE: paste once, just before </body>.
+     ============================================================ -->
+
+
+<!-- ─────────────────────────────────────────────────────────────
+     PIECE 1 — CSS  (paste once, inside <style>)
+     Relies on the module palette vars: --ink --mid --rule --mod --ml
+     --green --gnl --accent --al. All CPLA lesson pages define these.
+────────────────────────────────────────────────────────────── -->
+<style>
+/* ===== INTERACTIVE ASSESSMENT (added) ===== */
+.qopt-i{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;border:1px solid var(--rule);border-radius:8px;margin-top:8px;cursor:pointer;background:#fff;transition:all .15s;font-size:13px;line-height:1.5;}
+.qopt-i:hover{border-color:var(--mod);background:var(--ml);}
+.qopt-i input{margin-top:3px;flex-shrink:0;accent-color:var(--mod);}
+.qopt-i.correct{border-color:var(--green);background:var(--gnl);}
+.qopt-i.incorrect{border-color:var(--accent);background:var(--al);}
+.qopt-i.correct span::after{content:" \2713";color:var(--green);font-weight:600;}
+.qtextarea{width:100%;margin-top:10px;min-height:96px;border:1px solid var(--rule);border-radius:8px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.6;color:var(--ink);background:#fff;resize:vertical;}
+.qtextarea:focus{outline:none;border-color:var(--mod);box-shadow:0 0 0 3px var(--ml);}
+.assess-actions{display:flex;align-items:center;gap:10px;margin-top:22px;padding-top:18px;border-top:1px solid var(--rule);flex-wrap:wrap;}
+.assess-submit{background:var(--ink);color:#faf7f2;border:none;border-radius:8px;padding:12px 24px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-family:'DM Sans',sans-serif;transition:opacity .2s;}
+.assess-submit:hover{opacity:.9;}
+.assess-submit:disabled{opacity:.5;cursor:default;}
+.assess-retry{background:none;border:1px solid var(--rule);color:var(--mid);border-radius:8px;padding:11px 18px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:none;}
+.assess-note{font-size:12px;color:var(--mid);}
+.assess-result{display:none;border-radius:8px;padding:15px 17px;margin-top:16px;font-size:13px;line-height:1.6;}
+.assess-result.pass{background:var(--gnl);border:1px solid #b6d9a8;}
+.assess-result.fail{background:var(--al);border:1px solid #f0c4b8;}
+.assess-result .ar-score{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:4px;}
+.assess-result.pass .ar-score{color:var(--green);}
+.assess-result.fail .ar-score{color:var(--accent);}
+.ak{transition:all .2s;}
+</style>
+
+
+<!-- ─────────────────────────────────────────────────────────────
+     PIECE 2 — ONE ASSESSMENT BLOCK  (one per lesson)
+
+     REQUIRED on the wrapper div:
+       id="lNN-ass"                unique per lesson (e.g. l31-ass)
+       data-lesson="V.L"           the lessonId Firestore keys on (e.g. "2.1")
+       data-title="Lesson V.L Assessment"
+       data-correct="i,i,i,i,i"    0-based correct index per MC question,
+                                   IN THE ORDER the questions appear.
+                                   A=0 B=1 C=2 D=3.
+
+     Radio group name MUST be  {blockId}-q{n}   where n is the 0-based
+     MC question index. value MUST be the 0-based option index.
+     Short-answer textareas use class="qtextarea" and carry data-qn /
+     data-prompt so the instructor sees which question each answer is for.
+────────────────────────────────────────────────────────────── -->
+<div id="lNN-ass" class="tc" data-lesson="V.L" data-title="Lesson V.L Assessment" data-correct="1,2,0,3,1"><div class="wrap">
+  <div class="sl">Lesson V.L Assessment</div>
+  <h2>LESSON TITLE — Knowledge Check</h2>
+
+  <div class="ab"><h4>Part 1 — Knowledge Application · Multiple Choice</h4>
+
+    <div class="qi"><div class="qn">Q01</div><div class="qt">QUESTION TEXT?</div><div class="qo">
+      <label class="qopt-i"><input type="radio" name="lNN-ass-q0" value="0"><span>Option A</span></label>
+      <label class="qopt-i"><input type="radio" name="lNN-ass-q0" value="1"><span>Option B (correct in this example)</span></label>
+      <label class="qopt-i"><input type="radio" name="lNN-ass-q0" value="2"><span>Option C</span></label>
+      <label class="qopt-i"><input type="radio" name="lNN-ass-q0" value="3"><span>Option D</span></label>
+    </div></div>
+
+    <!-- Repeat .qi for Q02…Q05, incrementing the -q index: -q1, -q2, … -->
+
+    <div class="ak" style="display:none;"><p><strong>Answers:</strong> 1-B &nbsp;·&nbsp; 2-C &nbsp;·&nbsp; 3-A &nbsp;·&nbsp; 4-D &nbsp;·&nbsp; 5-B</p></div>
+  </div>
+
+  <div class="ab"><h4>Part 2 — Applied Understanding · Short Answer</h4>
+    <div class="qi"><div class="qn">Q06</div><div class="qt">SHORT-ANSWER PROMPT?</div>
+      <textarea class="qtextarea" name="lNN-ass-sa0" data-qn="Q06" data-prompt="SHORT-ANSWER PROMPT?" rows="4" placeholder="Type your answer here..."></textarea>
+    </div>
+    <!-- Repeat .qi for further short-answer questions, incrementing -sa index -->
+  </div>
+
+  <div class="assess-actions">
+    <button class="assess-submit" onclick="submitAssessment('lNN-ass')">Submit assessment</button>
+    <button class="assess-retry" onclick="retryAssessment('lNN-ass')">Try again</button>
+    <span class="assess-note" data-auth></span>
+  </div>
+  <div class="assess-result"></div>
+</div></div>
+
+
+<!-- ─────────────────────────────────────────────────────────────
+     PIECE 3 — ENGINE  (paste ONCE per page, just before </body>)
+────────────────────────────────────────────────────────────── -->
+<!-- Firebase SDK (added for interactive assessments) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="/firebase-config.js"></script>
+<script>
+/* ===== CPLA INTERACTIVE ASSESSMENT ENGINE =====
+   Auto-grades multiple choice (80% to pass) and records the submission for
+   instructor grading of the short-answer portion. Writes:
+     - progress/{uid}_{lessonId}  (student's own quizScore + status)
+     - submissions/{autoId}       (instructor-gradeable record)
+   Short-answer questions are captured verbatim; the instructor grade is final. */
+(function(){
+  var PASS = 80;                 // percent required to pass the MC portion
+  window.CPLA_USER = null;       // firebase user, when signed in
+  window.CPLA_CLASSID = null;    // student's classId, loaded from users doc
+
+  // Capture auth state without forcing a redirect (content stays viewable;
+  // submitting for a grade requires sign-in).
+  if (typeof auth !== 'undefined' && auth && auth.onAuthStateChanged) {
+    auth.onAuthStateChanged(async function(user){
+      window.CPLA_USER = user || null;
+      if (user) {
+        try {
+          var snap = await db.collection('users').doc(user.uid).get();
+          if (snap.exists) window.CPLA_CLASSID = snap.data().classId || null;
+        } catch(e){ /* offline: classId stays null */ }
+      }
+      document.querySelectorAll('.assess-note[data-auth]').forEach(function(n){
+        n.textContent = user ? '' : 'Sign in to submit this assessment for grading.';
+      });
+    });
+  }
+
+  window.submitAssessment = async function(blockId){
+    var block = document.getElementById(blockId);
+    if (!block) return;
+    var lessonId = block.getAttribute('data-lesson') || '';
+    var title    = block.getAttribute('data-title') || ('Lesson ' + lessonId + ' Assessment');
+    var correct  = (block.getAttribute('data-correct')||'').split(',').filter(function(s){return s!=='';}).map(Number);
+
+    // --- grade multiple choice ---
+    var score = 0, answered = 0;
+    for (var i=0;i<correct.length;i++){
+      var opts = block.querySelectorAll('input[name="'+blockId+'-q'+i+'"]');
+      opts.forEach(function(o){ o.closest('.qopt-i').classList.remove('correct','incorrect'); });
+      var sel = block.querySelector('input[name="'+blockId+'-q'+i+'"]:checked');
+      if (sel){
+        answered++;
+        var v = parseInt(sel.value,10);
+        if (v === correct[i]){ score++; sel.closest('.qopt-i').classList.add('correct'); }
+        else {
+          sel.closest('.qopt-i').classList.add('incorrect');
+          var right = block.querySelector('input[name="'+blockId+'-q'+i+'"][value="'+correct[i]+'"]');
+          if (right) right.closest('.qopt-i').classList.add('correct');
+        }
+      }
+    }
+    var total = correct.length || 1;
+    var pct = Math.round((score/total)*100);
+    var pass = pct >= PASS;
+
+    // --- collect short answers ---
+    var shortAnswers = [];
+    block.querySelectorAll('textarea.qtextarea').forEach(function(t){
+      shortAnswers.push({ q: t.getAttribute('data-qn')||'', prompt: t.getAttribute('data-prompt')||'', text: t.value.trim() });
+    });
+
+    // reveal printed answer key for review
+    var ak = block.querySelector('.ak'); if (ak) ak.style.display = '';
+
+    var res = block.querySelector('.assess-result');
+    var user = window.CPLA_USER;
+    var saveMsg = '';
+
+    if (user){
+      try {
+        await db.collection('progress').doc(user.uid + '_' + lessonId).set({
+          userId: user.uid, lessonId: lessonId,
+          quizScore: pct, assessmentStatus: 'submitted',
+          assessmentSubmittedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+        await db.collection('submissions').add({
+          studentId: user.uid, classId: window.CPLA_CLASSID || null,
+          lessonId: lessonId, deliverableTitle: title, method: 'assessment',
+          mcScore: pct, mcCorrect: score, mcTotal: total, mcPassed: pass,
+          shortAnswers: shortAnswers,
+          status: 'submitted',
+          grade: null, score: null, feedback: '', gradedBy: null, gradedAt: null,
+          submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        saveMsg = 'Submitted to your instructor for grading.';
+      } catch(e){
+        console.error('Assessment submit failed:', e);
+        saveMsg = 'Your answers were graded, but saving to your record failed. Please try again.';
+      }
+    } else {
+      saveMsg = '<a href="/login.html" style="color:inherit;text-decoration:underline;">Sign in</a> to save this submission to your record for grading.';
+    }
+
+    res.style.display = 'block';
+    res.className = 'assess-result ' + (pass ? 'pass' : 'fail');
+    res.innerHTML =
+      '<div class="ar-score">' + pct + '% — ' + (pass ? 'Passed' : 'Not yet') + '</div>' +
+      '<div>' + (pass
+        ? 'You passed the knowledge check (' + score + '/' + total + ' correct). '
+        : 'You need ' + PASS + '% to pass the multiple-choice section (' + score + '/' + total + ' correct). Review the lesson and try again. ') +
+      (shortAnswers.length ? 'Your written answers were recorded for instructor review. ' : '') +
+      saveMsg + '</div>';
+
+    var sub = block.querySelector('.assess-submit');
+    var rty = block.querySelector('.assess-retry');
+    if (sub) sub.style.display = 'none';
+    if (rty) rty.style.display = 'inline-flex';
+    if (res.scrollIntoView) res.scrollIntoView({behavior:'smooth', block:'nearest'});
+  };
+
+  window.retryAssessment = function(blockId){
+    var block = document.getElementById(blockId); if (!block) return;
+    block.querySelectorAll('.qopt-i').forEach(function(o){ o.classList.remove('correct','incorrect'); });
+    block.querySelectorAll('input[type=radio]').forEach(function(r){ r.checked = false; });
+    var ak = block.querySelector('.ak'); if (ak) ak.style.display = 'none';
+    var res = block.querySelector('.assess-result'); if (res) res.style.display = 'none';
+    var sub = block.querySelector('.assess-submit'); if (sub) sub.style.display = 'inline-flex';
+    var rty = block.querySelector('.assess-retry'); if (rty) rty.style.display = 'none';
+  };
+})();
+</script>
