@@ -87,6 +87,17 @@ service cloud.firestore {
       allow delete:        if isAdmin();
     }
 
+    // ---------- lesson_responses ----------
+    // One doc per student per lesson: {uid}_{lessonId}. Student writes own
+    // (uid is the doc-id prefix); the instructor who teaches their class may read.
+    match /lesson_responses/{docId} {
+      allow read:          if isOwner(docId.split('_')[0]) || isAdmin() || teachesClass(resource.data.classId);
+      allow create, update: if isSignedIn()
+                            && request.resource.data.studentId == request.auth.uid
+                            && docId.split('_')[0] == request.auth.uid;
+      allow delete:        if isAdmin();
+    }
+
     // ---------- instructor_notes ----------
     // Doc IDs are "{instructorUid}_{classId}_{lessonId}", so the owning
     // instructor is the uid prefix. Notes stay private to that instructor.
