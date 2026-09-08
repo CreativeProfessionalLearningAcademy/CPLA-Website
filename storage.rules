@@ -1,0 +1,59 @@
+rules_version = '2';
+
+// ============================================================================
+// Cloud Storage security rules for cpla-platform.firebasestorage.app
+//
+// Companion to firestore.rules. Storage rules are DEPLOYED SEPARATELY from
+// Firestore rules — updating one never touches the other.
+//
+// Deploy: Firebase Console -> Build -> Storage -> Rules -> paste -> Publish
+//         (or `firebase deploy --only storage` if you set up the CLI).
+//
+// Mirrors the Firestore posture:
+//   - a student reads/writes only their own files
+//   - the instructor who teaches the student's class may read them
+//   - an admin has full access
+// Upload path used by the app (lesson.html):
+//   submissions/{userId}/{lessonId}/{fileName}
+// ============================================================================
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // ---- helpers (read the SAME Firestore docs firestore.rules relies on) ----
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function isAdmin() {
+      return isSignedIn()
+        && firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
+        && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.accountType == 'admin';
+    }
+    // True when the signed-in user is the instructor of {studentId}'s class.
+    // Costs two Firestore reads per file access (student doc -> class doc).
+    function teachesStudent(studentId) {
+      return isSignedIn()
+        && firestore.exists(/databases/(default)/documents/users/$(studentId))
+        && firestore.get(
+             /databases/(default)/documents/classes/$(
+               firestore.get(/databases/(default)/documents/users/$(studentId)).data.classId
+             )
+           ).data.instructorId == request.auth.uid;
+    }
+
+    // ---- student submission files ----
+    match /submissions/{userId}/{lessonId}/{fileName} {
+      // The owning student, their instructor, or an admin may read.
+      allow read: if request.auth.uid == userId
+                  || teachesStudent(userId)
+                  || isAdmin();
+
+      // Only the owning student (or an admin) may upload, and only files
+      // under 50 MB. Adjust the cap if large .ai / design files need more room.
+      allow write: if (request.auth.uid == userId || isAdmin())
+                   && request.resource.size < 50 * 1024 * 1024;
+    }
+
+    // ---- everything else is denied by default ----
+    // (No catch-all match = implicit deny for any other path.)
+  }
+}
